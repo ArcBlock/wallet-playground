@@ -1,7 +1,7 @@
 /* eslint-disable camelcase */
 const ForgeSDK = require('@arcblock/forge-sdk');
 const env = require('../../libs/env');
-const { swapStorage, wallet } = require('../../libs/auth');
+const { swapStorage, wallet, authenticator } = require('../../libs/auth');
 
 const ensureAsset = async user => {
   const asset = {
@@ -43,12 +43,10 @@ module.exports = {
     swap: async ({ userDid, extraParams: { traceId } }) => {
       const asset = await ensureAsset(userDid);
       const updates = {
-        offerDid: wallet.address,
         offerAssets: [asset.address],
         offerToken: '0',
         demandAssets: [],
         demandToken: ForgeSDK.Util.fromTokenToUnit(1).toString(), // FIXME: decimal
-        demandDid: userDid,
       };
 
       await swapStorage.update(traceId, updates);
@@ -63,7 +61,29 @@ module.exports = {
     },
   },
 
-  onAuth: async ({ claims, userDid, token, storage }) => {
-    console.log(claims);
+  // eslint-disable-next-line object-curly-newline
+  onAuth: async ({ claims, userDid, token, extraParams }) => {
+    console.log('swap.onUserSetup', { userDid, token, claims });
+    const { traceId } = extraParams;
+
+    const swap = claims.find(x => x.type === 'swap');
+    const { state } = await ForgeSDK.getSwapState({ address: swap.address }, { conn: env.assetChainId });
+
+    // 保存 user setup_swap 到数据库
+    const updates = {
+      status: 'user_setup',
+      offerAddress: swap.offerAddress,
+      demandSetupHash: state.hash,
+      demandSwapAddress: swap.address,
+      demandRetrieveHash: '',
+      demandRevokeHash: '',
+      updatedAt: new Date(),
+    };
+    await swapStorage.update(traceId, updates);
+
+    // 把服务端的 swap address 返回给客户端
+    const url = authenticator.getPublicUrl('/api/did/swap/retrieve', extraParams);
+    console.log('swap.callback', url);
+    return { callback: url };
   },
 };
