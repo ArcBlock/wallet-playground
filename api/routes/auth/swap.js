@@ -84,6 +84,6 @@ module.exports = {
     // 把服务端的 swap address 返回给客户端
     const url = authenticator.getPublicUrl('/api/did/swap/retrieve', extraParams);
     console.log('swap.callback', url);
-    return { callback: url };
+    return { response: { callback: url } };
   },
 };
