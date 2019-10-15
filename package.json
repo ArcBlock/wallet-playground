@@ -21,7 +21,8 @@
   "dependencies": {
     "@arcblock/did": "^0.38.9",
     "@arcblock/did-auth": "^0.38.9",
-    "@arcblock/did-auth-storage-mongo": "^0.21.1",
+    "@arcblock/did-auth-storage-mongo": "^0.38.10",
+    "@arcblock/swap-storage-mongo": "^0.38.10",
     "@arcblock/did-react": "^0.36.0",
     "@arcblock/forge-sdk": "^0.38.9",
     "@arcblock/forge-util": "^0.38.9",

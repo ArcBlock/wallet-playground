@@ -13,10 +13,11 @@ const ForgeSDK = require('@arcblock/forge-sdk');
 // Routes: due to limitations of netlify functions, we need to import routes here
 // ------------------------------------------------------------------------------
 const { decode } = require('../libs/jwt');
-const { handlers, wallet } = require('../libs/auth');
+const { handlers, swapHandlers, wallet } = require('../libs/auth');
 const loginAuth = require('../routes/auth/login');
 const paymentAuth = require('../routes/auth/payment');
 const checkinAuth = require('../routes/auth/checkin');
+const swapAuth = require('../routes/auth/swap');
 const sessionRoutes = require('../routes/session');
 const paymentsRoutes = require('../routes/payments');
 
@@ -95,6 +96,7 @@ const router = express.Router();
 handlers.attach(Object.assign({ app: router }, loginAuth));
 handlers.attach(Object.assign({ app: router }, checkinAuth));
 handlers.attach(Object.assign({ app: router }, paymentAuth));
+swapHandlers.attach(Object.assign({ app: router }, swapAuth));
 sessionRoutes.init(router);
 paymentsRoutes.init(router);
 

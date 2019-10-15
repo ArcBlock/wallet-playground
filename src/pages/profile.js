@@ -84,6 +84,9 @@ export default function ProfilePage() {
             <Button color="primary" variant="outlined" href="/payment" style={{ marginTop: '30px' }}>
               My Purchase
             </Button>
+            <Button color="primary" variant="outlined" href="/swap" style={{ marginTop: '30px' }}>
+              My Swap
+            </Button>
             {balance.value && (
               <Button color="primary" variant="contained" onClick={() => setOpen()} style={{ marginTop: '30px' }}>
                 Get 25 {token.symbol}

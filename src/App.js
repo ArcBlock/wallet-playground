@@ -7,6 +7,7 @@ import { BrowserRouter as Router, Route, Switch, withRouter } from 'react-router
 import HomePage from './pages/index';
 import ProfilePage from './pages/profile';
 import PaymentPage from './pages/payment';
+import SwapPage from './pages/swap';
 import AppPage from './pages/application';
 import BlockPage from './pages/blocks';
 import ChainPage from './pages/chain';
@@ -31,6 +32,7 @@ export const App = () => (
             <Route exact path="/" component={HomePage} />
             <Route exact path="/profile" component={ProfilePage} />
             <Route exact path="/payment" component={PaymentPage} />
+            <Route exact path="/swap" component={SwapPage} />
             <Route exact path="/application" component={AppPage} />
             <Route exact path="/blocks" component={BlockPage} />
             <Route exact path="/chain" component={ChainPage} />

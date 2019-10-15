@@ -1,9 +1,16 @@
+/* eslint-disable no-console */
 const Mcrypto = require('@arcblock/mcrypto');
 const ForgeSDK = require('@arcblock/forge-sdk');
-const MongoStorage = require('@arcblock/did-auth-storage-mongo');
+const TokenMongoStorage = require('@arcblock/did-auth-storage-mongo');
+const SwapMongoStorage = require('@arcblock/swap-storage-mongo');
 const { fromSecretKey, WalletType } = require('@arcblock/forge-wallet');
-// eslint-disable-next-line object-curly-newline
-const { WalletAuthenticator, AppAuthenticator, AppHandlers, WalletHandlers } = require('@arcblock/did-auth');
+const {
+  WalletAuthenticator,
+  AppAuthenticator,
+  AppHandlers,
+  WalletHandlers,
+  SwapHandlers,
+} = require('@arcblock/did-auth');
 const env = require('./env');
 
 const type = WalletType({
@@ -14,8 +21,10 @@ const type = WalletType({
 
 if (env.chainHost) {
   ForgeSDK.connect(env.chainHost, { chainId: env.chainId, name: env.chainId, default: true });
+  console.log('Connected to chainHost', env.chainHost);
   if (env.assetChainHost) {
     ForgeSDK.connect(env.assetChainHost, { chainId: env.assetChainId, name: env.assetChainId });
+    console.log('Connected to assetChainHost', env.assetChainHost);
   }
 }
 
@@ -37,12 +46,24 @@ const walletAuth = new WalletAuthenticator({
   },
 });
 
+const tokenStorage = new TokenMongoStorage({
+  url: process.env.MONGO_URI,
+});
+const swapStorage = new SwapMongoStorage({
+  url: process.env.MONGO_URI,
+});
+
 const walletHandlers = new WalletHandlers({
   authenticator: walletAuth,
-  tokenGenerator: () => Date.now().toString(),
-  tokenStorage: new MongoStorage({
-    url: process.env.MONGO_URI,
-  }),
+  tokenStorage,
+});
+
+const swapHandlers = new SwapHandlers({
+  authenticator: walletAuth,
+  tokenStorage,
+  swapStorage,
+  offerChain: env.chainId,
+  demandChain: env.assetChainId,
 });
 
 const appAuth = new AppAuthenticator(wallet);
@@ -51,6 +72,9 @@ const appHandlers = new AppHandlers(appAuth);
 module.exports = {
   authenticator: walletAuth,
   handlers: walletHandlers,
+  tokenStorage,
+  swapStorage,
+  swapHandlers,
   appAuth,
   appHandlers,
   wallet,
