@@ -46,10 +46,10 @@ module.exports = {
       const payload = {
         offerAssets: [asset.address],
         offerToken: '0',
-        offerAddress: userDid,
+        offerAddress: wallet.address, // 卖家地址
         demandAssets: [],
         demandToken: ForgeSDK.Util.fromTokenToUnit(1).toString(), // FIXME: decimal
-        demandAddress: wallet.address,
+        demandAddress: userDid, // 买家地址
       };
 
       await swapStorage.finalizePayload(traceId, payload);
