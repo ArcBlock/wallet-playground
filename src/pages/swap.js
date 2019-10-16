@@ -87,6 +87,7 @@ export default function PaymentPage() {
           action="swap"
           extraParams={{ traceId }}
           checkFn={api.get}
+          checkTimeout={5 * 60 * 1000}
           onError={onAuthError}
           onClose={() => toggle()}
           onSuccess={() => window.location.reload()}

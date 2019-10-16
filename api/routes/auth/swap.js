@@ -31,6 +31,7 @@ const ensureAsset = async user => {
   const hash = await ForgeSDK.sendCreateAssetTx({
     tx: { itx: asset },
     wallet: ForgeSDK.Wallet.fromJSON(wallet),
+    commit: true,
   });
 
   console.log('createAsset.done', hash);
@@ -43,14 +44,16 @@ module.exports = {
   claims: {
     swap: async ({ userDid, extraParams: { traceId } }) => {
       const asset = await ensureAsset(userDid);
-      const updates = {
+      const payload = {
         offerAssets: [asset.address],
         offerToken: '0',
+        offerAddress: userDid,
         demandAssets: [],
         demandToken: ForgeSDK.Util.fromTokenToUnit(1).toString(), // FIXME: decimal
+        demandAddress: wallet.address,
       };
 
-      await swapStorage.update(traceId, updates);
+      await swapStorage.finalizePayload(traceId, payload);
       const swap = await swapStorage.read(traceId);
       console.log('swap.prepare', swap);
 
@@ -73,12 +76,8 @@ module.exports = {
     // 保存 user setup_swap 到数据库
     const updates = {
       status: 'user_setup',
-      offerAddress: swap.offerAddress,
       demandSetupHash: state.hash,
       demandSwapAddress: swap.address,
-      demandRetrieveHash: '',
-      demandRevokeHash: '',
-      updatedAt: new Date(),
     };
     await swapStorage.update(traceId, updates);
 
