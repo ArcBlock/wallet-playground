@@ -62,8 +62,10 @@ const swapHandlers = new SwapHandlers({
   authenticator: walletAuth,
   tokenStorage,
   swapStorage,
-  offerChain: env.chainId,
-  demandChain: env.assetChainId,
+  offerChainId: env.chainId,
+  offerChainHost: env.chainHost,
+  demandChainId: env.assetChainId,
+  demandChainHost: env.assetChainHost,
 });
 
 const appAuth = new AppAuthenticator(wallet);
