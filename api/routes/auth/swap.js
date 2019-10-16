@@ -12,6 +12,7 @@ const ensureAsset = async user => {
       typeUrl: 'json',
       value: {
         user,
+        sn: Math.random(),
       },
     },
   };
