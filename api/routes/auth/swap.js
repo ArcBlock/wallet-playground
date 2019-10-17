@@ -1,5 +1,6 @@
 /* eslint-disable camelcase */
 const ForgeSDK = require('@arcblock/forge-sdk');
+const env = require('../../libs/env');
 const { swapStorage, wallet } = require('../../libs/auth');
 
 const ensureAsset = async user => {
@@ -46,13 +47,15 @@ module.exports = {
       const payload = {
         offerAssets: [asset.address],
         offerToken: '0',
-        offerAddress: wallet.address, // 卖家地址
+        offerUserAddress: wallet.address, // 卖家地址
         demandAssets: [],
-        demandToken: ForgeSDK.Util.fromTokenToUnit(1).toString(), // FIXME: decimal
-        demandAddress: userDid, // 买家地址
+        demandToken: ForgeSDK.Util.fromTokenToUnit(1).toString(),
+        demandUserAddress: userDid, // 买家地址
+        demandLocktime: await ForgeSDK.toLocktime(57600, { conn: env.chainId }),
       };
 
-      await swapStorage.finalizePayload(traceId, payload);
+      const res = await swapStorage.finalize(traceId, payload);
+      console.log('swap.finalize', res);
       const swap = await swapStorage.read(traceId);
       console.log('swap.prepare', swap);
 
