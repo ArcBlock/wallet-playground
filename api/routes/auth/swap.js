@@ -43,27 +43,31 @@ module.exports = {
   action: 'swap',
   claims: {
     swap: async ({ userDid, extraParams: { traceId } }) => {
-      const asset = await ensureAsset(userDid);
-      const payload = {
-        offerAssets: [asset.address],
-        offerToken: '0',
-        offerUserAddress: wallet.address, // 卖家地址
-        demandAssets: [],
-        demandToken: ForgeSDK.Util.fromTokenToUnit(1).toString(),
-        demandUserAddress: userDid, // 买家地址
-        demandLocktime: await ForgeSDK.toLocktime(57600, { conn: env.chainId }),
-      };
+      try {
+        const asset = await ensureAsset(userDid);
+        const payload = {
+          offerAssets: [asset.address],
+          offerToken: '0',
+          offerUserAddress: wallet.address, // 卖家地址
+          demandAssets: [],
+          demandToken: ForgeSDK.Util.fromTokenToUnit(1).toString(),
+          demandUserAddress: userDid, // 买家地址
+          demandLocktime: await ForgeSDK.toLocktime(57600, { conn: env.chainId }),
+        };
 
-      const res = await swapStorage.finalize(traceId, payload);
-      console.log('swap.finalize', res);
-      const swap = await swapStorage.read(traceId);
-      console.log('swap.prepare', swap);
+        const res = await swapStorage.finalize(traceId, payload);
+        console.log('swap.finalize', res);
+        const swap = await swapStorage.read(traceId);
 
-      return {
-        swapId: traceId,
-        receiver: wallet.address,
-        ...swap,
-      };
+        return {
+          swapId: traceId,
+          receiver: wallet.address,
+          ...swap,
+        };
+      } catch (err) {
+        console.error(err);
+        throw new Error('出票失败，请重试');
+      }
     },
   },
 
