@@ -82,9 +82,6 @@ export default function IndexPage() {
               <div className="section__content">
                 <SwapBadgeButton {...session.value} />
                 <SwapBadgesButton {...session.value} />
-                <Button color="primary" variant="contained" size="large" className="action" disabled>
-                  Swap a Certificate for 4.99 Token
-                </Button>
               </div>
             </section>
             <section className="section">
