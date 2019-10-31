@@ -28,7 +28,7 @@ const ensureAsset = async (userPk, userDid) => {
 };
 
 module.exports = {
-  action: 'swap',
+  action: 'swap-badge',
   claims: {
     swap: async ({ userDid, userPk, extraParams: { traceId } }) => {
       try {

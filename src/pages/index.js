@@ -16,8 +16,9 @@ import api from '../libs/api';
 import { setToken } from '../libs/auth';
 
 import FundButton from '../components/auth/fund';
-import SwapButton1 from '../components/auth/swap-1token-1asset';
-import SwapButton2 from '../components/auth/swap-1token-2asset';
+import SwapBadgeButton from '../components/auth/swap_badge';
+import SwapBadgesButton from '../components/auth/swap_badges';
+import SwapTicketButton from '../components/auth/swap_ticket';
 
 export default function IndexPage() {
   const session = useSession();
@@ -78,9 +79,9 @@ export default function IndexPage() {
                 </Typography>
               </Typography>
               <div className="section__content">
-                <SwapButton1 {...session.value} />
-                <SwapButton2 {...session.value} />
-                <Button color="primary" variant="contained" size="large" className="action">
+                <SwapBadgeButton {...session.value} />
+                <SwapBadgesButton {...session.value} />
+                <Button color="primary" variant="contained" size="large" className="action" disabled>
                   Swap a Certificate for 4.99 Token
                 </Button>
               </div>
@@ -93,19 +94,17 @@ export default function IndexPage() {
                 </Typography>
               </Typography>
               <div className="section__content">
-                <Button color="primary" variant="contained" size="large" className="action">
+                <Button color="primary" variant="contained" size="large" className="action" disabled>
                   Claim A Coupon to Save 0.99 Token
                 </Button>
-                <Button color="secondary" variant="contained" size="large" className="action">
-                  Buy A Ticket with 1.99 Token
-                </Button>
-                <Button color="danger" variant="contained" size="large" className="action">
+                <SwapTicketButton {...session.value} />
+                <Button color="danger" variant="contained" size="large" className="action" disabled>
                   Consume A Ticket
                 </Button>
-                <Button color="secondary" variant="contained" size="large" className="action">
+                <Button color="primary" variant="contained" size="large" className="action" disabled>
                   Buy A Certificate with 3.99 Token
                 </Button>
-                <Button color="secondary" variant="contained" size="large" className="action">
+                <Button color="secondary" variant="contained" size="large" className="action" disabled>
                   Buy A Badge with 0.99 Token
                 </Button>
               </div>

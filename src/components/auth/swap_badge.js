@@ -29,7 +29,7 @@ export default function SwapButton({ assetToken }) {
       {isOpen && !!traceId && (
         <Auth
           responsive
-          action="swap"
+          action="swap-badge"
           extraParams={{ traceId }}
           checkFn={api.get}
           checkTimeout={5 * 60 * 1000}
