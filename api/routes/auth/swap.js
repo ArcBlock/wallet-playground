@@ -1,40 +1,28 @@
+/* eslint-disable no-console */
 /* eslint-disable camelcase */
 const ForgeSDK = require('@arcblock/forge-sdk');
+const { AssetRecipient } = require('@arcblock/asset-factory');
+
 const env = require('../../libs/env');
-const { swapStorage, wallet } = require('../../libs/auth');
+const { swapStorage, wallet, factory } = require('../../libs/auth');
 
-const ensureAsset = async user => {
-  const asset = {
-    moniker: `asset_for_${user}`,
-    readonly: false,
-    transferrable: false,
+const ensureAsset = async (userPk, userDid) => {
+  const [asset] = await factory.createBadge({
+    backgroundUrl: '',
     data: {
-      typeUrl: 'json',
-      value: {
-        user,
-        sn: Math.random(),
-      },
+      name: 'Atomic Swap 尝鲜 ①',
+      description: '完成 Atomic Swap 的通证兑换 Badge 测试',
+      reason: '报名并现场参加了 ArcBlock 的 DevCon0',
+      logoUrl: 'https://releases.arcblockio.cn/arcblock-logo.png',
+      issueTime: Date.now(),
+      expireTime: -1,
+      recipient: new AssetRecipient({
+        wallet: ForgeSDK.Wallet.fromPublicKey(userPk),
+        name: userDid,
+        location: '北京市朝阳区',
+      }),
     },
-  };
-
-  const address = ForgeSDK.Util.toAssetAddress(asset);
-  asset.address = address;
-
-  // check existence
-  const { state } = await ForgeSDK.getAssetState({ address });
-  if (state) {
-    return asset;
-  }
-
-  // create new
-  console.log('createAsset.payload', asset);
-  const hash = await ForgeSDK.sendCreateAssetTx({
-    tx: { itx: asset },
-    wallet: ForgeSDK.Wallet.fromJSON(wallet),
-    commit: true,
   });
-
-  console.log('createAsset.done', hash);
 
   return asset;
 };
@@ -42,9 +30,9 @@ const ensureAsset = async user => {
 module.exports = {
   action: 'swap',
   claims: {
-    swap: async ({ userDid, extraParams: { traceId } }) => {
+    swap: async ({ userDid, userPk, extraParams: { traceId } }) => {
       try {
-        const asset = await ensureAsset(userDid);
+        const asset = await ensureAsset(userPk, userDid);
         const payload = {
           offerAssets: [asset.address],
           offerToken: (await ForgeSDK.fromTokenToUnit(0, { conn: env.chainId })).toString(),
@@ -66,7 +54,7 @@ module.exports = {
         };
       } catch (err) {
         console.error(err);
-        throw new Error('出票失败，请重试');
+        throw new Error('徽章创建失败失败，请重试');
       }
     },
   },

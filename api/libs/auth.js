@@ -3,7 +3,8 @@ const Mcrypto = require('@arcblock/mcrypto');
 const ForgeSDK = require('@arcblock/forge-sdk');
 const TokenMongoStorage = require('@arcblock/did-auth-storage-mongo');
 const SwapMongoStorage = require('@arcblock/swap-storage-mongo');
-const { fromSecretKey, WalletType } = require('@arcblock/forge-wallet');
+const { AssetFactory } = require('@arcblock/asset-factory');
+const { fromSecretKey, fromJSON, WalletType } = require('@arcblock/forge-wallet');
 const {
   WalletAuthenticator,
   AppAuthenticator,
@@ -71,6 +72,17 @@ const swapHandlers = new SwapHandlers({
 const appAuth = new AppAuthenticator(wallet);
 const appHandlers = new AppHandlers(appAuth);
 
+const factory = new AssetFactory({
+  chainId: env.chainId,
+  chainHost: env.chainHost,
+  wallet: fromJSON(wallet),
+  issuer: {
+    name: 'ArcBlock',
+    url: 'https://www.arcblock.io',
+    logo: 'https://releases.arcblockio.cn/arcblock-logo.png',
+  },
+});
+
 module.exports = {
   authenticator: walletAuth,
   handlers: walletHandlers,
@@ -80,4 +92,5 @@ module.exports = {
   appAuth,
   appHandlers,
   wallet,
+  factory,
 };
