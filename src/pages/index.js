@@ -17,6 +17,7 @@ import { setToken } from '../libs/auth';
 
 import FundButton from '../components/auth/fund';
 import SwapButton1 from '../components/auth/swap-1token-1asset';
+import SwapButton2 from '../components/auth/swap-1token-2asset';
 
 export default function IndexPage() {
   const session = useSession();
@@ -78,12 +79,7 @@ export default function IndexPage() {
               </Typography>
               <div className="section__content">
                 <SwapButton1 {...session.value} />
-                <Button color="secondary" variant="contained" size="large" className="action">
-                  Swap 1.99 Token for 2 Assets
-                </Button>
-                <Button color="secondary" variant="contained" size="large" className="action">
-                  Swap 2.99 Token for 3 Assets
-                </Button>
+                <SwapButton2 {...session.value} />
                 <Button color="primary" variant="contained" size="large" className="action">
                   Swap a Certificate for 4.99 Token
                 </Button>
