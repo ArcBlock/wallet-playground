@@ -20,6 +20,7 @@ const checkinAuth = require('../routes/auth/checkin');
 const swapBadgeAuth = require('../routes/auth/swap_badge');
 const swapBadgesAuth = require('../routes/auth/swap_badges');
 const swapTicketAuth = require('../routes/auth/swap_ticket');
+const swapCertificateAuth = require('../routes/auth/swap_certificate');
 const fundAuth = require('../routes/auth/fund');
 const sessionRoutes = require('../routes/session');
 const paymentsRoutes = require('../routes/payments');
@@ -103,6 +104,7 @@ handlers.attach(Object.assign({ app: router }, fundAuth));
 swapHandlers.attach(Object.assign({ app: router }, swapBadgeAuth));
 swapHandlers.attach(Object.assign({ app: router }, swapBadgesAuth));
 swapHandlers.attach(Object.assign({ app: router }, swapTicketAuth));
+swapHandlers.attach(Object.assign({ app: router }, swapCertificateAuth));
 sessionRoutes.init(router);
 paymentsRoutes.init(router);
 

@@ -19,6 +19,7 @@ import FundButton from '../components/auth/fund';
 import SwapBadgeButton from '../components/auth/swap_badge';
 import SwapBadgesButton from '../components/auth/swap_badges';
 import SwapTicketButton from '../components/auth/swap_ticket';
+import SwapCertificateButton from '../components/auth/swap_certificate';
 
 export default function IndexPage() {
   const session = useSession();
@@ -94,15 +95,13 @@ export default function IndexPage() {
                 </Typography>
               </Typography>
               <div className="section__content">
-                <Button color="primary" variant="contained" size="large" className="action" disabled>
-                  Claim A Coupon to Save 0.99 Token
-                </Button>
                 <SwapTicketButton {...session.value} />
+                <SwapCertificateButton {...session.value} />
                 <Button color="danger" variant="contained" size="large" className="action" disabled>
                   Consume A Ticket
                 </Button>
                 <Button color="primary" variant="contained" size="large" className="action" disabled>
-                  Buy A Certificate with 3.99 Token
+                  Claim A Coupon to Save 0.99 Token
                 </Button>
                 <Button color="secondary" variant="contained" size="large" className="action" disabled>
                   Buy A Badge with 0.99 Token
