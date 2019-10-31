@@ -5,25 +5,35 @@ require('dotenv').config();
 const ForgeSDK = require('@arcblock/forge-sdk');
 const { fromJSON } = require('@arcblock/forge-wallet');
 const { wallet } = require('../api/libs/auth');
+const env = require('../api/libs/env');
 
 const appWallet = fromJSON(wallet);
 
 (async () => {
   try {
-    const res = await ForgeSDK.sendDeclareTx({
-      tx: {
-        itx: {
-          moniker: 'Arcblock',
-        },
+    let hash = await ForgeSDK.declare(
+      {
+        moniker: 'abt_wallet_playground',
+        wallet: appWallet,
       },
-      wallet: appWallet,
-    });
+      { conn: env.chainId }
+    );
 
-    console.log('Application wallet declared', wallet);
-    console.log('Application wallet declared', res);
+    console.log(`Application declared on chain ${env.chainId}`, hash);
+
+    if (env.assetChainId) {
+      hash = await ForgeSDK.declare(
+        {
+          moniker: 'abt_wallet_playground',
+          wallet: appWallet,
+        },
+        { conn: env.assetChainId }
+      );
+      console.log(`Application declared on chain ${env.assetChainId}`, hash);
+    }
+
     process.exit(0);
   } catch (err) {
-    console.error(err);
     console.error(err.errors);
     process.exit(1);
   }
