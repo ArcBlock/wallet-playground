@@ -48,21 +48,13 @@ export default function Header() {
           <img className="logo" src="/static/images/logo.png" alt="arcblock" />
           {env.appName}
         </Typography>
-        <Typography
-          component="a"
-          href={env.chainHost.replace('/api', '/node/explorer/txs')}
-          target="_blank"
-          variant="h6"
-          color="inherit">
-          Block Explorer
-        </Typography>
+        <Button href={env.chainHost.replace('/api', '/node/explorer/txs')} target="_blank" variant="h6" color="inherit">
+          Explorer
+        </Button>
         {session.value && session.value.user && (
           <React.Fragment>
             <Button href="/profile" size="large">
               Profile
-            </Button>
-            <Button href="/payment" size="large">
-              Payment
             </Button>
           </React.Fragment>
         )}

@@ -6,7 +6,6 @@ import styled from 'styled-components';
 import Helmet from 'react-helmet';
 
 import Header from './header';
-import Footer from './footer';
 
 import env from '../libs/env';
 
@@ -18,13 +17,12 @@ export default function Layout({ title, children, contentOnly }) {
   return (
     <Div>
       <Helmet title={`${title} - ${env.appName}`} />
-      <AppBar position="static" color="default">
+      <AppBar position="static" color="default" style={{ height: 64 }}>
         <Container>
           <Header />
         </Container>
       </AppBar>
       <Container style={{ minHeight: '60vh' }}>{children}</Container>
-      <Footer />
     </Div>
   );
 }

@@ -47,12 +47,12 @@ module.exports = {
         const asset = await ensureAsset(userDid);
         const payload = {
           offerAssets: [asset.address],
-          offerToken: '0',
+          offerToken: (await ForgeSDK.fromTokenToUnit(0, { conn: env.chainId })).toString(),
           offerUserAddress: wallet.address, // 卖家地址
           demandAssets: [],
-          demandToken: ForgeSDK.Util.fromTokenToUnit(1).toString(),
+          demandToken: (await ForgeSDK.fromTokenToUnit(1, { conn: env.assetChainId })).toString(),
           demandUserAddress: userDid, // 买家地址
-          demandLocktime: await ForgeSDK.toLocktime(57600, { conn: env.chainId }),
+          demandLocktime: await ForgeSDK.toLocktime(57600, { conn: env.assetChainId }),
         };
 
         const res = await swapStorage.finalize(traceId, payload);
