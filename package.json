@@ -9,7 +9,6 @@
     "react",
     "javascript"
   ],
-  "homepage": "https://github.com/ArcBlock/forge-dapp-starters/tree/master/packages/forge-react-starter",
   "repository": {
     "type": "git",
     "url": "https://github.com/ArcBlock/forge-dapp-starters/tree/master/packages/forge-react-starter"

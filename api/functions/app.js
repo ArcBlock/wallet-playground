@@ -1,4 +1,5 @@
 /* eslint-disable no-console */
+const path = require('path');
 const cors = require('cors');
 const morgan = require('morgan');
 const express = require('express');
@@ -133,10 +134,11 @@ ForgeSDK.getAccountState({ address: wallet.address })
 // This is required by netlify functions
 // ------------------------------------------------------
 if (isProduction) {
-  if (process.env.NETLIFY) {
+  if (process.env.NETLIFY && JSON.parse(process.env.NETLIFY)) {
     server.use('/.netlify/functions/app', router);
   } else {
     server.use(router);
+    server.use(express.static(path.resolve(__dirname, '../../build')));
   }
   server.use((req, res) => {
     res.status(404).send('404 NOT FOUND');
