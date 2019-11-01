@@ -8,7 +8,7 @@ module.exports = {
   action: 'fund',
   claims: {
     signature: async ({ extraParams: { locale } }) => {
-      const amount = Number((Math.random() * 256).toPrecision(6));
+      const amount = Number((Math.random() * 50).toPrecision(8));
       const { state } = await ForgeSDK.getForgeState({ conn: env.assetChainId });
 
       const description = {
