@@ -22,11 +22,11 @@ module.exports = {
           itx: {
             to: wallet.address,
             sender: {
-              value: await ForgeSDK.fromTokenToUnit(0),
+              value: await ForgeSDK.fromTokenToUnit(0, { conn: env.assetChainId }),
               assets: [],
             },
             receiver: {
-              value: await ForgeSDK.fromTokenToUnit(amount),
+              value: await ForgeSDK.fromTokenToUnit(amount, { conn: env.assetChainId }),
               assets: [],
             },
           },
