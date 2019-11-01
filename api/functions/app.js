@@ -133,7 +133,11 @@ ForgeSDK.getAccountState({ address: wallet.address })
 // This is required by netlify functions
 // ------------------------------------------------------
 if (isProduction) {
-  server.use('/.netlify/functions/app', router);
+  if (process.env.NETLIFY) {
+    server.use('/.netlify/functions/app', router);
+  } else {
+    server.use(router);
+  }
   server.use((req, res) => {
     res.status(404).send('404 NOT FOUND');
   });

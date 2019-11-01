@@ -1,4 +1,5 @@
 require('dotenv').config();
+
 const ForgeSDK = require('@arcblock/forge-sdk');
 
 const { fromSecretKey } = ForgeSDK.Wallet;
