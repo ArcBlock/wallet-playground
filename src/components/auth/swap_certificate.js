@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-one-expression-per-line */
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import useToggle from 'react-use/lib/useToggle';
@@ -24,7 +25,7 @@ export default function SwapButton({ assetToken }) {
   return (
     <React.Fragment>
       <Button color="secondary" variant="contained" size="large" className="action" onClick={onStartSwap}>
-        Buy a Certificate with 6.99 Token
+        Buy a Certificate with 6.99 {assetToken.symbol}
       </Button>
       {isOpen && !!traceId && (
         <Auth

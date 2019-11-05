@@ -33,8 +33,8 @@ module.exports = {
         },
         description: description[locale] || description.en,
         chainInfo: {
-          chainHost: env.assetChainHost,
-          chainId: env.assetChainId,
+          host: env.assetChainHost,
+          id: env.assetChainId,
         },
       };
     },

@@ -31,11 +31,10 @@ module.exports = {
   onAuth: async ({ userDid, extraParams: { locale } }) => {
     console.log('transfer_token_in.onAuth', { userDid });
     try {
-      const { state } = await ForgeSDK.getForgeState({ conn: env.chainId });
       const hash = await ForgeSDK.transfer(
         {
           to: userDid,
-          token: fromTokenToUnit(1, state.token.decimal),
+          token: 1,
           wallet: ForgeSDK.Wallet.fromJSON(wallet),
         },
         { conn: env.chainId }

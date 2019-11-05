@@ -18,6 +18,7 @@ import { setToken } from '../libs/auth';
 import AuthButton from '../components/auth/auth';
 import FundTbaButton from '../components/auth/fund_tba';
 import FundPlayButton from '../components/auth/fund_play';
+import SwapTokenButton from '../components/auth/swap_token';
 import SwapBadgeButton from '../components/auth/swap_badge';
 import SwapBadgesButton from '../components/auth/swap_badges';
 import SwapTicketButton from '../components/auth/swap_ticket';
@@ -60,6 +61,9 @@ export default function IndexPage() {
         <Typography component="h2" variant="h4" className="page-header" color="textPrimary">
           ABT Wallet Playground <Tag type="error">V2.0</Tag>
         </Typography>
+        <Typography component="h3" variant="h6" color="textSecondary">
+          TBA is the token on Zinc chain, PLAY is the token on App chain.
+        </Typography>
         {(session.loading || (session.value && !session.value.user)) && (
           <CircularProgress size={64} color="secondary" />
         )}
@@ -87,6 +91,7 @@ export default function IndexPage() {
               <div className="section__content">
                 <SwapBadgeButton {...session.value} />
                 <SwapBadgesButton {...session.value} />
+                <SwapTokenButton {...session.value} />
               </div>
             </section>
             <section className="section">

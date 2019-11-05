@@ -61,7 +61,6 @@ module.exports = {
 
   // eslint-disable-next-line object-curly-newline
   onAuth: async ({ claims, userDid, token }) => {
-    console.log('swap.onUserSetup', { userDid, token, claims });
     return {};
   },
 };

@@ -8,7 +8,7 @@ import Button from '@arcblock/ux/lib/Button';
 
 import api from '../../libs/api';
 
-export default function SwapButton({ assetToken }) {
+export default function SwapButton({ token, assetToken }) {
   const [isOpen, setOpen] = useToggle(false);
   const [traceId, setTraceId] = useState();
 
@@ -25,12 +25,12 @@ export default function SwapButton({ assetToken }) {
   return (
     <React.Fragment>
       <Button color="secondary" variant="contained" size="large" className="action" onClick={onStartSwap}>
-        Swap 1.99 {assetToken.symbol} for 2 Badges
+        Swap 1 {assetToken.symbol} for 5 {token.symbol}
       </Button>
       {isOpen && !!traceId && (
         <Auth
           responsive
-          action="swap-badges"
+          action="swap-token"
           extraParams={{ traceId }}
           checkFn={api.get}
           checkTimeout={5 * 60 * 1000}
@@ -38,7 +38,7 @@ export default function SwapButton({ assetToken }) {
           onSuccess={() => window.location.reload()}
           messages={{
             title: 'Swap Required',
-            scan: `Pay 1.99 ${assetToken.symbol} for an badge`,
+            scan: `Swap 1 ${assetToken.symbol} for 5 ${token.symbol}`,
             confirm: 'Confirm swap on your ABT Wallet',
             success: 'You have successfully paid!',
           }}
@@ -49,5 +49,6 @@ export default function SwapButton({ assetToken }) {
 }
 
 SwapButton.propTypes = {
+  token: PropTypes.object.isRequired,
   assetToken: PropTypes.object.isRequired,
 };
