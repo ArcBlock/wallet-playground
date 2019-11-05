@@ -15,12 +15,15 @@ import useSession from '../hooks/session';
 import api from '../libs/api';
 import { setToken } from '../libs/auth';
 
+import AuthButton from '../components/auth/auth';
 import FundTbaButton from '../components/auth/fund_tba';
 import FundPlayButton from '../components/auth/fund_play';
 import SwapBadgeButton from '../components/auth/swap_badge';
 import SwapBadgesButton from '../components/auth/swap_badges';
 import SwapTicketButton from '../components/auth/swap_ticket';
 import SwapCertificateButton from '../components/auth/swap_certificate';
+import TransferTokenOut from '../components/auth/transfer_token_out';
+import TransferTokenIn from '../components/auth/transfer_token_in';
 
 export default function IndexPage() {
   const session = useSession();
@@ -105,6 +108,47 @@ export default function IndexPage() {
                 <Button color="secondary" variant="contained" size="large" className="action" disabled>
                   Buy A Badge with 0.99 Token
                 </Button>
+              </div>
+            </section>
+            <section className="section">
+              <Typography component="h3" variant="h5" className="section__header" color="textPrimary" gutterBottom>
+                Transaction Factory{' '}
+                <Typography component="small" color="textSecondary">
+                  Help to generate different transaction types in your ABT Wallet
+                </Typography>
+              </Typography>
+              <div className="section__content">
+                <TransferTokenOut {...session.value} />
+                <TransferTokenIn {...session.value} />
+                <Button color="primary" variant="contained" size="large" className="action" disabled>
+                  Transfer Asset to Application
+                </Button>
+                <Button color="primary" variant="contained" size="large" className="action" disabled>
+                  Transfer Asset to Wallet
+                </Button>
+                <Button color="primary" variant="contained" size="large" className="action" disabled>
+                  Transfer Token + Asset to Application
+                </Button>
+                <Button color="primary" variant="contained" size="large" className="action" disabled>
+                  Transfer Token + Asset to Wallet
+                </Button>
+                <Button color="primary" variant="contained" size="large" className="action" disabled>
+                  Exchange Asset with Token
+                </Button>
+                <Button color="primary" variant="contained" size="large" className="action" disabled>
+                  Exchange Asset with Asset
+                </Button>
+              </div>
+            </section>
+            <section className="section">
+              <Typography component="h3" variant="h5" className="section__header" color="textPrimary" gutterBottom>
+                DID Auth Protocol{' '}
+                <Typography component="small" color="textSecondary">
+                  Help to test different DID Auth Protocol claims
+                </Typography>
+              </Typography>
+              <div className="section__content">
+                <AuthButton {...session.value} />
               </div>
             </section>
             <section className="section">

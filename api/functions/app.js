@@ -15,16 +15,6 @@ const ForgeSDK = require('@arcblock/forge-sdk');
 // ------------------------------------------------------------------------------
 const { decode } = require('../libs/jwt');
 const { handlers, swapHandlers, wallet } = require('../libs/auth');
-const loginAuth = require('../routes/auth/login');
-const paymentAuth = require('../routes/auth/payment');
-const checkinAuth = require('../routes/auth/checkin');
-const swapBadgeAuth = require('../routes/auth/swap_badge');
-const swapBadgesAuth = require('../routes/auth/swap_badges');
-const swapTicketAuth = require('../routes/auth/swap_ticket');
-const swapCertificateAuth = require('../routes/auth/swap_certificate');
-const fundAuth = require('../routes/auth/fund');
-const sessionRoutes = require('../routes/session');
-const paymentsRoutes = require('../routes/payments');
 
 const isProduction = process.env.NODE_ENV === 'production';
 
@@ -98,16 +88,20 @@ server.use((req, res, next) => {
 
 const router = express.Router();
 
-handlers.attach(Object.assign({ app: router }, loginAuth));
-handlers.attach(Object.assign({ app: router }, checkinAuth));
-handlers.attach(Object.assign({ app: router }, paymentAuth));
-handlers.attach(Object.assign({ app: router }, fundAuth));
-swapHandlers.attach(Object.assign({ app: router }, swapBadgeAuth));
-swapHandlers.attach(Object.assign({ app: router }, swapBadgesAuth));
-swapHandlers.attach(Object.assign({ app: router }, swapTicketAuth));
-swapHandlers.attach(Object.assign({ app: router }, swapCertificateAuth));
-sessionRoutes.init(router);
-paymentsRoutes.init(router);
+handlers.attach(Object.assign({ app: router }, require('../routes/auth/login')));
+handlers.attach(Object.assign({ app: router }, require('../routes/auth/payment')));
+handlers.attach(Object.assign({ app: router }, require('../routes/auth/checkin')));
+handlers.attach(Object.assign({ app: router }, require('../routes/auth/fund')));
+handlers.attach(Object.assign({ app: router }, require('../routes/auth/auth')));
+handlers.attach(Object.assign({ app: router }, require('../routes/auth/transfer_token_in')));
+handlers.attach(Object.assign({ app: router }, require('../routes/auth/transfer_token_out')));
+swapHandlers.attach(Object.assign({ app: router }, require('../routes/auth/swap_badge')));
+swapHandlers.attach(Object.assign({ app: router }, require('../routes/auth/swap_badges')));
+swapHandlers.attach(Object.assign({ app: router }, require('../routes/auth/swap_ticket')));
+swapHandlers.attach(Object.assign({ app: router }, require('../routes/auth/swap_certificate')));
+
+require('../routes/session').init(router);
+require('../routes/payments').init(router);
 
 // Check for application account
 ForgeSDK.getAccountState({ address: wallet.address })
