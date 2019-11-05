@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-one-expression-per-line */
 import React from 'react';
 import PropTypes from 'prop-types';
 import useToggle from 'react-use/lib/useToggle';
@@ -11,33 +12,33 @@ import api from '../../libs/api';
 import forge from '../../libs/sdk';
 import env from '../../libs/env';
 
-export default function Fund({ user, assetToken }) {
+export default function FundPlay({ user, token }) {
   const [isOpen, setOpen] = useToggle(false);
   const account = useAsync(async () => {
-    const res = await forge.getAccountState({ address: user.did }, { conn: env.assetChainId });
+    const res = await forge.getAccountState({ address: user.did }, { conn: env.chainId });
     return res.state;
   });
 
   return (
     <React.Fragment>
       <Button color="secondary" variant="contained" size="large" className="action" onClick={() => setOpen(true)}>
-        Fund my account!{' '}
+        Get {token.symbol}!{' '}
         {account.value && (
           <strong>
-            {fromUnitToToken(account.value.balance, assetToken.decimal)} {assetToken.symbol}
+            Balance: {fromUnitToToken(account.value.balance, token.decimal)} {token.symbol}
           </strong>
         )}
       </Button>
       {isOpen && (
         <Auth
           responsive
-          action="fund"
+          action="checkin"
           checkFn={api.get}
           onClose={() => setOpen()}
           onSuccess={() => window.location.reload()}
           messages={{
-            title: 'Get random lucky tokens for FREE',
-            scan: 'Scan qrcode to get tokens for FREE',
+            title: 'Get 100 PLAY token for FREE',
+            scan: 'Scan qrcode to get token for FREE',
             confirm: 'Confirm on your ABT Wallet',
             success: 'Lucky tokens sent to your account',
           }}
@@ -47,7 +48,7 @@ export default function Fund({ user, assetToken }) {
   );
 }
 
-Fund.propTypes = {
+FundPlay.propTypes = {
   user: PropTypes.object.isRequired,
-  assetToken: PropTypes.object.isRequired,
+  token: PropTypes.object.isRequired,
 };

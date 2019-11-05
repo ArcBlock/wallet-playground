@@ -15,7 +15,8 @@ import useSession from '../hooks/session';
 import api from '../libs/api';
 import { setToken } from '../libs/auth';
 
-import FundButton from '../components/auth/fund';
+import FundTbaButton from '../components/auth/fund_tba';
+import FundPlayButton from '../components/auth/fund_play';
 import SwapBadgeButton from '../components/auth/swap_badge';
 import SwapBadgesButton from '../components/auth/swap_badges';
 import SwapTicketButton from '../components/auth/swap_ticket';
@@ -69,7 +70,8 @@ export default function IndexPage() {
                 </Typography>
               </Typography>
               <div className="section__content">
-                <FundButton {...session.value} />
+                <FundTbaButton {...session.value} />
+                <FundPlayButton {...session.value} />
               </div>
             </section>
             <section className="section">

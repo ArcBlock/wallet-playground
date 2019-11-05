@@ -6,8 +6,6 @@ import { BrowserRouter as Router, Route, Switch, withRouter } from 'react-router
 
 import HomePage from './pages/index';
 import ProfilePage from './pages/profile';
-import PaymentPage from './pages/payment';
-import SwapPage from './pages/swap';
 
 import theme from './libs/theme';
 
@@ -28,8 +26,6 @@ export const App = () => (
           <Switch>
             <Route exact path="/" component={HomePage} />
             <Route exact path="/profile" component={ProfilePage} />
-            <Route exact path="/payment" component={PaymentPage} />
-            <Route exact path="/swap" component={SwapPage} />
           </Switch>
         </div>
       </React.Fragment>
