@@ -40,10 +40,10 @@
   resolved "https://registry.yarnpkg.com/@arcblock/did-auth-storage/-/did-auth-storage-0.40.6.tgz#6e9b7a9caec39751b79b9050f45ab761fcc3b2bc"
   integrity sha512-i+Y7OelOh3OBnK9RCTX0Yi/om7G2iDg0qJMgfs60X6GsZ9Ynj14EnLJfKY+wYISTD0w3V2A3W0LRmqjrcuI/yQ==
 
-"@arcblock/did-auth@^0.40.6":
-  version "0.40.6"
-  resolved "https://registry.yarnpkg.com/@arcblock/did-auth/-/did-auth-0.40.6.tgz#bdfc570d2e1a524ac40ee56fcecf5e58a60d451f"
-  integrity sha512-p++Y8V7WZGxUoXFWGsRjbq3zKTksuuAUIyPY2N9Vzar9H7ngZgi8gheLoM2RGAYnlFFYdwlR9xAmXnhZFKWZdQ==
+"@arcblock/did-auth@^0.40.7":
+  version "0.40.7"
+  resolved "https://registry.yarnpkg.com/@arcblock/did-auth/-/did-auth-0.40.7.tgz#819160ec7bf79d806b76d4b344031acfacd36389"
+  integrity sha512-LOeNZNk1krKLBN4gQ4v2wpiDzztjrswrZhKyNIGG2FYaGPLkDNlQ95jweSGuvHtA8EgL6IQig6/a75ggGBJkuw==
   dependencies:
     "@arcblock/did" "^0.40.6"
     "@arcblock/forge-sdk" "^0.40.6"
