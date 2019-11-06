@@ -10,6 +10,7 @@ module.exports = {
     watch: false,
     max_memory_restart: '500M',
     env: {
+      DEBUG: '@arcblock/*',
       NODE_ENV: 'production'
     }
   }],
