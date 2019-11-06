@@ -40,17 +40,17 @@
   resolved "https://registry.npm.taobao.org/@arcblock/did-auth-storage/download/@arcblock/did-auth-storage-0.40.0.tgz#62c8042f00530ba2cec015c0961cd0cdf0aac846"
   integrity sha1-YsgELwBTC6LOwBXAlhzQzfCqyEY=
 
-"@arcblock/did-auth@^0.40.3":
-  version "0.40.3"
-  resolved "https://registry.npm.taobao.org/@arcblock/did-auth/download/@arcblock/did-auth-0.40.3.tgz#a0ab87a11b2fd8670e11bc469ad200a7bfeb93f2"
-  integrity sha1-oKuHoRsv2GcOEbxGmtIAp7/rk/I=
+"@arcblock/did-auth@^0.40.4":
+  version "0.40.4"
+  resolved "https://registry.npm.taobao.org/@arcblock/did-auth/download/@arcblock/did-auth-0.40.4.tgz#8b8bba613fcdf039ff530b3b83e969f6b9d6bead"
+  integrity sha1-i4u6YT/N8Dn/Uws7g+lp9rnWvq0=
   dependencies:
     "@arcblock/did" "^0.40.3"
     "@arcblock/forge-sdk" "^0.40.3"
     "@arcblock/forge-util" "^0.40.3"
     "@arcblock/forge-wallet" "^0.40.3"
     "@arcblock/mcrypto" "^0.40.3"
-    "@arcblock/swap-retriever" "^0.40.3"
+    "@arcblock/swap-retriever" "^0.40.4"
     "@arcblock/tx-util" "^0.40.3"
     debug "^4.1.1"
     json-stable-stringify "^1.0.1"
@@ -339,10 +339,10 @@
     debug "^4.1.1"
     graphql "^14.1.1"
 
-"@arcblock/swap-retriever@^0.40.3":
-  version "0.40.3"
-  resolved "https://registry.npm.taobao.org/@arcblock/swap-retriever/download/@arcblock/swap-retriever-0.40.3.tgz#c95f989fc4a14730f64bd1a5367c65edab0d7d77"
-  integrity sha1-yV+Yn8ShRzD2S9GlNnxl7asNfXc=
+"@arcblock/swap-retriever@^0.40.4":
+  version "0.40.4"
+  resolved "https://registry.npm.taobao.org/@arcblock/swap-retriever/download/@arcblock/swap-retriever-0.40.4.tgz#0167f18891be25ca71108d1ddeb3032ad6667dc1"
+  integrity sha1-AWfxiJG+JcpxEI0d3rMDKtZmfcE=
   dependencies:
     "@arcblock/forge-sdk" "^0.38.10"
     "@arcblock/tx-util" "^0.38.10"

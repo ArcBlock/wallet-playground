@@ -97,7 +97,7 @@ handlers.attach(Object.assign({ app: router }, require('../routes/auth/transfer_
 handlers.attach(Object.assign({ app: router }, require('../routes/auth/transfer_token_out')));
 swapHandlers.attach(Object.assign({ app: router }, require('../routes/auth/swap_badge')));
 swapHandlers.attach(Object.assign({ app: router }, require('../routes/auth/swap_badges')));
-swapHandlers.attach(Object.assign({ app: router }, require('../routes/auth/swap_token')));
+swapHandlers.attach(Object.assign({ app: router, signedResponse: true }, require('../routes/auth/swap_token')));
 swapHandlers.attach(Object.assign({ app: router }, require('../routes/auth/swap_ticket')));
 swapHandlers.attach(Object.assign({ app: router }, require('../routes/auth/swap_certificate')));
 

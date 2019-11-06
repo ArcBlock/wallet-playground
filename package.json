@@ -20,7 +20,7 @@
   "dependencies": {
     "@arcblock/asset-factory": "^0.40.3",
     "@arcblock/did": "^0.40.3",
-    "@arcblock/did-auth": "^0.40.3",
+    "@arcblock/did-auth": "^0.40.4",
     "@arcblock/did-auth-storage-mongo": "^0.40.0",
     "@arcblock/did-react": "^0.36.0",
     "@arcblock/forge-sdk": "^0.40.3",
