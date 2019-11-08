@@ -1,30 +1,18 @@
 /* eslint-disable no-console */
-const multibase = require('multibase');
 const ForgeSDK = require('@arcblock/forge-sdk');
-const { fromTokenToUnit } = require('@arcblock/forge-util');
 const { wallet } = require('../../libs/auth');
 const env = require('../../libs/env');
 
 module.exports = {
   action: 'transfer_token_in',
   claims: {
-    signature: async ({ userDid, extraParams: { locale } }) => {
-      const { state } = await ForgeSDK.getForgeState({ conn: env.chainId });
-
-      const description = {
-        en: `Accept 1 ${state.token.symbol} to your wallet`,
-        zh: `接收 1 ${state.token.symbol} 到你的钱包`,
-      };
+    signature: async ({ userDid }) => {
+      const { state } = await ForgeSDK.getForgeState({ conn: env.assetChainId });
 
       return {
-        txType: 'TransferTx',
-        txData: {
-          itx: {
-            to: userDid,
-            value: fromTokenToUnit(1, state.token.decimal),
-          },
-        },
-        description: description[locale] || description.en,
+        description: `签名该文本，你将获得 1 个测试用的 ${state.token.symbol}`,
+        data: JSON.stringify({ userDid }, null, 2),
+        type: 'mime::text/plain',
       };
     },
   },

@@ -1,5 +1,4 @@
 /* eslint-disable no-console */
-const multibase = require('multibase');
 const ForgeSDK = require('@arcblock/forge-sdk');
 const { fromTokenToUnit } = require('@arcblock/forge-util');
 const { fromAddress } = require('@arcblock/forge-wallet');
@@ -18,8 +17,8 @@ module.exports = {
       };
 
       return {
-        txType: 'TransferTx',
-        txData: {
+        type: 'TransferTx',
+        data: {
           itx: {
             to: wallet.address,
             value: fromTokenToUnit(1, state.token.decimal),
@@ -33,7 +32,7 @@ module.exports = {
     console.log('transfer_token_out.onAuth', { claims, userDid });
     try {
       const claim = claims.find(x => x.type === 'signature');
-      const tx = ForgeSDK.decodeTx(multibase.decode(claim.origin));
+      const tx = ForgeSDK.decodeTx(claim.origin);
       const user = fromAddress(userDid);
 
       const hash = await ForgeSDK.sendTransferTx({

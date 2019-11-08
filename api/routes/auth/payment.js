@@ -1,5 +1,4 @@
 /* eslint-disable no-console */
-const multibase = require('multibase');
 const ForgeSDK = require('@arcblock/forge-sdk');
 const { fromTokenToUnit } = require('@arcblock/forge-util');
 const { fromAddress } = require('@arcblock/forge-wallet');
@@ -9,10 +8,7 @@ module.exports = {
   action: 'payment',
   claims: {
     signature: async ({ extraParams: { locale } }) => {
-      const { state } = await ForgeSDK.getForgeState(
-        {},
-        { ignoreFields: ['state.protocols', /\.txConfig$/, /\.gas$/] }
-      );
+      const { state } = await ForgeSDK.getForgeState();
 
       const description = {
         en: `Please pay 2 ${state.token.symbol} to unlock the secret document`,
@@ -20,8 +16,8 @@ module.exports = {
       };
 
       return {
-        txType: 'TransferTx',
-        txData: {
+        type: 'TransferTx',
+        data: {
           itx: {
             to: wallet.address,
             value: fromTokenToUnit(2, state.token.decimal),
@@ -35,7 +31,7 @@ module.exports = {
     console.log('pay.onAuth', { claims, userDid });
     try {
       const claim = claims.find(x => x.type === 'signature');
-      const tx = ForgeSDK.decodeTx(multibase.decode(claim.origin));
+      const tx = ForgeSDK.decodeTx(claim.origin);
       const user = fromAddress(userDid);
 
       const hash = await ForgeSDK.sendTransferTx({
