@@ -5,27 +5,28 @@ import useToggle from 'react-use/lib/useToggle';
 import Auth from '@arcblock/did-react/lib/Auth';
 import Button from '@arcblock/ux/lib/Button';
 
-import api from '../../libs/api';
+import api from '../../../libs/api';
 
 export default function AuthPrincipal() {
   const [isOpen, setOpen] = useToggle(false);
   return (
     <React.Fragment>
       <Button color="secondary" variant="contained" size="large" className="action" onClick={() => setOpen(true)}>
-        Do Auth Principal
+        Request Full Profile
       </Button>
       {isOpen && (
         <Auth
           responsive
-          action="auth"
+          action="profile"
           checkFn={api.get}
           onClose={() => setOpen()}
+          checkTimeout={5 * 60 * 1000}
           onSuccess={() => window.location.reload()}
           messages={{
-            title: 'Auth principal',
-            scan: 'Scan qrcode to choose did',
+            title: 'Profile Required',
+            scan: 'Scan qrcode to provide profile',
             confirm: 'Confirm on your ABT Wallet',
-            success: 'Lucky tokens sent to your account',
+            success: 'Profile provided',
           }}
         />
       )}
