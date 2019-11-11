@@ -2,15 +2,16 @@
 const Mcrypto = require('@arcblock/mcrypto');
 const ForgeSDK = require('@arcblock/forge-sdk');
 const TokenMongoStorage = require('@arcblock/did-auth-storage-mongo');
+const AgentMongoStorage = require('@arcblock/did-agent-storage-mongo');
 const SwapMongoStorage = require('@arcblock/swap-storage-mongo');
 const { AssetFactory } = require('@arcblock/asset-factory');
 const { fromSecretKey, fromJSON, WalletType } = require('@arcblock/forge-wallet');
 const {
   WalletAuthenticator,
-  AppAuthenticator,
-  AppHandlers,
+  AgentAuthenticator,
   WalletHandlers,
   SwapHandlers,
+  AgentWalletHandlers,
 } = require('@arcblock/did-auth');
 const env = require('./env');
 
@@ -37,9 +38,7 @@ const walletAuth = new WalletAuthenticator({
   appInfo: {
     name: env.appName,
     description: env.appDescription,
-    icon: 'https://arcblock.oss-cn-beijing.aliyuncs.com/images/wallet-round.png',
-    path: 'https://abtwallet.io/i/',
-    publisher: `did:abt:${wallet.address}`,
+    icon: 'https://releases.arcblock.io/playground.png',
   },
   chainInfo: {
     host: env.chainHost,
@@ -47,12 +46,23 @@ const walletAuth = new WalletAuthenticator({
   },
 });
 
-const tokenStorage = new TokenMongoStorage({
-  url: process.env.MONGO_URI,
+const agentAuth = new AgentAuthenticator({
+  wallet,
+  baseUrl: env.baseUrl,
+  appInfo: {
+    name: 'Agent Service',
+    description: 'This is a demo agent service that can do did-auth on be-half-of another application',
+    icon: 'https://releases.arcblock.io/agent.png',
+  },
+  chainInfo: {
+    host: env.chainHost,
+    id: env.chainId,
+  },
 });
-const swapStorage = new SwapMongoStorage({
-  url: process.env.MONGO_URI,
-});
+
+const tokenStorage = new TokenMongoStorage({ url: process.env.MONGO_URI });
+const swapStorage = new SwapMongoStorage({ url: process.env.MONGO_URI });
+const agentStorage = new AgentMongoStorage({ url: process.env.MONGO_URI });
 
 const walletHandlers = new WalletHandlers({
   authenticator: walletAuth,
@@ -69,8 +79,11 @@ const swapHandlers = new SwapHandlers({
   demandChainHost: env.assetChainHost,
 });
 
-const appAuth = new AppAuthenticator(wallet);
-const appHandlers = new AppHandlers(appAuth);
+const agentHandlers = new AgentWalletHandlers({
+  authenticator: agentAuth,
+  tokenStorage,
+  agentStorage,
+});
 
 const factory = new AssetFactory({
   chainId: env.chainId,
@@ -84,13 +97,14 @@ const factory = new AssetFactory({
 });
 
 module.exports = {
-  authenticator: walletAuth,
-  handlers: walletHandlers,
   tokenStorage,
   swapStorage,
+  agentStorage,
+
+  walletHandlers,
   swapHandlers,
-  appAuth,
-  appHandlers,
+  agentHandlers,
+
   wallet,
   factory,
 };

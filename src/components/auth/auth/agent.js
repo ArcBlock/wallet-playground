@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-one-expression-per-line */
-import React from 'react';
+import React, { useState } from 'react';
 import useToggle from 'react-use/lib/useToggle';
 
 import Auth from '@arcblock/did-react/lib/Auth';
@@ -9,15 +9,35 @@ import api from '../../../libs/api';
 
 export default function AuthPrincipal() {
   const [isOpen, setOpen] = useToggle(false);
+  const [error, setError] = useState('');
+  const [authorizeId, setAuthorizeId] = useState(null);
+
+  const fetchAuthorization = async () => {
+    const { data } = await api.get('/api/authorizations');
+    if (data.error) {
+      setError(data.error);
+    } else {
+      console.log('authorization fetched', data);
+      setAuthorizeId(data.authorizeId);
+      setOpen(true);
+    }
+  };
+
   return (
     <React.Fragment>
-      <Button color="secondary" variant="contained" size="large" className="action" onClick={() => setOpen(true)}>
-        Verify dApp's Authorization to Agent
+      <Button
+        color={error ? 'danger' : 'secondary'}
+        variant="contained"
+        size="large"
+        className="action"
+        onClick={fetchAuthorization}>
+        {error || "Verify dApp's Authorization to Agent"}
       </Button>
-      {isOpen && (
+      {authorizeId && isOpen && (
         <Auth
           responsive
-          action="agent"
+          action="profile"
+          prefix={`/api/agent/${authorizeId}`}
           checkFn={api.get}
           onClose={() => setOpen()}
           onSuccess={() => setOpen(false)}

@@ -1,3 +1,4 @@
+/* eslint-disable object-curly-newline */
 /* eslint-disable no-console */
 const path = require('path');
 const cors = require('cors');
@@ -14,7 +15,7 @@ const ForgeSDK = require('@arcblock/forge-sdk');
 // Routes: due to limitations of netlify functions, we need to import routes here
 // ------------------------------------------------------------------------------
 const { decode } = require('../libs/jwt');
-const { handlers, swapHandlers, wallet } = require('../libs/auth');
+const { walletHandlers, swapHandlers, agentHandlers, wallet } = require('../libs/auth');
 
 const isProduction = process.env.NODE_ENV === 'production';
 
@@ -88,22 +89,24 @@ server.use((req, res, next) => {
 
 const router = express.Router();
 
-handlers.attach(Object.assign({ app: router }, require('../routes/auth/login')));
-handlers.attach(Object.assign({ app: router }, require('../routes/auth/payment')));
-handlers.attach(Object.assign({ app: router }, require('../routes/auth/checkin')));
-handlers.attach(Object.assign({ app: router }, require('../routes/auth/fund')));
-handlers.attach(Object.assign({ app: router }, require('../routes/auth/profile')));
-handlers.attach(Object.assign({ app: router }, require('../routes/auth/error')));
-handlers.attach(Object.assign({ app: router }, require('../routes/auth/transfer_token_in')));
-handlers.attach(Object.assign({ app: router }, require('../routes/auth/transfer_token_out')));
+walletHandlers.attach(Object.assign({ app: router }, require('../routes/auth/login')));
+walletHandlers.attach(Object.assign({ app: router }, require('../routes/auth/payment')));
+walletHandlers.attach(Object.assign({ app: router }, require('../routes/auth/checkin')));
+walletHandlers.attach(Object.assign({ app: router }, require('../routes/auth/fund')));
+walletHandlers.attach(Object.assign({ app: router }, require('../routes/auth/profile')));
+walletHandlers.attach(Object.assign({ app: router }, require('../routes/auth/error')));
+walletHandlers.attach(Object.assign({ app: router }, require('../routes/auth/transfer_token_in')));
+walletHandlers.attach(Object.assign({ app: router }, require('../routes/auth/transfer_token_out')));
 swapHandlers.attach(Object.assign({ app: router }, require('../routes/auth/swap_badge')));
 swapHandlers.attach(Object.assign({ app: router }, require('../routes/auth/swap_badges')));
 swapHandlers.attach(Object.assign({ app: router, signedResponse: true }, require('../routes/auth/swap_token')));
 swapHandlers.attach(Object.assign({ app: router }, require('../routes/auth/swap_ticket')));
 swapHandlers.attach(Object.assign({ app: router }, require('../routes/auth/swap_certificate')));
+agentHandlers.attach(Object.assign({ app: router }, require('../routes/auth/profile'))); // we can reuse something here
 
 require('../routes/session').init(router);
 require('../routes/payments').init(router);
+require('../routes/authorizations').init(router);
 
 // Check for application account
 ForgeSDK.getAccountState({ address: wallet.address })

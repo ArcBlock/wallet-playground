@@ -1,0 +1,66 @@
+/* eslint-disable no-console */
+const Mcrypto = require('@arcblock/mcrypto');
+const ForgeSDK = require('@arcblock/forge-sdk');
+const { WalletType } = require('@arcblock/forge-wallet');
+const { JWT } = require('@arcblock/did-auth');
+const { wallet, agentStorage } = require('../libs/auth');
+const env = require('../libs/env');
+
+module.exports = {
+  init(app) {
+    app.get('/api/authorizations', async (req, res) => {
+      if (!req.user) {
+        res.jsonp({ error: 'Please login to create your application and authorization' });
+      }
+
+      const ownerDid = req.user.did;
+      let [authorization] = await agentStorage.listByOwner(ownerDid);
+      if (authorization) {
+        return res.jsonp(authorization);
+      }
+
+      // We need to create a new application for this user
+      // Then make a fake authorization between the application and this dapp
+      const type = WalletType({ role: Mcrypto.types.RoleType.ROLE_APPLICATION });
+      const authorizer = ForgeSDK.Wallet.fromRandom(type);
+      const authorizeId = authorizer.toAddress();
+
+      // Declare the application
+      const hash = await ForgeSDK.declare(
+        {
+          issuer: ownerDid,
+          moniker: 'demo_application',
+          wallet: authorizer,
+        },
+        { conn: env.chainId }
+      );
+      console.log('application.declare', { ownerDid, authorizeId, hash });
+
+      // Sign the token
+      const token = JWT.sign(authorizeId, authorizer.secretKey, {
+        sub: wallet.address,
+        ops: {
+          profile: ['fullName', 'mobilePhone', 'mailingAddress'],
+        },
+      });
+
+      // Create the authorization
+      const [, content, sig] = token.split('.');
+      authorization = await agentStorage.create(authorizeId, {
+        ownerDid,
+        agentDid: wallet.address,
+        appDid: authorizeId,
+        appPk: authorizer.publicKey,
+        appSk: authorizer.appSk, // Please delete this line in production
+        appName: 'My Demo Application',
+        appDescription: `This is a random application generated to user ${ownerDid}`,
+        appIcon: 'https://reselease.arcblock.io/demo.png',
+        certificateContent: content,
+        certificateSignature: sig,
+      });
+      console.log('authorization.create', authorization);
+
+      res.jsonp(authorization);
+    });
+  },
+};
