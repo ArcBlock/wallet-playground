@@ -93,6 +93,7 @@ handlers.attach(Object.assign({ app: router }, require('../routes/auth/payment')
 handlers.attach(Object.assign({ app: router }, require('../routes/auth/checkin')));
 handlers.attach(Object.assign({ app: router }, require('../routes/auth/fund')));
 handlers.attach(Object.assign({ app: router }, require('../routes/auth/profile')));
+handlers.attach(Object.assign({ app: router }, require('../routes/auth/error')));
 handlers.attach(Object.assign({ app: router }, require('../routes/auth/transfer_token_in')));
 handlers.attach(Object.assign({ app: router }, require('../routes/auth/transfer_token_out')));
 swapHandlers.attach(Object.assign({ app: router }, require('../routes/auth/swap_badge')));

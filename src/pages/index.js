@@ -16,6 +16,8 @@ import api from '../libs/api';
 import { setToken } from '../libs/auth';
 
 import ProfileButton from '../components/auth/auth/profile';
+import AgentButton from '../components/auth/auth/agent';
+import ErrorButton from '../components/auth/auth/error';
 import FundTbaButton from '../components/auth/fund_tba';
 import FundPlayButton from '../components/auth/fund_play';
 import SwapTokenButton from '../components/auth/swap_token';
@@ -154,6 +156,8 @@ export default function IndexPage() {
               </Typography>
               <div className="section__content">
                 <ProfileButton {...session.value} />
+                <AgentButton {...session.value} />
+                <ErrorButton {...session.value} />
               </div>
             </section>
             <section className="section">

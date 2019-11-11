@@ -4,6 +4,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Container from '@material-ui/core/Container';
 import styled from 'styled-components';
 import Helmet from 'react-helmet';
+import Footer from '@arcblock/ux/lib/Footer';
 
 import Header from './header';
 
@@ -22,7 +23,10 @@ export default function Layout({ title, children, contentOnly }) {
           <Header />
         </Container>
       </AppBar>
-      <Container style={{ minHeight: '60vh' }}>{children}</Container>
+      <Container style={{ minHeight: '60vh' }}>
+        {children}
+        <Footer />
+      </Container>
     </Div>
   );
 }
