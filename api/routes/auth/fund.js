@@ -6,6 +6,12 @@ const env = require('../../libs/env');
 
 module.exports = {
   action: 'fund',
+  authPrincipal: {
+    chainInfo: {
+      host: env.assetChainHost,
+      id: env.assetChainId,
+    },
+  },
   claims: {
     signature: async ({ userDid }) => {
       const amount = Number((Math.random() * 50).toPrecision(8));
@@ -15,10 +21,6 @@ module.exports = {
         description: `签名该文本，你将获得 ${amount} 个测试用的 ${state.token.symbol}`,
         data: JSON.stringify({ amount, userDid }, null, 2),
         type: 'mime::text/plain',
-        chainInfo: {
-          host: env.assetChainHost,
-          id: env.assetChainId,
-        },
       };
     },
   },
