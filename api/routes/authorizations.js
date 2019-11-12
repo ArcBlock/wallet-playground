@@ -50,8 +50,8 @@ module.exports = {
         ownerDid,
         agentDid: wallet.address,
         appDid: authorizeId,
-        appPk: authorizer.publicKey,
-        appSk: authorizer.appSk, // Please delete this line in production
+        appPk: ForgeSDK.Util.toBase58(authorizer.publicKey),
+        appSk: ForgeSDK.Util.toBase58(authorizer.secretKey), // Please delete this line in production
         appName: 'My Demo Application',
         appDescription: `This is a random application generated to user ${ownerDid}`,
         appIcon: 'https://reselease.arcblock.io/demo.png',
