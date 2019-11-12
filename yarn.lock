@@ -2,13 +2,13 @@
 # yarn lockfile v1
 
 
-"@arcblock/asset-factory@^0.40.10":
-  version "0.40.10"
-  resolved "https://registry.npm.taobao.org/@arcblock/asset-factory/download/@arcblock/asset-factory-0.40.10.tgz#ab506770e406a4e491d0fadccc1023e5ee4a9c8a"
-  integrity sha1-q1BncOQGpOSR0PrczBAj5e5KnIo=
+"@arcblock/asset-factory@^0.40.11":
+  version "0.40.11"
+  resolved "https://registry.npmjs.org/@arcblock/asset-factory/-/asset-factory-0.40.11.tgz#97ffa38b531fd72bcd029abe21d4fc135f3aa4db"
+  integrity sha512-FnwNMpM73iwC0a0OD/ut0pbaPThzn68VHYIbOAXLTwhrV58CqSh+WJN36yVjCRhD3qO83IMFppESwJ6dkLvlBg==
   dependencies:
-    "@arcblock/forge-sdk" "^0.40.10"
-    "@arcblock/forge-wallet" "^0.40.10"
+    "@arcblock/forge-sdk" "^0.40.11"
+    "@arcblock/forge-wallet" "^0.40.11"
     debug "^4.1.1"
     json-stable-stringify "^1.0.1"
     lodash "^4.17.15"
@@ -28,18 +28,33 @@
     debug "^4.1.1"
     lodash "^4.17.14"
 
-"@arcblock/did-agent-storage-mongo@^0.40.10":
-  version "0.40.10"
-  resolved "https://registry.npm.taobao.org/@arcblock/did-agent-storage-mongo/download/@arcblock/did-agent-storage-mongo-0.40.10.tgz#075fbb62170cde06cadb36e1cf5116f525b83c39"
-  integrity sha1-B1+7YhcM3gbK2zbhz1EW9SW4PDk=
+"@arcblock/client-extension@^0.40.11":
+  version "0.40.11"
+  resolved "https://registry.npmjs.org/@arcblock/client-extension/-/client-extension-0.40.11.tgz#e049f4aebbbe6dfeee7c36037a4b1d8e95da48cf"
+  integrity sha512-6VkKhdz0BJldW4XSMZHgbnwReEJpak0z+Uzj/OxB7d1v4yXn8QBQ52RLXt6hNvxQVAGd1BKY08TqQKKlzqNX4Q==
   dependencies:
-    "@arcblock/did-agent-storage" "^0.40.10"
+    "@arcblock/did" "^0.40.10"
+    "@arcblock/did-util" "^0.40.11"
+    "@arcblock/forge-message" "^0.40.10"
+    "@arcblock/forge-proto" "^0.40.9"
+    "@arcblock/forge-util" "^0.40.10"
+    "@arcblock/forge-wallet" "^0.40.11"
+    "@arcblock/mcrypto" "^0.40.10"
+    debug "^4.1.1"
+    lodash "^4.17.14"
+
+"@arcblock/did-agent-storage-mongo@^0.40.11":
+  version "0.40.11"
+  resolved "https://registry.npmjs.org/@arcblock/did-agent-storage-mongo/-/did-agent-storage-mongo-0.40.11.tgz#d401a8ae2c75bd85c41a1aed56348a006bddb8d3"
+  integrity sha512-3rQHl5hgMAnoprKH9qT5rqEzhnxT5lNn0ldoZzKamH2vKgcOMj7gPic8TiHeCrqGoFPqDdq+J4qqbOZiiULYcQ==
+  dependencies:
+    "@arcblock/did-agent-storage" "^0.40.11"
     mongodb "3.1.13"
 
-"@arcblock/did-agent-storage@^0.40.10":
-  version "0.40.10"
-  resolved "https://registry.npm.taobao.org/@arcblock/did-agent-storage/download/@arcblock/did-agent-storage-0.40.10.tgz#4a624e7a1e9e81a704ccfe49ce0e6d50e5f44dba"
-  integrity sha1-SmJOeh6egacEzP5Jzg5tUOX0Tbo=
+"@arcblock/did-agent-storage@^0.40.11":
+  version "0.40.11"
+  resolved "https://registry.npmjs.org/@arcblock/did-agent-storage/-/did-agent-storage-0.40.11.tgz#c16c0237eeeadd9720b1d42d54086d2c882245dd"
+  integrity sha512-yPLpkPZcuTb+5ABT1l5v+SKiZlUfhIxTdbtLCnt80SCM0IkfiQ2gIXoPv9OfvnCeRx3BtbvOYa90Ge8wN380lg==
 
 "@arcblock/did-auth-storage-mongo@^0.40.10":
   version "0.40.10"
@@ -71,13 +86,13 @@
     json-stable-stringify "^1.0.1"
     lodash.get "^4.4.2"
 
-"@arcblock/did-react@^0.37.0":
-  version "0.37.0"
-  resolved "https://registry.npmjs.org/@arcblock/did-react/-/did-react-0.37.0.tgz#148cde8bc0600002db5b13e0b59e50ff640c673b"
-  integrity sha512-anzpW7lXZNv0EzUU9Yg3NB4vaRdDG3++gKdSTJBQvSRguq5LB43k2AtaSY0d3kWEVUw618aYhz7Bt5BhxCqnXg==
+"@arcblock/did-react@^0.38.0":
+  version "0.38.0"
+  resolved "https://registry.npmjs.org/@arcblock/did-react/-/did-react-0.38.0.tgz#07e8eb31791bbb85f0ffe7b18058f7fe62d3f01f"
+  integrity sha512-fTxQt5aJwyug6VvKa3HDbWihybLG8SdBCz652rQmnwYkV7F8bHP0CEQzsfwlJXPEStUMQwDXfFUAgatZkDVinQ==
   dependencies:
-    "@arcblock/react-hooks" "^0.37.0"
-    "@arcblock/ux" "^0.37.0"
+    "@arcblock/react-hooks" "^0.38.0"
+    "@arcblock/ux" "^0.38.0"
     ismobilejs "^0.5.2"
     qrcode.react "^0.9.3"
     react-load-script "^0.0.6"
@@ -92,6 +107,18 @@
     "@arcblock/forge-proto" "^0.40.9"
     "@arcblock/forge-util" "^0.40.10"
     "@arcblock/forge-wallet" "^0.40.10"
+    "@arcblock/mcrypto" "^0.40.10"
+
+"@arcblock/did-util@^0.40.11":
+  version "0.40.11"
+  resolved "https://registry.npmjs.org/@arcblock/did-util/-/did-util-0.40.11.tgz#f54236c2d949b98959e92f6b33ac48c0f73820e2"
+  integrity sha512-K46Op5OeG82e31meAGrJ9zvlNc5Rd+YIOCTbWxLnOjb0BGsqDS6tmSBGNTEPkT6LMYFRpqXvT7y07UVFqUx51A==
+  dependencies:
+    "@arcblock/did" "^0.40.10"
+    "@arcblock/forge-message" "^0.40.10"
+    "@arcblock/forge-proto" "^0.40.9"
+    "@arcblock/forge-util" "^0.40.10"
+    "@arcblock/forge-wallet" "^0.40.11"
     "@arcblock/mcrypto" "^0.40.10"
 
 "@arcblock/did@^0.40.10":
@@ -138,6 +165,20 @@
     debug "^4.1.1"
     react-app-polyfill "^1.0.1"
 
+"@arcblock/forge-sdk@^0.40.11":
+  version "0.40.11"
+  resolved "https://registry.npmjs.org/@arcblock/forge-sdk/-/forge-sdk-0.40.11.tgz#7059621793ab1ff054fc748d7cbe3be306286be9"
+  integrity sha512-/7635bOQflGYdKjWW4n7KBADUk6SXSTY0tLbWH1TBIuouNDzSjQvSB57plWUYXZkyCy7VKJ7zWo9xdOOEBUVVg==
+  dependencies:
+    "@arcblock/did-util" "^0.40.11"
+    "@arcblock/forge-message" "^0.40.10"
+    "@arcblock/forge-util" "^0.40.10"
+    "@arcblock/forge-wallet" "^0.40.11"
+    "@arcblock/graphql-client" "^0.40.11"
+    "@arcblock/grpc-client" "^0.40.11"
+    debug "^4.1.1"
+    react-app-polyfill "^1.0.1"
+
 "@arcblock/forge-util@^0.40.10":
   version "0.40.10"
   resolved "https://registry.npm.taobao.org/@arcblock/forge-util/download/@arcblock/forge-util-0.40.10.tgz#4e95eee0c7a5e12eced53d36f3509fc46dbe7a86"
@@ -159,12 +200,36 @@
     "@arcblock/mcrypto" "^0.40.10"
     lodash.upperfirst "^4.3.1"
 
+"@arcblock/forge-wallet@^0.40.11":
+  version "0.40.11"
+  resolved "https://registry.npmjs.org/@arcblock/forge-wallet/-/forge-wallet-0.40.11.tgz#b4348c78c68729f328aa286ebeeea9d43e8a81db"
+  integrity sha512-ZEYX7hRJc4Ps2FS3ezdg+U+23QIQWwF7PUxDvUT+gfWk5wzA76DGXrsrwuc2PxklN9nLzHXPqjx4Cf24aK7GpQ==
+  dependencies:
+    "@arcblock/did" "^0.40.10"
+    "@arcblock/mcrypto" "^0.40.10"
+    lodash.upperfirst "^4.3.1"
+
 "@arcblock/graphql-client@^0.40.10":
   version "0.40.10"
   resolved "https://registry.npm.taobao.org/@arcblock/graphql-client/download/@arcblock/graphql-client-0.40.10.tgz#be7885f6f00b0270cdba99932a51cae8c8dd28e9"
   integrity sha1-vniF9vALAnDNupmTKlHK6MjdKOk=
   dependencies:
     "@arcblock/client-extension" "^0.40.10"
+    "@arcblock/sdk-util" "^0.24.0"
+    blueimp-md5 "^2.10.0"
+    debug "^4.1.1"
+    jsonpack "^1.1.5"
+    lodash "^4.17.14"
+    phoenix-channels "^1.0.0"
+    react-app-polyfill "^1.0.1"
+    wolfy87-eventemitter "^5.2.5"
+
+"@arcblock/graphql-client@^0.40.11":
+  version "0.40.11"
+  resolved "https://registry.npmjs.org/@arcblock/graphql-client/-/graphql-client-0.40.11.tgz#519b4ccecfbc8dec71ae3a526f8051ddc3bf232b"
+  integrity sha512-D3i1eMSFZqhzD9MDU6mBR5BiEeIeVBEGxFsyYxSdZXWgucn6oGdUuhxpBzJlWhY+xTVEo2u0CGLbCG41TAS3EA==
+  dependencies:
+    "@arcblock/client-extension" "^0.40.11"
     "@arcblock/sdk-util" "^0.24.0"
     blueimp-md5 "^2.10.0"
     debug "^4.1.1"
@@ -186,6 +251,18 @@
     grpc "^1.24.0"
     lodash "^4.17.15"
 
+"@arcblock/grpc-client@^0.40.11":
+  version "0.40.11"
+  resolved "https://registry.npmjs.org/@arcblock/grpc-client/-/grpc-client-0.40.11.tgz#0a845cab634130e3f77c131f70fff1f1052dd297"
+  integrity sha512-8QzcQ2o4O7Cqvy5YOjFqiyUtyaD2MoJirLWkY73E6lWmbVQuSAntZcmScmAgDuZDsGoC2CjxK+EjYk5Jcyn1Ug==
+  dependencies:
+    "@arcblock/client-extension" "^0.40.11"
+    "@arcblock/forge-message" "^0.40.10"
+    "@arcblock/forge-proto" "^0.40.9"
+    debug "^4.1.1"
+    grpc "^1.24.0"
+    lodash "^4.17.15"
+
 "@arcblock/mcrypto@^0.40.10":
   version "0.40.10"
   resolved "https://registry.npm.taobao.org/@arcblock/mcrypto/download/@arcblock/mcrypto-0.40.10.tgz#1ba07f9df14aa45162d2981325d4ba7d7d2aae49"
@@ -201,10 +278,10 @@
     randombytes "^2.0.6"
     tweetnacl "^1.0.1"
 
-"@arcblock/react-hooks@^0.37.0":
-  version "0.37.0"
-  resolved "https://registry.npmjs.org/@arcblock/react-hooks/-/react-hooks-0.37.0.tgz#8938b95b90800775809360aef2bd3925ad92753e"
-  integrity sha512-+P5WVyRt6Rne+fBijgjNZxYwL1X++3Te3gdFWeZuyts1JCJDEr4oBma/cizU8G3LKEDms9gxQ8/AKehKWkavJQ==
+"@arcblock/react-hooks@^0.38.0":
+  version "0.38.0"
+  resolved "https://registry.npmjs.org/@arcblock/react-hooks/-/react-hooks-0.38.0.tgz#180e157c15e57a1bcf7de9975cbf8cc37d527aa2"
+  integrity sha512-Wr8aiYAw84cWKpXxF99u1xHUENKakkzuEcG7yOWFcsWRW9CY0zszwQ1XesQk/R2roh+2o9BCn9vx11Pga6p5jg==
   dependencies:
     event-target-shim "^5.0.1"
     qrcode.react "^0.9.3"
@@ -229,10 +306,10 @@
     debug "^4.1.1"
     lodash "^4.17.15"
 
-"@arcblock/swap-storage-mongo@^0.40.10":
-  version "0.40.10"
-  resolved "https://registry.npm.taobao.org/@arcblock/swap-storage-mongo/download/@arcblock/swap-storage-mongo-0.40.10.tgz#829c15f928a8ce9292d760b359b449d6daba825c"
-  integrity sha1-gpwV+SiozpKS12CzWbRJ1tq6glw=
+"@arcblock/swap-storage-mongo@^0.40.11":
+  version "0.40.11"
+  resolved "https://registry.npmjs.org/@arcblock/swap-storage-mongo/-/swap-storage-mongo-0.40.11.tgz#ed57c508b290609fe596ead06c5bffd79a3d37a1"
+  integrity sha512-Zd6nGgosca9ip4T+Z1x8BSKWBrMvvPEApaMPx5gYT4qJnuaBTvd6K8M/xLBpOKSnRclQTmx3i4IYb6X3y/SUOw==
   dependencies:
     "@arcblock/swap-storage" "^0.40.10"
     mongodb "3.1.13"
@@ -250,12 +327,12 @@
     "@arcblock/forge-sdk" "^0.40.10"
     debug "^4.1.1"
 
-"@arcblock/ux@^0.37.0":
-  version "0.37.0"
-  resolved "https://registry.npmjs.org/@arcblock/ux/-/ux-0.37.0.tgz#10df9f8142597c1e88f7293cedaf0fbc13c17a37"
-  integrity sha512-ufNL7zEMMIMXVHZlbTFiRPbMSg8GZFQxL/Gx/kYlF3fWJiXmyV5VScoiUN4cR7TwPijgLE6hxfL7fT6ZBQpupA==
+"@arcblock/ux@^0.38.0":
+  version "0.38.0"
+  resolved "https://registry.npmjs.org/@arcblock/ux/-/ux-0.38.0.tgz#b220741dedec80ab92ea627640fdfc4d08a5be72"
+  integrity sha512-PHvJcrGfULg3bZKQ/wJgn20iKfL17zO6nbYgaIwKAdyR/k8IQE6X3fahU0pEjxj/Vy8+MQt0Yz4n2p/vyT1Hyw==
   dependencies:
-    "@arcblock/react-hooks" "^0.37.0"
+    "@arcblock/react-hooks" "^0.38.0"
     "@babel/plugin-syntax-dynamic-import" "^7.2.0"
     copy-to-clipboard "^3.2.0"
     d3-geo "^1.11.6"
