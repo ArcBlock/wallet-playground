@@ -27,6 +27,7 @@ import SwapTicketButton from '../components/auth/swap_ticket';
 import SwapCertificateButton from '../components/auth/swap_certificate';
 import TransferTokenOut from '../components/auth/transfer_token_out';
 import TransferTokenIn from '../components/auth/transfer_token_in';
+import TransferAssetOut from '../components/auth/transfer_asset_out';
 
 export default function IndexPage() {
   const session = useSession();
@@ -127,9 +128,7 @@ export default function IndexPage() {
               <div className="section__content">
                 <TransferTokenOut {...session.value} />
                 <TransferTokenIn {...session.value} />
-                <Button color="primary" variant="contained" size="large" className="action" disabled>
-                  Transfer Asset to Application
-                </Button>
+                <TransferAssetOut {...session.value} />
                 <Button color="primary" variant="contained" size="large" className="action" disabled>
                   Transfer Asset to Wallet
                 </Button>

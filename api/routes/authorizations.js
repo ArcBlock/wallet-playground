@@ -37,15 +37,18 @@ module.exports = {
       console.log('application.declare', { ownerDid, authorizeId, hash });
 
       // Sign the token
+      const now = Math.floor(Date.now() / 1000);
       const token = JWT.sign(authorizeId, authorizer.secretKey, {
-        sub: wallet.address,
+        iat: now,
+        nbf: now,
+        exp: now + 365 * 24 * 60 * 60, // authorize for a year
+        agentDid: ForgeSDK.Util.toDid(wallet.address),
         ops: {
           profile: ['fullName', 'mobilePhone', 'mailingAddress'],
         },
       });
 
       // Create the authorization
-      const [, content, sig] = token.split('.');
       authorization = await agentStorage.create(authorizeId, {
         ownerDid,
         agentDid: wallet.address,
@@ -54,10 +57,9 @@ module.exports = {
         appSk: ForgeSDK.Util.toBase58(authorizer.secretKey), // Please delete this line in production
         appName: 'My Demo Application',
         appDescription: `This is a random application generated to user ${ownerDid}`,
-        appIcon: 'https://reselease.arcblock.io/demo.png',
+        appIcon: 'https://releases.arcblockio.cn/demo.png',
         chainHost: env.chainHost,
-        certificateContent: content,
-        certificateSignature: sig,
+        certificateContent: token,
       });
       console.log('authorization.create', authorization);
 
