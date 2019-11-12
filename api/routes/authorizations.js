@@ -55,6 +55,7 @@ module.exports = {
         appName: 'My Demo Application',
         appDescription: `This is a random application generated to user ${ownerDid}`,
         appIcon: 'https://reselease.arcblock.io/demo.png',
+        chainHost: env.chainHost,
         certificateContent: content,
         certificateSignature: sig,
       });
