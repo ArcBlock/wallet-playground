@@ -44,8 +44,8 @@ mongoose.connection.on('reconnected', () => {
 // Create and config express application
 const server = express();
 server.use(cookieParser());
-server.use(bodyParser.json());
-server.use(bodyParser.urlencoded({ extended: true }));
+server.use(bodyParser.json({ limit: '1M' }));
+server.use(bodyParser.urlencoded({ extended: true, limit: '1M' }));
 server.use(cors());
 
 server.use(
@@ -100,7 +100,9 @@ walletHandlers.attach(Object.assign({ app: router }, require('../routes/auth/tra
 walletHandlers.attach(Object.assign({ app: router }, require('../routes/auth/transfer_asset_out')));
 swapHandlers.attach(Object.assign({ app: router }, require('../routes/auth/swap_badge')));
 swapHandlers.attach(Object.assign({ app: router }, require('../routes/auth/swap_badges')));
-swapHandlers.attach(Object.assign({ app: router, signedResponse: true }, require('../routes/auth/swap_token')));
+swapHandlers.attach(
+  Object.assign({ app: router, signedResponse: true }, require('../routes/auth/swap_token'))
+);
 swapHandlers.attach(Object.assign({ app: router }, require('../routes/auth/swap_ticket')));
 swapHandlers.attach(Object.assign({ app: router }, require('../routes/auth/swap_certificate')));
 agentHandlers.attach(Object.assign({ app: router }, require('../routes/auth/profile'))); // we can reuse something here
