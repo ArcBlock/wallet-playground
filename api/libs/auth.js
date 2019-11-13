@@ -32,13 +32,17 @@ if (env.chainHost) {
 
 const wallet = fromSecretKey(process.env.APP_SK, type).toJSON();
 
+let icon = 'https://releases.arcblockio.cn/playground.png';
+if (process.env.STAGING && JSON.parse(process.env.STAGING)) {
+  icon = 'https://releases.arcblockio.cn/playground-staging.png';
+}
 const walletAuth = new WalletAuthenticator({
   wallet,
   baseUrl: env.baseUrl,
   appInfo: {
     name: env.appName,
     description: env.appDescription,
-    icon: 'https://releases.arcblock.io/playground.png',
+    icon,
   },
   chainInfo: {
     host: env.chainHost,
@@ -51,7 +55,8 @@ const agentAuth = new AgentAuthenticator({
   baseUrl: env.baseUrl,
   appInfo: {
     name: 'Agent Service',
-    description: 'This is a demo agent service that can do did-auth on be-half-of another application',
+    description:
+      'This is a demo agent service that can do did-auth on be-half-of another application',
     icon: 'https://releases.arcblock.io/agent.png',
   },
   chainInfo: {
