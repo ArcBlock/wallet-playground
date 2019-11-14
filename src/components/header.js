@@ -4,17 +4,17 @@ import qs from 'querystring';
 import styled from 'styled-components';
 import useToggle from 'react-use/lib/useToggle';
 
-import Button from '@material-ui/core/Button';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Auth from '@arcblock/did-react/lib/Auth';
 import UserAvatar from '@arcblock/did-react/lib/Avatar';
+import Button from '@arcblock/ux/lib/Button';
 
 import useSession from '../hooks/session';
 import api from '../libs/api';
 import env from '../libs/env';
-import { setToken } from '../libs/auth';
+import { setToken, removeToken } from '../libs/auth';
 
 export default function Header() {
   const session = useSession();
@@ -41,6 +41,11 @@ export default function Header() {
     window.location.href = '/profile';
   };
 
+  const onLogout = () => {
+    removeToken();
+    window.location.reload();
+  };
+
   return (
     <Nav>
       <div className="nav-left">
@@ -48,7 +53,11 @@ export default function Header() {
           <img className="logo" src="/static/images/logo.png" alt="arcblock" />
           {env.appName}
         </Typography>
-        <Button href={env.chainHost.replace('/api', '/node/explorer/txs')} target="_blank" variant="h6" color="inherit">
+        <Button
+          href={env.chainHost.replace('/api', '/node/explorer/txs')}
+          target="_blank"
+          variant="h6"
+          color="inherit">
           Explorer
         </Button>
         {session.value && session.value.user && (
@@ -56,11 +65,17 @@ export default function Header() {
             <Button href="/profile" size="large">
               Profile
             </Button>
+            <Button size="large" color="danger" onClick={onLogout}>
+              Logout
+            </Button>
           </React.Fragment>
         )}
       </div>
       <div className="nav-right">
-        <Button href="https://github.com/ArcBlock/forge-dapp-starters" className="github" target="_blank">
+        <Button
+          href="https://github.com/ArcBlock/forge-dapp-starters"
+          className="github"
+          target="_blank">
           GitHub
         </Button>
         {session.loading && (
