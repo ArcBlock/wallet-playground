@@ -29,7 +29,7 @@ export default function ExchangeAssetWithToken({ token }) {
           onSuccess={() => window.location.reload()}
           messages={{
             title: 'Exchange Required',
-            scan: 'Scan qrcode to start exchange',
+            scan: 'Scan QR code to start exchange',
             confirm: 'Confirm the exchange on your ABT Wallet',
             success: 'Exchange success!',
           }}

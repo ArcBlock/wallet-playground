@@ -13,7 +13,7 @@ export default function TransferTokenOut({ token }) {
   return (
     <React.Fragment>
       <Button color="secondary" variant="contained" size="large" className="action" onClick={() => setOpen(true)}>
-        Transfer 1 {token.symbol} to Application
+        Send 1 {token.symbol} to Application
       </Button>
       {isOpen && (
         <Auth
@@ -24,7 +24,7 @@ export default function TransferTokenOut({ token }) {
           onSuccess={() => window.location.reload()}
           messages={{
             title: 'Transfer Required',
-            scan: 'Scan qrcode to complete transfer',
+            scan: 'Scan QR code to complete transfer',
             confirm: 'Confirm on your ABT Wallet',
             success: 'Transfer sent!',
           }}

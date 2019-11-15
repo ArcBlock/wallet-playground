@@ -1,6 +1,5 @@
 /* eslint-disable react/jsx-one-expression-per-line */
 import React from 'react';
-// import PropTypes from 'prop-types';
 import useToggle from 'react-use/lib/useToggle';
 
 import Auth from '@arcblock/did-react/lib/Auth';
@@ -18,7 +17,7 @@ export default function TransferTokenOut() {
         size="large"
         className="action"
         onClick={() => setOpen(true)}>
-        Transfer 1 Asset to Application
+        Send 1 Asset to Application
       </Button>
       {isOpen && (
         <Auth
@@ -29,7 +28,7 @@ export default function TransferTokenOut() {
           onSuccess={() => window.location.reload()}
           messages={{
             title: 'Transfer Required',
-            scan: 'Scan qrcode to complete asset transfer',
+            scan: 'Scan QR code to complete asset transfer',
             confirm: 'Confirm on your ABT Wallet',
             success: 'Asset transfer sent!',
           }}
@@ -38,5 +37,3 @@ export default function TransferTokenOut() {
     </React.Fragment>
   );
 }
-
-TransferTokenOut.propTypes = {};

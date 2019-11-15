@@ -24,7 +24,7 @@ export default function AuthPrincipal() {
           onSuccess={() => window.location.reload()}
           messages={{
             title: 'Profile Required',
-            scan: 'Scan qrcode to provide profile',
+            scan: 'Scan QR code to provide profile',
             confirm: 'Confirm on your ABT Wallet',
             success: 'Profile provided',
           }}

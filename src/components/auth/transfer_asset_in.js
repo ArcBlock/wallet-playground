@@ -18,7 +18,7 @@ export default function TransferTokenIn() {
         size="large"
         className="action"
         onClick={() => setOpen(true)}>
-        Transfer 1 Asset to wallet
+        Send 1 Certificate to Wallet
       </Button>
       {isOpen && (
         <Auth
@@ -29,14 +29,12 @@ export default function TransferTokenIn() {
           onSuccess={() => window.location.reload()}
           messages={{
             title: 'Transfer Required',
-            scan: 'Scan qrcode to complete asset transfer',
+            scan: 'Scan QR code to complete Certificate transfer',
             confirm: 'Confirm on your ABT Wallet',
-            success: 'Asset transfer sent!',
+            success: 'Certificate transfer sent!',
           }}
         />
       )}
     </React.Fragment>
   );
 }
-
-TransferTokenIn.propTypes = {};

@@ -32,7 +32,6 @@ module.exports = {
     signature: async ({ userPk, userDid }) => {
       const asset = await ensureAsset(userPk, userDid);
 
-      console.log(asset);
       return {
         description: `签名该文本，你将获得 asset ${asset.address}`,
         data: JSON.stringify({ asset: asset.address, userDid }, null, 2),
@@ -41,8 +40,8 @@ module.exports = {
     },
   },
   onAuth: async ({ claims, userDid, userPk }) => {
-    console.log('transfer_asset_in.onAuth', { claims, userDid });
     try {
+      console.log('transfer_asset_in.onAuth', { claims, userDid });
       const type = toTypeInfo(userDid);
       const user = ForgeSDK.Wallet.fromPublicKey(userPk, type);
       const claim = claims.find(x => x.type === 'signature');

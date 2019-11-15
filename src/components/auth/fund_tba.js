@@ -38,7 +38,7 @@ export default function Fund({ user, assetToken }) {
           onSuccess={() => window.location.reload()}
           messages={{
             title: 'Get random lucky tokens for FREE',
-            scan: 'Scan qrcode to get tokens for FREE',
+            scan: 'Scan QR code to get tokens for FREE',
             confirm: 'Confirm on your ABT Wallet',
             success: 'Lucky tokens sent to your account',
           }}

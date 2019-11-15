@@ -136,7 +136,7 @@ export default function ProfilePage() {
           onSuccess={() => window.location.reload()}
           messages={{
             title: `Get 25 ${token.symbol} for FREE`,
-            scan: `Scan qrcode to get 25 ${token.symbol} for FREE`,
+            scan: `Scan QR code to get 25 ${token.symbol} for FREE`,
             confirm: 'Confirm on your ABT Wallet',
             success: `25 ${token.symbol} sent to your account`,
           }}

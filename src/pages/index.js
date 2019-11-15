@@ -67,7 +67,7 @@ export default function IndexPage() {
     <Layout title="Home">
       <Main>
         <Typography component="h2" variant="h4" className="page-header" color="textPrimary">
-          ABT Wallet Playground <Tag type="error">V2.0</Tag>
+          ABT Wallet Playground <Tag type="success">V2.0</Tag>
         </Typography>
         <Typography component="h3" variant="h6" color="textSecondary">
           TBA is the token on Zinc chain, PLAY is the token on App chain.
@@ -112,27 +112,6 @@ export default function IndexPage() {
                 <SwapTokenButton {...session.value} />
                 <SwapTicketButton {...session.value} />
                 <SwapCertificateButton {...session.value} />
-              </div>
-            </section>
-            <section className="section">
-              <Typography
-                component="h3"
-                variant="h5"
-                className="section__header"
-                color="textPrimary"
-                gutterBottom>
-                Asset Scenarios{' '}
-                <Typography component="small" color="textSecondary">
-                  Show what dApps can do with asset that ABT Wallet understands.
-                </Typography>
-              </Typography>
-              <div className="section__content">
-                <Button color="primary" variant="contained" size="large" className="action" disabled>
-                  Consume A Ticket
-                </Button>
-                <Button color="primary" variant="contained" size="large" className="action" disabled>
-                  Acquire A Product
-                </Button>
               </div>
             </section>
             <section className="section">
@@ -189,6 +168,22 @@ export default function IndexPage() {
                 <ProfileButton {...session.value} />
                 <AgentButton {...session.value} />
                 <ErrorButton {...session.value} />
+                <Button
+                  color="primary"
+                  variant="contained"
+                  size="large"
+                  className="action"
+                  disabled>
+                  Consume A Ticket
+                </Button>
+                <Button
+                  color="primary"
+                  variant="contained"
+                  size="large"
+                  className="action"
+                  disabled>
+                  Acquire A Product
+                </Button>
               </div>
             </section>
             <section className="section">
