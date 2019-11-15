@@ -20,6 +20,7 @@ import AgentButton from '../components/auth/auth/agent';
 import ErrorButton from '../components/auth/auth/error';
 import ExchangeAssetWithToken from '../components/auth/exchange_asset_with_token';
 import ExchangeTokenWithAsset from '../components/auth/exchange_token_with_asset';
+import ExchangeAssetWithAsset from '../components/auth/exchange_asset_with_asset';
 import FundTbaButton from '../components/auth/fund_tba';
 import FundPlayButton from '../components/auth/fund_play';
 import SwapTokenButton from '../components/auth/swap_token';
@@ -150,6 +151,9 @@ export default function IndexPage() {
               <div className="section__content">
                 <ExchangeAssetWithToken {...session.value} />
                 <ExchangeTokenWithAsset {...session.value} />
+                <ExchangeAssetWithAsset {...session.value} receiveCount={1} />
+                <ExchangeAssetWithAsset {...session.value} receiveCount={2} />
+                <ExchangeAssetWithAsset {...session.value} receiveCount={2} payCount={2} />
               </div>
             </section>
             <section className="section">
