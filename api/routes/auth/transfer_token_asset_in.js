@@ -10,8 +10,8 @@ const ensureAsset = async (userPk, userDid) => {
   const [asset] = await factory.createCertificate({
     backgroundUrl: '',
     data: {
-      name: '普通话二级甲等证书',
-      description: '普通话二级甲等证书',
+      name: '普通话一级甲等证书',
+      description: '普通话一级甲等证书',
       reason: '普通话标准',
       logoUrl: 'https://releases.arcblockio.cn/arcblock-logo.png',
       issueTime: Date.now() + 7 * 24 * 60 * 60 * 1000,
@@ -28,23 +28,26 @@ const ensureAsset = async (userPk, userDid) => {
 };
 
 module.exports = {
-  action: 'transfer_asset_in',
+  action: 'transfer_token_asset_in',
   claims: {
     signature: async ({ userPk, userDid }) => {
       const { state } = await ForgeSDK.getForgeState({ conn: env.assetChainId });
       const asset = await ensureAsset(userPk, userDid);
 
-      console.log(asset);
       return {
         description: `签名该文本，你将获得 1 个测试用的 ${state.token.symbol}  和一个证书: ${asset.address}`,
-        data: JSON.stringify({ asset: asset.address, userDid }, null, 2),
+        data: JSON.stringify(
+          { asset: asset.address, token: ForgeSDK.Util.fromTokenToUnit(1), userDid },
+          null,
+          2
+        ),
         type: 'mime::text/plain',
       };
     },
   },
   onAuth: async ({ claims, userDid, userPk }) => {
-    console.log('transfer_asset_in.onAuth', { claims, userDid });
     try {
+      console.log('transfer_asset_token_in.onAuth', { claims, userDid });
       const type = toTypeInfo(userDid);
       const user = ForgeSDK.Wallet.fromPublicKey(userPk, type);
       const claim = claims.find(x => x.type === 'signature');
@@ -55,20 +58,20 @@ module.exports = {
 
       const appWallet = ForgeSDK.Wallet.fromJSON(wallet);
       const data = JSON.parse(ForgeSDK.Util.fromBase58(claim.data));
-      const hash = await ForgeSDK.sendTransferTx({
-        tx: {
-          itx: {
-            to: data.userDid,
-            assets: [data.asset],
-          },
+      const hash = await ForgeSDK.transfer(
+        {
+          to: userDid,
+          token: 1,
+          assets: [data.asset],
+          wallet: appWallet,
         },
-        wallet: appWallet,
-      });
+        { conn: env.chainId }
+      );
 
-      console.log('transfer_asset_in.onAuth', hash);
+      console.log('transfer_asset_token_in.onAuth.hash', hash);
       return { hash, tx: claim.origin };
     } catch (err) {
-      console.log('transfer_asset_in.onAuth.error', err);
+      console.log('transfer_asset_token_in.onAuth.error', err);
       throw new Error('交易失败', err.message);
     }
   },

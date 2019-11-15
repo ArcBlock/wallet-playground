@@ -31,6 +31,7 @@ import TransferTokenIn from '../components/auth/transfer_token_in';
 import TransferAssetOut from '../components/auth/transfer_asset_out';
 import TransferAssetIn from '../components/auth/transfer_asset_in';
 import TransferTokenAssetIn from '../components/auth/transfer_token_asset_in';
+import TransferTokenAssetOut from '../components/auth/transfer_token_asset_out';
 
 export default function IndexPage() {
   const session = useSession();
@@ -164,14 +165,7 @@ export default function IndexPage() {
                 <TransferAssetOut {...session.value} />
                 <TransferAssetIn {...session.value} />
                 <TransferTokenAssetIn {...session.value} />
-                <Button
-                  color="primary"
-                  variant="contained"
-                  size="large"
-                  className="action"
-                  disabled>
-                  Transfer Token + Asset to Wallet
-                </Button>
+                <TransferTokenAssetOut {...session.value} />
                 <ExchangeAssetWithToken {...session.value} />
                 <Button
                   color="primary"

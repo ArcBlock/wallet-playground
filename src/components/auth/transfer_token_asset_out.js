@@ -8,12 +8,17 @@ import Button from '@arcblock/ux/lib/Button';
 
 import api from '../../libs/api';
 
-export default function TransferTokenAssetOut({ token }) {
+export default function TransferTokenAssetOut() {
   const [isOpen, setOpen] = useToggle(false);
   return (
     <React.Fragment>
-      <Button color="secondary" variant="contained" size="large" className="action" onClick={() => setOpen(true)}>
-        Transfer 1 {token.symbol} and asset to Application
+      <Button
+        color="secondary"
+        variant="contained"
+        size="large"
+        className="action"
+        onClick={() => setOpen(true)}>
+        Transfer token + asset to Application
       </Button>
       {isOpen && (
         <Auth
@@ -33,7 +38,3 @@ export default function TransferTokenAssetOut({ token }) {
     </React.Fragment>
   );
 }
-
-TransferTokenAssetOut.propTypes = {
-  token: PropTypes.object.isRequired,
-};
