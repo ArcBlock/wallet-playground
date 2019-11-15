@@ -1,12 +1,8 @@
 /* eslint-disable no-console */
 const ForgeSDK = require('@arcblock/forge-sdk');
-const { fromTokenToUnit } = require('@arcblock/forge-util');
-const { fromAddress, fromJSON } = require('@arcblock/forge-wallet');
 const { AssetRecipient } = require('@arcblock/asset-factory');
 
 const { wallet, factory } = require('../../libs/auth');
-
-const sleep = async ms => new Promise(resolve => setTimeout(resolve, ms));
 
 const ensureAsset = async (userPk, userDid) => {
   const [asset] = await factory.createCertificate({
@@ -33,64 +29,32 @@ module.exports = {
   action: 'exchange_asset_with_token',
   claims: {
     signature: async ({ userPk, userDid }) => {
-      // 3. create asset for sender
       const asset = await ensureAsset(userPk, userDid);
-      console.log(asset);
-      // const user = ForgeSDK.Wallet.fromPublicKey(userPk);
-      const exchange = {
-        itx: {
-          to: userDid,
-          sender: {
-            assets: [asset.address],
-          },
-          receiver: {
-            // value: fromTokenToUnit(0.01),
-            value: await ForgeSDK.fromTokenToUnit(1),
+      const tx = await ForgeSDK.signExchangeTx({
+        tx: {
+          itx: {
+            to: userDid,
+            sender: {
+              assets: [asset.address],
+            },
+            receiver: {
+              value: await ForgeSDK.fromTokenToUnit(1),
+            },
           },
         },
-      };
-
-      console.log(exchange);
-      // const sender = fromJSON(wallet);
-      // const signedTx = await ForgeSDK.signExchangeTx({
-      //   tx: exchange,
-      //   wallet: sender,
-      // });
-
-      // signedTx.signatures = [
-      //   {
-      //     pk: userPk,
-      //     signer: userDid,
-      //   },
-      // ];
-
-      const sender = fromJSON(wallet);
-      const { buffer, object: encoded } = await ForgeSDK.encodeExchangeTx({
-        tx: exchange,
-        wallet: sender,
+        wallet: ForgeSDK.Wallet.fromJSON(wallet),
       });
-      const senderSignature = sender.sign(buffer);
-      console.log('certify.onReq.exchange', exchange.itx);
-      console.log('certify.onReq.signature', senderSignature);
 
-      // We need to persist from and nonce
-      exchange.from = encoded.from;
-      exchange.nonce = encoded.nonce;
+      tx.signaturesList.push({
+        pk: ForgeSDK.Util.fromBase58(userPk),
+        signer: userDid,
+      });
 
-      exchange.signature = senderSignature;
-      exchange.signatures = [
-        {
-          pk: ForgeSDK.Util.fromBase58(userPk),
-          signer: userDid,
-        },
-      ];
-
-      console.log('EXCHANGE:');
-      console.log(exchange);
+      console.log('exchange.claims.signed', tx);
 
       return {
         type: 'ExchangeTx',
-        data: exchange,
+        data: tx,
         description: 'test',
       };
     },
@@ -98,18 +62,16 @@ module.exports = {
   onAuth: async ({ claims }) => {
     try {
       const claim = claims.find(x => x.type === 'signature');
-      const userSignedTx = ForgeSDK.decodeTx(claim.origin);
-      console.log('USER SIGNED 1:');
-      console.log(userSignedTx);
-      userSignedTx.signaturesList[0].signature = claim.sig;
-      const dApp = fromJSON(wallet);
+      console.log('exchange.auth.claim', claim);
 
-      console.log('USER SIGNED2:');
-      console.log(userSignedTx);
+      const tx = ForgeSDK.decodeTx(claim.origin);
+
+      tx.signaturesList[0].signature = claim.sig;
+      console.log('exchange.auth.tx', tx);
 
       const hash = await ForgeSDK.exchange({
-        tx: userSignedTx,
-        wallet: dApp,
+        tx,
+        wallet: ForgeSDK.Wallet.fromJSON(wallet),
       });
 
       console.log('exchange tx hash:', hash);
