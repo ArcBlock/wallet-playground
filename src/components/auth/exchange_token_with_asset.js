@@ -18,12 +18,12 @@ export default function ExchangeAssetWithToken({ token }) {
         size="large"
         className="action"
         onClick={() => setOpen(true)}>
-        Exchange 1 {token.symbol} for 1 Asset
+        Exchange 1 Asset for 1 {token.symbol}
       </Button>
       {isOpen && (
         <Auth
           responsive
-          action="exchange_asset_with_token"
+          action="exchange_token_with_asset"
           checkFn={api.get}
           onClose={() => setOpen()}
           onSuccess={() => window.location.reload()}

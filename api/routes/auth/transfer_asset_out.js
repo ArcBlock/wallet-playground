@@ -2,21 +2,14 @@
 const ForgeSDK = require('@arcblock/forge-sdk');
 const { fromAddress } = require('@arcblock/forge-wallet');
 const { wallet } = require('../../libs/auth');
+const { getTransferrableAssets } = require('../../libs/util');
 const env = require('../../libs/env');
 
 module.exports = {
   action: 'transfer_asset_out',
   claims: {
     signature: async ({ userDid }) => {
-      const { assets } = await ForgeSDK.listAssets({ ownerAddress: userDid });
-      if (!assets || assets.length === 0) {
-        throw new Error('You do not have any asset, use other test to earn one');
-      }
-
-      const asset = assets.find(x => x.transferrable);
-      if (!asset) {
-        throw new Error('You do not have any asset that can be transferred to me');
-      }
+      const [asset] = await getTransferrableAssets(userDid);
 
       return {
         type: 'TransferTx',

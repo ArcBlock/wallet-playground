@@ -19,6 +19,7 @@ import ProfileButton from '../components/auth/auth/profile';
 import AgentButton from '../components/auth/auth/agent';
 import ErrorButton from '../components/auth/auth/error';
 import ExchangeAssetWithToken from '../components/auth/exchange_asset_with_token';
+import ExchangeTokenWithAsset from '../components/auth/exchange_token_with_asset';
 import FundTbaButton from '../components/auth/fund_tba';
 import FundPlayButton from '../components/auth/fund_play';
 import SwapTokenButton from '../components/auth/swap_token';
@@ -100,7 +101,7 @@ export default function IndexPage() {
                 className="section__header"
                 color="textPrimary"
                 gutterBottom>
-                Atomic Swap{' '}
+                Atomic Swap Scenarios{' '}
                 <Typography component="small" color="textSecondary">
                   Show the full potential of cross-chain transactions.
                 </Typography>
@@ -109,6 +110,8 @@ export default function IndexPage() {
                 <SwapBadgeButton {...session.value} />
                 <SwapBadgesButton {...session.value} />
                 <SwapTokenButton {...session.value} />
+                <SwapTicketButton {...session.value} />
+                <SwapCertificateButton {...session.value} />
               </div>
             </section>
             <section className="section">
@@ -118,32 +121,17 @@ export default function IndexPage() {
                 className="section__header"
                 color="textPrimary"
                 gutterBottom>
-                Asset Factory{' '}
+                Asset Scenarios{' '}
                 <Typography component="small" color="textSecondary">
                   Show what dApps can do with asset that ABT Wallet understands.
                 </Typography>
               </Typography>
               <div className="section__content">
-                <SwapTicketButton {...session.value} />
-                <SwapCertificateButton {...session.value} />
-                <Button color="danger" variant="contained" size="large" className="action" disabled>
+                <Button color="primary" variant="contained" size="large" className="action" disabled>
                   Consume A Ticket
                 </Button>
-                <Button
-                  color="primary"
-                  variant="contained"
-                  size="large"
-                  className="action"
-                  disabled>
-                  Claim A Coupon to Save 0.99 Token
-                </Button>
-                <Button
-                  color="secondary"
-                  variant="contained"
-                  size="large"
-                  className="action"
-                  disabled>
-                  Buy A Badge with 0.99 Token
+                <Button color="primary" variant="contained" size="large" className="action" disabled>
+                  Acquire A Product
                 </Button>
               </div>
             </section>
@@ -154,9 +142,9 @@ export default function IndexPage() {
                 className="section__header"
                 color="textPrimary"
                 gutterBottom>
-                Transaction Factory{' '}
+                Transfer Scenarios{' '}
                 <Typography component="small" color="textSecondary">
-                  Help to generate different transaction types in your ABT Wallet
+                  Help to generate different transfer transactions in ABT Wallet
                 </Typography>
               </Typography>
               <div className="section__content">
@@ -166,15 +154,6 @@ export default function IndexPage() {
                 <TransferAssetIn {...session.value} />
                 <TransferTokenAssetIn {...session.value} />
                 <TransferTokenAssetOut {...session.value} />
-                <ExchangeAssetWithToken {...session.value} />
-                <Button
-                  color="primary"
-                  variant="contained"
-                  size="large"
-                  className="action"
-                  disabled>
-                  Exchange Asset with Asset
-                </Button>
               </div>
             </section>
             <section className="section">
@@ -184,9 +163,26 @@ export default function IndexPage() {
                 className="section__header"
                 color="textPrimary"
                 gutterBottom>
-                DID Auth Protocol{' '}
+                Exchange Scenarios{' '}
                 <Typography component="small" color="textSecondary">
-                  Help to test different DID Auth Protocol claims
+                  Help to generate different exchange transactions in ABT Wallet
+                </Typography>
+              </Typography>
+              <div className="section__content">
+                <ExchangeAssetWithToken {...session.value} />
+                <ExchangeTokenWithAsset {...session.value} />
+              </div>
+            </section>
+            <section className="section">
+              <Typography
+                component="h3"
+                variant="h5"
+                className="section__header"
+                color="textPrimary"
+                gutterBottom>
+                DID Auth Claims{' '}
+                <Typography component="small" color="textSecondary">
+                  Help to test different DID Auth Claims in ABT Wallet
                 </Typography>
               </Typography>
               <div className="section__content">
