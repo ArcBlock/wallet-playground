@@ -40,6 +40,12 @@ module.exports = {
       const sessionToken = await login(userDid);
       await storage.update(token, { did: userDid, sessionToken });
       console.error('login.onAuth.login', { userDid, sessionToken });
+
+      return {
+        callbackParams: {
+          loginToken: sessionToken,
+        },
+      };
     } catch (err) {
       console.error('login.onAuth.error', err);
     }
