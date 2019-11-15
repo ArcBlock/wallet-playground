@@ -30,6 +30,7 @@ import TransferTokenOut from '../components/auth/transfer_token_out';
 import TransferTokenIn from '../components/auth/transfer_token_in';
 import TransferAssetOut from '../components/auth/transfer_asset_out';
 import TransferAssetIn from '../components/auth/transfer_asset_in';
+import TransferTokenAssetIn from '../components/auth/transfer_token_asset_in';
 
 export default function IndexPage() {
   const session = useSession();
@@ -162,14 +163,7 @@ export default function IndexPage() {
                 <TransferTokenIn {...session.value} />
                 <TransferAssetOut {...session.value} />
                 <TransferAssetIn {...session.value} />
-                <Button
-                  color="primary"
-                  variant="contained"
-                  size="large"
-                  className="action"
-                  disabled>
-                  Transfer Token + Asset to Application
-                </Button>
+                <TransferTokenAssetIn {...session.value} />
                 <Button
                   color="primary"
                   variant="contained"
