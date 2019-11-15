@@ -7,7 +7,6 @@ const env = require('../../libs/env');
 const { wallet, factory } = require('../../libs/auth');
 
 const ensureAsset = async (userPk, userDid) => {
-  console.log(env);
   const [asset] = await factory.createCertificate({
     backgroundUrl: '',
     data: {
@@ -35,7 +34,6 @@ module.exports = {
       const { state } = await ForgeSDK.getForgeState({ conn: env.assetChainId });
       const asset = await ensureAsset(userPk, userDid);
 
-      console.log(asset);
       return {
         description: `签名该文本，你将获得 1 个测试用的 ${state.token.symbol}  和一个证书: ${asset.address}`,
         data: JSON.stringify(

@@ -1,6 +1,5 @@
 /* eslint-disable react/jsx-one-expression-per-line */
 import React from 'react';
-import PropTypes from 'prop-types';
 import useToggle from 'react-use/lib/useToggle';
 
 import Auth from '@arcblock/did-react/lib/Auth';
@@ -8,7 +7,7 @@ import Button from '@arcblock/ux/lib/Button';
 
 import api from '../../libs/api';
 
-export default function TransferTokenAssetIn({ token }) {
+export default function TransferTokenAssetIn() {
   const [isOpen, setOpen] = useToggle(false);
   return (
     <React.Fragment>
@@ -18,7 +17,7 @@ export default function TransferTokenAssetIn({ token }) {
         size="large"
         className="action"
         onClick={() => setOpen(true)}>
-        Transfer Token + Asset to Application
+        Transfer Token + Asset to Wallet
       </Button>
       {isOpen && (
         <Auth
@@ -38,7 +37,3 @@ export default function TransferTokenAssetIn({ token }) {
     </React.Fragment>
   );
 }
-
-TransferTokenAssetIn.propTypes = {
-  token: PropTypes.object.isRequired,
-};
