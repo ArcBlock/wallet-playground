@@ -18,6 +18,7 @@ import { setToken } from '../libs/auth';
 import ProfileButton from '../components/auth/auth/profile';
 import AgentButton from '../components/auth/auth/agent';
 import ErrorButton from '../components/auth/auth/error';
+import ExchangeAssetWithToken from '../components/auth/exchange_asset_with_token';
 import FundTbaButton from '../components/auth/fund_tba';
 import FundPlayButton from '../components/auth/fund_play';
 import SwapTokenButton from '../components/auth/swap_token';
@@ -74,7 +75,12 @@ export default function IndexPage() {
         {session.value && session.value.user && (
           <React.Fragment>
             <section className="section">
-              <Typography component="h3" variant="h5" className="section__header" color="textPrimary" gutterBottom>
+              <Typography
+                component="h3"
+                variant="h5"
+                className="section__header"
+                color="textPrimary"
+                gutterBottom>
                 Feeling lucky{' '}
                 <Typography component="small" color="textSecondary">
                   Get your account funded for doing later testing
@@ -86,7 +92,12 @@ export default function IndexPage() {
               </div>
             </section>
             <section className="section">
-              <Typography component="h3" variant="h5" className="section__header" color="textPrimary" gutterBottom>
+              <Typography
+                component="h3"
+                variant="h5"
+                className="section__header"
+                color="textPrimary"
+                gutterBottom>
                 Atomic Swap{' '}
                 <Typography component="small" color="textSecondary">
                   Show the full potential of cross-chain transactions.
@@ -99,7 +110,12 @@ export default function IndexPage() {
               </div>
             </section>
             <section className="section">
-              <Typography component="h3" variant="h5" className="section__header" color="textPrimary" gutterBottom>
+              <Typography
+                component="h3"
+                variant="h5"
+                className="section__header"
+                color="textPrimary"
+                gutterBottom>
                 Asset Factory{' '}
                 <Typography component="small" color="textSecondary">
                   Show what dApps can do with asset that ABT Wallet understands.
@@ -111,16 +127,31 @@ export default function IndexPage() {
                 <Button color="danger" variant="contained" size="large" className="action" disabled>
                   Consume A Ticket
                 </Button>
-                <Button color="primary" variant="contained" size="large" className="action" disabled>
+                <Button
+                  color="primary"
+                  variant="contained"
+                  size="large"
+                  className="action"
+                  disabled>
                   Claim A Coupon to Save 0.99 Token
                 </Button>
-                <Button color="secondary" variant="contained" size="large" className="action" disabled>
+                <Button
+                  color="secondary"
+                  variant="contained"
+                  size="large"
+                  className="action"
+                  disabled>
                   Buy A Badge with 0.99 Token
                 </Button>
               </div>
             </section>
             <section className="section">
-              <Typography component="h3" variant="h5" className="section__header" color="textPrimary" gutterBottom>
+              <Typography
+                component="h3"
+                variant="h5"
+                className="section__header"
+                color="textPrimary"
+                gutterBottom>
                 Transaction Factory{' '}
                 <Typography component="small" color="textSecondary">
                   Help to generate different transaction types in your ABT Wallet
@@ -131,25 +162,40 @@ export default function IndexPage() {
                 <TransferTokenIn {...session.value} />
                 <TransferAssetOut {...session.value} />
                 <TransferAssetIn {...session.value} />
-                {/* <Button color="primary" variant="contained" size="large" className="action" disabled>
-                  Transfer Asset to Wallet
-                </Button> */}
-                <Button color="primary" variant="contained" size="large" className="action" disabled>
+                <Button
+                  color="primary"
+                  variant="contained"
+                  size="large"
+                  className="action"
+                  disabled>
                   Transfer Token + Asset to Application
                 </Button>
-                <Button color="primary" variant="contained" size="large" className="action" disabled>
+                <Button
+                  color="primary"
+                  variant="contained"
+                  size="large"
+                  className="action"
+                  disabled>
                   Transfer Token + Asset to Wallet
                 </Button>
-                <Button color="primary" variant="contained" size="large" className="action" disabled>
-                  Exchange Asset with Token
-                </Button>
-                <Button color="primary" variant="contained" size="large" className="action" disabled>
+                <ExchangeAssetWithToken {...session.value} />
+                <Button
+                  color="primary"
+                  variant="contained"
+                  size="large"
+                  className="action"
+                  disabled>
                   Exchange Asset with Asset
                 </Button>
               </div>
             </section>
             <section className="section">
-              <Typography component="h3" variant="h5" className="section__header" color="textPrimary" gutterBottom>
+              <Typography
+                component="h3"
+                variant="h5"
+                className="section__header"
+                color="textPrimary"
+                gutterBottom>
                 DID Auth Protocol{' '}
                 <Typography component="small" color="textSecondary">
                   Help to test different DID Auth Protocol claims
@@ -162,7 +208,12 @@ export default function IndexPage() {
               </div>
             </section>
             <section className="section">
-              <Typography component="h3" variant="h5" className="section__header" color="textPrimary" gutterBottom>
+              <Typography
+                component="h3"
+                variant="h5"
+                className="section__header"
+                color="textPrimary"
+                gutterBottom>
                 Do not have ABT Wallet?
               </Typography>
               <div className="section__content">
