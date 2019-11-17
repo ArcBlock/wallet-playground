@@ -1,6 +1,7 @@
 /* eslint-disable no-console */
 const ForgeSDK = require('@arcblock/forge-sdk');
 const { AssetRecipient } = require('@arcblock/asset-factory');
+const lodash = require('lodash');
 
 const { factory, wallet } = require('../../libs/auth');
 const { getTransferrableAssets } = require('../../libs/util');
@@ -27,32 +28,67 @@ const ensureAsset = async (userPk, userDid) => {
   return asset;
 };
 
-module.exports = {
-  action: 'exchange_asset_with_asset',
-  claims: {
-    signature: async ({ userPk, userDid, extraParams: { receiveCount = 1, payCount = 1 } }) => {
+const getReceives = async (type, count = 1, userPk, userDid) => {
+  switch (lodash.toLower(type)) {
+    case 'asset': {
       const receiveAssets = [];
-
-      for (let i = 0; i < receiveCount; i += 1) {
+      for (let i = 0; i < count; i += 1) {
         receiveAssets.push((await ensureAsset(userPk, userDid)).address); // eslint-disable-line
       }
 
-      console.log('RECEIVE ASSETS:');
-      console.log(receiveAssets);
+      return receiveAssets;
+    }
+    case 'play':
+      return '';
+    default:
+      throw new Error(`Invalid receive type: ${type}`);
+  }
+};
 
-      const payAssets = await getTransferrableAssets(userDid, payCount);
-      console.log('PAY ASSETS:');
+const getPays = async (type, count = 1, userDid) => {
+  switch (lodash.toLower(type)) {
+    case 'asset':
+      return getTransferrableAssets(userDid, count);
+    case 'play':
+      return '';
+    default:
+      throw new Error(`Invalid pay type: ${type}`);
+  }
+};
+
+module.exports = {
+  action: 'exchange_asset_with_asset',
+  claims: {
+    signature: async ({
+      userPk,
+      userDid,
+      extraParams: {
+        receiveType,
+        receiveCount,
+        payType,
+        payCount,
+      },
+    }) => {
+      const receives = await getReceives(receiveType, receiveCount, userPk);
+
+      console.log('RECEIVES:');
+      console.log(receives);
+
+      const payAssets = await getPays(payType, payCount, userDid);
+      console.log('PAYS:');
       console.log(payAssets);
 
+      const receiverType = receiveType === 'asset' ? 'assets' : 'value';
+      const senderType = payType === 'asset' ? 'assets' : 'value';
       const tx = await ForgeSDK.signExchangeTx({
         tx: {
           itx: {
             to: userDid,
             sender: {
-              assets: receiveAssets,
+              [receiverType]: receives,
             },
             receiver: {
-              assets: payAssets.map(x => x.address),
+              [senderType]: payAssets.map(x => x.address),
             },
           },
         },

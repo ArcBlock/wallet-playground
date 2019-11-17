@@ -151,9 +151,19 @@ export default function IndexPage() {
               <div className="section__content">
                 <ExchangeAssetWithToken {...session.value} />
                 <ExchangeTokenWithAsset {...session.value} />
-                <ExchangeAssetWithAsset {...session.value} receiveCount={1} />
-                <ExchangeAssetWithAsset {...session.value} receiveCount={2} />
-                <ExchangeAssetWithAsset {...session.value} receiveCount={2} payCount={2} />
+                <ExchangeAssetWithAsset {...session.value} receiveType="asset" payType="asset" />
+                <ExchangeAssetWithAsset
+                  {...session.value}
+                  receiveType="asset"
+                  receiveCount="2"
+                  payType="asset"
+                />
+                <ExchangeAssetWithAsset
+                  receiveType="asset"
+                  receiveCount="2"
+                  payType="asset"
+                  payCount="2"
+                />
               </div>
             </section>
             <section className="section">

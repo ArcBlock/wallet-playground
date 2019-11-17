@@ -8,7 +8,14 @@ import Button from '@arcblock/ux/lib/Button';
 
 import api from '../../libs/api';
 
-export default function ExchangeAssetWithAsset({ payCount = 1, receiveCount = 1 }) {
+const getExchangeAsset = type => (type === 'asset' ? 'asset' : 'play');
+
+export default function ExchangeAssetWithAsset({
+  payType,
+  payCount = 1,
+  receiveType,
+  receiveCount = 1,
+}) {
   const [isOpen, setOpen] = useToggle(false);
   return (
     <React.Fragment>
@@ -18,8 +25,8 @@ export default function ExchangeAssetWithAsset({ payCount = 1, receiveCount = 1 
         size="large"
         className="action"
         onClick={() => setOpen(true)}>
-        Exchange {payCount} {payCount >= 1 ? 'Assets' : 'Asset'} for {receiveCount}{' '}
-        {receiveCount >= 1 ? 'Assets' : 'Asset'}
+        Exchange {payCount} {getExchangeAsset(payType)} for {receiveCount}{' '}
+        {getExchangeAsset(receiveType)}
       </Button>
       {isOpen && (
         <Auth
@@ -35,7 +42,9 @@ export default function ExchangeAssetWithAsset({ payCount = 1, receiveCount = 1 
             success: 'Exchange success!',
           }}
           extraParams={{
+            receiveType,
             receiveCount,
+            payType,
             payCount,
           }}
         />
@@ -45,6 +54,8 @@ export default function ExchangeAssetWithAsset({ payCount = 1, receiveCount = 1 
 }
 
 ExchangeAssetWithAsset.propTypes = {
+  receiveType: PrompTypes.string.isRequired,
   receiveCount: PrompTypes.number.isRequired,
+  payType: PrompTypes.string.isRequired,
   payCount: PrompTypes.number.isRequired,
 };
