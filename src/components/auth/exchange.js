@@ -8,15 +8,22 @@ import Button from '@arcblock/ux/lib/Button';
 
 import api from '../../libs/api';
 
-const getExchangeAsset = type => (type === 'asset' ? 'asset' : 'play');
+const getExchangeAssetDesc = (type, count, token) => {
+  let result = '';
+  if (type === 'token') {
+    result = token.symbol;
+  } else {
+    result = count <= 1 ? 'Asset' : 'Assets';
+  }
 
-export default function ExchangeAssetWithAsset({
-  payType,
-  payCount = 1,
-  receiveType,
-  receiveCount = 1,
-}) {
+  return result;
+};
+
+export default function Exchange({ payType, payCount = 1, receiveType, receiveCount = 1, token }) {
   const [isOpen, setOpen] = useToggle(false);
+  const payDesc = getExchangeAssetDesc(payType, payCount, token);
+  const receiveDesc = getExchangeAssetDesc(receiveType, receiveCount, token);
+
   return (
     <React.Fragment>
       <Button
@@ -25,13 +32,12 @@ export default function ExchangeAssetWithAsset({
         size="large"
         className="action"
         onClick={() => setOpen(true)}>
-        Exchange {payCount} {getExchangeAsset(payType)} for {receiveCount}{' '}
-        {getExchangeAsset(receiveType)}
+        Exchange {payCount} {payDesc} for {receiveCount} {receiveDesc}
       </Button>
       {isOpen && (
         <Auth
           responsive
-          action="exchange_asset_with_asset"
+          action="exchange"
           checkFn={api.get}
           onClose={() => setOpen()}
           onSuccess={() => window.location.reload()}
@@ -53,9 +59,14 @@ export default function ExchangeAssetWithAsset({
   );
 }
 
-ExchangeAssetWithAsset.propTypes = {
+Exchange.propTypes = {
+  token: PrompTypes.object,
   receiveType: PrompTypes.string.isRequired,
   receiveCount: PrompTypes.number.isRequired,
   payType: PrompTypes.string.isRequired,
   payCount: PrompTypes.number.isRequired,
+};
+
+Exchange.defaultProps = {
+  token: {},
 };

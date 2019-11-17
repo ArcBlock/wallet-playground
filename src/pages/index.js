@@ -18,9 +18,7 @@ import { setToken } from '../libs/auth';
 import ProfileButton from '../components/auth/auth/profile';
 import AgentButton from '../components/auth/auth/agent';
 import ErrorButton from '../components/auth/auth/error';
-import ExchangeAssetWithToken from '../components/auth/exchange_asset_with_token';
-import ExchangeTokenWithAsset from '../components/auth/exchange_token_with_asset';
-import ExchangeAssetWithAsset from '../components/auth/exchange_asset_with_asset';
+import Exchange from '../components/auth/exchange';
 import FundTbaButton from '../components/auth/fund_tba';
 import FundPlayButton from '../components/auth/fund_play';
 import SwapTokenButton from '../components/auth/swap_token';
@@ -149,17 +147,21 @@ export default function IndexPage() {
                 </Typography>
               </Typography>
               <div className="section__content">
-                <ExchangeAssetWithToken {...session.value} />
-                <ExchangeTokenWithAsset {...session.value} />
-                <ExchangeAssetWithAsset {...session.value} receiveType="asset" payType="asset" />
-                <ExchangeAssetWithAsset
+                <Exchange {...session.value} receiveType="asset" payType="token" />
+                <Exchange {...session.value} receiveType="token" payType="asset" />
+                <Exchange {...session.value} receiveType="asset" payType="asset" />
+                <Exchange {...session.value} receiveType="asset" receiveCount="2" payType="asset" />
+                <Exchange {...session.value} receiveType="asset" payCount="2" payType="asset" />
+                <Exchange
                   {...session.value}
                   receiveType="asset"
                   receiveCount="2"
                   payType="asset"
+                  payCount="2"
                 />
-                <ExchangeAssetWithAsset
-                  receiveType="asset"
+                <Exchange
+                  {...session.value}
+                  receiveType="token"
                   receiveCount="2"
                   payType="asset"
                   payCount="2"

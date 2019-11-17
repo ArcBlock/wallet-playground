@@ -38,8 +38,8 @@ const getReceives = async (type, count = 1, userPk, userDid) => {
 
       return receiveAssets;
     }
-    case 'play':
-      return '';
+    case 'token':
+      return ForgeSDK.fromTokenToUnit(count);
     default:
       throw new Error(`Invalid receive type: ${type}`);
   }
@@ -47,27 +47,24 @@ const getReceives = async (type, count = 1, userPk, userDid) => {
 
 const getPays = async (type, count = 1, userDid) => {
   switch (lodash.toLower(type)) {
-    case 'asset':
-      return getTransferrableAssets(userDid, count);
-    case 'play':
-      return '';
+    case 'asset': {
+      const assets = await getTransferrableAssets(userDid, count);
+      return assets.map(x => x.address);
+    }
+    case 'token':
+      return ForgeSDK.fromTokenToUnit(count);
     default:
       throw new Error(`Invalid pay type: ${type}`);
   }
 };
 
 module.exports = {
-  action: 'exchange_asset_with_asset',
+  action: 'exchange',
   claims: {
     signature: async ({
       userPk,
       userDid,
-      extraParams: {
-        receiveType,
-        receiveCount,
-        payType,
-        payCount,
-      },
+      extraParams: { receiveType, receiveCount, payType, payCount },
     }) => {
       const receives = await getReceives(receiveType, receiveCount, userPk);
 
@@ -88,7 +85,7 @@ module.exports = {
               [receiverType]: receives,
             },
             receiver: {
-              [senderType]: payAssets.map(x => x.address),
+              [senderType]: payAssets,
             },
           },
         },
