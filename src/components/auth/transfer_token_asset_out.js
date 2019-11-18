@@ -8,25 +8,30 @@ import Button from '@arcblock/ux/lib/Button';
 
 import api from '../../libs/api';
 
-export default function TransferTokenOut({ token }) {
+export default function TransferTokenAssetOut({ token }) {
   const [isOpen, setOpen] = useToggle(false);
   return (
     <React.Fragment>
-      <Button color="secondary" variant="contained" size="large" className="action" onClick={() => setOpen(true)}>
-        Send 1 {token.symbol} to Wallet
+      <Button
+        color="secondary"
+        variant="contained"
+        size="large"
+        className="action"
+        onClick={() => setOpen(true)}>
+        Send 1 {token.symbol} + 1 Asset to Application
       </Button>
       {isOpen && (
         <Auth
           responsive
-          action="transfer_token_in"
+          action="transfer_token_asset_out"
           checkFn={api.get}
           onClose={() => setOpen()}
           onSuccess={() => window.location.reload()}
           messages={{
             title: 'Transfer Required',
-            scan: 'Scan QR code to receive token',
+            scan: 'Scan QR code to complete transfer',
             confirm: 'Confirm on your ABT Wallet',
-            success: 'Transfer sent!',
+            success: 'Transfer Sent!',
           }}
         />
       )}
@@ -34,6 +39,6 @@ export default function TransferTokenOut({ token }) {
   );
 }
 
-TransferTokenOut.propTypes = {
+TransferTokenAssetOut.propTypes = {
   token: PropTypes.object.isRequired,
 };

@@ -25,7 +25,7 @@ export default function SwapButton({ assetToken }) {
   return (
     <React.Fragment>
       <Button color="secondary" variant="contained" size="large" className="action" onClick={onStartSwap}>
-        Swap 1.99 {assetToken.symbol} for 2 Badges
+        Buy 2 Badges with 1.99 {assetToken.symbol}
       </Button>
       {isOpen && !!traceId && (
         <Auth

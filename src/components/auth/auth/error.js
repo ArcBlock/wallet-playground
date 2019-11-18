@@ -23,7 +23,7 @@ export default function AuthPrincipal() {
           onSuccess={() => setOpen(false)}
           messages={{
             title: 'dApp will throw an error',
-            scan: 'Scan qrcode to get the error',
+            scan: 'Scan QR code to get the error',
             confirm: 'Confirm on your ABT Wallet',
             success: 'You will not see this',
           }}

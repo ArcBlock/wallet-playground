@@ -18,6 +18,7 @@ import { setToken } from '../libs/auth';
 import ProfileButton from '../components/auth/auth/profile';
 import AgentButton from '../components/auth/auth/agent';
 import ErrorButton from '../components/auth/auth/error';
+import Exchange from '../components/auth/exchange';
 import FundTbaButton from '../components/auth/fund_tba';
 import FundPlayButton from '../components/auth/fund_play';
 import SwapTokenButton from '../components/auth/swap_token';
@@ -28,6 +29,9 @@ import SwapCertificateButton from '../components/auth/swap_certificate';
 import TransferTokenOut from '../components/auth/transfer_token_out';
 import TransferTokenIn from '../components/auth/transfer_token_in';
 import TransferAssetOut from '../components/auth/transfer_asset_out';
+import TransferAssetIn from '../components/auth/transfer_asset_in';
+import TransferTokenAssetIn from '../components/auth/transfer_token_asset_in';
+import TransferTokenAssetOut from '../components/auth/transfer_token_asset_out';
 
 export default function IndexPage() {
   const session = useSession();
@@ -62,7 +66,7 @@ export default function IndexPage() {
     <Layout title="Home">
       <Main>
         <Typography component="h2" variant="h4" className="page-header" color="textPrimary">
-          ABT Wallet Playground <Tag type="error">V2.0</Tag>
+          ABT Wallet Playground <Tag type="success">V2.0</Tag>
         </Typography>
         <Typography component="h3" variant="h6" color="textSecondary">
           TBA is the token on Zinc chain, PLAY is the token on App chain.
@@ -73,7 +77,12 @@ export default function IndexPage() {
         {session.value && session.value.user && (
           <React.Fragment>
             <section className="section">
-              <Typography component="h3" variant="h5" className="section__header" color="textPrimary" gutterBottom>
+              <Typography
+                component="h3"
+                variant="h5"
+                className="section__header"
+                color="textPrimary"
+                gutterBottom>
                 Feeling lucky{' '}
                 <Typography component="small" color="textSecondary">
                   Get your account funded for doing later testing
@@ -85,8 +94,13 @@ export default function IndexPage() {
               </div>
             </section>
             <section className="section">
-              <Typography component="h3" variant="h5" className="section__header" color="textPrimary" gutterBottom>
-                Atomic Swap{' '}
+              <Typography
+                component="h3"
+                variant="h5"
+                className="section__header"
+                color="textPrimary"
+                gutterBottom>
+                Atomic Swap Scenarios{' '}
                 <Typography component="small" color="textSecondary">
                   Show the full potential of cross-chain transactions.
                 </Typography>
@@ -95,72 +109,106 @@ export default function IndexPage() {
                 <SwapBadgeButton {...session.value} />
                 <SwapBadgesButton {...session.value} />
                 <SwapTokenButton {...session.value} />
-              </div>
-            </section>
-            <section className="section">
-              <Typography component="h3" variant="h5" className="section__header" color="textPrimary" gutterBottom>
-                Asset Factory{' '}
-                <Typography component="small" color="textSecondary">
-                  Show what dApps can do with asset that ABT Wallet understands.
-                </Typography>
-              </Typography>
-              <div className="section__content">
                 <SwapTicketButton {...session.value} />
                 <SwapCertificateButton {...session.value} />
-                <Button color="danger" variant="contained" size="large" className="action" disabled>
-                  Consume A Ticket
-                </Button>
-                <Button color="primary" variant="contained" size="large" className="action" disabled>
-                  Claim A Coupon to Save 0.99 Token
-                </Button>
-                <Button color="secondary" variant="contained" size="large" className="action" disabled>
-                  Buy A Badge with 0.99 Token
-                </Button>
               </div>
             </section>
             <section className="section">
-              <Typography component="h3" variant="h5" className="section__header" color="textPrimary" gutterBottom>
-                Transaction Factory{' '}
+              <Typography
+                component="h3"
+                variant="h5"
+                className="section__header"
+                color="textPrimary"
+                gutterBottom>
+                Transfer Scenarios{' '}
                 <Typography component="small" color="textSecondary">
-                  Help to generate different transaction types in your ABT Wallet
+                  Help to generate different transfer transactions in ABT Wallet
                 </Typography>
               </Typography>
               <div className="section__content">
                 <TransferTokenOut {...session.value} />
                 <TransferTokenIn {...session.value} />
                 <TransferAssetOut {...session.value} />
-                <Button color="primary" variant="contained" size="large" className="action" disabled>
-                  Transfer Asset to Wallet
-                </Button>
-                <Button color="primary" variant="contained" size="large" className="action" disabled>
-                  Transfer Token + Asset to Application
-                </Button>
-                <Button color="primary" variant="contained" size="large" className="action" disabled>
-                  Transfer Token + Asset to Wallet
-                </Button>
-                <Button color="primary" variant="contained" size="large" className="action" disabled>
-                  Exchange Asset with Token
-                </Button>
-                <Button color="primary" variant="contained" size="large" className="action" disabled>
-                  Exchange Asset with Asset
-                </Button>
+                <TransferAssetIn {...session.value} />
+                <TransferTokenAssetIn {...session.value} />
+                <TransferTokenAssetOut {...session.value} />
               </div>
             </section>
             <section className="section">
-              <Typography component="h3" variant="h5" className="section__header" color="textPrimary" gutterBottom>
-                DID Auth Protocol{' '}
+              <Typography
+                component="h3"
+                variant="h5"
+                className="section__header"
+                color="textPrimary"
+                gutterBottom>
+                Exchange Scenarios{' '}
                 <Typography component="small" color="textSecondary">
-                  Help to test different DID Auth Protocol claims
+                  Help to generate different exchange transactions in ABT Wallet
+                </Typography>
+              </Typography>
+              <div className="section__content">
+                <Exchange {...session.value} receiveType="asset" payType="token" />
+                <Exchange {...session.value} receiveType="token" payType="asset" />
+                <Exchange {...session.value} receiveType="asset" payType="asset" />
+                <Exchange {...session.value} receiveType="asset" receiveCount="2" payType="asset" />
+                <Exchange {...session.value} receiveType="asset" payCount="2" payType="asset" />
+                <Exchange
+                  {...session.value}
+                  receiveType="asset"
+                  receiveCount="2"
+                  payType="asset"
+                  payCount="2"
+                />
+                <Exchange
+                  {...session.value}
+                  receiveType="token"
+                  receiveCount="2"
+                  payType="asset"
+                  payCount="2"
+                />
+              </div>
+            </section>
+            <section className="section">
+              <Typography
+                component="h3"
+                variant="h5"
+                className="section__header"
+                color="textPrimary"
+                gutterBottom>
+                DID Auth Claims{' '}
+                <Typography component="small" color="textSecondary">
+                  Help to test different DID Auth Claims in ABT Wallet
                 </Typography>
               </Typography>
               <div className="section__content">
                 <ProfileButton {...session.value} />
                 <AgentButton {...session.value} />
                 <ErrorButton {...session.value} />
+                <Button
+                  color="primary"
+                  variant="contained"
+                  size="large"
+                  className="action"
+                  disabled>
+                  Consume A Ticket
+                </Button>
+                <Button
+                  color="primary"
+                  variant="contained"
+                  size="large"
+                  className="action"
+                  disabled>
+                  Acquire A Product
+                </Button>
               </div>
             </section>
             <section className="section">
-              <Typography component="h3" variant="h5" className="section__header" color="textPrimary" gutterBottom>
+              <Typography
+                component="h3"
+                variant="h5"
+                className="section__header"
+                color="textPrimary"
+                gutterBottom>
                 Do not have ABT Wallet?
               </Typography>
               <div className="section__content">
