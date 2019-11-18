@@ -7,12 +7,11 @@ const { factory, wallet } = require('../../libs/auth');
 const { getTransferrableAssets } = require('../../libs/util');
 
 const ensureAsset = async (userPk, userDid) => {
-  const now = new Date();
   const [asset] = await factory.createCertificate({
     backgroundUrl: '',
     data: {
-      name: `Asset&Asset 普通话一级证书 ${now.toLocaleDateString()} ${now.toLocaleTimeString()}`,
-      description: '普通话一级甲等证书',
+      name: `普通话证书 ${Date.now()}`,
+      description: '普通话证书',
       reason: '普通话标准',
       logoUrl: 'https://releases.arcblockio.cn/arcblock-logo.png',
       issueTime: Date.now() + 7 * 24 * 60 * 60 * 1000,
