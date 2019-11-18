@@ -166,6 +166,20 @@ export default function IndexPage() {
                   payType="asset"
                   payCount="2"
                 />
+                <Exchange
+                  {...session.value}
+                  receiveType="asset"
+                  receiveCount="5"
+                  payType="token"
+                  payCount="1"
+                />
+                <Exchange
+                  {...session.value}
+                  receiveCount="5"
+                  receiveType="asset"
+                  payCount="5"
+                  payType="asset"
+                />
               </div>
             </section>
             <section className="section">
