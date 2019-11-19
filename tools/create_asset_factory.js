@@ -27,8 +27,8 @@ const dAppWallet = ForgeSDK.Wallet.fromJSON(wallet);
       templateVariables: ['cinema', 'name', 'location', 'row', 'seat', 'datetime'],
       assetName: 'MovieTicket',
       attributes: {
-        transferrable: false,
-        ttl: 3600 * 2,
+        transferrable: true,
+        ttl: 0,
       },
     },
     wallet: dAppWallet,
