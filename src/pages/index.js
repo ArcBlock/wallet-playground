@@ -15,12 +15,13 @@ import useSession from '../hooks/session';
 import api from '../libs/api';
 import { setToken } from '../libs/auth';
 
-import ProfileButton from '../components/auth/auth/profile';
 import AgentButton from '../components/auth/auth/agent';
+import AcquireMovieTicket from '../components/auth/did_auth_acquire';
 import ErrorButton from '../components/auth/auth/error';
 import Exchange from '../components/auth/exchange';
 import FundTbaButton from '../components/auth/fund_tba';
 import FundPlayButton from '../components/auth/fund_play';
+import ProfileButton from '../components/auth/auth/profile';
 import SwapTokenButton from '../components/auth/swap_token';
 import SwapBadgeButton from '../components/auth/swap_badge';
 import SwapBadgesButton from '../components/auth/swap_badges';
@@ -206,14 +207,15 @@ export default function IndexPage() {
                   disabled>
                   Consume A Ticket
                 </Button>
-                <Button
+                {/* <Button
                   color="primary"
                   variant="contained"
                   size="large"
                   className="action"
                   disabled>
                   Acquire A Product
-                </Button>
+                </Button> */}
+                <AcquireMovieTicket count="1" />
               </div>
             </section>
             <section className="section">

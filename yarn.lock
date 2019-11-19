@@ -84,8 +84,8 @@
 
 "@arcblock/did-util@^1.0.1":
   version "1.0.1"
-  resolved "https://registry.npm.taobao.org/@arcblock/did-util/download/@arcblock/did-util-1.0.1.tgz#ecd6e6d44d3839cf0dcdda11bdc0dff01c6e276a"
-  integrity sha1-7Nbm1E04Oc8NzdoRvcDf8BxuJ2o=
+  resolved "https://registry.yarnpkg.com/@arcblock/did-util/-/did-util-1.0.1.tgz#ecd6e6d44d3839cf0dcdda11bdc0dff01c6e276a"
+  integrity sha512-Aekr9Y60nnCh/NnvYRkdTx3PFdVEWSrKdSO02L5E1emjWRvcBGD/vaIDbJ9gQKg0l47KYVkeS3yGaBpqQGUvhQ==
   dependencies:
     "@arcblock/did" "^1.0.1"
     "@arcblock/forge-message" "^1.0.0"
@@ -107,8 +107,8 @@
 
 "@arcblock/forge-message@^1.0.0":
   version "1.0.0"
-  resolved "https://registry.npm.taobao.org/@arcblock/forge-message/download/@arcblock/forge-message-1.0.0.tgz#4a999ef2ec27008a7bbc4e2d069bb1258f85a1ed"
-  integrity sha1-Spme8uwnAIp7vE4tBpuxJY+Foe0=
+  resolved "https://registry.yarnpkg.com/@arcblock/forge-message/-/forge-message-1.0.0.tgz#4a999ef2ec27008a7bbc4e2d069bb1258f85a1ed"
+  integrity sha512-CJjh3BfHLoejbLF3GVrvi77fO6bi2X7S9gwEB4fGniQL+7SJkNjesaympKuLbhnN6f4nfURzFhvmPQPWYHtISQ==
   dependencies:
     "@arcblock/forge-proto" "^1.0.0"
     "@arcblock/forge-util" "^1.0.0"
@@ -118,8 +118,8 @@
 
 "@arcblock/forge-proto@^1.0.0":
   version "1.0.0"
-  resolved "https://registry.npm.taobao.org/@arcblock/forge-proto/download/@arcblock/forge-proto-1.0.0.tgz#dae294e01739ac1fac4aa0b20eb3157029c3d618"
-  integrity sha1-2uKU4Bc5rB+sSqCyDrMVcCnD1hg=
+  resolved "https://registry.yarnpkg.com/@arcblock/forge-proto/-/forge-proto-1.0.0.tgz#dae294e01739ac1fac4aa0b20eb3157029c3d618"
+  integrity sha512-iHYKoQTodvU0smGSyhKYKUlMqklIffeYLYMeikQRXmO44xm8H5hJTDWJfGeMunj6n8FUsDp/poQ1x2hp6R+fFg==
   dependencies:
     debug "^4.1.1"
     lodash "^4.17.15"
