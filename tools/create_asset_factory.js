@@ -13,7 +13,7 @@ const dAppWallet = ForgeSDK.Wallet.fromJSON(wallet);
     readonly: false, // if we want to update the machine, we should set this to false
     transferrable: false,
     factory: {
-      description: 'Unlimited Movie Ticket Machine',
+      description: 'Movie Ticket Machine',
       limit: 99999,
       price: 1,
       template: JSON.stringify({

@@ -25,11 +25,11 @@
               "id": 3
             },
             "row": {
-              "type": "int32",
+              "type": "string",
               "id": 4
             },
             "seat": {
-              "type": "int32",
+              "type": "string",
               "id": 5
             },
             "datetime": {

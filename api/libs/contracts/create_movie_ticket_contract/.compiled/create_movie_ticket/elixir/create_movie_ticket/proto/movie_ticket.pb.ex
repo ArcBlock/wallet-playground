@@ -3,7 +3,7 @@ defmodule ForgeAbi.CreateMovieTicketTx do
   use Protobuf, syntax: :proto3
 
   @type t :: %__MODULE__{
-          ticket: ForgeAbi.MovieTicket.t() | nil
+          ticket: ForgeAbi.MovieTicket.t()
         }
   defstruct [:ticket]
 
@@ -18,8 +18,8 @@ defmodule ForgeAbi.MovieTicket do
           cinema: String.t(),
           name: String.t(),
           location: String.t(),
-          row: integer,
-          seat: integer,
+          row: String.t(),
+          seat: String.t(),
           datetime: String.t()
         }
   defstruct [:cinema, :name, :location, :row, :seat, :datetime]
@@ -27,7 +27,7 @@ defmodule ForgeAbi.MovieTicket do
   field :cinema, 1, type: :string
   field :name, 2, type: :string
   field :location, 3, type: :string
-  field :row, 4, type: :int32
-  field :seat, 5, type: :int32
+  field :row, 4, type: :string
+  field :seat, 5, type: :string
   field :datetime, 6, type: :string
 end

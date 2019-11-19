@@ -222,8 +222,8 @@ proto.forge_abi.MovieTicket.toObject = function(includeInstance, msg) {
     cinema: jspb.Message.getFieldWithDefault(msg, 1, ""),
     name: jspb.Message.getFieldWithDefault(msg, 2, ""),
     location: jspb.Message.getFieldWithDefault(msg, 3, ""),
-    row: jspb.Message.getFieldWithDefault(msg, 4, 0),
-    seat: jspb.Message.getFieldWithDefault(msg, 5, 0),
+    row: jspb.Message.getFieldWithDefault(msg, 4, ""),
+    seat: jspb.Message.getFieldWithDefault(msg, 5, ""),
     datetime: jspb.Message.getFieldWithDefault(msg, 6, "")
   };
 
@@ -274,11 +274,11 @@ proto.forge_abi.MovieTicket.deserializeBinaryFromReader = function(msg, reader) 
       msg.setLocation(value);
       break;
     case 4:
-      var value = /** @type {number} */ (reader.readInt32());
+      var value = /** @type {string} */ (reader.readString());
       msg.setRow(value);
       break;
     case 5:
-      var value = /** @type {number} */ (reader.readInt32());
+      var value = /** @type {string} */ (reader.readString());
       msg.setSeat(value);
       break;
     case 6:
@@ -336,15 +336,15 @@ proto.forge_abi.MovieTicket.serializeBinaryToWriter = function(message, writer) 
     );
   }
   f = message.getRow();
-  if (f !== 0) {
-    writer.writeInt32(
+  if (f.length > 0) {
+    writer.writeString(
       4,
       f
     );
   }
   f = message.getSeat();
-  if (f !== 0) {
-    writer.writeInt32(
+  if (f.length > 0) {
+    writer.writeString(
       5,
       f
     );
@@ -405,32 +405,32 @@ proto.forge_abi.MovieTicket.prototype.setLocation = function(value) {
 
 
 /**
- * optional int32 row = 4;
- * @return {number}
+ * optional string row = 4;
+ * @return {string}
  */
 proto.forge_abi.MovieTicket.prototype.getRow = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 4, 0));
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 4, ""));
 };
 
 
-/** @param {number} value */
+/** @param {string} value */
 proto.forge_abi.MovieTicket.prototype.setRow = function(value) {
-  jspb.Message.setProto3IntField(this, 4, value);
+  jspb.Message.setProto3StringField(this, 4, value);
 };
 
 
 /**
- * optional int32 seat = 5;
- * @return {number}
+ * optional string seat = 5;
+ * @return {string}
  */
 proto.forge_abi.MovieTicket.prototype.getSeat = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 5, 0));
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 5, ""));
 };
 
 
-/** @param {number} value */
+/** @param {string} value */
 proto.forge_abi.MovieTicket.prototype.setSeat = function(value) {
-  jspb.Message.setProto3IntField(this, 5, value);
+  jspb.Message.setProto3StringField(this, 5, value);
 };
 
 

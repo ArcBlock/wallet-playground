@@ -9,7 +9,7 @@ message MovieTicket {
   string cinema = 1;
   string name = 2;
   string location = 3;
-  int32 row = 4;
-  int32 seat = 5;
+  string row = 4;
+  string seat = 5;
   string datetime = 6;
 }
