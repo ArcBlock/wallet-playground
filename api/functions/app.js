@@ -1,6 +1,7 @@
 /* eslint-disable object-curly-newline */
 /* eslint-disable no-console */
 require('../libs/contracts/create_movie_ticket_contract/.compiled/create_movie_ticket/javascript/index');
+const fs = require('fs');
 const path = require('path');
 const cors = require('cors');
 const morgan = require('morgan');
@@ -152,6 +153,9 @@ if (isProduction) {
   } else {
     server.use(router);
     server.use(express.static(path.resolve(__dirname, '../../build')));
+    server.get('*', (req, res) => {
+      res.send(fs.readFileSync(path.resolve(__dirname, '../../build/index.html')).toString());
+    });
   }
   server.use((req, res) => {
     res.status(404).send('404 NOT FOUND');
