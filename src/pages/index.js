@@ -180,6 +180,20 @@ export default function IndexPage() {
                   payCount="5"
                   payType="asset"
                 />
+                <Exchange
+                  {...session.value}
+                  receiveType="token"
+                  receiveCount="10000000"
+                  payType="asset"
+                  payCount="1"
+                />
+                <Exchange
+                  {...session.value}
+                  receiveType="token"
+                  receiveCount="1000000000"
+                  payType="asset"
+                  payCount="1"
+                />
               </div>
             </section>
             <section className="section">
