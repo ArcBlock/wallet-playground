@@ -184,7 +184,7 @@ export default function IndexPage() {
                 <Exchange
                   {...session.value}
                   receiveType="token"
-                  receiveCount="10000000"
+                  receiveCount="100000"
                   payType="asset"
                   payCount="1"
                 />
