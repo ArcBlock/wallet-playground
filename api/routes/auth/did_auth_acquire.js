@@ -27,8 +27,8 @@ module.exports = {
           cinema: '万达影院',
           name: '阿甘正传',
           location: '朝阳区',
-          row: 6,
-          seat: 6,
+          row: '6',
+          seat: '6',
           datetime: '2019-11-25 09:00',
         },
       ];

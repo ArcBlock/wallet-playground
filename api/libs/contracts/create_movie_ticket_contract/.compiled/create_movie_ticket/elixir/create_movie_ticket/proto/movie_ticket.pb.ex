@@ -3,7 +3,7 @@ defmodule ForgeAbi.CreateMovieTicketTx do
   use Protobuf, syntax: :proto3
 
   @type t :: %__MODULE__{
-          ticket: ForgeAbi.MovieTicket.t()
+          ticket: ForgeAbi.MovieTicket.t() | nil
         }
   defstruct [:ticket]
 
