@@ -8,7 +8,7 @@ module.exports = {
   action: 'did_auth_acquire',
   claims: {
     signature: async ({ userPk, userDid }) => {
-      const factoryAddress = 'zjdxG9dq95tDZrU2mfZqWUf2eK7zTEyPkteR';
+      const factoryAddress = 'zjdsHpUWuUjj41jY1P9Epno8Jvz5f5YKLMm3';
 
       const { state } = await ForgeSDK.getAssetState({ address: factoryAddress });
       if (!state) {
@@ -29,7 +29,7 @@ module.exports = {
           location: '朝阳区',
           row: '6',
           seat: '6',
-          datetime: '2019-11-25 09:00',
+          datetime: new Date().toISOString(),
         },
       ];
 
@@ -59,6 +59,8 @@ module.exports = {
         pk: userPk,
       };
 
+      console.log('acquire asset data:');
+      console.log(JSON.stringify(data, null, 2));
       return {
         type: 'AcquireAssetTx',
         data,
