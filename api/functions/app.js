@@ -1,5 +1,6 @@
 /* eslint-disable object-curly-newline */
 /* eslint-disable no-console */
+require('../libs/contracts/create_movie_ticket_contract/.compiled/create_movie_ticket/javascript/index');
 const path = require('path');
 const cors = require('cors');
 const morgan = require('morgan');
@@ -105,9 +106,9 @@ walletHandlers.attach(
 walletHandlers.attach(
   Object.assign({ app: router }, require('../routes/auth/transfer_token_asset_out'))
 );
-walletHandlers.attach(
-  Object.assign({ app: router }, require('../routes/auth/exchange'))
-);
+walletHandlers.attach(Object.assign({ app: router }, require('../routes/auth/consume_asset')));
+walletHandlers.attach(Object.assign({ app: router }, require('../routes/auth/did_auth_acquire')));
+walletHandlers.attach(Object.assign({ app: router }, require('../routes/auth/exchange')));
 swapHandlers.attach(Object.assign({ app: router }, require('../routes/auth/swap_badge')));
 swapHandlers.attach(Object.assign({ app: router }, require('../routes/auth/swap_badges')));
 swapHandlers.attach(
