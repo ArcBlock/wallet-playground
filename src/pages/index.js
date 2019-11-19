@@ -5,7 +5,6 @@ import styled from 'styled-components';
 
 import Typography from '@material-ui/core/Typography';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import Button from '@arcblock/ux/lib/Button';
 import WalletDownload from '@arcblock/ux/lib/Wallet/Download';
 import Tag from '@arcblock/ux/lib/Tag';
 import Auth from '@arcblock/did-react/lib/Auth';
@@ -16,6 +15,7 @@ import api from '../libs/api';
 import { setToken } from '../libs/auth';
 
 import AgentButton from '../components/auth/auth/agent';
+import ConsumeAssetButton from '../components/auth/consume_asset';
 import AcquireMovieTicket from '../components/auth/did_auth_acquire';
 import ErrorButton from '../components/auth/auth/error';
 import Exchange from '../components/auth/exchange';
@@ -199,23 +199,23 @@ export default function IndexPage() {
                 <ProfileButton {...session.value} />
                 <AgentButton {...session.value} />
                 <ErrorButton {...session.value} />
-                <Button
-                  color="primary"
-                  variant="contained"
-                  size="large"
-                  className="action"
-                  disabled>
-                  Consume A Ticket
-                </Button>
-                {/* <Button
-                  color="primary"
-                  variant="contained"
-                  size="large"
-                  className="action"
-                  disabled>
-                  Acquire A Product
-                </Button> */}
+              </div>
+            </section>
+            <section className="section">
+              <Typography
+                component="h3"
+                variant="h5"
+                className="section__header"
+                color="textPrimary"
+                gutterBottom>
+                Asset Scenarios{' '}
+                <Typography component="small" color="textSecondary">
+                  Consume/Acquire an asset
+                </Typography>
+              </Typography>
+              <div className="section__content">
                 <AcquireMovieTicket count="1" />
+                <ConsumeAssetButton {...session.value} />
               </div>
             </section>
             <section className="section">
