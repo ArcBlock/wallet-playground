@@ -8,7 +8,7 @@ module.exports = {
   action: 'did_auth_acquire',
   claims: {
     signature: async ({ userPk, userDid }) => {
-      const factoryAddress = 'zjdvoF49W76WHKrd5pqrDPkEYeDuyv4pd1ZZ';
+      const factoryAddress = 'zjdxG9dq95tDZrU2mfZqWUf2eK7zTEyPkteR';
 
       const { state } = await ForgeSDK.getAssetState({ address: factoryAddress });
       if (!state) {
