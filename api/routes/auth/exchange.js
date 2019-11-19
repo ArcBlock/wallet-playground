@@ -99,7 +99,7 @@ module.exports = {
       console.log('exchange.claims.signed', tx);
 
       return {
-        type: 'ExchangeTx',
+        type: 'AcquireAssetTx',
         data: tx,
         description: 'Asset & Asset',
       };
