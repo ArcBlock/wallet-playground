@@ -44,5 +44,9 @@ export default function ConsumeAsset({ count }) {
 }
 
 ConsumeAsset.propTypes = {
-  count: PrompTypes.number.isRequired,
+  count: PrompTypes.number,
+};
+
+ConsumeAsset.defaultProps = {
+  count: 1,
 };

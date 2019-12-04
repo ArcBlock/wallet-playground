@@ -242,7 +242,8 @@ export default function IndexPage() {
                 </Typography>
               </Typography>
               <div className="section__content">
-                <AcquireMovieTicket count="1" />
+                <AcquireMovieTicket count={1} />
+                <AcquireMovieTicket count={2} />
                 <ConsumeAssetButton {...session.value} />
               </div>
             </section>

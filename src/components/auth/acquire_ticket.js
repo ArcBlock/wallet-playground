@@ -24,7 +24,7 @@ export default function AcquireMovieTicket({ count }) {
       {isOpen && (
         <Auth
           responsive
-          action="did_auth_acquire"
+          action="acquire_asset"
           checkFn={api.get}
           onClose={() => setOpen()}
           onSuccess={() => window.location.reload()}

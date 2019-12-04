@@ -5,7 +5,7 @@ const { decodeAny } = require('@arcblock/forge-message/lite');
 const { fromAddress } = require('@arcblock/forge-wallet');
 
 module.exports = {
-  action: 'did_auth_acquire',
+  action: 'acquire_asset',
   claims: {
     signature: async ({ userPk, userDid }) => {
       const factoryAddress = 'zjdsHpUWuUjj41jY1P9Epno8Jvz5f5YKLMm3';

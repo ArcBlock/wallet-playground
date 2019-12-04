@@ -1,5 +1,7 @@
 const ForgeSDK = require('@arcblock/forge-sdk');
 
+const env = require('./env');
+
 const getTransferrableAssets = async (userDid, assetCount) => {
   const { assets } = await ForgeSDK.listAssets({ ownerAddress: userDid });
   if (!assets || assets.length === 0) {
@@ -18,6 +20,53 @@ const getTransferrableAssets = async (userDid, assetCount) => {
   return goodAssets.slice(0, assetCount);
 };
 
+const getTokenInfo = async () => {
+  const { getForgeState: data } = await ForgeSDK.doRawQuery(
+    `{
+      getForgeState {
+        code
+        state {
+          token {
+            decimal
+            description
+            inflationRate
+            initialSupply
+            name
+            symbol
+            totalSupply
+            unit
+          }
+        }
+      }
+    }`,
+    { conn: env.chainId }
+  );
+
+  const { getForgeState: data2 } = await ForgeSDK.doRawQuery(
+    `{
+      getForgeState {
+        code
+        state {
+          token {
+            decimal
+            description
+            inflationRate
+            initialSupply
+            name
+            symbol
+            totalSupply
+            unit
+          }
+        }
+      }
+    }`,
+    { conn: env.assetChainId }
+  );
+
+  return { appToken: data.state.token, assetToken: data2.state.token };
+};
+
 module.exports = {
   getTransferrableAssets,
+  getTokenInfo,
 };

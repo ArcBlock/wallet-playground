@@ -39,7 +39,7 @@ export default function ProfilePage() {
 
   if (session.loading || !session.value) {
     return (
-      <Layout title="Payment">
+      <Layout title="Profile">
         <Main>
           <CircularProgress />
         </Main>
@@ -49,7 +49,7 @@ export default function ProfilePage() {
 
   if (session.error) {
     return (
-      <Layout title="Payment">
+      <Layout title="Profile">
         <Main>{session.error.message}</Main>
       </Layout>
     );

@@ -51,12 +51,22 @@ export default function Header() {
         </Typography>
       </div>
       <div className="nav-right">
-        <Link
-          href={env.chainHost.replace('/api', '/node/explorer/txs')}
-          target="_blank"
-          className="nav-item">
-          Explorer
-        </Link>
+        {!!env.chainHost && (
+          <Link
+            href={env.chainHost.replace('/api', '/node/explorer/txs')}
+            target="_blank"
+            className="nav-item">
+            App Chain
+          </Link>
+        )}
+        {!!env.assetChainHost && (
+          <Link
+            href={env.assetChainHost.replace('/api', '/node/explorer/txs')}
+            target="_blank"
+            className="nav-item">
+            Asset Chain
+          </Link>
+        )}
         {session.value && session.value.user && (
           <React.Fragment>
             <Link href="/profile" className="nav-item">
