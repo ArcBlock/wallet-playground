@@ -18,8 +18,8 @@ module.exports = {
         // Mark orders as expired
         orders = orders.map(x => {
           if (
-            x.demandLocktime <= assetChainInfo.blockHeight ||
-            x.offerLocktime <= appChainInfo.blockHeight
+            (x.demandLocktime && x.demandLocktime <= assetChainInfo.blockHeight)
+            || (x.offerLocktime && x.offerLocktime <= appChainInfo.blockHeight)
           ) {
             x.status = 'expired';
           }

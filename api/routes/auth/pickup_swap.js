@@ -15,8 +15,8 @@ module.exports = {
       console.log('pickup_swap', swap);
 
       if (
-        swap.demandLocktime <= assetChainInfo.blockHeight ||
-        swap.offerLocktime <= appChainInfo.blockHeight
+        (swap.demandLocktime && swap.demandLocktime <= assetChainInfo.blockHeight)
+        || (swap.offerLocktime && swap.offerLocktime <= appChainInfo.blockHeight)
       ) {
         throw new Error('This order has expired, please place another order');
       }
@@ -30,7 +30,5 @@ module.exports = {
   },
 
   // eslint-disable-next-line object-curly-newline
-  onAuth: async ({ claims, userDid, token }) => {
-    return {};
-  },
+  onAuth: async ({ claims, userDid, token }) => ({}),
 };
