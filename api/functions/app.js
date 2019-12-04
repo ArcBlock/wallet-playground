@@ -108,8 +108,9 @@ walletHandlers.attach(
   Object.assign({ app: router }, require('../routes/auth/transfer_token_asset_out'))
 );
 walletHandlers.attach(Object.assign({ app: router }, require('../routes/auth/consume_asset')));
-walletHandlers.attach(Object.assign({ app: router }, require('../routes/auth/did_auth_acquire')));
+walletHandlers.attach(Object.assign({ app: router }, require('../routes/auth/acquire_asset')));
 walletHandlers.attach(Object.assign({ app: router }, require('../routes/auth/exchange')));
+swapHandlers.attach(Object.assign({ app: router }, require('../routes/auth/pickup_swap')));
 swapHandlers.attach(Object.assign({ app: router }, require('../routes/auth/swap_badge')));
 swapHandlers.attach(Object.assign({ app: router }, require('../routes/auth/swap_badges')));
 swapHandlers.attach(
@@ -120,8 +121,7 @@ swapHandlers.attach(Object.assign({ app: router }, require('../routes/auth/swap_
 agentHandlers.attach(Object.assign({ app: router }, require('../routes/auth/profile'))); // we can reuse something here
 
 require('../routes/session').init(router);
-require('../routes/payments').init(router);
-require('../routes/authorizations').init(router);
+require('../routes/orders').init(router);
 
 // Check for application account
 ForgeSDK.getAccountState({ address: wallet.address })

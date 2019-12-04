@@ -6,6 +6,7 @@ import useToggle from 'react-use/lib/useToggle';
 
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
+import Link from '@material-ui/core/Link';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Auth from '@arcblock/did-react/lib/Auth';
 import UserAvatar from '@arcblock/did-react/lib/Avatar';
@@ -14,7 +15,7 @@ import Button from '@arcblock/ux/lib/Button';
 import useSession from '../hooks/session';
 import api from '../libs/api';
 import env from '../libs/env';
-import { setToken, removeToken } from '../libs/auth';
+import { setToken } from '../libs/auth';
 
 export default function Header() {
   const session = useSession();
@@ -41,11 +42,6 @@ export default function Header() {
     window.location.href = '/profile';
   };
 
-  const onLogout = () => {
-    removeToken();
-    window.location.reload();
-  };
-
   return (
     <Nav>
       <div className="nav-left">
@@ -53,31 +49,40 @@ export default function Header() {
           <img className="logo" src="/static/images/logo.png" alt="arcblock" />
           {env.appName}
         </Typography>
-        <Button
-          href={env.chainHost.replace('/api', '/node/explorer/txs')}
-          target="_blank"
-          variant="h6"
-          color="inherit">
-          Explorer
-        </Button>
-        {session.value && session.value.user && (
-          <React.Fragment>
-            <Button href="/profile" size="large">
-              Profile
-            </Button>
-            <Button size="large" color="danger" onClick={onLogout}>
-              Logout
-            </Button>
-          </React.Fragment>
-        )}
       </div>
       <div className="nav-right">
-        <Button
-          href="https://github.com/ArcBlock/forge-dapp-starters"
-          className="github"
-          target="_blank">
+        {!!env.chainHost && (
+          <Link
+            href={env.chainHost.replace('/api', '/node/explorer/txs')}
+            target="_blank"
+            className="nav-item">
+            App Chain
+          </Link>
+        )}
+        {!!env.assetChainHost && (
+          <Link
+            href={env.assetChainHost.replace('/api', '/node/explorer/txs')}
+            target="_blank"
+            className="nav-item">
+            Asset Chain
+          </Link>
+        )}
+        {session.value && session.value.user && (
+          <React.Fragment>
+            <Link href="/profile" className="nav-item">
+              Profile
+            </Link>
+            <Link href="/orders" className="nav-item">
+              Orders
+            </Link>
+          </React.Fragment>
+        )}
+        <Link
+          href="https://github.com/ArcBlock/wallet-playground"
+          target="_blank"
+          className="nav-item">
           GitHub
-        </Button>
+        </Link>
         {session.loading && (
           <Button>
             <CircularProgress size={20} color="secondary" />
@@ -89,9 +94,9 @@ export default function Header() {
           </Button>
         )}
         {session.value && session.value.user && (
-          <Button href="/profile" className="avatar">
+          <Link href="/profile" className="nav-item">
             <UserAvatar did={session.value.user.did} />
-          </Button>
+          </Link>
         )}
       </div>
       {open && (
@@ -149,6 +154,12 @@ const Nav = styled(Toolbar)`
 
     .github {
       margin-right: 16px;
+    }
+
+    .nav-item {
+      margin: 8px 12px;
+      font-weight: bold;
+      text-transform: uppercase;
     }
   }
 `;

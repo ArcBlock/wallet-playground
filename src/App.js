@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Route, Switch, withRouter } from 'react-router
 
 import HomePage from './pages/index';
 import ProfilePage from './pages/profile';
+import OrdersPage from './pages/orders';
 
 import theme from './libs/theme';
 
@@ -26,6 +27,7 @@ export const App = () => (
           <Switch>
             <Route exact path="/" component={HomePage} />
             <Route exact path="/profile" component={ProfilePage} />
+            <Route exact path="/orders" component={OrdersPage} />
           </Switch>
         </div>
       </React.Fragment>

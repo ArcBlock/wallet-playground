@@ -10,25 +10,22 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import Auth from '@arcblock/did-react/lib/Auth';
 import Avatar from '@arcblock/did-react/lib/Avatar';
+import Button from '@arcblock/ux/lib/Button';
 
 import Layout from '../components/layout';
 import useSession from '../hooks/session';
 import forge from '../libs/sdk';
-import api from '../libs/api';
-import { removeToken, onAuthError } from '../libs/auth';
+import { removeToken } from '../libs/auth';
 
 export default function ProfilePage() {
   const session = useSession();
   const [isFetched, setFetched] = useToggle(false);
-  const [isOpen, setOpen] = useToggle(false);
   const [balance, fetchBalance] = useAsyncFn(async () => {
     if (session.value && session.value.user) {
-      const address = session.value.user.did.replace(/^did:abt:/, '');
-      const { state: account } = await forge.getAccountState({ address }, { ignoreFields: [] });
+      const address = session.value.user.did;
+      const { state: account } = await forge.getAccountState({ address });
       return account;
     }
 
@@ -42,7 +39,7 @@ export default function ProfilePage() {
 
   if (session.loading || !session.value) {
     return (
-      <Layout title="Payment">
+      <Layout title="Profile">
         <Main>
           <CircularProgress />
         </Main>
@@ -52,7 +49,7 @@ export default function ProfilePage() {
 
   if (session.error) {
     return (
-      <Layout title="Payment">
+      <Layout title="Profile">
         <Main>{session.error.message}</Main>
       </Layout>
     );
@@ -78,20 +75,16 @@ export default function ProfilePage() {
         <Grid container spacing={6}>
           <Grid item xs={12} md={3} className="avatar">
             <Avatar size={240} did={user.did} />
-            <Button color="secondary" variant="outlined" onClick={onLogout}>
+            <Button
+              color="secondary"
+              variant="contained"
+              href="/orders"
+              style={{ marginBottom: 30 }}>
+              My Orders
+            </Button>
+            <Button color="danger" variant="contained" onClick={onLogout}>
               Logout
             </Button>
-            <Button color="primary" variant="outlined" href="/payment" style={{ marginTop: '30px' }}>
-              My Purchase
-            </Button>
-            <Button color="primary" variant="outlined" href="/swap" style={{ marginTop: '30px' }}>
-              My Swap
-            </Button>
-            {balance.value && (
-              <Button color="primary" variant="contained" onClick={() => setOpen()} style={{ marginTop: '30px' }}>
-                Get 25 {token.symbol}
-              </Button>
-            )}
           </Grid>
           <Grid item xs={12} md={9} className="meta">
             <Typography component="h3" variant="h4">
@@ -126,22 +119,6 @@ export default function ProfilePage() {
           </Grid>
         </Grid>
       </Main>
-      {isOpen && (
-        <Auth
-          responsive
-          action="checkin"
-          checkFn={api.get}
-          onError={onAuthError}
-          onClose={() => setOpen()}
-          onSuccess={() => window.location.reload()}
-          messages={{
-            title: `Get 25 ${token.symbol} for FREE`,
-            scan: `Scan QR code to get 25 ${token.symbol} for FREE`,
-            confirm: 'Confirm on your ABT Wallet',
-            success: `25 ${token.symbol} sent to your account`,
-          }}
-        />
-      )}
     </Layout>
   );
 }
