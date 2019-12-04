@@ -11,6 +11,7 @@ const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const bearerToken = require('express-bearer-token');
+const compression = require('compression');
 const ForgeSDK = require('@arcblock/forge-sdk');
 
 // ------------------------------------------------------------------------------
@@ -151,8 +152,9 @@ if (isProduction) {
   if (process.env.NETLIFY && JSON.parse(process.env.NETLIFY)) {
     server.use('/.netlify/functions/app', router);
   } else {
+    server.use(compression());
     server.use(router);
-    server.use(express.static(path.resolve(__dirname, '../../build')));
+    server.use(express.static(path.resolve(__dirname, '../../build'), { maxAge: '365d' }));
     server.get('*', (req, res) => {
       res.send(fs.readFileSync(path.resolve(__dirname, '../../build/index.html')).toString());
     });
