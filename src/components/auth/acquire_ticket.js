@@ -44,5 +44,9 @@ export default function AcquireMovieTicket({ count }) {
 }
 
 AcquireMovieTicket.propTypes = {
-  count: PrompTypes.number.isRequired,
+  count: PrompTypes.number,
+};
+
+AcquireMovieTicket.defaultProps = {
+  count: 1,
 };

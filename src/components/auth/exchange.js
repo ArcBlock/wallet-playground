@@ -62,11 +62,13 @@ export default function Exchange({ payType, payCount = 1, receiveType, receiveCo
 Exchange.propTypes = {
   token: PrompTypes.object,
   receiveType: PrompTypes.string.isRequired,
-  receiveCount: PrompTypes.number.isRequired,
+  receiveCount: PrompTypes.number,
   payType: PrompTypes.string.isRequired,
-  payCount: PrompTypes.number.isRequired,
+  payCount: PrompTypes.number,
 };
 
 Exchange.defaultProps = {
   token: {},
+  receiveCount: 1,
+  payCount: 1,
 };

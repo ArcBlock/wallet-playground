@@ -16,7 +16,7 @@ import { setToken } from '../libs/auth';
 
 import AgentButton from '../components/auth/auth/agent';
 import ConsumeAssetButton from '../components/auth/consume_asset';
-import AcquireMovieTicket from '../components/auth/did_auth_acquire';
+import AcquireMovieTicket from '../components/auth/acquire_ticket';
 import ErrorButton from '../components/auth/auth/error';
 import Exchange from '../components/auth/exchange';
 import FundTbaButton from '../components/auth/fund_tba';
@@ -151,63 +151,63 @@ export default function IndexPage() {
                 <Exchange {...session.value} receiveType="asset" payType="token" />
                 <Exchange {...session.value} receiveType="token" payType="asset" />
                 <Exchange {...session.value} receiveType="asset" payType="asset" />
-                <Exchange {...session.value} receiveType="asset" receiveCount="2" payType="asset" />
-                <Exchange {...session.value} receiveType="asset" payCount="2" payType="asset" />
+                <Exchange {...session.value} receiveType="asset" receiveCount={2} payType="asset" />
+                <Exchange {...session.value} receiveType="asset" payCount={2} payType="asset" />
                 <Exchange
                   {...session.value}
                   receiveType="asset"
-                  receiveCount="2"
+                  receiveCount={2}
                   payType="asset"
-                  payCount="2"
+                  payCount={2}
                 />
                 <Exchange
                   {...session.value}
                   receiveType="token"
-                  receiveCount="2"
+                  receiveCount={2}
                   payType="asset"
-                  payCount="2"
+                  payCount={2}
                 />
                 <Exchange
                   {...session.value}
                   receiveType="asset"
-                  receiveCount="5"
+                  receiveCount={5}
                   payType="token"
-                  payCount="1"
+                  payCount={1}
                 />
                 <Exchange
                   {...session.value}
-                  receiveCount="5"
+                  receiveCount={5}
                   receiveType="asset"
-                  payCount="5"
+                  payCount={5}
                   payType="asset"
                 />
                 <Exchange
                   {...session.value}
                   receiveType="token"
-                  receiveCount="100000"
+                  receiveCount={100000}
                   payType="asset"
-                  payCount="1"
+                  payCount={1}
                 />
                 <Exchange
                   {...session.value}
                   receiveType="token"
-                  receiveCount="0.001"
+                  receiveCount={0.001}
                   payType="asset"
-                  payCount="1"
+                  payCount={1}
                 />
                 <Exchange
                   {...session.value}
                   receiveType="token"
-                  receiveCount="100000.0001"
+                  receiveCount={100000.0001}
                   payType="asset"
-                  payCount="1"
+                  payCount={1}
                 />
                 <Exchange
                   {...session.value}
                   receiveType="token"
-                  receiveCount="0.000001"
+                  receiveCount={0.000001}
                   payType="asset"
-                  payCount="1"
+                  payCount={1}
                 />
               </div>
             </section>
