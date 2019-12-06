@@ -5,6 +5,7 @@ const { AssetRecipient } = require('@arcblock/asset-factory');
 
 const env = require('../../libs/env');
 const { swapStorage, wallet, factory } = require('../../libs/auth');
+const { getTransferrableAssets } = require('../../libs/util');
 
 const ensureAsset = async (userPk, userDid) => {
   const [asset] = await factory.createCertificate({
@@ -30,21 +31,61 @@ const ensureAsset = async (userPk, userDid) => {
 module.exports = {
   action: 'swap-certificate',
   claims: {
-    swap: async ({ userDid, userPk, extraParams: { traceId } }) => {
-      try {
-        const asset = await ensureAsset(userPk, userDid);
+    swap: async ({ userDid, userPk, extraParams: { traceId, action } }) => {
+      if (action === 'buy') {
+        try {
+          const asset = await ensureAsset(userPk, userDid);
+          const payload = {
+            offerAssets: [asset.address],
+            offerToken: (await ForgeSDK.fromTokenToUnit(0, { conn: env.chainId })).toString(),
+            offerUserAddress: wallet.address, // 卖家地址
+            demandAssets: [],
+            demandToken: (await ForgeSDK.fromTokenToUnit(6.99, { conn: env.assetChainId })).toString(),
+            demandUserAddress: userDid, // 买家地址
+            demandLocktime: await ForgeSDK.toLocktime(57600, { conn: env.assetChainId }),
+          };
+
+          const res = await swapStorage.finalize(traceId, payload);
+          console.log('ticket.finalize', res);
+          const swap = await swapStorage.read(traceId);
+
+          return {
+            swapId: traceId,
+            receiver: wallet.address,
+            ...swap,
+          };
+        } catch (err) {
+          console.error(err);
+          throw new Error('证书创建失败，请重试');
+        }
+      }
+
+      if (action === 'sell') {
+        const assets = await getTransferrableAssets(userDid);
+        const asset = assets.find(x => x.moniker === 'DevCon0 黑客松人气奖');
+
+        if (!asset) {
+          throw new Error('No certificate to sell');
+        }
+
+        // Since we are doing swap with reversed chain
         const payload = {
-          offerAssets: [asset.address],
-          offerToken: (await ForgeSDK.fromTokenToUnit(0, { conn: env.chainId })).toString(),
+          offerChainId: env.assetChainId,
+          offerChainHost: env.assetChainHost,
+          offerAssets: [],
+          offerToken: (await ForgeSDK.fromTokenToUnit(6.99, { conn: env.assetChainId })).toString(),
           offerUserAddress: wallet.address, // 卖家地址
-          demandAssets: [],
-          demandToken: (await ForgeSDK.fromTokenToUnit(6.99, { conn: env.assetChainId })).toString(),
+
+          demandChainId: env.chainId,
+          demandChainHost: env.chainHost,
+          demandAssets: [asset.address],
+          demandToken: (await ForgeSDK.fromTokenToUnit(0, { conn: env.chainId })).toString(),
           demandUserAddress: userDid, // 买家地址
-          demandLocktime: await ForgeSDK.toLocktime(57600, { conn: env.assetChainId }),
+          demandLocktime: await ForgeSDK.toLocktime(2400, { conn: env.chainId }),
         };
 
         const res = await swapStorage.finalize(traceId, payload);
-        console.log('ticket.finalize', res);
+        console.log('certificate.sell.finalize', res);
         const swap = await swapStorage.read(traceId);
 
         return {
@@ -52,16 +93,15 @@ module.exports = {
           receiver: wallet.address,
           ...swap,
         };
-      } catch (err) {
-        console.error(err);
-        throw new Error('证书创建失败，请重试');
       }
+
+      throw new Error(`Unsupported certificate action ${action}`);
     },
   },
 
   // eslint-disable-next-line object-curly-newline
   onAuth: async ({ claims, userDid, token }) => {
-    console.log('ticket.onUserSetup', { userDid, token, claims });
+    console.log('swap.certificate.onAuth', { userDid, token, claims });
     return {};
   },
 };

@@ -3,7 +3,7 @@ const ForgeSDK = require('@arcblock/forge-sdk');
 const env = require('./env');
 
 const getTransferrableAssets = async (userDid, assetCount) => {
-  const { assets } = await ForgeSDK.listAssets({ ownerAddress: userDid });
+  const { assets } = await ForgeSDK.listAssets({ ownerAddress: userDid, paging: { size: 200 } });
   if (!assets || assets.length === 0) {
     throw new Error('You do not have any asset, use other test to earn one');
   }
@@ -13,7 +13,7 @@ const getTransferrableAssets = async (userDid, assetCount) => {
     throw new Error('You do not have any asset that can be transferred to me');
   }
 
-  if (goodAssets.length < assetCount) {
+  if (assetCount && goodAssets.length < assetCount) {
     throw new Error('You do not have enough assets that can be transferred to me');
   }
 

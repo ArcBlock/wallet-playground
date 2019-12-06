@@ -23,11 +23,11 @@ import Exchange from '../components/auth/exchange';
 import FundTbaButton from '../components/auth/fund_tba';
 import FundPlayButton from '../components/auth/fund_play';
 import ProfileButton from '../components/auth/auth/profile';
-import SwapTokenButton from '../components/auth/swap_token';
-import SwapBadgeButton from '../components/auth/swap_badge';
-import SwapBadgesButton from '../components/auth/swap_badges';
-import SwapTicketButton from '../components/auth/swap_ticket';
-import SwapCertificateButton from '../components/auth/swap_certificate';
+import BuyTokenButton from '../components/auth/swap_token';
+import BuyBadgeButton from '../components/auth/swap_badge';
+import BuyBadgesButton from '../components/auth/swap_badges';
+import BuyTicketButton from '../components/auth/swap_ticket';
+import CertificateButton from '../components/auth/swap_certificate';
 import TransferTokenOut from '../components/auth/transfer_token_out';
 import TransferTokenIn from '../components/auth/transfer_token_in';
 import TransferAssetOut from '../components/auth/transfer_asset_out';
@@ -108,11 +108,12 @@ export default function IndexPage() {
                 </Typography>
               </Typography>
               <div className="section__content">
-                <SwapBadgeButton {...session.value} />
-                <SwapBadgesButton {...session.value} />
-                <SwapTokenButton {...session.value} />
-                <SwapTicketButton {...session.value} />
-                <SwapCertificateButton {...session.value} />
+                <BuyBadgeButton {...session.value} />
+                <BuyBadgesButton {...session.value} />
+                <BuyTokenButton {...session.value} />
+                <BuyTicketButton {...session.value} />
+                <CertificateButton {...session.value} action="buy" />
+                <CertificateButton {...session.value} action="sell" />
               </div>
             </section>
             <section className="section">
