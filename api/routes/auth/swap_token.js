@@ -8,31 +8,74 @@ const { swapStorage, wallet } = require('../../libs/auth');
 module.exports = {
   action: 'swap-token',
   claims: {
-    swap: async ({ userDid, extraParams: { traceId } }) => {
-      try {
-        const payload = {
-          offerAssets: [],
-          offerToken: (await ForgeSDK.fromTokenToUnit(5, { conn: env.chainId })).toString(),
-          offerUserAddress: wallet.address, // 卖家地址
-          demandAssets: [],
-          demandToken: (await ForgeSDK.fromTokenToUnit(1, { conn: env.assetChainId })).toString(),
-          demandUserAddress: userDid, // 买家地址
-          demandLocktime: await ForgeSDK.toLocktime(57600, { conn: env.assetChainId }),
-        };
+    swap: async ({ userDid, extraParams: { traceId, action } }) => {
+      if (action === 'buy') {
+        // User buy 1 TBA with 5 Play
+        try {
+          const payload = {
+            offerChainId: env.assetChainId,
+            offerChainHost: env.assetChainHost,
+            offerAssets: [],
+            offerToken: (await ForgeSDK.fromTokenToUnit(1, { conn: env.assetChainId })).toString(),
+            offerUserAddress: wallet.address, // 卖家地址
 
-        const res = await swapStorage.finalize(traceId, payload);
-        console.log('swap.finalize', res);
-        const swap = await swapStorage.read(traceId);
+            demandChainId: env.chainId,
+            demandChainHost: env.chainHost,
+            demandAssets: [],
+            demandToken: (await ForgeSDK.fromTokenToUnit(5, { conn: env.chainId })).toString(),
+            demandUserAddress: userDid, // 买家地址
+            demandLocktime: await ForgeSDK.toLocktime(2400, { conn: env.chainId }),
+          };
 
-        return {
-          swapId: traceId,
-          receiver: wallet.address,
-          ...swap,
-        };
-      } catch (err) {
-        console.error(err);
-        throw new Error('换币失败，请重试');
+          const res = await swapStorage.finalize(traceId, payload);
+          console.log('swap.finalize', res);
+          const swap = await swapStorage.read(traceId);
+
+          return {
+            swapId: traceId,
+            receiver: wallet.address,
+            ...swap,
+          };
+        } catch (err) {
+          console.error(err);
+          throw new Error('换币失败，请重试');
+        }
       }
+
+      if (action === 'sell') {
+        // User sell 1 TBA for 5 Play
+        try {
+          const payload = {
+            offerChainId: env.chainId,
+            offerChainHost: env.chainHost,
+            offerAssets: [],
+            offerToken: (await ForgeSDK.fromTokenToUnit(5, { conn: env.chainId })).toString(),
+            offerUserAddress: wallet.address, // 卖家地址
+
+            demandChainId: env.assetChainId,
+            demandChainHost: env.assetChainHost,
+            demandAssets: [],
+            demandToken: (await ForgeSDK.fromTokenToUnit(1, { conn: env.assetChainId })).toString(),
+            demandUserAddress: userDid, // 买家地址
+            demandLocktime: await ForgeSDK.toLocktime(2400, { conn: env.assetChainId }),
+          };
+
+          const res = await swapStorage.finalize(traceId, payload);
+          console.log('swap.finalize', res);
+          const swap = await swapStorage.read(traceId);
+
+          return {
+            swapId: traceId,
+            receiver: wallet.address,
+            ...swap,
+          };
+        } catch (err) {
+          console.error(err);
+          throw new Error('换币失败，请重试');
+        }
+      }
+
+      throw new Error(`Unsupported token swap action ${action}`);
     },
   },
 

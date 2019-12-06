@@ -1,14 +1,16 @@
+/* eslint-disable no-return-assign */
 /* eslint-disable react/jsx-one-expression-per-line */
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import useToggle from 'react-use/lib/useToggle';
+import capitalize from 'lodash/capitalize';
 
 import Auth from '@arcblock/did-react/lib/Auth';
 import Button from '@arcblock/ux/lib/Button';
 
 import api from '../../libs/api';
 
-export default function SwapButton({ token, assetToken }) {
+export default function SwapButton({ token, assetToken, action }) {
   const [isOpen, setOpen] = useToggle(false);
   const [traceId, setTraceId] = useState();
 
@@ -22,25 +24,31 @@ export default function SwapButton({ token, assetToken }) {
     }
   };
 
+  // eslint-disable-next-line operator-linebreak
+  const title =
+    action === 'buy'
+      ? `Buy 1 ${assetToken.symbol} with 5 ${token.symbol}`
+      : `Sell 1 ${assetToken.symbol} for 5 ${token.symbol}`;
+
   return (
     <React.Fragment>
       <Button color="secondary" variant="contained" size="large" className="action" onClick={onStartSwap}>
-        Swap 1 {assetToken.symbol} for 5 {token.symbol}
+        {title}
       </Button>
       {isOpen && !!traceId && (
         <Auth
           responsive
           action="swap-token"
-          extraParams={{ traceId }}
+          extraParams={{ traceId, action }}
           checkFn={api.get}
           checkTimeout={5 * 60 * 1000}
           onClose={() => setOpen(false)}
-          onSuccess={() => window.location.reload()}
+          onSuccess={() => (window.location.href = '/orders')}
           messages={{
-            title: 'Swap Required',
-            scan: `Swap 1 ${assetToken.symbol} for 5 ${token.symbol}`,
-            confirm: 'Confirm swap on your ABT Wallet',
-            success: 'You have successfully paid!',
+            title: `${capitalize(action)} ${assetToken.symbol}`,
+            scan: title,
+            confirm: 'Confirm transaction on your ABT Wallet',
+            success: 'Transaction success',
           }}
         />
       )}
@@ -51,4 +59,5 @@ export default function SwapButton({ token, assetToken }) {
 SwapButton.propTypes = {
   token: PropTypes.object.isRequired,
   assetToken: PropTypes.object.isRequired,
+  action: PropTypes.string.isRequired,
 };

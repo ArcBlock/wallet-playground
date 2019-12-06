@@ -5,6 +5,7 @@ const { AssetRecipient } = require('@arcblock/asset-factory');
 
 const env = require('../../libs/env');
 const { swapStorage, wallet, factory } = require('../../libs/auth');
+const { getTransferrableAssets } = require('../../libs/util');
 
 const ensureAssets = async (userPk, userDid) => {
   const [asset1] = await factory.createBadge({
@@ -47,21 +48,59 @@ const ensureAssets = async (userPk, userDid) => {
 module.exports = {
   action: 'swap-badges',
   claims: {
-    swap: async ({ userDid, userPk, extraParams: { traceId } }) => {
-      try {
-        const [asset1, asset2] = await ensureAssets(userPk, userDid);
+    swap: async ({ userDid, userPk, extraParams: { traceId, action } }) => {
+      if (action === 'buy') {
+        try {
+          const [asset1, asset2] = await ensureAssets(userPk, userDid);
+          const payload = {
+            offerAssets: [asset1.address, asset2.address],
+            offerToken: (await ForgeSDK.fromTokenToUnit(0, { conn: env.chainId })).toString(),
+            offerUserAddress: wallet.address, // 卖家地址
+            demandAssets: [],
+            demandToken: (await ForgeSDK.fromTokenToUnit(1.99, { conn: env.assetChainId })).toString(),
+            demandUserAddress: userDid, // 买家地址
+            demandLocktime: await ForgeSDK.toLocktime(57600, { conn: env.assetChainId }),
+          };
+
+          const res = await swapStorage.finalize(traceId, payload);
+          console.log('swap.badges.sell.buy', res);
+          const swap = await swapStorage.read(traceId);
+
+          return {
+            swapId: traceId,
+            receiver: wallet.address,
+            ...swap,
+          };
+        } catch (err) {
+          console.error(err);
+          throw new Error('徽章创建失败，请重试');
+        }
+      }
+
+      if (action === 'sell') {
+        const assets = await getTransferrableAssets(userDid);
+        const badges = assets.filter(x => x.moniker.startsWith('Atomic Swap 尝鲜 ②'));
+        if (badges.length < 2) {
+          throw new Error('You do not have 2 badge for sell');
+        }
+
         const payload = {
-          offerAssets: [asset1.address, asset2.address],
-          offerToken: (await ForgeSDK.fromTokenToUnit(0, { conn: env.chainId })).toString(),
+          offerChainId: env.assetChainId,
+          offerChainHost: env.assetChainHost,
+          offerAssets: [],
+          offerToken: (await ForgeSDK.fromTokenToUnit(1.99, { conn: env.assetChainId })).toString(),
           offerUserAddress: wallet.address, // 卖家地址
-          demandAssets: [],
-          demandToken: (await ForgeSDK.fromTokenToUnit(1.99, { conn: env.assetChainId })).toString(),
+
+          demandChainId: env.chainId,
+          demandChainHost: env.chainHost,
+          demandAssets: badges.map(x => x.address),
+          demandToken: (await ForgeSDK.fromTokenToUnit(0, { conn: env.chainId })).toString(),
           demandUserAddress: userDid, // 买家地址
-          demandLocktime: await ForgeSDK.toLocktime(57600, { conn: env.assetChainId }),
+          demandLocktime: await ForgeSDK.toLocktime(2400, { conn: env.chainId }),
         };
 
         const res = await swapStorage.finalize(traceId, payload);
-        console.log('swap.finalize', res);
+        console.log('swap.badges.sell.finalize', res);
         const swap = await swapStorage.read(traceId);
 
         return {
@@ -69,10 +108,9 @@ module.exports = {
           receiver: wallet.address,
           ...swap,
         };
-      } catch (err) {
-        console.error(err);
-        throw new Error('徽章创建失败，请重试');
       }
+
+      throw new Error(`Unsupported action ${action}`);
     },
   },
 

@@ -23,9 +23,10 @@ import Exchange from '../components/auth/exchange';
 import FundTbaButton from '../components/auth/fund_tba';
 import FundPlayButton from '../components/auth/fund_play';
 import ProfileButton from '../components/auth/auth/profile';
-import BuyTokenButton from '../components/auth/swap_token';
+import SwapTokenButton from '../components/auth/swap_token';
 import BuyBadgeButton from '../components/auth/swap_badge';
-import BuyBadgesButton from '../components/auth/swap_badges';
+import SwapBadgesButton from '../components/auth/swap_badges';
+import SwapAssetsButton from '../components/auth/swap_assets';
 import BuyTicketButton from '../components/auth/swap_ticket';
 import CertificateButton from '../components/auth/swap_certificate';
 import TransferTokenOut from '../components/auth/transfer_token_out';
@@ -79,12 +80,7 @@ export default function IndexPage() {
         {session.value && session.value.user && (
           <React.Fragment>
             <section className="section">
-              <Typography
-                component="h3"
-                variant="h5"
-                className="section__header"
-                color="textPrimary"
-                gutterBottom>
+              <Typography component="h3" variant="h5" className="section__header" color="textPrimary" gutterBottom>
                 Feeling lucky{' '}
                 <Typography component="small" color="textSecondary">
                   Get your account funded for doing later testing
@@ -96,12 +92,7 @@ export default function IndexPage() {
               </div>
             </section>
             <section className="section">
-              <Typography
-                component="h3"
-                variant="h5"
-                className="section__header"
-                color="textPrimary"
-                gutterBottom>
+              <Typography component="h3" variant="h5" className="section__header" color="textPrimary" gutterBottom>
                 Atomic Swap Scenarios{' '}
                 <Typography component="small" color="textSecondary">
                   Show the full potential of cross-chain transactions.
@@ -109,20 +100,19 @@ export default function IndexPage() {
               </Typography>
               <div className="section__content">
                 <BuyBadgeButton {...session.value} />
-                <BuyBadgesButton {...session.value} />
-                <BuyTokenButton {...session.value} />
                 <BuyTicketButton {...session.value} />
                 <CertificateButton {...session.value} action="buy" />
                 <CertificateButton {...session.value} action="sell" />
+                <SwapTokenButton {...session.value} action="buy" />
+                <SwapTokenButton {...session.value} action="sell" />
+                <SwapBadgesButton {...session.value} action="buy" />
+                <SwapBadgesButton {...session.value} action="sell" />
+                <SwapAssetsButton {...session.value} action="buy" />
+                <SwapAssetsButton {...session.value} action="sell" />
               </div>
             </section>
             <section className="section">
-              <Typography
-                component="h3"
-                variant="h5"
-                className="section__header"
-                color="textPrimary"
-                gutterBottom>
+              <Typography component="h3" variant="h5" className="section__header" color="textPrimary" gutterBottom>
                 Transfer Scenarios{' '}
                 <Typography component="small" color="textSecondary">
                   Help to generate different transfer transactions in ABT Wallet
@@ -138,12 +128,7 @@ export default function IndexPage() {
               </div>
             </section>
             <section className="section">
-              <Typography
-                component="h3"
-                variant="h5"
-                className="section__header"
-                color="textPrimary"
-                gutterBottom>
+              <Typography component="h3" variant="h5" className="section__header" color="textPrimary" gutterBottom>
                 Exchange Scenarios{' '}
                 <Typography component="small" color="textSecondary">
                   Help to generate different exchange transactions in ABT Wallet
@@ -155,48 +140,12 @@ export default function IndexPage() {
                 <Exchange {...session.value} receiveType="asset" payType="asset" />
                 <Exchange {...session.value} receiveType="asset" receiveCount={2} payType="asset" />
                 <Exchange {...session.value} receiveType="asset" payCount={2} payType="asset" />
-                <Exchange
-                  {...session.value}
-                  receiveType="asset"
-                  receiveCount={2}
-                  payType="asset"
-                  payCount={2}
-                />
-                <Exchange
-                  {...session.value}
-                  receiveType="token"
-                  receiveCount={2}
-                  payType="asset"
-                  payCount={2}
-                />
-                <Exchange
-                  {...session.value}
-                  receiveType="asset"
-                  receiveCount={5}
-                  payType="token"
-                  payCount={1}
-                />
-                <Exchange
-                  {...session.value}
-                  receiveCount={5}
-                  receiveType="asset"
-                  payCount={5}
-                  payType="asset"
-                />
-                <Exchange
-                  {...session.value}
-                  receiveType="token"
-                  receiveCount={100000}
-                  payType="asset"
-                  payCount={1}
-                />
-                <Exchange
-                  {...session.value}
-                  receiveType="token"
-                  receiveCount={0.001}
-                  payType="asset"
-                  payCount={1}
-                />
+                <Exchange {...session.value} receiveType="asset" receiveCount={2} payType="asset" payCount={2} />
+                <Exchange {...session.value} receiveType="token" receiveCount={2} payType="asset" payCount={2} />
+                <Exchange {...session.value} receiveType="asset" receiveCount={5} payType="token" payCount={1} />
+                <Exchange {...session.value} receiveCount={5} receiveType="asset" payCount={5} payType="asset" />
+                <Exchange {...session.value} receiveType="token" receiveCount={100000} payType="asset" payCount={1} />
+                <Exchange {...session.value} receiveType="token" receiveCount={0.001} payType="asset" payCount={1} />
                 <Exchange
                   {...session.value}
                   receiveType="token"
@@ -204,22 +153,11 @@ export default function IndexPage() {
                   payType="asset"
                   payCount={1}
                 />
-                <Exchange
-                  {...session.value}
-                  receiveType="token"
-                  receiveCount={0.000001}
-                  payType="asset"
-                  payCount={1}
-                />
+                <Exchange {...session.value} receiveType="token" receiveCount={0.000001} payType="asset" payCount={1} />
               </div>
             </section>
             <section className="section">
-              <Typography
-                component="h3"
-                variant="h5"
-                className="section__header"
-                color="textPrimary"
-                gutterBottom>
+              <Typography component="h3" variant="h5" className="section__header" color="textPrimary" gutterBottom>
                 DID Auth Claims{' '}
                 <Typography component="small" color="textSecondary">
                   Help to test different DID Auth Claims in ABT Wallet
@@ -235,12 +173,7 @@ export default function IndexPage() {
               </div>
             </section>
             <section className="section">
-              <Typography
-                component="h3"
-                variant="h5"
-                className="section__header"
-                color="textPrimary"
-                gutterBottom>
+              <Typography component="h3" variant="h5" className="section__header" color="textPrimary" gutterBottom>
                 Asset Scenarios{' '}
                 <Typography component="small" color="textSecondary">
                   Consume/Acquire an asset
@@ -253,12 +186,7 @@ export default function IndexPage() {
               </div>
             </section>
             <section className="section">
-              <Typography
-                component="h3"
-                variant="h5"
-                className="section__header"
-                color="textPrimary"
-                gutterBottom>
+              <Typography component="h3" variant="h5" className="section__header" color="textPrimary" gutterBottom>
                 Do not have ABT Wallet?
               </Typography>
               <div className="section__content">
