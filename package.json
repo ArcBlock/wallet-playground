@@ -21,7 +21,7 @@
     "@arcblock/asset-factory": "^1.0.9",
     "@arcblock/did": "^1.0.9",
     "@arcblock/did-agent-storage-mongo": "^1.0.4",
-    "@arcblock/did-auth": "^1.0.10",
+    "@arcblock/did-auth": "^1.0.11",
     "@arcblock/did-auth-storage-mongo": "^1.0.0",
     "@arcblock/did-react": "^0.50.0",
     "@arcblock/did-util": "^1.0.9",
