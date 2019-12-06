@@ -8,18 +8,23 @@ module.exports = {
   init(app) {
     app.get('/api/orders', async (req, res) => {
       if (req.user) {
-        const [{ info: appChainInfo }, { info: assetChainInfo }] = await Promise.all([
+        const [{ info: chainInfo }, { info: assetChainInfo }] = await Promise.all([
           ForgeSDK.getChainInfo({ conn: env.chainId }),
           ForgeSDK.getChainInfo({ conn: env.assetChainId }),
         ]);
+
         const { appToken, assetToken } = await getTokenInfo();
         let orders = await swapStorage.listByDemandAddress(req.user.did);
+        const chainInfos = {
+          [env.chainId]: chainInfo,
+          [env.assetChainId]: assetChainInfo,
+        };
 
         // Mark orders as expired
         orders = orders.map(x => {
           if (
-            (x.demandLocktime && x.demandLocktime <= assetChainInfo.blockHeight)
-            || (x.offerLocktime && x.offerLocktime <= appChainInfo.blockHeight)
+            (x.demandLocktime && x.demandLocktime <= chainInfos[x.demandChainId].blockHeight)
+            || (x.offerLocktime && x.offerLocktime <= chainInfos[x.offerChainId].blockHeight)
           ) {
             x.status = 'expired';
           }

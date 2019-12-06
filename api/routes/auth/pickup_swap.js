@@ -6,17 +6,17 @@ module.exports = {
   action: 'pickup_swap',
   claims: {
     swap: async ({ extraParams: { traceId } }) => {
-      const [{ info: appChainInfo }, { info: assetChainInfo }] = await Promise.all([
-        ForgeSDK.getChainInfo({ conn: env.chainId }),
-        ForgeSDK.getChainInfo({ conn: env.assetChainId }),
-      ]);
-
       const swap = await swapStorage.read(traceId);
       console.log('pickup_swap', swap);
 
+      const [{ info: offerChainInfo }, { info: demandChainInfo }] = await Promise.all([
+        ForgeSDK.getChainInfo({ conn: env.offerChainId }),
+        ForgeSDK.getChainInfo({ conn: swap.demandChainId }),
+      ]);
+
       if (
-        (swap.demandLocktime && swap.demandLocktime <= assetChainInfo.blockHeight)
-        || (swap.offerLocktime && swap.offerLocktime <= appChainInfo.blockHeight)
+        (swap.demandLocktime && swap.demandLocktime <= demandChainInfo.blockHeight)
+        || (swap.offerLocktime && swap.offerLocktime <= offerChainInfo.blockHeight)
       ) {
         throw new Error('This order has expired, please place another order');
       }
