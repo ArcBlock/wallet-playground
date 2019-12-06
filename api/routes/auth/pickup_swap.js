@@ -1,6 +1,5 @@
 const ForgeSDK = require('@arcblock/forge-sdk');
 const { swapStorage, wallet } = require('../../libs/auth');
-const env = require('../../libs/env');
 
 module.exports = {
   action: 'pickup_swap',
@@ -10,7 +9,7 @@ module.exports = {
       console.log('pickup_swap', swap);
 
       const [{ info: offerChainInfo }, { info: demandChainInfo }] = await Promise.all([
-        ForgeSDK.getChainInfo({ conn: env.offerChainId }),
+        ForgeSDK.getChainInfo({ conn: swap.offerChainId }),
         ForgeSDK.getChainInfo({ conn: swap.demandChainId }),
       ]);
 
