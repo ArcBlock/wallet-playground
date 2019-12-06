@@ -32,7 +32,7 @@ export default function Fund({ user, assetToken }) {
       {isOpen && (
         <Auth
           responsive
-          action="fund"
+          action="fund_tba"
           checkFn={api.get}
           onClose={() => setOpen()}
           onSuccess={() => window.location.reload()}

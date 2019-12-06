@@ -10,7 +10,7 @@ const chainInfo = {
 };
 
 module.exports = {
-  action: 'fund',
+  action: 'fund_tba',
   authPrincipal: { chainInfo },
   claims: {
     signature: async ({ userDid }) => {

@@ -32,7 +32,7 @@ export default function FundPlay({ user, token }) {
       {isOpen && (
         <Auth
           responsive
-          action="checkin"
+          action="fund_play"
           checkFn={api.get}
           onClose={() => setOpen()}
           onSuccess={() => window.location.reload()}

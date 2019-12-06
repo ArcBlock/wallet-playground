@@ -94,32 +94,27 @@ const router = express.Router();
 
 walletHandlers.attach(Object.assign({ app: router }, require('../routes/auth/login')));
 walletHandlers.attach(Object.assign({ app: router }, require('../routes/auth/payment')));
-walletHandlers.attach(Object.assign({ app: router }, require('../routes/auth/checkin')));
-walletHandlers.attach(Object.assign({ app: router }, require('../routes/auth/fund')));
-walletHandlers.attach(Object.assign({ app: router }, require('../routes/auth/profile')));
+walletHandlers.attach(Object.assign({ app: router }, require('../routes/auth/fund_play')));
+walletHandlers.attach(Object.assign({ app: router }, require('../routes/auth/fund_tba')));
+walletHandlers.attach(Object.assign({ app: router }, require('../routes/auth/claim_profile')));
+walletHandlers.attach(Object.assign({ app: router }, require('../routes/auth/claim_signature')));
 walletHandlers.attach(Object.assign({ app: router }, require('../routes/auth/error')));
 walletHandlers.attach(Object.assign({ app: router }, require('../routes/auth/transfer_token_in')));
 walletHandlers.attach(Object.assign({ app: router }, require('../routes/auth/transfer_token_out')));
 walletHandlers.attach(Object.assign({ app: router }, require('../routes/auth/transfer_asset_out')));
 walletHandlers.attach(Object.assign({ app: router }, require('../routes/auth/transfer_asset_in')));
-walletHandlers.attach(
-  Object.assign({ app: router }, require('../routes/auth/transfer_token_asset_in'))
-);
-walletHandlers.attach(
-  Object.assign({ app: router }, require('../routes/auth/transfer_token_asset_out'))
-);
+walletHandlers.attach(Object.assign({ app: router }, require('../routes/auth/transfer_token_asset_in')));
+walletHandlers.attach(Object.assign({ app: router }, require('../routes/auth/transfer_token_asset_out')));
 walletHandlers.attach(Object.assign({ app: router }, require('../routes/auth/consume_asset')));
 walletHandlers.attach(Object.assign({ app: router }, require('../routes/auth/acquire_asset')));
 walletHandlers.attach(Object.assign({ app: router }, require('../routes/auth/exchange')));
 swapHandlers.attach(Object.assign({ app: router }, require('../routes/auth/pickup_swap')));
 swapHandlers.attach(Object.assign({ app: router }, require('../routes/auth/swap_badge')));
 swapHandlers.attach(Object.assign({ app: router }, require('../routes/auth/swap_badges')));
-swapHandlers.attach(
-  Object.assign({ app: router, signedResponse: true }, require('../routes/auth/swap_token'))
-);
+swapHandlers.attach(Object.assign({ app: router, signedResponse: true }, require('../routes/auth/swap_token')));
 swapHandlers.attach(Object.assign({ app: router }, require('../routes/auth/swap_ticket')));
 swapHandlers.attach(Object.assign({ app: router }, require('../routes/auth/swap_certificate')));
-agentHandlers.attach(Object.assign({ app: router }, require('../routes/auth/profile'))); // we can reuse something here
+agentHandlers.attach(Object.assign({ app: router }, require('../routes/auth/claim_profile'))); // we can reuse something here
 
 require('../routes/session').init(router);
 require('../routes/orders').init(router);

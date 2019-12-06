@@ -17,6 +17,7 @@ import { setToken } from '../libs/auth';
 import AgentButton from '../components/auth/auth/agent';
 import ConsumeAssetButton from '../components/auth/consume_asset';
 import AcquireMovieTicket from '../components/auth/acquire_ticket';
+import ClaimSignature from '../components/auth/claim_signature';
 import ErrorButton from '../components/auth/auth/error';
 import Exchange from '../components/auth/exchange';
 import FundTbaButton from '../components/auth/fund_tba';
@@ -227,6 +228,9 @@ export default function IndexPage() {
                 <ProfileButton {...session.value} />
                 <AgentButton {...session.value} />
                 <ErrorButton {...session.value} />
+                <ClaimSignature {...session.value} type="transaction" />
+                <ClaimSignature {...session.value} type="text" />
+                <ClaimSignature {...session.value} type="html" />
               </div>
             </section>
             <section className="section">

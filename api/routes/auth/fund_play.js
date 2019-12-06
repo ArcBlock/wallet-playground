@@ -5,7 +5,7 @@ const { fromAddress } = require('@arcblock/forge-wallet');
 const env = require('../../libs/env');
 
 module.exports = {
-  action: 'checkin',
+  action: 'fund_play',
   claims: {
     signature: async ({ extraParams: { locale } }) => {
       const { state } = await ForgeSDK.getForgeState({ conn: env.chainId });
