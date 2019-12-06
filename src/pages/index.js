@@ -26,7 +26,7 @@ import ProfileButton from '../components/auth/auth/profile';
 import SwapTokenButton from '../components/auth/swap_token';
 import BuyBadgeButton from '../components/auth/swap_badge';
 import SwapBadgesButton from '../components/auth/swap_badges';
-import SwapAssetsButton from '../components/auth/swap_assets';
+// import SwapAssetsButton from '../components/auth/swap_assets';
 import BuyTicketButton from '../components/auth/swap_ticket';
 import CertificateButton from '../components/auth/swap_certificate';
 import TransferTokenOut from '../components/auth/transfer_token_out';
@@ -107,8 +107,6 @@ export default function IndexPage() {
                 <SwapTokenButton {...session.value} action="sell" />
                 <SwapBadgesButton {...session.value} action="buy" />
                 <SwapBadgesButton {...session.value} action="sell" />
-                <SwapAssetsButton {...session.value} action="buy" />
-                <SwapAssetsButton {...session.value} action="sell" />
               </div>
             </section>
             <section className="section">
