@@ -26,10 +26,10 @@ import DidAddress from '@arcblock/did-react/lib/Address';
 import Layout from '../components/layout';
 import sdk from '../libs/sdk';
 import api from '../libs/api';
-import env from '../libs/env';
 
-const appChainExplorer = env.chainHost.replace('/api', '/node/explorer');
-const assetChainExplorer = env.assetChainHost.replace('/api', '/node/explorer');
+function getChainExplorerAddress(url = '') {
+  return url.replace('/api', '/node/explorer');
+}
 
 async function fetchOrders() {
   const { data: orders } = await api.get('/api/orders');
@@ -119,7 +119,7 @@ export default function OrdersPage() {
     );
   }
 
-  const { orders, appToken, assetToken } = state.value;
+  const { orders, tokenInfo } = state.value;
 
   return (
     <Layout title="Orders">
@@ -141,7 +141,8 @@ export default function OrdersPage() {
           </TableHead>
           <TableBody>
             {orders.map(x => (
-              <TableRow key={x.id}>
+              // eslint-disable-next-line
+              <TableRow key={x._id}>
                 <TableCell>
                   <ClickToCopy content={x.traceId}>
                     <TextCollapse maxWidth={90}>{x.traceId}</TextCollapse>
@@ -149,22 +150,28 @@ export default function OrdersPage() {
                 </TableCell>
                 <TableCell>
                   {x.offerToken > 0 &&
-                    `${sdk.Util.fromUnitToToken(x.offerToken, appToken.decimal)} ${
-                      appToken.symbol
+                    `${sdk.Util.fromUnitToToken(x.offerToken, tokenInfo[x.offerChainId].decimal)} ${
+                      tokenInfo[x.offerChainId].symbol
                     }`}
                   {x.offerAssets.map(asset => (
-                    <Link href={`${appChainExplorer}/assets/${asset}`} target="_blank">
+                    <Link
+                      key={asset}
+                      href={`${getChainExplorerAddress(x.offerChainHost)}/assets/${asset}`}
+                      target="_blank">
                       <DidAddress copyable={false}>{asset}</DidAddress>
                     </Link>
                   ))}
                 </TableCell>
                 <TableCell>
                   {x.demandToken > 0 &&
-                    `${sdk.Util.fromUnitToToken(x.demandToken, assetToken.decimal)} ${
-                      assetToken.symbol
+                    `${sdk.Util.fromUnitToToken(x.demandToken, tokenInfo[x.demandChainId].decimal)} ${
+                      tokenInfo[x.demandChainId].symbol
                     }`}
                   {x.demandAssets.map(asset => (
-                    <Link href={`${assetChainExplorer}/assets/${asset}`} target="_blank">
+                    <Link
+                      key={asset}
+                      href={`${getChainExplorerAddress(x.demandChainHost)}/assets/${asset}`}
+                      target="_blank">
                       <DidAddress copyable={false}>{asset}</DidAddress>
                     </Link>
                   ))}
