@@ -20,6 +20,7 @@ export default function TransferTokenOut({ token }) {
           responsive
           action="transfer_token_out"
           checkFn={api.get}
+          checkTimeout={5 * 60 * 1000}
           onClose={() => setOpen()}
           onSuccess={() => window.location.reload()}
           messages={{
