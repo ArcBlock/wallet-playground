@@ -1,47 +1,37 @@
 /* eslint-disable no-console */
 const ForgeSDK = require('@arcblock/forge-sdk');
 const { toTypeInfo } = require('@arcblock/did');
+const { wallet } = require('../../libs/auth');
 
 module.exports = {
-  action: 'claim_signature',
+  action: 'claim_create_did',
+
+  authPrincipal: {
+    description: 'Please generate a new application did',
+    declareParams: {
+      moniker: 'user_application',
+      issuer: wallet.address,
+    },
+    targetType: {
+      role: 'application',
+      hash: 'sha3',
+      key: 'ed25519',
+    },
+  },
+
   claims: {
-    signature: async ({ userDid, userPk, extraParams: { type } }) => {
+    signature: async ({ userDid, userPk }) => {
       const params = {
-        transaction: {
-          type: 'DeclareTx',
-          data: {
-            itx: { moniker: 'wangshijun' },
-          },
-        },
-
-        text: {
-          type: 'mime::text/plain',
-          data: JSON.stringify({ userDid, userPk }, null, 2),
-        },
-
-        html: {
-          type: 'mime::text/html',
-          data: `<div>
-  <h2 style="color:red;font-weight:bold;border-bottom:1px solid blue;">This is title</h2>
-  <ul>
-    <li>Item 1</li>
-    <li>Item 2</li>
-    <li>Item 3</li>
-  </ul>
-</div>`,
-        },
+        type: 'mime::text/plain',
+        data: JSON.stringify({ userDid, userPk }, null, 2),
       };
 
-      if (!params[type]) {
-        throw new Error(`Unsupported signature type ${type}`);
-      }
-
-      return Object.assign({ description: `Please sign the ${type}` }, params[type]);
+      return Object.assign({ description: 'Please sign the text' }, params);
     },
   },
 
   onAuth: async ({ userDid, userPk, claims }) => {
-    console.log('claim.signature.onAuth', { userPk, userDid });
+    console.log('claim.create_did.onAuth', { userPk, userDid });
 
     const type = toTypeInfo(userDid);
     const user = ForgeSDK.Wallet.fromPublicKey(userPk, type);
