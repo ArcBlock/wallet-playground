@@ -14,7 +14,7 @@ const bodyParser = require('body-parser');
 const bearerToken = require('express-bearer-token');
 const compression = require('compression');
 const ForgeSDK = require('@arcblock/forge-sdk');
-const EventServer = require('@arcblock/did-auth-event-server');
+const EventServer = require('@arcblock/event-server');
 
 // ------------------------------------------------------------------------------
 // Routes: due to limitations of netlify functions, we need to import routes here
@@ -49,12 +49,11 @@ mongoose.connection.on('reconnected', () => {
 // Create and config express application
 const app = express();
 const server = http.createServer(app);
-const eventServer = new EventServer();
-eventServer.addTopic('did-auth');
-eventServer.attach(server);
+const eventServer = new EventServer(server, ['auth']);
 
-walletHandlers.on('scanned', data => eventServer.dispatch('did-auth', data));
-walletHandlers.on('succeed', data => eventServer.dispatch('did-auth', data));
+walletHandlers.on('scanned', data => eventServer.dispatch('auth', data));
+walletHandlers.on('succeed', data => eventServer.dispatch('auth', data));
+walletHandlers.on('failed', data => eventServer.dispatch('auth', data));
 
 app.use(cookieParser());
 app.use(bodyParser.json({ limit: '1 mb' }));
