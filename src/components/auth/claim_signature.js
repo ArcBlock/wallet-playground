@@ -23,6 +23,7 @@ export default function SignatureClaim({ type }) {
           action="claim_signature"
           extraParams={{ type }}
           checkFn={api.get}
+          socketUrl={api.socketUrl}
           onClose={() => setOpen()}
           onSuccess={() => window.location.reload()}
           messages={{

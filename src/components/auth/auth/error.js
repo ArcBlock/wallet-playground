@@ -19,6 +19,7 @@ export default function AuthPrincipal() {
           responsive
           action="error"
           checkFn={api.get}
+          socketUrl={api.socketUrl}
           checkTimeout={5 * 60 * 1000}
           onClose={() => setOpen()}
           onSuccess={() => setOpen(false)}

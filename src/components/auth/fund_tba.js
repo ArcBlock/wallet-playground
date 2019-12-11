@@ -34,6 +34,7 @@ export default function Fund({ user, assetToken }) {
           responsive
           action="fund_tba"
           checkFn={api.get}
+          socketUrl={api.socketUrl}
           onClose={() => setOpen()}
           onSuccess={() => window.location.reload()}
           messages={{

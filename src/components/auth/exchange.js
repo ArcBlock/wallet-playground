@@ -40,6 +40,7 @@ export default function Exchange({ payType, payCount = 1, receiveType, receiveCo
           action="exchange"
           checkFn={api.get}
           onClose={() => setOpen()}
+          socketUrl={api.socketUrl}
           onSuccess={() => window.location.reload()}
           messages={{
             title: 'Exchange Required',

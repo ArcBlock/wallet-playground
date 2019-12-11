@@ -19,6 +19,7 @@ export default function CreateDid() {
           responsive
           action="claim_create_did"
           checkFn={api.get}
+          socketUrl={api.socketUrl}
           onClose={() => setOpen()}
           onSuccess={() => setOpen(false)}
           messages={{

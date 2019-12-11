@@ -16,4 +16,7 @@ axios.interceptors.request.use(
   error => Promise.reject(error)
 );
 
+axios.socketUrl = env.baseUrl.replace('https://', 'wss://').replace('http://', 'ws://');
+console.log('socketUrl', axios.socketUrl);
+
 export default axios;

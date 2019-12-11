@@ -26,6 +26,7 @@ export default function ConsumeAsset({ count }) {
           responsive
           action="consume_asset"
           checkFn={api.get}
+          socketUrl={api.socketUrl}
           onClose={() => setOpen()}
           onSuccess={() => window.location.reload()}
           messages={{
