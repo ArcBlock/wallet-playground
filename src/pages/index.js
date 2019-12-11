@@ -22,6 +22,7 @@ import ErrorButton from '../components/auth/auth/error';
 import Exchange from '../components/auth/exchange';
 import FundTbaButton from '../components/auth/fund_tba';
 import FundPlayButton from '../components/auth/fund_play';
+import CreateDidButton from '../components/auth/auth/create_did';
 import ProfileButton from '../components/auth/auth/profile';
 import SwapTokenButton from '../components/auth/swap_token';
 import BuyBadgeButton from '../components/auth/swap_badge';
@@ -165,6 +166,7 @@ export default function IndexPage() {
                 <ProfileButton {...session.value} />
                 <AgentButton {...session.value} />
                 <ErrorButton {...session.value} />
+                <CreateDidButton {...session.value} />
                 <ClaimSignature {...session.value} type="transaction" />
                 <ClaimSignature {...session.value} type="text" />
                 <ClaimSignature {...session.value} type="html" />
