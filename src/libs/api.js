@@ -17,6 +17,6 @@ axios.interceptors.request.use(
 );
 
 const url = env.baseUrl.replace('https://', 'wss://').replace('http://', 'ws://');
-axios.socketUrl = `${url}/websocket`;
+axios.socketUrl = `${url}/events`;
 
 export default axios;
