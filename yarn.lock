@@ -55,10 +55,10 @@
   resolved "https://registry.npm.taobao.org/@arcblock/did-auth-storage/download/@arcblock/did-auth-storage-1.0.13.tgz#acc03e51cfcc38d52d691935b10ca421638fd494"
   integrity sha1-rMA+Uc/MONUtaRk1sQykIWOP1JQ=
 
-"@arcblock/did-auth@^1.0.13":
-  version "1.0.13"
-  resolved "https://registry.npm.taobao.org/@arcblock/did-auth/download/@arcblock/did-auth-1.0.13.tgz#10e9e4354667ffb5c1a2f842f75bccc121bb1276"
-  integrity sha1-EOnkNUZn/7XBovhC91vMwSG7EnY=
+"@arcblock/did-auth@^1.0.14":
+  version "1.0.14"
+  resolved "https://registry.npm.taobao.org/@arcblock/did-auth/download/@arcblock/did-auth-1.0.14.tgz#0ce7ca4185dabda1f7b4e0c4d910d579c3081475"
+  integrity sha1-DOfKQYXavaH3tODE2RDVecMIFHU=
   dependencies:
     "@arcblock/did" "^1.0.13"
     "@arcblock/forge-sdk" "^1.0.13"
@@ -72,13 +72,14 @@
     json-stable-stringify "^1.0.1"
     lodash.get "^4.4.2"
 
-"@arcblock/did-react@^0.50.0":
-  version "0.50.0"
-  resolved "https://registry.yarnpkg.com/@arcblock/did-react/-/did-react-0.50.0.tgz#1e5260778f66afc5bbde6186ee594fb93990cbe4"
-  integrity sha512-h8pSlrjkWdPYEP7x/CyGHjytIhWI0716JTXgmCXsmLm3h2AD1rhjuaczx4ZZISh13lWo/PZwNnLmTC3T0JxhpQ==
+"@arcblock/did-react@^0.51.0":
+  version "0.51.0"
+  resolved "https://registry.npm.taobao.org/@arcblock/did-react/download/@arcblock/did-react-0.51.0.tgz#876bf7afa5318f48ac2d87c6ce18cba61e482eac"
+  integrity sha1-h2v3r6Uxj0isLYfGzhjLph5ILqw=
   dependencies:
-    "@arcblock/react-hooks" "^0.50.0"
-    "@arcblock/ux" "^0.50.0"
+    "@arcblock/event-client" "^1.0.13"
+    "@arcblock/react-hooks" "^0.51.0"
+    "@arcblock/ux" "^0.51.0"
     ismobilejs "^0.5.2"
     qrcode.react "^0.9.3"
     react-load-script "^0.0.6"
@@ -105,6 +106,26 @@
     bn.js "^5.0.0"
     debug "^4.1.1"
     lodash "^4.17.14"
+
+"@arcblock/event-client@^1.0.13":
+  version "1.0.13"
+  resolved "https://registry.npm.taobao.org/@arcblock/event-client/download/@arcblock/event-client-1.0.13.tgz#bbe339f662e7ca6c568518c4880726545b27b88f"
+  integrity sha1-u+M59mLnymxWhRjEiAcmVFsnuI8=
+  dependencies:
+    debug "^4.1.1"
+    isomorphic-ws "^4.0.1"
+    phoenix "^1.4.11"
+    wolfy87-eventemitter "^5.2.5"
+    ws "^7.2.0"
+
+"@arcblock/event-server@^1.0.13":
+  version "1.0.13"
+  resolved "https://registry.npm.taobao.org/@arcblock/event-server/download/@arcblock/event-server-1.0.13.tgz#4f0cba74065191376605705ecea22c09c6e293ba"
+  integrity sha1-Twy6dAZRkTdmBXBezqIsCcbik7o=
+  dependencies:
+    debug "^4.1.1"
+    uuid "^3.3.3"
+    ws "^7.2.0"
 
 "@arcblock/forge-message@^1.0.13":
   version "1.0.13"
@@ -202,10 +223,10 @@
     randombytes "^2.0.6"
     tweetnacl "^1.0.1"
 
-"@arcblock/react-hooks@^0.50.0":
-  version "0.50.0"
-  resolved "https://registry.yarnpkg.com/@arcblock/react-hooks/-/react-hooks-0.50.0.tgz#81c9b4266f3f0eee53f78389c2901279333d6ca0"
-  integrity sha512-GJTHCMlfITgNXhEpVuNex0XukzqqsXUNs0a2trNw9SMl097rWWyjpMSm8Dlbru+Ez5/TNDQkCY81BqlU65HF8Q==
+"@arcblock/react-hooks@^0.51.0":
+  version "0.51.0"
+  resolved "https://registry.npm.taobao.org/@arcblock/react-hooks/download/@arcblock/react-hooks-0.51.0.tgz#dc0b600d78b24d9fce0caf4ca9f4eb154c217db1"
+  integrity sha1-3AtgDXiyTZ/ODK9MqfTrFUwhfbE=
   dependencies:
     event-target-shim "^5.0.1"
     qrcode.react "^0.9.3"
@@ -251,12 +272,12 @@
     "@arcblock/forge-sdk" "^1.0.13"
     debug "^4.1.1"
 
-"@arcblock/ux@^0.50.0":
-  version "0.50.0"
-  resolved "https://registry.yarnpkg.com/@arcblock/ux/-/ux-0.50.0.tgz#5cef50a1b00444814cf11ac7bf9361cd32122f6f"
-  integrity sha512-u3pUv8DzJBwhZIKP+W0fvkNrc6pscwy1bHi0nEunsVW6GLXIxWjEo+XMA+z+RhF82ysXmhgHvQPCbxHte8lKbQ==
+"@arcblock/ux@^0.51.0":
+  version "0.51.0"
+  resolved "https://registry.npm.taobao.org/@arcblock/ux/download/@arcblock/ux-0.51.0.tgz#20335db1ead7d6062c13b9927508d5d56bd24f34"
+  integrity sha1-IDNdserX1gYsE7mSdQjV1WvSTzQ=
   dependencies:
-    "@arcblock/react-hooks" "^0.50.0"
+    "@arcblock/react-hooks" "^0.51.0"
     "@babel/plugin-syntax-dynamic-import" "^7.2.0"
     copy-to-clipboard "^3.2.0"
     d3-geo "^1.11.6"
@@ -2235,7 +2256,7 @@ async-each@^1.0.1:
   resolved "https://registry.yarnpkg.com/async-each/-/async-each-1.0.3.tgz#b727dbf87d7651602f06f4d4ac387f47d91b0cbf"
   integrity sha512-z/WhQ5FPySLdvREByI2vZiTWwCnF0moMJ1hK9YQwDTHKh6I7/uSckMetoRGb5UBZPC1z0jlw+n/XCgjeH7y1AQ==
 
-async-limiter@~1.0.0:
+async-limiter@^1.0.0, async-limiter@~1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/async-limiter/-/async-limiter-1.0.1.tgz#dd379e94f0db8310b08291f9d64c3209766617fd"
   integrity sha512-csOlWGAcRFJaI6m+F2WKdnMKr4HhdhFVBk0H/QbJFMCr+uO2kwohwXQPxw/9OCxp05r5ghVBFSyioixx3gfkNQ==
@@ -6358,6 +6379,11 @@ isobject@^3.0.0, isobject@^3.0.1:
   resolved "https://registry.yarnpkg.com/isobject/-/isobject-3.0.1.tgz#4e431e92b11a9731636aa1f9c8d1ccbcfdab78df"
   integrity sha1-TkMekrEalzFjaqH5yNHMvP2reN8=
 
+isomorphic-ws@^4.0.1:
+  version "4.0.1"
+  resolved "https://registry.npm.taobao.org/isomorphic-ws/download/isomorphic-ws-4.0.1.tgz#55fd4cd6c5e6491e76dc125938dd863f5cd4f2dc"
+  integrity sha1-Vf1M1sXmSR523BJZON2GP1zU8tw=
+
 isstream@~0.1.2:
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/isstream/-/isstream-0.1.2.tgz#47e63f7af55afa6f92e1500e690eb8b8529c099a"
@@ -8711,6 +8737,11 @@ phoenix-channels@^1.0.0:
   integrity sha1-TeOno0J0g97/xJCNj+yscl2wbWo=
   dependencies:
     websocket "^1.0.24"
+
+phoenix@^1.4.11:
+  version "1.4.11"
+  resolved "https://registry.npm.taobao.org/phoenix/download/phoenix-1.4.11.tgz#3e70cd2461600ef3b0d4308e8fef7d2005fe000a"
+  integrity sha1-PnDNJGFgDvOw1DCOj+99IAX+AAo=
 
 picomatch@^2.0.5:
   version "2.0.7"
@@ -11796,7 +11827,7 @@ utils-merge@1.0.1:
   resolved "https://registry.yarnpkg.com/utils-merge/-/utils-merge-1.0.1.tgz#9f95710f50a267947b2ccc124741c1028427e713"
   integrity sha1-n5VxD1CiZ5R7LMwSR0HBAoQn5xM=
 
-uuid@^3.0.1, uuid@^3.3.2:
+uuid@^3.0.1, uuid@^3.3.2, uuid@^3.3.3:
   version "3.3.3"
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-3.3.3.tgz#4568f0216e78760ee1dbf3a4d2cf53e224112866"
   integrity sha512-pW0No1RGHgzlpHJO1nsVrHKpOEIxkGg1xB+v0ZmdNH5OAeAwzAVrCnI2/6Mtx+Uys6iaylxa+D3g4j63IKKjSQ==
@@ -12344,6 +12375,13 @@ ws@^6.1.2:
   integrity sha512-GIyAXC2cB7LjvpgMt9EKS2ldqr0MTrORaleiOno6TweZ6r3TKtoFQWay/2PceJ3RuBasOHzXNn5Lrw1X0bEjqA==
   dependencies:
     async-limiter "~1.0.0"
+
+ws@^7.2.0:
+  version "7.2.0"
+  resolved "https://registry.npm.taobao.org/ws/download/ws-7.2.0.tgz?cache=0&sync_timestamp=1571495118606&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fws%2Fdownload%2Fws-7.2.0.tgz#422eda8c02a4b5dba7744ba66eebbd84bcef0ec7"
+  integrity sha1-Qi7ajAKktdundEumbuu9hLzvDsc=
+  dependencies:
+    async-limiter "^1.0.0"
 
 xdg-basedir@^3.0.0:
   version "3.0.0"

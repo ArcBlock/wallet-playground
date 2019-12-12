@@ -33,6 +33,7 @@ export default function SwapButton({ assetToken }) {
           action="swap-badge"
           extraParams={{ traceId }}
           checkFn={api.get}
+          socketUrl={api.socketUrl}
           checkTimeout={5 * 60 * 1000}
           onClose={() => setOpen(false)}
           onSuccess={() => window.location.reload()}

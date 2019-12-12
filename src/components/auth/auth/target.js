@@ -5,36 +5,33 @@ import useToggle from 'react-use/lib/useToggle';
 import Auth from '@arcblock/did-react/lib/Auth';
 import Button from '@arcblock/ux/lib/Button';
 
-import api from '../../libs/api';
+import api from '../../../libs/api';
 
-export default function TransferTokenOut() {
+export default function TargetDid() {
   const [isOpen, setOpen] = useToggle(false);
   return (
     <React.Fragment>
-      <Button
-        color="secondary"
-        variant="contained"
-        size="large"
-        className="action"
-        onClick={() => setOpen(true)}>
-        Send 1 Asset to Application
+      <Button color="secondary" variant="contained" size="large" className="action" onClick={() => setOpen(true)}>
+        Proof of DID Holding
       </Button>
       {isOpen && (
         <Auth
           responsive
-          action="transfer_asset_out"
+          action="claim_target"
           checkFn={api.get}
           socketUrl={api.socketUrl}
           onClose={() => setOpen()}
-          onSuccess={() => window.location.reload()}
+          onSuccess={() => setOpen(false)}
           messages={{
-            title: 'Transfer Required',
-            scan: 'Scan QR code to complete asset transfer',
+            title: 'Create DID',
+            scan: 'Scan QR code to get the did spec',
             confirm: 'Confirm on your ABT Wallet',
-            success: 'Asset transfer sent!',
+            success: 'Application Created',
           }}
         />
       )}
     </React.Fragment>
   );
 }
+
+TargetDid.propTypes = {};

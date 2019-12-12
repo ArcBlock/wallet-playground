@@ -49,6 +49,7 @@ export default function CertificateButton({ assetToken, action }) {
           action="swap-certificate"
           extraParams={{ traceId, action }}
           checkFn={api.get}
+          socketUrl={api.socketUrl}
           checkTimeout={5 * 60 * 1000}
           onClose={() => setOpen(false)}
           onSuccess={() => setOpen(false)}

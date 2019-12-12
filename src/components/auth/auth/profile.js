@@ -19,6 +19,7 @@ export default function AuthPrincipal() {
           responsive
           action="profile"
           checkFn={api.get}
+          socketUrl={api.socketUrl}
           onClose={() => setOpen()}
           checkTimeout={5 * 60 * 1000}
           onSuccess={() => window.location.reload()}

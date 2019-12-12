@@ -16,4 +16,7 @@ axios.interceptors.request.use(
   error => Promise.reject(error)
 );
 
+const url = env.baseUrl.replace('https://', 'wss://').replace('http://', 'ws://');
+axios.socketUrl = `${url}/websocket`;
+
 export default axios;

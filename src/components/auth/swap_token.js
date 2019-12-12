@@ -41,6 +41,7 @@ export default function SwapButton({ token, assetToken, action }) {
           action="swap-token"
           extraParams={{ traceId, action }}
           checkFn={api.get}
+          socketUrl={api.socketUrl}
           checkTimeout={5 * 60 * 1000}
           onClose={() => setOpen(false)}
           onSuccess={() => (window.location.href = '/orders')}

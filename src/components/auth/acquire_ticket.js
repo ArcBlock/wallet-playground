@@ -26,6 +26,7 @@ export default function AcquireMovieTicket({ count }) {
           responsive
           action="acquire_asset"
           checkFn={api.get}
+          socketUrl={api.socketUrl}
           onClose={() => setOpen()}
           onSuccess={() => window.location.reload()}
           messages={{

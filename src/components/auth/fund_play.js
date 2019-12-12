@@ -34,6 +34,7 @@ export default function FundPlay({ user, token }) {
           responsive
           action="fund_play"
           checkFn={api.get}
+          socketUrl={api.socketUrl}
           onClose={() => setOpen()}
           onSuccess={() => window.location.reload()}
           messages={{

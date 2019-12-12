@@ -3,6 +3,7 @@
 require('../libs/contracts/create_movie_ticket_contract/.compiled/create_movie_ticket/javascript/index');
 const fs = require('fs');
 const path = require('path');
+const http = require('http');
 const cors = require('cors');
 const morgan = require('morgan');
 const express = require('express');
@@ -13,6 +14,7 @@ const bodyParser = require('body-parser');
 const bearerToken = require('express-bearer-token');
 const compression = require('compression');
 const ForgeSDK = require('@arcblock/forge-sdk');
+const EventServer = require('@arcblock/event-server');
 
 // ------------------------------------------------------------------------------
 // Routes: due to limitations of netlify functions, we need to import routes here
@@ -45,13 +47,23 @@ mongoose.connection.on('reconnected', () => {
 });
 
 // Create and config express application
-const server = express();
-server.use(cookieParser());
-server.use(bodyParser.json({ limit: '1 mb' }));
-server.use(bodyParser.urlencoded({ extended: true, limit: '1 mb' }));
-server.use(cors());
+const app = express();
+const server = http.createServer(app);
 
-server.use(
+// Only enable socket server in production, since live reload will also have socket server
+if (isProduction) {
+  const eventServer = new EventServer(server, ['auth']);
+  walletHandlers.on('scanned', data => eventServer.dispatch('auth', data));
+  walletHandlers.on('succeed', data => eventServer.dispatch('auth', data));
+  walletHandlers.on('failed', data => eventServer.dispatch('auth', data));
+}
+
+app.use(cookieParser());
+app.use(bodyParser.json({ limit: '1 mb' }));
+app.use(bodyParser.urlencoded({ extended: true, limit: '1 mb' }));
+app.use(cors());
+
+app.use(
   morgan((tokens, req, res) => {
     const log = [
       tokens.method(req, res),
@@ -72,8 +84,8 @@ server.use(
   })
 );
 
-server.use(bearerToken());
-server.use((req, res, next) => {
+app.use(bearerToken());
+app.use((req, res, next) => {
   if (!req.token) {
     next();
     return;
@@ -98,6 +110,8 @@ walletHandlers.attach(Object.assign({ app: router }, require('../routes/auth/fun
 walletHandlers.attach(Object.assign({ app: router }, require('../routes/auth/fund_tba')));
 walletHandlers.attach(Object.assign({ app: router }, require('../routes/auth/claim_profile')));
 walletHandlers.attach(Object.assign({ app: router }, require('../routes/auth/claim_signature')));
+walletHandlers.attach(Object.assign({ app: router }, require('../routes/auth/claim_create_did')));
+walletHandlers.attach(Object.assign({ app: router }, require('../routes/auth/claim_target')));
 walletHandlers.attach(Object.assign({ app: router }, require('../routes/auth/error')));
 walletHandlers.attach(Object.assign({ app: router }, require('../routes/auth/transfer_token_in')));
 walletHandlers.attach(Object.assign({ app: router }, require('../routes/auth/transfer_token_out')));
@@ -145,28 +159,28 @@ ForgeSDK.getAccountState({ address: wallet.address })
 // ------------------------------------------------------
 if (isProduction) {
   if (process.env.NETLIFY && JSON.parse(process.env.NETLIFY)) {
-    server.use('/.netlify/functions/app', router);
+    app.use('/.netlify/functions/app', router);
   } else {
-    server.use(compression());
-    server.use(router);
-    server.use(express.static(path.resolve(__dirname, '../../build'), { maxAge: '365d' }));
-    server.get('*', (req, res) => {
+    app.use(compression());
+    app.use(router);
+    app.use(express.static(path.resolve(__dirname, '../../build'), { maxAge: '365d' }));
+    app.get('*', (req, res) => {
       res.send(fs.readFileSync(path.resolve(__dirname, '../../build/index.html')).toString());
     });
   }
-  server.use((req, res) => {
+  app.use((req, res) => {
     res.status(404).send('404 NOT FOUND');
   });
 
   // eslint-disable-next-line no-unused-vars
-  server.use((err, req, res, next) => {
+  app.use((err, req, res, next) => {
     console.error(err.stack);
     res.status(500).send('Something broke!');
   });
 } else {
-  server.use(router);
+  app.use(router);
 }
 
 // Make it serverless
-exports.handler = serverless(server);
+exports.handler = serverless(app);
 exports.server = server;

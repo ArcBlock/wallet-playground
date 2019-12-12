@@ -25,6 +25,7 @@ export default function TransferTokenAssetOut({ token }) {
           responsive
           action="transfer_token_asset_out"
           checkFn={api.get}
+          socketUrl={api.socketUrl}
           onClose={() => setOpen()}
           onSuccess={() => window.location.reload()}
           messages={{
