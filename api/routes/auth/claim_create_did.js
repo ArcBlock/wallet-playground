@@ -58,6 +58,9 @@ module.exports = {
     if (!state) {
       throw new Error('The created DID is not created on chain as required');
     }
+    if (state.issuer !== wallet.address) {
+      throw new Error('The created DID does not belong to expected issuer');
+    }
 
     // 3. we need to ensure that the did has the same signature
     const w = ForgeSDK.Wallet.fromPublicKey(userPk, type);

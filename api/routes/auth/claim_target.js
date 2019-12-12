@@ -37,17 +37,22 @@ module.exports = {
     },
   ],
 
-  onAuth: async ({ userDid, userPk, claims }) => {
-    console.log('claim.create_did.onAuth', { userPk, userDid });
-
-    const type = toTypeInfo(userDid);
-    const user = ForgeSDK.Wallet.fromPublicKey(userPk, type);
+  onAuth: async ({ userDid, userPk, sessionDid, claims }) => {
     const claim = claims.find(x => x.type === 'signature');
+    console.log('claim.create_did.onAuth', { userPk, userDid, claim });
 
-    if (user.verify(claim.origin, claim.sig) === false) {
-      throw new Error('签名错误');
+    const user = await User.findOne({ did: sessionDid });
+    if (!user) {
+      throw new Error('You are not a valid user, please login and retry');
+    }
+    if (user.extraDid.includes(userDid) === false) {
+      throw new Error('You are providing an invalid DID');
     }
 
-    return '签名验证成功';
+    const type = toTypeInfo(userDid);
+    const w = ForgeSDK.Wallet.fromPublicKey(userPk, type);
+    if (w.verify(claim.origin, claim.sig) === false) {
+      throw new Error('签名错误');
+    }
   },
 };
