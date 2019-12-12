@@ -23,6 +23,7 @@ const { decode } = require('../libs/jwt');
 const { walletHandlers, swapHandlers, agentHandlers, wallet } = require('../libs/auth');
 
 const isProduction = process.env.NODE_ENV === 'production';
+const isNetlify = process.env.NETLIFY && JSON.parse(process.env.NETLIFY);
 
 if (!process.env.MONGO_URI) {
   throw new Error('Cannot start application without process.env.MONGO_URI');
@@ -51,7 +52,7 @@ const app = express();
 const server = http.createServer(app);
 
 // Only enable socket server in production, since live reload will also have socket server
-if (isProduction) {
+if (isProduction && !isNetlify) {
   const eventServer = new EventServer(server, ['auth']);
   walletHandlers.on('scanned', data => eventServer.dispatch('auth', data));
   walletHandlers.on('succeed', data => eventServer.dispatch('auth', data));
@@ -158,7 +159,7 @@ ForgeSDK.getAccountState({ address: wallet.address })
 // This is required by netlify functions
 // ------------------------------------------------------
 if (isProduction) {
-  if (process.env.NETLIFY && JSON.parse(process.env.NETLIFY)) {
+  if (isNetlify) {
     app.use('/.netlify/functions/app', router);
   } else {
     app.use(compression());
