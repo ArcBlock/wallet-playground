@@ -104,6 +104,7 @@ export default function Header() {
           responsive
           action="login"
           checkFn={api.get}
+          socketUrl={api.socketUrl}
           onClose={() => toggle()}
           onSuccess={onLogin}
           messages={{

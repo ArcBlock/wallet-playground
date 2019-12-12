@@ -207,6 +207,7 @@ export default function IndexPage() {
             responsive
             action="login"
             checkFn={api.get}
+            socketUrl={api.socketUrl}
             onClose={() => setOpen(false)}
             onSuccess={onLogin}
             messages={{

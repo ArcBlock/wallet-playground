@@ -49,11 +49,14 @@ mongoose.connection.on('reconnected', () => {
 // Create and config express application
 const app = express();
 const server = http.createServer(app);
-const eventServer = new EventServer(server, ['auth']);
 
-walletHandlers.on('scanned', data => eventServer.dispatch('auth', data));
-walletHandlers.on('succeed', data => eventServer.dispatch('auth', data));
-walletHandlers.on('failed', data => eventServer.dispatch('auth', data));
+// Only enable socket server in production, since live reload will also have socket server
+if (isProduction) {
+  const eventServer = new EventServer(server, ['auth']);
+  walletHandlers.on('scanned', data => eventServer.dispatch('auth', data));
+  walletHandlers.on('succeed', data => eventServer.dispatch('auth', data));
+  walletHandlers.on('failed', data => eventServer.dispatch('auth', data));
+}
 
 app.use(cookieParser());
 app.use(bodyParser.json({ limit: '1 mb' }));
