@@ -5,6 +5,7 @@ const UserSchema = new mongoose.Schema({
   name: { type: String, required: true },
   email: { type: String, default: '' },
   mobile: { type: String, default: '' },
+  extraDid: { type: Array, default: [] },
   createdAt: { type: Date },
   updatedAt: { type: Date },
 });

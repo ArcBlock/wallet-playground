@@ -1,46 +1,73 @@
 /* eslint-disable no-console */
 const ForgeSDK = require('@arcblock/forge-sdk');
 const { toTypeInfo } = require('@arcblock/did');
+const { types } = require('@arcblock/mcrypto');
 const { wallet } = require('../../libs/auth');
+const { User } = require('../../models');
 
 module.exports = {
   action: 'claim_create_did',
+  authPrincipal: false, // disable default auth principal
 
-  authPrincipal: {
-    description: 'Please generate a new application did',
-    declareParams: {
-      moniker: 'user_application',
-      issuer: wallet.address,
+  claims: [
+    {
+      authPrincipal: {
+        description: 'Please generate a new application did',
+        declareParams: {
+          moniker: 'user_application',
+          issuer: wallet.address,
+        },
+        targetType: {
+          role: 'application',
+          hash: 'sha3',
+          key: 'ed25519',
+        },
+      },
     },
-    targetType: {
-      role: 'application',
-      hash: 'sha3',
-      key: 'ed25519',
+    {
+      signature: async ({ userDid, userPk }) => {
+        const params = {
+          type: 'mime::text/plain',
+          data: JSON.stringify({ userDid, userPk }, null, 2),
+        };
+
+        return Object.assign({ description: 'Please sign the text' }, params);
+      },
     },
-  },
+  ],
 
-  claims: {
-    signature: async ({ userDid, userPk }) => {
-      const params = {
-        type: 'mime::text/plain',
-        data: JSON.stringify({ userDid, userPk }, null, 2),
-      };
-
-      return Object.assign({ description: 'Please sign the text' }, params);
-    },
-  },
-
-  onAuth: async ({ userDid, userPk, claims }) => {
-    console.log('claim.create_did.onAuth', { userPk, userDid });
-
-    const type = toTypeInfo(userDid);
-    const user = ForgeSDK.Wallet.fromPublicKey(userPk, type);
+  // eslint-disable-next-line object-curly-newline
+  onAuth: async ({ userDid, userPk, sessionDid, claims }) => {
     const claim = claims.find(x => x.type === 'signature');
+    console.log('claim.create_did.onAuth', { userPk, userDid, claim });
 
-    if (user.verify(claim.origin, claim.sig) === false) {
+    // 1. we need to ensure that the wallet is returning expected did type
+    const type = toTypeInfo(userDid);
+    if (type.role !== types.RoleType.ROLE_APPLICATION) {
+      throw new Error('The created DID must be an application DID');
+    }
+    if (type.hash !== types.HashType.SHA3) {
+      throw new Error('The created DID must use SHA3 256');
+    }
+    if (type.pk !== types.KeyType.ED25519) {
+      throw new Error('The created DID must use ED25519');
+    }
+
+    // 2. we need to ensure that the did is declared onchain
+    const { state } = await ForgeSDK.getAccountState({ address: userDid });
+    if (!state) {
+      throw new Error('The created DID is not created on chain as required');
+    }
+
+    // 3. we need to ensure that the did has the same signature
+    const w = ForgeSDK.Wallet.fromPublicKey(userPk, type);
+    if (w.verify(claim.origin, claim.sig) === false) {
       throw new Error('签名错误');
     }
 
-    return '签名验证成功';
+    // 4. save generated did to user session store
+    const user = await User.findOne({ did: sessionDid });
+    user.extraDid = [userDid].concat(Array.isArray(user.extraDid) ? user.extraDid : []);
+    await user.save();
   },
 };
