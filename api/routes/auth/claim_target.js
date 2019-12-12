@@ -7,7 +7,8 @@ module.exports = {
 
   authPrincipal: {
     description: 'Please select the required DID',
-    target: 'z1hD4gEPyPgvpPm8UfsWCVttwQV2C7m8uf9',
+    // target: 'z1hD4gEPyPgvpPm8UfsWCVttwQV2C7m8uf9',
+    target: 'zNKndybysMDXR7di6jj3ztLdVFPjw9gPv7tR',
   },
 
   claims: {
