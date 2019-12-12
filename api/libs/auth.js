@@ -31,6 +31,7 @@ if (env.chainHost) {
 }
 
 const wallet = fromSecretKey(process.env.APP_SK, type).toJSON();
+const isRestricted = process.env.APP_RESTRICTED_DECLARE && JSON.parse(process.env.APP_RESTRICTED_DECLARE);
 
 let icon = 'https://releases.arcblockio.cn/playground.png';
 if (process.env.STAGING && JSON.parse(process.env.STAGING)) {
@@ -47,6 +48,7 @@ const walletAuth = new WalletAuthenticator({
   chainInfo: {
     host: env.chainHost,
     id: env.chainId,
+    restrictedDeclare: isRestricted,
   },
 });
 
@@ -55,13 +57,13 @@ const agentAuth = new AgentAuthenticator({
   baseUrl: env.baseUrl,
   appInfo: {
     name: 'Agent Service',
-    description:
-      'This is a demo agent service that can do did-auth on be-half-of another application',
+    description: 'This is a demo agent service that can do did-auth on be-half-of another application',
     icon: 'https://releases.arcblock.io/agent.png',
   },
   chainInfo: {
     host: env.chainHost,
     id: env.chainId,
+    restrictedDeclare: isRestricted,
   },
 });
 
