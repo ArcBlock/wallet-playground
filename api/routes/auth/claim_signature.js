@@ -16,17 +16,17 @@ module.exports = {
 
         text: {
           type: 'mime::text/plain',
-          data: JSON.stringify({ userDid, userPk }, null, 2),
+          data: JSON.stringify({ userDid, userPk, random: Math.random() }, null, 2),
         },
 
         html: {
           type: 'mime::text/html',
           data: `<div>
-  <h2 style="color:red;font-weight:bold;border-bottom:1px solid blue;">This is title</h2>
+  <h2>This is title</h2>
   <ul>
-    <li>Item 1</li>
-    <li>Item 2</li>
-    <li>Item 3</li>
+    <li>User DID: ${userDid}</li>
+    <li>User PK: ${userPk}</li>
+    <li>Random: ${Math.random()}</li>
   </ul>
 </div>`,
         },
@@ -41,16 +41,15 @@ module.exports = {
   },
 
   onAuth: async ({ userDid, userPk, claims }) => {
-    console.log('claim.signature.onAuth', { userPk, userDid });
-
     const type = toTypeInfo(userDid);
     const user = ForgeSDK.Wallet.fromPublicKey(userPk, type);
     const claim = claims.find(x => x.type === 'signature');
 
+    console.log('claim.signature.onAuth', { userPk, userDid, claim });
+
+    // We do not need to hash the data when verifying
     if (user.verify(claim.origin, claim.sig) === false) {
       throw new Error('签名错误');
     }
-
-    return '签名验证成功';
   },
 };
