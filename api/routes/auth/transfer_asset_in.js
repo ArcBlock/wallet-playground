@@ -51,7 +51,7 @@ module.exports = {
       }
 
       const appWallet = ForgeSDK.Wallet.fromJSON(wallet);
-      const data = JSON.parse(ForgeSDK.Util.fromBase58(claim.data));
+      const data = JSON.parse(ForgeSDK.Util.fromBase58(claim.origin));
       const hash = await ForgeSDK.sendTransferTx({
         tx: {
           itx: {
