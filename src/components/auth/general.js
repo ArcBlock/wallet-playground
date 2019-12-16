@@ -8,9 +8,16 @@ import Button from '@arcblock/ux/lib/Button';
 import Alert from '../alert';
 import api from '../../libs/api';
 
+// eslint-disable-next-line object-curly-newline
 export default function GeneralAuthButton({ button, action, messages, extraParams }) {
   const [isOpen, setOpen] = useState(false);
   const [isComplete, setComplete] = useState(false);
+
+  const onClose = () => {
+    setOpen(false);
+    setComplete(false);
+  };
+
   return (
     <React.Fragment>
       <Button color="secondary" variant="contained" size="large" className="action" onClick={() => setOpen(true)}>
@@ -29,7 +36,7 @@ export default function GeneralAuthButton({ button, action, messages, extraParam
           messages={messages}
         />
       )}
-      {isComplete && <Alert onClose={() => setComplete(false)} message={messages.success} />}
+      {isComplete && <Alert onClose={onClose} message={messages.success} />}
     </React.Fragment>
   );
 }
