@@ -58,9 +58,10 @@ module.exports = {
     if (!state) {
       throw new Error('The created DID is not created on chain as required');
     }
-    if (state.issuer !== wallet.address) {
-      throw new Error('The created DID does not belong to expected issuer');
-    }
+    // Disable this check for now
+    // if (state.issuer !== wallet.address) {
+    //   throw new Error('The created DID does not belong to expected issuer');
+    // }
 
     // 3. we need to ensure that the did has the same signature
     const w = ForgeSDK.Wallet.fromPublicKey(userPk, type);
@@ -71,6 +72,7 @@ module.exports = {
     // 4. save generated did to user session store
     const user = await User.findOne({ did: sessionDid });
     user.extraDid = [userDid].concat(Array.isArray(user.extraDid) ? user.extraDid : []);
+    user.markModified('extraDid');
     await user.save();
   },
 };
