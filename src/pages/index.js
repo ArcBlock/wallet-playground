@@ -182,8 +182,8 @@ export default function IndexPage() {
                   }}
                 />
                 <AuthButton
-                  button="Proof of DID Holding"
-                  action="claim_target"
+                  button="Create New DID"
+                  action="claim_create_did"
                   messages={{
                     title: 'Create DID',
                     scan: 'Scan QR code to get the did spec',
@@ -192,13 +192,13 @@ export default function IndexPage() {
                   }}
                 />
                 <AuthButton
-                  button="Create New DID"
-                  action="claim_create_did"
+                  button="Proof of DID Holding"
+                  action="claim_target"
                   messages={{
-                    title: 'Create DID',
-                    scan: 'Scan QR code to get the did spec',
+                    title: 'Provide DID',
+                    scan: 'Scan QR code to prove you own the DID',
                     confirm: 'Confirm on your ABT Wallet',
-                    success: 'Application Created',
+                    success: 'DID holding confirmed',
                   }}
                 />
                 <AgentButton {...session.value} />
