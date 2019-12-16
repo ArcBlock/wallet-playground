@@ -17,6 +17,6 @@ axios.interceptors.request.use(
 );
 
 const url = env.baseUrl.replace('https://', 'wss://').replace('http://', 'ws://');
-axios.socketUrl = `${url}/events`;
+axios.socketUrl = process.env.NODE_ENV === 'production' ? `${url}/events` : '';
 
 export default axios;

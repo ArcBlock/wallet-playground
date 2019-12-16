@@ -14,17 +14,14 @@ import useSession from '../hooks/session';
 import api from '../libs/api';
 import { setToken } from '../libs/auth';
 
+import AuthButton from '../components/auth/general';
+import SignButton from '../components/auth/auth/sign';
 import AgentButton from '../components/auth/auth/agent';
 import ConsumeAssetButton from '../components/auth/consume_asset';
 import AcquireMovieTicket from '../components/auth/acquire_ticket';
-import ClaimSignature from '../components/auth/claim_signature';
-import ErrorButton from '../components/auth/auth/error';
 import Exchange from '../components/auth/exchange';
 import FundTbaButton from '../components/auth/fund_tba';
 import FundPlayButton from '../components/auth/fund_play';
-import CreateDidButton from '../components/auth/auth/create_did';
-import TargetDidButton from '../components/auth/auth/target';
-import ProfileButton from '../components/auth/auth/profile';
 import SwapTokenButton from '../components/auth/swap_token';
 import BuyBadgeButton from '../components/auth/swap_badge';
 import SwapBadgesButton from '../components/auth/swap_badges';
@@ -164,14 +161,50 @@ export default function IndexPage() {
                 </Typography>
               </Typography>
               <div className="section__content">
-                <ProfileButton {...session.value} />
+                <AuthButton
+                  button="Request Full Profile"
+                  action="profile"
+                  messages={{
+                    title: 'Profile Required',
+                    scan: 'Scan QR code to provide profile',
+                    confirm: 'Confirm on your ABT Wallet',
+                    success: 'Profile provided',
+                  }}
+                />
+                <AuthButton
+                  button="Show DApp Error"
+                  action="error"
+                  messages={{
+                    title: 'dApp will throw an error',
+                    scan: 'Scan QR code to get the error',
+                    confirm: 'Confirm on your ABT Wallet',
+                    success: 'You will not see this',
+                  }}
+                />
+                <AuthButton
+                  button="Proof of DID Holding"
+                  action="claim_target"
+                  messages={{
+                    title: 'Create DID',
+                    scan: 'Scan QR code to get the did spec',
+                    confirm: 'Confirm on your ABT Wallet',
+                    success: 'Application Created',
+                  }}
+                />
+                <AuthButton
+                  button="Create New DID"
+                  action="claim_create_did"
+                  messages={{
+                    title: 'Create DID',
+                    scan: 'Scan QR code to get the did spec',
+                    confirm: 'Confirm on your ABT Wallet',
+                    success: 'Application Created',
+                  }}
+                />
                 <AgentButton {...session.value} />
-                <ErrorButton {...session.value} />
-                <CreateDidButton {...session.value} />
-                <TargetDidButton {...session.value} />
-                <ClaimSignature {...session.value} type="transaction" />
-                <ClaimSignature {...session.value} type="text" />
-                <ClaimSignature {...session.value} type="html" />
+                <SignButton {...session.value} type="transaction" />
+                <SignButton {...session.value} type="text" />
+                <SignButton {...session.value} type="html" />
               </div>
             </section>
             <section className="section">
