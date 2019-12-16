@@ -209,7 +209,7 @@ export default function IndexPage() {
                   button="Multiple Claims"
                   action="claim_multiple"
                   messages={{
-                    title: 'Provide DID',
+                    title: 'Multiple Claims',
                     scan: 'Scan QR code to get multiple claims at once',
                     confirm: 'Confirm on your ABT Wallet',
                     success: 'Claims processed successfully',
@@ -219,7 +219,7 @@ export default function IndexPage() {
                   button="Multiple Steps"
                   action="claim_multiple_step"
                   messages={{
-                    title: 'Provide DID',
+                    title: 'Multiple Steps',
                     scan: 'Scan QR code to get multiple claims in sequential',
                     confirm: 'Confirm on your ABT Wallet',
                     success: 'Claims processed successfully',
