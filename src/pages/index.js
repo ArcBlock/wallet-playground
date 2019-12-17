@@ -204,6 +204,7 @@ export default function IndexPage() {
                 <SignButton {...session.value} type="transaction" />
                 <SignButton {...session.value} type="text" />
                 <SignButton {...session.value} type="html" />
+                <SignButton {...session.value} type="digest" />
                 <AgentButton {...session.value} />
                 <AuthButton
                   button="Multiple Claims"
