@@ -20,7 +20,7 @@ module.exports = {
       return {
         description: `签名该文本，你将获得 ${amount} 个测试用的 ${state.token.symbol}`,
         data: JSON.stringify({ amount, userDid }, null, 2),
-        type: 'mime::text/plain',
+        type: 'mime:text/plain',
         chainInfo,
       };
     },

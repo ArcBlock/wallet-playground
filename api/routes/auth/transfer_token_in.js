@@ -12,7 +12,7 @@ module.exports = {
       return {
         description: `签名该文本，你将获得 1 个测试用的 ${state.token.symbol}`,
         data: JSON.stringify({ userDid }, null, 2),
-        type: 'mime::text/plain',
+        type: 'mime:text/plain',
       };
     },
   },

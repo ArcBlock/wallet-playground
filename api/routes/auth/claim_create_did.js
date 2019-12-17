@@ -27,7 +27,7 @@ module.exports = {
     {
       signature: async ({ userDid, userPk }) => {
         const params = {
-          type: 'mime::text/plain',
+          type: 'mime:text/plain',
           data: JSON.stringify({ userDid, userPk }, null, 2),
         };
 

@@ -19,14 +19,14 @@ module.exports = {
     },
     {
       signature: async ({ userDid, userPk }) => ({
-        type: 'mime::text/plain',
+        type: 'mime:text/plain',
         data: JSON.stringify({ userDid, userPk }, null, 2),
         description: 'Please sign the text',
       }),
     },
     {
       signature: async ({ userDid, userPk }) => ({
-        type: 'mime::text/html',
+        type: 'mime:text/html',
         data: `<div>
   <h2 style="color:red;font-weight:bold;border-bottom:1px solid blue;">This is title</h2>
   <ul>

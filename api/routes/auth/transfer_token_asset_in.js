@@ -41,7 +41,7 @@ module.exports = {
           null,
           2
         ),
-        type: 'mime::text/plain',
+        type: 'mime:text/plain',
       };
     },
   },

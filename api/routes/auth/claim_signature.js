@@ -15,12 +15,12 @@ module.exports = {
         },
 
         text: {
-          type: 'mime::text/plain',
+          type: 'mime:text/plain',
           data: JSON.stringify({ userDid, userPk, random: Math.random() }, null, 2),
         },
 
         html: {
-          type: 'mime::text/html',
+          type: 'mime:text/html',
           data: `<div>
   <h2>This is title</h2>
   <ul>

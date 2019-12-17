@@ -21,7 +21,7 @@ module.exports = {
     signText: [
       'signature',
       ({ userDid, userPk }) => ({
-        type: 'mime::text/plain',
+        type: 'mime:text/plain',
         data: JSON.stringify({ userDid, userPk }, null, 2),
         description: 'Please sign the text',
       }),
@@ -29,7 +29,7 @@ module.exports = {
     signHtml: [
       'signature',
       ({ userDid, userPk }) => ({
-        type: 'mime::text/html',
+        type: 'mime:text/html',
         data: `<div>
   <h2>This is title</h2>
   <ul>
