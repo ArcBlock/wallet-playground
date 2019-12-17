@@ -12,7 +12,7 @@ module.exports = {
           itx: { moniker: 'wangshijun' },
           data: {
             type: 'json',
-            value: { userDid, userPk },
+            value: { userDid, userPk, random: Math.random() },
           },
         },
         description: 'Please sign the transaction',
@@ -22,7 +22,7 @@ module.exports = {
       'signature',
       ({ userDid, userPk }) => ({
         type: 'mime:text/plain',
-        data: JSON.stringify({ userDid, userPk }, null, 2),
+        data: JSON.stringify({ userDid, userPk, random: Math.random() }, null, 2),
         description: 'Please sign the text',
       }),
     ],
@@ -33,8 +33,9 @@ module.exports = {
         data: `<div>
   <h2>This is title</h2>
   <ul>
-    <li>userDid: ${userDid}</li>
-    <li>userPk: ${userPk}</li>
+    <li>UserDid: ${userDid}</li>
+    <li>UserPk: ${userPk}</li>
+    <li>Random: ${Math.random()}</li>
   </ul>
 </div>`,
         description: 'Please sign the html',

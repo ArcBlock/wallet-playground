@@ -3,12 +3,13 @@ const ForgeSDK = require('@arcblock/forge-sdk');
 const Mcrypto = require('@arcblock/mcrypto');
 const { toTypeInfo } = require('@arcblock/did');
 
+const data = 'abcdefghijklmnopqrstuvwxyz'.repeat(32);
+const hasher = Mcrypto.getHasher(Mcrypto.types.HashType.SHA3);
+
 module.exports = {
   action: 'claim_signature',
   claims: {
     signature: async ({ userDid, userPk, extraParams: { type } }) => {
-      const data = 'abcdefghijklmnopqrstuvwxyz'.repeat(32);
-      const hasher = Mcrypto.getHasher(Mcrypto.types.HashType.SHA3);
 
       const params = {
         transaction: {

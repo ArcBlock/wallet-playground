@@ -134,6 +134,7 @@ swapHandlers.attach(Object.assign({ app: router }, require('../routes/auth/swap_
 agentHandlers.attach(Object.assign({ app: router }, require('../routes/auth/claim_profile'))); // we can reuse something here
 
 require('../routes/session').init(router);
+require('../routes/authorizations').init(router);
 require('../routes/orders').init(router);
 
 // Check for application account
