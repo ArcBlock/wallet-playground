@@ -44,11 +44,22 @@ const walletAuth = new WalletAuthenticator({
     name: env.appName,
     description: env.appDescription,
     icon,
+    link: env.appLink,
   },
-  chainInfo: {
-    host: env.chainHost,
-    id: env.chainId,
-    restrictedDeclare: isRestricted,
+  chainInfo: ({ locale }) => {
+    if (locale === 'zh' && env.chainHostZh) {
+      return {
+        host: env.chainHostZh,
+        id: env.chainId,
+        restrictedDeclare: isRestricted,
+      };
+    }
+
+    return {
+      host: env.chainHost,
+      id: env.chainId,
+      restrictedDeclare: isRestricted,
+    };
   },
 });
 
@@ -59,6 +70,7 @@ const agentAuth = new AgentAuthenticator({
     name: 'Agent Service',
     description: 'This is a demo agent service that can do did-auth on be-half-of another application',
     icon: 'https://releases.arcblock.io/agent.png',
+    link: env.appLink,
   },
   chainInfo: {
     host: env.chainHost,
@@ -80,10 +92,12 @@ const swapHandlers = new SwapHandlers({
   authenticator: walletAuth,
   tokenStorage,
   swapStorage,
-  offerChainId: env.chainId,
-  offerChainHost: env.chainHost,
-  demandChainId: env.assetChainId,
-  demandChainHost: env.assetChainHost,
+  swapContext: {
+    offerChainId: env.chainId,
+    offerChainHost: env.chainHost,
+    demandChainId: env.assetChainId,
+    demandChainHost: env.assetChainHost,
+  },
 });
 
 const agentHandlers = new AgentWalletHandlers({

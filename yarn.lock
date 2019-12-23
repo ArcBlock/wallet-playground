@@ -55,10 +55,10 @@
   resolved "https://registry.npm.taobao.org/@arcblock/did-auth-storage/download/@arcblock/did-auth-storage-1.0.13.tgz#acc03e51cfcc38d52d691935b10ca421638fd494"
   integrity sha1-rMA+Uc/MONUtaRk1sQykIWOP1JQ=
 
-"@arcblock/did-auth@^1.0.24":
-  version "1.0.24"
-  resolved "https://registry.yarnpkg.com/@arcblock/did-auth/-/did-auth-1.0.24.tgz#744ee454d8d9590eecd4f253f37a83898b4c920f"
-  integrity sha512-jOH5o+gU8lOsdLpDNVHm1ZyXeDzk/rVgR1onGsyxKVxqpnvHkN6U9yiBqP5dj/7xk21SOITyiDJIRQhJOEjguQ==
+"@arcblock/did-auth@^1.0.25":
+  version "1.0.25"
+  resolved "https://registry.npm.taobao.org/@arcblock/did-auth/download/@arcblock/did-auth-1.0.25.tgz#8f71fad9abe07bef9311eca127e6204bc572f03f"
+  integrity sha1-j3H62avge++TEeyhJ+YgS8Vy8D8=
   dependencies:
     "@arcblock/did" "^1.0.23"
     "@arcblock/forge-sdk" "^1.0.24"
