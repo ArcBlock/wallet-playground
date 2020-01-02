@@ -72,14 +72,14 @@
     json-stable-stringify "^1.0.1"
     lodash.get "^4.4.2"
 
-"@arcblock/did-react@^0.54.0":
-  version "0.54.0"
-  resolved "https://registry.yarnpkg.com/@arcblock/did-react/-/did-react-0.54.0.tgz#01a6affe50694eeb030c89d8042addd3e22f01a3"
-  integrity sha512-ryYcLTWYKhu/7z3JqrXo/wFNfPFmElC/RsBx2N554CFYjdX1YrvpocfUjKhwf4SiyQGeqsm018/B/AL7nWOWFg==
+"@arcblock/did-react@^0.57.0":
+  version "0.57.0"
+  resolved "https://registry.npm.taobao.org/@arcblock/did-react/download/@arcblock/did-react-0.57.0.tgz#55d617545c40582fc7fe2d8e5b2af4b686b067c4"
+  integrity sha1-VdYXVFxAWC/H/i2OWyr0toawZ8Q=
   dependencies:
     "@arcblock/event-client" "^1.0.13"
-    "@arcblock/react-hooks" "^0.54.0"
-    "@arcblock/ux" "^0.54.0"
+    "@arcblock/react-hooks" "^0.57.0"
+    "@arcblock/ux" "^0.57.0"
     ismobilejs "^0.5.2"
     qrcode.react "^0.9.3"
     react-load-script "^0.0.6"
@@ -234,10 +234,10 @@
     randombytes "^2.0.6"
     tweetnacl "^1.0.1"
 
-"@arcblock/react-hooks@^0.54.0":
-  version "0.54.0"
-  resolved "https://registry.yarnpkg.com/@arcblock/react-hooks/-/react-hooks-0.54.0.tgz#2897e53f9043de24cde52a632ba1dc3f5836fd42"
-  integrity sha512-MvfXe+FZcy2O1738EZA82lUrFRrSDu/Kzzgpz9qczv3vmmi4mQQWaRgZe+1ImQIw3GWvCL0t2mMJl24QRhmnuw==
+"@arcblock/react-hooks@^0.57.0":
+  version "0.57.0"
+  resolved "https://registry.npm.taobao.org/@arcblock/react-hooks/download/@arcblock/react-hooks-0.57.0.tgz#484018ac0df59ca99d560d63ec89e2e52dfdf61e"
+  integrity sha1-SEAYrA31nKmdVg1j7Ini5S399h4=
   dependencies:
     event-target-shim "^5.0.1"
     qrcode.react "^0.9.3"
@@ -283,12 +283,12 @@
     "@arcblock/forge-sdk" "^1.0.24"
     debug "^4.1.1"
 
-"@arcblock/ux@^0.54.0":
-  version "0.54.0"
-  resolved "https://registry.yarnpkg.com/@arcblock/ux/-/ux-0.54.0.tgz#dae669544e8adc0a8ec36e4cb4dadf6a8da98e4a"
-  integrity sha512-Z+9ZuMIIflU4xTNQSnBKpfJJ1GhTEZDlO+aQVCWR9eo0RoFFdaduAkUZxQRUN7zV5XSLXN1atRvF5P74jvdwig==
+"@arcblock/ux@^0.57.0":
+  version "0.57.0"
+  resolved "https://registry.npm.taobao.org/@arcblock/ux/download/@arcblock/ux-0.57.0.tgz#352c981331bfceb4ef3fb687cc70fa1cf7dc7bd5"
+  integrity sha1-NSyYEzG/zrTvP7aHzHD6HPfce9U=
   dependencies:
-    "@arcblock/react-hooks" "^0.54.0"
+    "@arcblock/react-hooks" "^0.57.0"
     "@babel/plugin-syntax-dynamic-import" "^7.2.0"
     copy-to-clipboard "^3.2.0"
     d3-geo "^1.11.6"
