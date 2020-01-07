@@ -182,6 +182,28 @@ export default function IndexPage() {
                   }}
                 />
                 <AuthButton
+                  button="Auth Request Timeout"
+                  action="timeout"
+                  extraParams={{ stage: 'request' }}
+                  messages={{
+                    title: 'Request Timeout',
+                    scan: 'Scan QR code to test the timeout',
+                    confirm: 'Confirm on your ABT Wallet',
+                    success: 'You will not see this',
+                  }}
+                />
+                <AuthButton
+                  button="Auth Response Timeout"
+                  action="timeout"
+                  extraParams={{ stage: 'response' }}
+                  messages={{
+                    title: 'Response Timeout',
+                    scan: 'Scan QR code to test the timeout',
+                    confirm: 'Confirm on your ABT Wallet',
+                    success: 'You will not see this',
+                  }}
+                />
+                <AuthButton
                   button="Create New DID"
                   action="claim_create_did"
                   messages={{

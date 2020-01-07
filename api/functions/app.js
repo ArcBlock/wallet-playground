@@ -116,6 +116,7 @@ walletHandlers.attach(Object.assign({ app: router }, require('../routes/auth/cla
 walletHandlers.attach(Object.assign({ app: router }, require('../routes/auth/claim_multiple')));
 walletHandlers.attach(Object.assign({ app: router }, require('../routes/auth/claim_multiple_step')));
 walletHandlers.attach(Object.assign({ app: router }, require('../routes/auth/error')));
+walletHandlers.attach(Object.assign({ app: router }, require('../routes/auth/timeout')));
 walletHandlers.attach(Object.assign({ app: router }, require('../routes/auth/transfer_token_in')));
 walletHandlers.attach(Object.assign({ app: router }, require('../routes/auth/transfer_token_out')));
 walletHandlers.attach(Object.assign({ app: router }, require('../routes/auth/transfer_asset_out')));
