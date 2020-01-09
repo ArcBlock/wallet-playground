@@ -2,6 +2,7 @@
 const ForgeSDK = require('@arcblock/forge-sdk');
 const { toTypeInfo } = require('@arcblock/did');
 const { wallet } = require('../../libs/auth');
+const { getTokenInfo } = require('../../libs/util');
 const env = require('../../libs/env');
 
 const chainInfo = {
@@ -15,10 +16,10 @@ module.exports = {
   claims: {
     signature: async ({ userDid }) => {
       const amount = Number((Math.random() * 50).toPrecision(8));
-      const { state } = await ForgeSDK.getForgeState({ conn: env.assetChainId });
+      const data = await getTokenInfo();
 
       return {
-        description: `签名该文本，你将获得 ${amount} 个测试用的 ${state.token.symbol}`,
+        description: `签名该文本，你将获得 ${amount} 个测试用的 ${data[env.assetChainId].symbol}`,
         data: JSON.stringify({ amount, userDid }, null, 2),
         type: 'mime:text/plain',
         chainInfo,

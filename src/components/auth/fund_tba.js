@@ -15,7 +15,10 @@ import env from '../../libs/env';
 export default function Fund({ user, assetToken }) {
   const [isOpen, setOpen] = useToggle(false);
   const account = useAsync(async () => {
-    const res = await forge.getAccountState({ address: user.did }, { conn: env.assetChainId });
+    const res = await forge.getAccountState(
+      { address: user.did },
+      { conn: env.assetChainId, ignoreFields: [/\.withdrawItems/, /\.items/] }
+    );
     return res.state;
   });
 

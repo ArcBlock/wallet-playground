@@ -21,6 +21,7 @@ const EventServer = require('@arcblock/event-server');
 // ------------------------------------------------------------------------------
 const { decode } = require('../libs/jwt');
 const { walletHandlers, swapHandlers, agentHandlers, wallet } = require('../libs/auth');
+const { getAccountStateOptions } = require('../libs/util');
 
 const isProduction = process.env.NODE_ENV === 'production';
 const isNetlify = process.env.NETLIFY && JSON.parse(process.env.NETLIFY);
@@ -139,7 +140,7 @@ require('../routes/authorizations').init(router);
 require('../routes/orders').init(router);
 
 // Check for application account
-ForgeSDK.getAccountState({ address: wallet.address })
+ForgeSDK.getAccountState({ address: wallet.address }, getAccountStateOptions)
   .then(res => {
     if (!res.state) {
       console.log('\n----------');

@@ -28,13 +28,7 @@ const getTokenInfo = async () => {
         state {
           token {
             decimal
-            description
-            inflationRate
-            initialSupply
-            name
             symbol
-            totalSupply
-            unit
           }
         }
       }
@@ -49,13 +43,7 @@ const getTokenInfo = async () => {
         state {
           token {
             decimal
-            description
-            inflationRate
-            initialSupply
-            name
             symbol
-            totalSupply
-            unit
           }
         }
       }
@@ -63,10 +51,13 @@ const getTokenInfo = async () => {
     { conn: env.assetChainId }
   );
 
-  return { appToken: data.state.token, assetToken: data2.state.token };
+  return { [env.chainId]: data.state.token, [env.assetChainId]: data2.state.token };
 };
+
+const getAccountStateOptions = { ignoreFields: [/\.withdrawItems/, /\.items/] };
 
 module.exports = {
   getTransferrableAssets,
   getTokenInfo,
+  getAccountStateOptions,
 };

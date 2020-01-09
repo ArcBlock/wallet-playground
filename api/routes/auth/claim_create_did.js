@@ -3,6 +3,7 @@ const ForgeSDK = require('@arcblock/forge-sdk');
 const { toTypeInfo } = require('@arcblock/did');
 const { types } = require('@arcblock/mcrypto');
 const { wallet } = require('../../libs/auth');
+const { getAccountStateOptions } = require('../../libs/util');
 const { User } = require('../../models');
 
 module.exports = {
@@ -54,7 +55,7 @@ module.exports = {
     }
 
     // 2. we need to ensure that the did is declared onchain
-    const { state } = await ForgeSDK.getAccountState({ address: userDid });
+    const { state } = await ForgeSDK.getAccountState({ address: userDid }, getAccountStateOptions);
     if (!state) {
       throw new Error('The created DID is not created on chain as required');
     }

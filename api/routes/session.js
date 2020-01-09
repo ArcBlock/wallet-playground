@@ -1,10 +1,11 @@
+const env = require('../libs/env');
 const { getTokenInfo } = require('../libs/util');
 
 module.exports = {
   init(app) {
     app.get('/api/session', async (req, res) => {
-      const { appToken, assetToken } = await getTokenInfo();
-      res.json({ user: req.user, token: appToken, assetToken });
+      const data = await getTokenInfo();
+      res.json({ user: req.user, token: data[env.chainId], assetToken: data[env.assetChainId] });
     });
 
     app.post('/api/logout', (req, res) => {
