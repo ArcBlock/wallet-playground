@@ -13,6 +13,7 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const bearerToken = require('express-bearer-token');
 const compression = require('compression');
+const nocache = require('nocache');
 const ForgeSDK = require('@arcblock/forge-sdk');
 const EventServer = require('@arcblock/event-server');
 
@@ -170,7 +171,7 @@ if (isProduction) {
     app.use(compression());
     app.use(router);
     app.use(express.static(path.resolve(__dirname, '../../build'), { maxAge: '365d' }));
-    app.get('*', (req, res) => {
+    app.get('*', nocache(), (req, res) => {
       res.send(fs.readFileSync(path.resolve(__dirname, '../../build/index.html')).toString());
     });
   }
