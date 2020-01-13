@@ -15,7 +15,7 @@ module.exports = {
   authPrincipal: { chainInfo },
   claims: {
     signature: async ({ userDid }) => {
-      const amount = Number((Math.random() * 50).toPrecision(8));
+      const amount = Number((Math.random() * 5).toPrecision(8));
       const data = await getTokenInfo();
 
       return {
