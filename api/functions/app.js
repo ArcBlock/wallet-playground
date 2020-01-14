@@ -170,7 +170,7 @@ if (isProduction) {
   } else {
     app.use(compression());
     app.use(router);
-    app.use(express.static(path.resolve(__dirname, '../../build'), { maxAge: '365d' }));
+    app.use(express.static(path.resolve(__dirname, '../../build'), { maxAge: '365d', index: false }));
     app.get('*', nocache(), (req, res) => {
       res.send(fs.readFileSync(path.resolve(__dirname, '../../build/index.html')).toString());
     });
