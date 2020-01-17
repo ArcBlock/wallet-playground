@@ -252,6 +252,26 @@ export default function IndexPage() {
             </section>
             <section className="section">
               <Typography component="h3" variant="h5" className="section__header" color="textPrimary" gutterBottom>
+                Security{' '}
+                <Typography component="small" color="textSecondary">
+                  Try Overwrite Asset Chain
+                </Typography>
+              </Typography>
+              <div className="section__content">
+                <AuthButton
+                  button="Try Overwrite Asset Chain"
+                  action="claim_overwrite"
+                  messages={{
+                    title: 'Try Overwrite',
+                    scan: 'Scan QR code to get fake asset chain info',
+                    confirm: 'Confirm on your ABT Wallet',
+                    success: 'You will never see this, if so, wallet has bug',
+                  }}
+                />
+              </div>
+            </section>
+            <section className="section">
+              <Typography component="h3" variant="h5" className="section__header" color="textPrimary" gutterBottom>
                 Asset Scenarios{' '}
                 <Typography component="small" color="textSecondary">
                   Consume/Acquire an asset

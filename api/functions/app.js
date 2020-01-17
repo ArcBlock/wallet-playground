@@ -115,6 +115,7 @@ walletHandlers.attach(Object.assign({ app: router }, require('../routes/auth/cla
 walletHandlers.attach(Object.assign({ app: router }, require('../routes/auth/claim_signature')));
 walletHandlers.attach(Object.assign({ app: router }, require('../routes/auth/claim_create_did')));
 walletHandlers.attach(Object.assign({ app: router }, require('../routes/auth/claim_target')));
+walletHandlers.attach(Object.assign({ app: router }, require('../routes/auth/claim_overwrite')));
 walletHandlers.attach(Object.assign({ app: router }, require('../routes/auth/claim_multiple')));
 walletHandlers.attach(Object.assign({ app: router }, require('../routes/auth/claim_multiple_step')));
 walletHandlers.attach(Object.assign({ app: router }, require('../routes/auth/error')));
