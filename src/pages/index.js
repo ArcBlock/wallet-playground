@@ -250,7 +250,7 @@ export default function IndexPage() {
                 />
               </div>
             </section>
-            <section className="section">
+            <section className="section" style={{ display: 'none' }}>
               <Typography component="h3" variant="h5" className="section__header" color="textPrimary" gutterBottom>
                 Security{' '}
                 <Typography component="small" color="textSecondary">
@@ -270,7 +270,7 @@ export default function IndexPage() {
                 />
               </div>
             </section>
-            <section className="section">
+            <section className="section" style={{ display: 'none' }}>
               <Typography component="h3" variant="h5" className="section__header" color="textPrimary" gutterBottom>
                 Asset Scenarios{' '}
                 <Typography component="small" color="textSecondary">
