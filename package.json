@@ -1,7 +1,7 @@
 {
   "name": "@arcblock/wallet-playground",
   "private": true,
-  "version": "0.55.0",
+  "version": "0.56.0",
   "author": "wangshijun <shijun@arcblock.io> https://github.com/wangshijun",
   "keywords": [
     "arcblock",
