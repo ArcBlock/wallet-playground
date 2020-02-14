@@ -42,6 +42,11 @@ export default function Header() {
     window.location.href = '/profile';
   };
 
+  const getExplorerUrl = chainHost => {
+    const [host] = chainHost.split('/api');
+    return `${host}/node/explorer/txs`;
+  };
+
   return (
     <Nav>
       <div className="nav-left">
@@ -53,7 +58,7 @@ export default function Header() {
       <div className="nav-right">
         {!!env.chainHost && (
           <Link
-            href={env.chainHost.replace('/api', '/node/explorer/txs')}
+            href={getExplorerUrl(env.chainHost)}
             target="_blank"
             className="nav-item">
             Local Chain
@@ -61,7 +66,7 @@ export default function Header() {
         )}
         {!!env.assetChainHost && (
           <Link
-            href={env.assetChainHost.replace('/api', '/node/explorer/txs')}
+            href={getExplorerUrl(env.assetChainHost)}
             target="_blank"
             className="nav-item">
             Foreign Chain

@@ -44,7 +44,7 @@ const walletAuth = new WalletAuthenticator({
     name: env.appName,
     description: env.appDescription,
     icon,
-    link: env.appLink,
+    link: env.baseUrl,
   },
   chainInfo: ({ locale }) => {
     if (locale === 'zh' && env.chainHostZh) {
@@ -70,7 +70,7 @@ const agentAuth = new AgentAuthenticator({
     name: 'Agent Service',
     description: 'This is a demo agent service that can do did-auth on be-half-of another application',
     icon: 'https://releases.arcblock.io/agent.png',
-    link: env.appLink,
+    link: env.baseUrl,
   },
   chainInfo: {
     host: env.chainHost,
