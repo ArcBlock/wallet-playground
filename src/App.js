@@ -4,10 +4,10 @@ import { createGlobalStyle, ThemeProvider } from 'styled-components';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { BrowserRouter as Router, Route, Switch, Redirect, withRouter } from 'react-router-dom';
 
-import HomePage from './pages/index';
+import HomePage from './pages/full';
 import ProfilePage from './pages/profile';
 import OrdersPage from './pages/orders';
-import MiniPage from './pages/mini';
+import MiniPage from './pages/index';
 
 import theme from './libs/theme';
 
@@ -26,8 +26,8 @@ export const App = () => (
         <GlobalStyle />
         <div className="wrapper">
           <Switch>
-            <Route exact path="/" component={HomePage} />
-            <Route exact path="/mini" component={MiniPage} />
+            <Route exact path="/" component={MiniPage} />
+            <Route exact path="/full" component={HomePage} />
             <Route exact path="/profile" component={ProfilePage} />
             <Route exact path="/orders" component={OrdersPage} />
             <Redirect to="/" />
