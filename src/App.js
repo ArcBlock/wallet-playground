@@ -2,11 +2,12 @@ import React from 'react';
 import { MuiThemeProvider } from '@material-ui/core/styles';
 import { createGlobalStyle, ThemeProvider } from 'styled-components';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import { BrowserRouter as Router, Route, Switch, withRouter } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch, Redirect, withRouter } from 'react-router-dom';
 
 import HomePage from './pages/index';
 import ProfilePage from './pages/profile';
 import OrdersPage from './pages/orders';
+import MiniPage from './pages/mini';
 
 import theme from './libs/theme';
 
@@ -26,8 +27,10 @@ export const App = () => (
         <div className="wrapper">
           <Switch>
             <Route exact path="/" component={HomePage} />
+            <Route exact path="/mini" component={MiniPage} />
             <Route exact path="/profile" component={ProfilePage} />
             <Route exact path="/orders" component={OrdersPage} />
+            <Redirect to="/" />
           </Switch>
         </div>
       </React.Fragment>

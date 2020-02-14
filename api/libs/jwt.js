@@ -1,6 +1,6 @@
 /* eslint-disable no-underscore-dangle */
 const jwt = require('jsonwebtoken');
-const debug = require('debug')(require('../../package.json').name);
+const debug = require('debug')('wallet-playground');
 const { User } = require('../models');
 
 if (!process.env.APP_TOKEN_SECRET) {

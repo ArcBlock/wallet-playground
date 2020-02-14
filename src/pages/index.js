@@ -35,6 +35,8 @@ import TransferAssetIn from '../components/auth/transfer_asset_in';
 import TransferTokenAssetIn from '../components/auth/transfer_token_asset_in';
 import TransferTokenAssetOut from '../components/auth/transfer_token_asset_out';
 
+import { version } from '../../package.json';
+
 export default function IndexPage() {
   const session = useSession();
   const [open, setOpen] = useState(false);
@@ -60,245 +62,20 @@ export default function IndexPage() {
     window.location.reload();
   };
 
-  if (session.value && !session.value.user) {
-    setTimeout(() => setOpen(true), 0);
+  if (session.loading || !session.value) {
+    return (
+      <Layout title="Home">
+        <Main>
+          <CircularProgress size={64} color="secondary" />
+        </Main>
+      </Layout>
+    );
   }
 
-  return (
-    <Layout title="Home">
-      <Main>
-        <Typography component="h2" variant="h4" className="page-header" color="textPrimary">
-          ABT Wallet Playground <Tag type="success">V2.0</Tag>
-        </Typography>
-        <Typography component="h3" variant="h6" color="textSecondary">
-          TBA is the token on Zinc chain, PLAY is the token on App chain.
-        </Typography>
-        {(session.loading || (session.value && !session.value.user)) && (
-          <CircularProgress size={64} color="secondary" />
-        )}
-        {session.value && session.value.user && (
-          <React.Fragment>
-            <section className="section">
-              <Typography component="h3" variant="h5" className="section__header" color="textPrimary" gutterBottom>
-                Feeling lucky{' '}
-                <Typography component="small" color="textSecondary">
-                  Get your account funded for doing later testing
-                </Typography>
-              </Typography>
-              <div className="section__content">
-                <FundTbaButton {...session.value} />
-                <FundPlayButton {...session.value} />
-              </div>
-            </section>
-            <section className="section">
-              <Typography component="h3" variant="h5" className="section__header" color="textPrimary" gutterBottom>
-                Atomic Swap Scenarios{' '}
-                <Typography component="small" color="textSecondary">
-                  Show the full potential of cross-chain transactions.
-                </Typography>
-              </Typography>
-              <div className="section__content">
-                <BuyBadgeButton {...session.value} />
-                <BuyTicketButton {...session.value} />
-                <CertificateButton {...session.value} action="buy" />
-                <CertificateButton {...session.value} action="sell" />
-                <SwapTokenButton {...session.value} action="buy" />
-                <SwapTokenButton {...session.value} action="sell" />
-                <SwapBadgesButton {...session.value} action="buy" />
-                <SwapBadgesButton {...session.value} action="sell" />
-              </div>
-            </section>
-            <section className="section">
-              <Typography component="h3" variant="h5" className="section__header" color="textPrimary" gutterBottom>
-                Transfer Scenarios{' '}
-                <Typography component="small" color="textSecondary">
-                  Help to generate different transfer transactions in ABT Wallet
-                </Typography>
-              </Typography>
-              <div className="section__content">
-                <TransferTokenOut {...session.value} />
-                <TransferTokenIn {...session.value} />
-                <TransferAssetOut {...session.value} />
-                <TransferAssetIn {...session.value} />
-                <TransferTokenAssetIn {...session.value} />
-                <TransferTokenAssetOut {...session.value} />
-              </div>
-            </section>
-            <section className="section">
-              <Typography component="h3" variant="h5" className="section__header" color="textPrimary" gutterBottom>
-                Exchange Scenarios{' '}
-                <Typography component="small" color="textSecondary">
-                  Help to generate different exchange transactions in ABT Wallet
-                </Typography>
-              </Typography>
-              <div className="section__content">
-                <Exchange {...session.value} receiveType="asset" payType="token" />
-                <Exchange {...session.value} receiveType="token" payType="asset" />
-                <Exchange {...session.value} receiveType="asset" payType="asset" />
-                <Exchange {...session.value} receiveType="asset" receiveCount={2} payType="asset" />
-                <Exchange {...session.value} receiveType="asset" payCount={2} payType="asset" />
-                <Exchange {...session.value} receiveType="asset" receiveCount={2} payType="asset" payCount={2} />
-                <Exchange {...session.value} receiveType="token" receiveCount={2} payType="asset" payCount={2} />
-                <Exchange {...session.value} receiveType="asset" receiveCount={5} payType="token" payCount={1} />
-                <Exchange {...session.value} receiveCount={5} receiveType="asset" payCount={5} payType="asset" />
-                <Exchange {...session.value} receiveType="token" receiveCount={100000} payType="asset" payCount={1} />
-                <Exchange {...session.value} receiveType="token" receiveCount={0.001} payType="asset" payCount={1} />
-                <Exchange
-                  {...session.value}
-                  receiveType="token"
-                  receiveCount={100000.0001}
-                  payType="asset"
-                  payCount={1}
-                />
-                <Exchange {...session.value} receiveType="token" receiveCount={0.000001} payType="asset" payCount={1} />
-              </div>
-            </section>
-            <section className="section">
-              <Typography component="h3" variant="h5" className="section__header" color="textPrimary" gutterBottom>
-                DID Auth Claims{' '}
-                <Typography component="small" color="textSecondary">
-                  Help to test different DID Auth Claims in ABT Wallet
-                </Typography>
-              </Typography>
-              <div className="section__content">
-                <AuthButton
-                  button="Request Full Profile"
-                  action="profile"
-                  messages={{
-                    title: 'Profile Required',
-                    scan: 'Scan QR code to provide profile',
-                    confirm: 'Confirm on your ABT Wallet',
-                    success: 'Profile provided',
-                  }}
-                />
-                <AuthButton
-                  button="Show DApp Error"
-                  action="error"
-                  messages={{
-                    title: 'dApp will throw an error',
-                    scan: 'Scan QR code to get the error',
-                    confirm: 'Confirm on your ABT Wallet',
-                    success: 'You will not see this',
-                  }}
-                />
-                <AuthButton
-                  button="Auth Request Timeout"
-                  action="timeout"
-                  extraParams={{ stage: 'request' }}
-                  messages={{
-                    title: 'Request Timeout',
-                    scan: 'Scan QR code to test the timeout',
-                    confirm: 'Confirm on your ABT Wallet',
-                    success: 'You will not see this',
-                  }}
-                />
-                <AuthButton
-                  button="Auth Response Timeout"
-                  action="timeout"
-                  extraParams={{ stage: 'response' }}
-                  messages={{
-                    title: 'Response Timeout',
-                    scan: 'Scan QR code to test the timeout',
-                    confirm: 'Confirm on your ABT Wallet',
-                    success: 'You will not see this',
-                  }}
-                />
-                <AuthButton
-                  button="Create New DID"
-                  action="claim_create_did"
-                  messages={{
-                    title: 'Create DID',
-                    scan: 'Scan QR code to get the did spec',
-                    confirm: 'Confirm on your ABT Wallet',
-                    success: 'Application Created',
-                  }}
-                />
-                <AuthButton
-                  button="Proof of DID Holding"
-                  action="claim_target"
-                  messages={{
-                    title: 'Provide DID',
-                    scan: 'Scan QR code to prove you own the DID',
-                    confirm: 'Confirm on your ABT Wallet',
-                    success: 'DID holding confirmed',
-                  }}
-                />
-                <SignButton {...session.value} type="transaction" />
-                <SignButton {...session.value} type="text" />
-                <SignButton {...session.value} type="html" />
-                <SignButton {...session.value} type="digest" />
-                <AgentButton {...session.value} />
-                <AuthButton
-                  button="Multiple Claims"
-                  action="claim_multiple"
-                  messages={{
-                    title: 'Multiple Claims',
-                    scan: 'Scan QR code to get multiple claims at once',
-                    confirm: 'Confirm on your ABT Wallet',
-                    success: 'Claims processed successfully',
-                  }}
-                />
-                <AuthButton
-                  button="Multiple Steps"
-                  action="claim_multiple_step"
-                  messages={{
-                    title: 'Multiple Steps',
-                    scan: 'Scan QR code to get multiple claims in sequential',
-                    confirm: 'Confirm on your ABT Wallet',
-                    success: 'Claims processed successfully',
-                  }}
-                />
-              </div>
-            </section>
-            <section className="section" style={{ display: 'none' }}>
-              <Typography component="h3" variant="h5" className="section__header" color="textPrimary" gutterBottom>
-                Security{' '}
-                <Typography component="small" color="textSecondary">
-                  Try Overwrite Asset Chain
-                </Typography>
-              </Typography>
-              <div className="section__content">
-                <AuthButton
-                  button="Try Overwrite Asset Chain"
-                  action="claim_overwrite"
-                  messages={{
-                    title: 'Try Overwrite',
-                    scan: 'Scan QR code to get fake asset chain info',
-                    confirm: 'Confirm on your ABT Wallet',
-                    success: 'You will never see this, if so, wallet has bug',
-                  }}
-                />
-              </div>
-            </section>
-            <section className="section" style={{ display: 'none' }}>
-              <Typography component="h3" variant="h5" className="section__header" color="textPrimary" gutterBottom>
-                Asset Scenarios{' '}
-                <Typography component="small" color="textSecondary">
-                  Consume/Acquire an asset
-                </Typography>
-              </Typography>
-              <div className="section__content">
-                <AcquireMovieTicket count={1} />
-                <AcquireMovieTicket count={2} />
-                <ConsumeAssetButton {...session.value} />
-              </div>
-            </section>
-            <section className="section">
-              <Typography component="h3" variant="h5" className="section__header" color="textPrimary" gutterBottom>
-                Do not have ABT Wallet?
-              </Typography>
-              <div className="section__content">
-                <div style={{ padding: 24, background: '#44cdc6', color: 'rgb(255, 255, 255)' }}>
-                  <WalletDownload
-                    layout="horizontal"
-                    title="Make sure you have your phone handy with the ABT Wallet downloaded."
-                  />
-                </div>
-              </div>
-            </section>
-          </React.Fragment>
-        )}
-        {open && (
+  if (open || (session.value && !session.value.user)) {
+    return (
+      <Layout title="Home">
+        <Main>
           <Auth
             responsive
             action="login"
@@ -313,14 +90,241 @@ export default function IndexPage() {
               success: 'You have successfully signed in!',
             }}
           />
-        )}
+        </Main>
+      </Layout>
+    );
+  }
+
+  const { token, assetToken } = session.value;
+
+  return (
+    <Layout title="Home">
+      <Main>
+        <Typography component="h2" variant="h5" className="page-header" color="textPrimary">
+          ABT Wallet Playground<Tag type="success">V{version}</Tag>
+        </Typography>
+        <Typography component="h3" variant="subtitle1" color="textSecondary">
+          {token.symbol} is the token on Local Chain, {assetToken.symbol} is the token on Foreign Chain.
+        </Typography>
+        <section className="section">
+          <Typography component="h3" variant="h5" className="section__header" color="textPrimary" gutterBottom>
+            Feeling lucky{' '}
+            <Typography component="small" color="textSecondary">
+              Get your account funded for doing later testing
+            </Typography>
+          </Typography>
+          <div className="section__content">
+            <FundTbaButton {...session.value} />
+            <FundPlayButton {...session.value} />
+          </div>
+        </section>
+        <section className="section">
+          <Typography component="h3" variant="h5" className="section__header" color="textPrimary" gutterBottom>
+            Atomic Swap Scenarios{' '}
+            <Typography component="small" color="textSecondary">
+              Show the full potential of cross-chain transactions.
+            </Typography>
+          </Typography>
+          <div className="section__content">
+            <BuyBadgeButton {...session.value} />
+            <BuyTicketButton {...session.value} />
+            <CertificateButton {...session.value} action="buy" />
+            <CertificateButton {...session.value} action="sell" />
+            <SwapTokenButton {...session.value} action="buy" />
+            <SwapTokenButton {...session.value} action="sell" />
+            <SwapBadgesButton {...session.value} action="buy" />
+            <SwapBadgesButton {...session.value} action="sell" />
+          </div>
+        </section>
+        <section className="section">
+          <Typography component="h3" variant="h5" className="section__header" color="textPrimary" gutterBottom>
+            Transfer Scenarios{' '}
+            <Typography component="small" color="textSecondary">
+              Help to generate different transfer transactions in ABT Wallet
+            </Typography>
+          </Typography>
+          <div className="section__content">
+            <TransferTokenOut {...session.value} />
+            <TransferTokenIn {...session.value} />
+            <TransferAssetOut {...session.value} />
+            <TransferAssetIn {...session.value} />
+            <TransferTokenAssetIn {...session.value} />
+            <TransferTokenAssetOut {...session.value} />
+          </div>
+        </section>
+        <section className="section">
+          <Typography component="h3" variant="h5" className="section__header" color="textPrimary" gutterBottom>
+            Exchange Scenarios{' '}
+            <Typography component="small" color="textSecondary">
+              Help to generate different exchange transactions in ABT Wallet
+            </Typography>
+          </Typography>
+          <div className="section__content">
+            <Exchange {...session.value} receiveType="asset" payType="token" />
+            <Exchange {...session.value} receiveType="token" payType="asset" />
+            <Exchange {...session.value} receiveType="asset" payType="asset" />
+            <Exchange {...session.value} receiveType="asset" receiveCount={2} payType="asset" />
+            <Exchange {...session.value} receiveType="asset" payCount={2} payType="asset" />
+            <Exchange {...session.value} receiveType="asset" receiveCount={2} payType="asset" payCount={2} />
+            <Exchange {...session.value} receiveType="token" receiveCount={2} payType="asset" payCount={2} />
+            <Exchange {...session.value} receiveType="asset" receiveCount={5} payType="token" payCount={1} />
+            <Exchange {...session.value} receiveCount={5} receiveType="asset" payCount={5} payType="asset" />
+            <Exchange {...session.value} receiveType="token" receiveCount={100000} payType="asset" payCount={1} />
+            <Exchange {...session.value} receiveType="token" receiveCount={0.001} payType="asset" payCount={1} />
+            <Exchange {...session.value} receiveType="token" receiveCount={100000.0001} payType="asset" payCount={1} />
+            <Exchange {...session.value} receiveType="token" receiveCount={0.000001} payType="asset" payCount={1} />
+          </div>
+        </section>
+        <section className="section">
+          <Typography component="h3" variant="h5" className="section__header" color="textPrimary" gutterBottom>
+            DID Auth Claims{' '}
+            <Typography component="small" color="textSecondary">
+              Help to test different DID Auth Claims in ABT Wallet
+            </Typography>
+          </Typography>
+          <div className="section__content">
+            <AuthButton
+              button="Request Full Profile"
+              action="profile"
+              messages={{
+                title: 'Profile Required',
+                scan: 'Scan QR code to provide profile',
+                confirm: 'Confirm on your ABT Wallet',
+                success: 'Profile provided',
+              }}
+            />
+            <AuthButton
+              button="Show DApp Error"
+              action="error"
+              messages={{
+                title: 'dApp will throw an error',
+                scan: 'Scan QR code to get the error',
+                confirm: 'Confirm on your ABT Wallet',
+                success: 'You will not see this',
+              }}
+            />
+            <AuthButton
+              button="Auth Request Timeout"
+              action="timeout"
+              extraParams={{ stage: 'request' }}
+              messages={{
+                title: 'Request Timeout',
+                scan: 'Scan QR code to test the timeout',
+                confirm: 'Confirm on your ABT Wallet',
+                success: 'You will not see this',
+              }}
+            />
+            <AuthButton
+              button="Auth Response Timeout"
+              action="timeout"
+              extraParams={{ stage: 'response' }}
+              messages={{
+                title: 'Response Timeout',
+                scan: 'Scan QR code to test the timeout',
+                confirm: 'Confirm on your ABT Wallet',
+                success: 'You will not see this',
+              }}
+            />
+            <AuthButton
+              button="Create New DID"
+              action="claim_create_did"
+              messages={{
+                title: 'Create DID',
+                scan: 'Scan QR code to get the did spec',
+                confirm: 'Confirm on your ABT Wallet',
+                success: 'Application Created',
+              }}
+            />
+            <AuthButton
+              button="Proof of DID Holding"
+              action="claim_target"
+              messages={{
+                title: 'Provide DID',
+                scan: 'Scan QR code to prove you own the DID',
+                confirm: 'Confirm on your ABT Wallet',
+                success: 'DID holding confirmed',
+              }}
+            />
+            <SignButton {...session.value} type="transaction" />
+            <SignButton {...session.value} type="text" />
+            <SignButton {...session.value} type="html" />
+            <SignButton {...session.value} type="digest" />
+            <AgentButton {...session.value} />
+            <AuthButton
+              button="Multiple Claims"
+              action="claim_multiple"
+              messages={{
+                title: 'Multiple Claims',
+                scan: 'Scan QR code to get multiple claims at once',
+                confirm: 'Confirm on your ABT Wallet',
+                success: 'Claims processed successfully',
+              }}
+            />
+            <AuthButton
+              button="Multiple Steps"
+              action="claim_multiple_step"
+              messages={{
+                title: 'Multiple Steps',
+                scan: 'Scan QR code to get multiple claims in sequential',
+                confirm: 'Confirm on your ABT Wallet',
+                success: 'Claims processed successfully',
+              }}
+            />
+          </div>
+        </section>
+        <section className="section" style={{ display: 'none' }}>
+          <Typography component="h3" variant="h5" className="section__header" color="textPrimary" gutterBottom>
+            Security{' '}
+            <Typography component="small" color="textSecondary">
+              Try Overwrite Asset Chain
+            </Typography>
+          </Typography>
+          <div className="section__content">
+            <AuthButton
+              button="Try Overwrite Asset Chain"
+              action="claim_overwrite"
+              messages={{
+                title: 'Try Overwrite',
+                scan: 'Scan QR code to get fake asset chain info',
+                confirm: 'Confirm on your ABT Wallet',
+                success: 'You will never see this, if so, wallet has bug',
+              }}
+            />
+          </div>
+        </section>
+        <section className="section" style={{ display: 'none' }}>
+          <Typography component="h3" variant="h5" className="section__header" color="textPrimary" gutterBottom>
+            Asset Scenarios{' '}
+            <Typography component="small" color="textSecondary">
+              Consume/Acquire an asset
+            </Typography>
+          </Typography>
+          <div className="section__content">
+            <AcquireMovieTicket count={1} />
+            <AcquireMovieTicket count={2} />
+            <ConsumeAssetButton {...session.value} />
+          </div>
+        </section>
+        <section className="section">
+          <Typography component="h3" variant="h5" className="section__header" color="textPrimary" gutterBottom>
+            Do not have ABT Wallet?
+          </Typography>
+          <div className="section__content">
+            <div style={{ padding: 24, background: '#44cdc6', color: 'rgb(255, 255, 255)' }}>
+              <WalletDownload
+                layout="horizontal"
+                title="Make sure you have your phone handy with the ABT Wallet downloaded."
+              />
+            </div>
+          </div>
+        </section>
       </Main>
     </Layout>
   );
 }
 
 const Main = styled.main`
-  margin: 80px 0 0;
+  margin: 40px 0 0;
 
   a {
     color: ${props => props.theme.colors.green};
