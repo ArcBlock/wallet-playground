@@ -7,7 +7,7 @@ module.exports = {
   action: 'transfer_token_in',
   claims: {
     signature: async ({ userDid }) => {
-      const { state } = await ForgeSDK.getForgeState({ conn: env.assetChainId });
+      const { state } = await ForgeSDK.getForgeState({ conn: env.chainId });
 
       return {
         description: `签名该文本，你将获得 1 个测试用的 ${state.token.symbol}`,
