@@ -100,10 +100,10 @@ export default function IndexPage() {
   return (
     <Layout title="Home">
       <Main>
-        <Typography component="h2" variant="h4" className="page-header" color="textPrimary">
-          ABT Wallet Playground <Tag type="success">V{version}</Tag>
+        <Typography component="h2" variant="h5" className="page-header" color="textPrimary">
+          ABT Wallet Playground<Tag type="success">V{version}</Tag>
         </Typography>
-        <Typography component="h3" variant="h6" color="textSecondary">
+        <Typography component="h3" variant="subtitle1" color="textSecondary">
           {token.symbol} is the token on Local Chain, {assetToken.symbol} is the token on Foreign Chain.
         </Typography>
         <section className="section">
@@ -324,7 +324,7 @@ export default function IndexPage() {
 }
 
 const Main = styled.main`
-  margin: 80px 0 0;
+  margin: 40px 0 0;
 
   a {
     color: ${props => props.theme.colors.green};
