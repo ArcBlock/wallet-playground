@@ -99,8 +99,7 @@ app.use((req, res, next) => {
       req.user = user;
       next();
     })
-    .catch(err => {
-      console.error('session.deserialize.error', err.message);
+    .catch(() => {
       next();
     });
 });

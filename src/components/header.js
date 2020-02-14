@@ -56,7 +56,7 @@ export default function Header() {
             href={env.chainHost.replace('/api', '/node/explorer/txs')}
             target="_blank"
             className="nav-item">
-            App Chain
+            Local Chain
           </Link>
         )}
         {!!env.assetChainHost && (
@@ -64,7 +64,7 @@ export default function Header() {
             href={env.assetChainHost.replace('/api', '/node/explorer/txs')}
             target="_blank"
             className="nav-item">
-            Asset Chain
+            Foreign Chain
           </Link>
         )}
         {session.value && session.value.user && (
