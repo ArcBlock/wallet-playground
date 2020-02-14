@@ -14,12 +14,16 @@ module.exports = {
   action: 'fund_tba',
   authPrincipal: { chainInfo },
   claims: {
-    signature: async ({ userDid }) => {
-      const amount = Number((Math.random() * 5).toPrecision(8));
+    signature: async ({ userDid, extraParams: { locale } }) => {
+      const amount = Number((Math.random() * 10).toPrecision(8));
       const data = await getTokenInfo();
+      const description = {
+        en: `Sign this text to get ${amount} ${data[env.assetChainId].symbol} for test`,
+        zh: `签名该文本，你将获得 ${amount} 个测试用的 ${data[env.assetChainId].symbol}`,
+      };
 
       return {
-        description: `签名该文本，你将获得 ${amount} 个测试用的 ${data[env.assetChainId].symbol}`,
+        description: description[locale],
         data: JSON.stringify({ amount, userDid }, null, 2),
         type: 'mime:text/plain',
         chainInfo,

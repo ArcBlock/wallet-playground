@@ -11,8 +11,8 @@ module.exports = {
       const { state } = await ForgeSDK.getForgeState({ conn: env.chainId });
 
       const description = {
-        en: `Sign this transaction to receive 100 ${state.token.symbol} for test purpose`,
-        zh: `签名该交易，你将获得 100 个测试用的 ${state.token.symbol}`,
+        en: `Sign this transaction to receive ${state.txConfig.poke.amount} ${state.token.symbol} for test purpose`,
+        zh: `签名该交易，你将获得 ${state.txConfig.poke.amount} 个测试用的 ${state.token.symbol}`,
       };
 
       return {
