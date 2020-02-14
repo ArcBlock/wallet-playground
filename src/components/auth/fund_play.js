@@ -41,7 +41,7 @@ export default function FundPlay({ user, token }) {
           onClose={() => setOpen()}
           onSuccess={() => window.location.reload()}
           messages={{
-            title: 'Get 100 PLAY token for FREE',
+            title: `Get test ${token.symbol} for FREE`,
             scan: 'Scan QR code to get token for FREE',
             confirm: 'Confirm on your ABT Wallet',
             success: 'Lucky tokens sent to your account',
