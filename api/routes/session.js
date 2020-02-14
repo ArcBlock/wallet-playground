@@ -1,11 +1,18 @@
 const env = require('../libs/env');
 const { getTokenInfo } = require('../libs/util');
+const { getExchangeRate } = require('../libs/currency');
+const isNetlify = process.env.NETLIFY && JSON.parse(process.env.NETLIFY);
 
 module.exports = {
   init(app) {
     app.get('/api/session', async (req, res) => {
       const data = await getTokenInfo();
-      res.json({ user: req.user, token: data[env.chainId], assetToken: data[env.assetChainId] });
+      res.json({
+        user: req.user,
+        token: data[env.chainId],
+        assetToken: data[env.assetChainId],
+        exchangeRate: isNetlify ? getExchangeRate() : 5,
+      });
     });
 
     app.post('/api/logout', (req, res) => {

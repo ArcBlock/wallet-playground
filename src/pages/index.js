@@ -99,8 +99,8 @@ export default function MiniPage() {
             </Typography>
           </Typography>
           <div className="section__content">
-            <FundTbaButton {...session.value} />
-            <FundPlayButton {...session.value} />
+            <FundTbaButton {...session.value} action="fund_foreign" />
+            <FundPlayButton {...session.value} action="fund_local" />
           </div>
         </section>
         <section className="section">

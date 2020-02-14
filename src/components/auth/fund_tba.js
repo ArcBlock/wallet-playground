@@ -12,7 +12,7 @@ import api from '../../libs/api';
 import forge from '../../libs/sdk';
 import env from '../../libs/env';
 
-export default function Fund({ user, assetToken }) {
+export default function Fund({ user, assetToken, action }) {
   const [isOpen, setOpen] = useToggle(false);
   const account = useAsync(async () => {
     const res = await forge.getAccountState(
@@ -35,7 +35,7 @@ export default function Fund({ user, assetToken }) {
       {isOpen && (
         <Auth
           responsive
-          action="fund_tba"
+          action={action}
           checkFn={api.get}
           socketUrl={api.socketUrl}
           onClose={() => setOpen()}
@@ -55,4 +55,9 @@ export default function Fund({ user, assetToken }) {
 Fund.propTypes = {
   user: PropTypes.object.isRequired,
   assetToken: PropTypes.object.isRequired,
+  action: PropTypes.string,
+};
+
+Fund.defaultProps = {
+  action: 'fund_tba',
 };

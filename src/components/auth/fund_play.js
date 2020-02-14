@@ -12,7 +12,7 @@ import api from '../../libs/api';
 import forge from '../../libs/sdk';
 import env from '../../libs/env';
 
-export default function FundPlay({ user, token }) {
+export default function FundPlay({ user, token, action }) {
   const [isOpen, setOpen] = useToggle(false);
   const account = useAsync(async () => {
     const res = await forge.getAccountState(
@@ -35,7 +35,7 @@ export default function FundPlay({ user, token }) {
       {isOpen && (
         <Auth
           responsive
-          action="fund_play"
+          action={action}
           checkFn={api.get}
           socketUrl={api.socketUrl}
           onClose={() => setOpen()}
@@ -55,4 +55,9 @@ export default function FundPlay({ user, token }) {
 FundPlay.propTypes = {
   user: PropTypes.object.isRequired,
   token: PropTypes.object.isRequired,
+  action: PropTypes.string,
+};
+
+FundPlay.defaultProps = {
+  action: 'fund_play',
 };

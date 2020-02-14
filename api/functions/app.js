@@ -110,6 +110,8 @@ walletHandlers.attach(Object.assign({ app: router }, require('../routes/auth/log
 walletHandlers.attach(Object.assign({ app: router }, require('../routes/auth/payment')));
 walletHandlers.attach(Object.assign({ app: router }, require('../routes/auth/fund_play')));
 walletHandlers.attach(Object.assign({ app: router }, require('../routes/auth/fund_tba')));
+walletHandlers.attach(Object.assign({ app: router }, require('../routes/auth/fund_local')));
+walletHandlers.attach(Object.assign({ app: router }, require('../routes/auth/fund_foreign')));
 walletHandlers.attach(Object.assign({ app: router }, require('../routes/auth/claim_profile')));
 walletHandlers.attach(Object.assign({ app: router }, require('../routes/auth/claim_signature')));
 walletHandlers.attach(Object.assign({ app: router }, require('../routes/auth/claim_create_did')));

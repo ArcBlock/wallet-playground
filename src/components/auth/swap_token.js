@@ -10,7 +10,7 @@ import Button from '@arcblock/ux/lib/Button';
 
 import api from '../../libs/api';
 
-export default function SwapButton({ token, assetToken, action }) {
+export default function SwapButton({ token, assetToken, exchangeRate, action }) {
   const [isOpen, setOpen] = useToggle(false);
   const [traceId, setTraceId] = useState();
 
@@ -27,8 +27,8 @@ export default function SwapButton({ token, assetToken, action }) {
   // eslint-disable-next-line operator-linebreak
   const title =
     action === 'buy'
-      ? `Buy 1 ${assetToken.symbol} with 5 ${token.symbol}`
-      : `Sell 1 ${assetToken.symbol} for 5 ${token.symbol}`;
+      ? `Buy 1 ${assetToken.symbol} with ${exchangeRate} ${token.symbol}`
+      : `Sell 1 ${assetToken.symbol} for ${exchangeRate} ${token.symbol}`;
 
   return (
     <React.Fragment>
@@ -60,5 +60,6 @@ export default function SwapButton({ token, assetToken, action }) {
 SwapButton.propTypes = {
   token: PropTypes.object.isRequired,
   assetToken: PropTypes.object.isRequired,
+  exchangeRate: PropTypes.number.isRequired,
   action: PropTypes.string.isRequired,
 };
