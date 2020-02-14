@@ -9,7 +9,7 @@ module.exports = {
   action: 'fund_local',
   claims: {
     signature: async ({ userDid, extraParams: { locale } }) => {
-      const amount = Number((Math.random() * 500).toPrecision(8));
+      const amount = 100 + Number((Math.random() * 500).toPrecision(8));
       const data = await getTokenInfo();
       const description = {
         en: `Sign this text to get ${amount} ${data[env.chainId].symbol} for test`,
