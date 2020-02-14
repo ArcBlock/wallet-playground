@@ -78,7 +78,8 @@
     "start:server": "nodemon api/index.js -w api",
     "build": "yarn clean && npm-run-all build:*",
     "build:client": "react-scripts build",
-    "build:server": "netlify-lambda build api/functions",
+    "build:server:debug": "netlify-lambda build api/functions --config api/webpack.functions.js",
+    "build:server": "NODE_ENV=production netlify-lambda build api/functions --config api/webpack.functions.js",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
