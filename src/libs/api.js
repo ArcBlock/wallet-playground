@@ -16,7 +16,7 @@ axios.interceptors.request.use(
   error => Promise.reject(error)
 );
 
-const url = env.baseUrl.replace('https://', 'wss://').replace('http://', 'ws://');
+// const url = env.baseUrl.replace('https://', 'wss://').replace('http://', 'ws://');
 // axios.socketUrl = process.env.NODE_ENV === 'production' ? `${url}/events` : '';
 
 export default axios;

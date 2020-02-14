@@ -42,7 +42,16 @@ export default function Header() {
     window.location.href = '/profile';
   };
 
-  const getExplorerUrl = chainHost => {
+  const getExplorerUrl = (chainHost, type) => {
+    if (window.env) {
+      if (window.env.localChainExplorer && type === 'local') {
+        return window.env.localChainExplorer;
+      }
+      if (window.env.foreignChainExplorer && type === 'foreign') {
+        return window.env.foreignChainExplorer;
+      }
+    }
+
     const [host] = chainHost.split('/api');
     return `${host}/node/explorer/txs`;
   };
@@ -57,18 +66,12 @@ export default function Header() {
       </div>
       <div className="nav-right">
         {!!env.chainHost && (
-          <Link
-            href={getExplorerUrl(env.chainHost)}
-            target="_blank"
-            className="nav-item">
+          <Link href={getExplorerUrl(env.chainHost, 'local')} target="_blank" className="nav-item">
             Local Chain
           </Link>
         )}
         {!!env.assetChainHost && (
-          <Link
-            href={getExplorerUrl(env.assetChainHost)}
-            target="_blank"
-            className="nav-item">
+          <Link href={getExplorerUrl(env.assetChainHost, 'foreign')} target="_blank" className="nav-item">
             Foreign Chain
           </Link>
         )}
@@ -82,10 +85,7 @@ export default function Header() {
             </Link>
           </React.Fragment>
         )}
-        <Link
-          href="https://github.com/ArcBlock/wallet-playground"
-          target="_blank"
-          className="nav-item">
+        <Link href="https://github.com/ArcBlock/wallet-playground" target="_blank" className="nav-item">
           GitHub
         </Link>
         {session.loading && (

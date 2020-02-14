@@ -12,5 +12,14 @@ module.exports = {
       req.user = null;
       res.json({ user: null });
     });
+
+    app.get('/api/env', (req, res) => {
+      const isNetlify = process.env.NETLIFY && JSON.parse(process.env.NETLIFY);
+      res.type('.js');
+      res.send(`window.env = {
+  localChainExplorer: "${isNetlify ? 'http://54.84.194.134:8210/node/explorer/txs' : ''}",
+  foreignChainExplorer: "${isNetlify ? 'http://54.90.197.111:8210/node/explorer/txs' : ''}",
+}`);
+    });
   },
 };
