@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-one-expression-per-line */
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 import useAsyncFn from 'react-use/lib/useAsyncFn';
 import useToggle from 'react-use/lib/useToggle';
@@ -15,16 +15,15 @@ import Avatar from '@arcblock/did-react/lib/Avatar';
 import Button from '@arcblock/ux/lib/Button';
 
 import Layout from '../components/layout';
-import useSession from '../hooks/session';
 import forge from '../libs/sdk';
-import { removeToken } from '../libs/auth';
+import { SessionContext } from '../libs/session';
 
 export default function ProfilePage() {
-  const session = useSession();
+  const { session } = useContext(SessionContext);
   const [isFetched, setFetched] = useToggle(false);
   const [balance, fetchBalance] = useAsyncFn(async () => {
-    if (session.value && session.value.user) {
-      const address = session.value.user.did;
+    if (session.user) {
+      const address = session.user.did;
       const { state: account } = await forge.getAccountState({ address });
       return account;
     }
@@ -33,32 +32,9 @@ export default function ProfilePage() {
   }, [session.value]);
 
   const onLogout = () => {
-    removeToken();
+    session.logout();
     window.location.href = '/';
   };
-
-  if (session.loading || !session.value) {
-    return (
-      <Layout title="Profile">
-        <Main>
-          <CircularProgress />
-        </Main>
-      </Layout>
-    );
-  }
-
-  if (session.error) {
-    return (
-      <Layout title="Profile">
-        <Main>{session.error.message}</Main>
-      </Layout>
-    );
-  }
-
-  if (!session.value.user) {
-    window.location.href = '/?openLogin=true';
-    return null;
-  }
 
   if (!isFetched) {
     setTimeout(() => {
@@ -67,7 +43,7 @@ export default function ProfilePage() {
     }, 100);
   }
 
-  const { user, token } = session.value;
+  const { user, token } = session;
 
   return (
     <Layout title="Profile">
@@ -75,11 +51,7 @@ export default function ProfilePage() {
         <Grid container spacing={6}>
           <Grid item xs={12} md={3} className="avatar">
             <Avatar size={240} did={user.did} />
-            <Button
-              color="secondary"
-              variant="contained"
-              href="/orders"
-              style={{ marginBottom: 30 }}>
+            <Button color="secondary" variant="contained" href="/orders" style={{ marginBottom: 30 }}>
               My Orders
             </Button>
             <Button color="danger" variant="contained" onClick={onLogout}>
