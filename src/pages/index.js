@@ -19,8 +19,6 @@ import { version } from '../../package.json';
 // 临时 demo 的页面
 export default function MiniPage() {
   const { session } = useContext(SessionContext);
-  console.log(session);
-
   const { token, assetToken } = session;
 
   return (

@@ -27,11 +27,7 @@ export const App = () => (
     <ThemeProvider theme={theme}>
       <SessionProvider serviceHost={env.baseUrl}>
         {({ session }) => {
-          if (!session.user) {
-            setTimeout(() => {
-              session.login();
-            }, 0);
-
+          if (session.loading) {
             return <CircularProgress />;
           }
 

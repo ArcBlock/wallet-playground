@@ -22,14 +22,10 @@ export default function ProfilePage() {
   const { session } = useContext(SessionContext);
   const [isFetched, setFetched] = useToggle(false);
   const [balance, fetchBalance] = useAsyncFn(async () => {
-    if (session.user) {
-      const address = session.user.did;
-      const { state: account } = await forge.getAccountState({ address });
-      return account;
-    }
-
-    return null;
-  }, [session.value]);
+    const address = session.user.did;
+    const { state: account } = await forge.getAccountState({ address });
+    return account;
+  }, []);
 
   const onLogout = () => {
     session.logout();
