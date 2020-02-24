@@ -1,18 +1,13 @@
 /* eslint-disable react/jsx-one-expression-per-line */
-import React, { useEffect, useState } from 'react';
-import qs from 'querystring';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 
 import Typography from '@material-ui/core/Typography';
-import CircularProgress from '@material-ui/core/CircularProgress';
 import WalletDownload from '@arcblock/ux/lib/Wallet/Download';
 import Tag from '@arcblock/ux/lib/Tag';
-import Auth from '@arcblock/did-react/lib/Auth';
 
 import Layout from '../components/layout';
-import useSession from '../hooks/session';
-import api from '../libs/api';
-import { setToken } from '../libs/auth';
+import { SessionContext } from '../libs/session';
 
 import AuthButton from '../components/auth/general';
 import SignButton from '../components/auth/auth/sign';
@@ -38,64 +33,8 @@ import TransferTokenAssetOut from '../components/auth/transfer_token_asset_out';
 import { version } from '../../package.json';
 
 export default function IndexPage() {
-  const session = useSession();
-  const [open, setOpen] = useState(false);
-
-  useEffect(() => {
-    if (session.value && !session.value.user && window.location.search) {
-      const params = qs.parse(window.location.search.slice(1));
-      try {
-        if (params.openLogin && JSON.parse(params.openLogin)) {
-          setOpen(true);
-        }
-      } catch (err) {
-        // Do nothing
-      }
-    }
-    // eslint-disable-next-line
-  }, [session]);
-
-  const onLogin = async result => {
-    if (result.sessionToken) {
-      setToken(result.sessionToken);
-    }
-    window.location.reload();
-  };
-
-  if (session.loading || !session.value) {
-    return (
-      <Layout title="Home">
-        <Main>
-          <CircularProgress size={64} color="secondary" />
-        </Main>
-      </Layout>
-    );
-  }
-
-  if (open || (session.value && !session.value.user)) {
-    return (
-      <Layout title="Home">
-        <Main>
-          <Auth
-            responsive
-            action="login"
-            checkFn={api.get}
-            socketUrl={api.socketUrl}
-            onClose={() => setOpen(false)}
-            onSuccess={onLogin}
-            messages={{
-              title: 'login',
-              scan: 'Scan QR code with ABT Wallet',
-              confirm: 'Confirm login on your ABT Wallet',
-              success: 'You have successfully signed in!',
-            }}
-          />
-        </Main>
-      </Layout>
-    );
-  }
-
-  const { token, assetToken } = session.value;
+  const { session } = useContext(SessionContext);
+  const { token, assetToken } = session;
 
   return (
     <Layout title="Home">
@@ -114,8 +53,8 @@ export default function IndexPage() {
             </Typography>
           </Typography>
           <div className="section__content">
-            <FundTbaButton {...session.value} />
-            <FundPlayButton {...session.value} />
+            <FundTbaButton {...session} />
+            <FundPlayButton {...session} />
           </div>
         </section>
         <section className="section">
@@ -126,14 +65,14 @@ export default function IndexPage() {
             </Typography>
           </Typography>
           <div className="section__content">
-            <BuyBadgeButton {...session.value} />
-            <BuyTicketButton {...session.value} />
-            <CertificateButton {...session.value} action="buy" />
-            <CertificateButton {...session.value} action="sell" />
-            <SwapTokenButton {...session.value} action="buy" />
-            <SwapTokenButton {...session.value} action="sell" />
-            <SwapBadgesButton {...session.value} action="buy" />
-            <SwapBadgesButton {...session.value} action="sell" />
+            <BuyBadgeButton {...session} />
+            <BuyTicketButton {...session} />
+            <CertificateButton {...session} action="buy" />
+            <CertificateButton {...session} action="sell" />
+            <SwapTokenButton {...session} action="buy" />
+            <SwapTokenButton {...session} action="sell" />
+            <SwapBadgesButton {...session} action="buy" />
+            <SwapBadgesButton {...session} action="sell" />
           </div>
         </section>
         <section className="section">
@@ -144,12 +83,12 @@ export default function IndexPage() {
             </Typography>
           </Typography>
           <div className="section__content">
-            <TransferTokenOut {...session.value} />
-            <TransferTokenIn {...session.value} />
-            <TransferAssetOut {...session.value} />
-            <TransferAssetIn {...session.value} />
-            <TransferTokenAssetIn {...session.value} />
-            <TransferTokenAssetOut {...session.value} />
+            <TransferTokenOut {...session} />
+            <TransferTokenIn {...session} />
+            <TransferAssetOut {...session} />
+            <TransferAssetIn {...session} />
+            <TransferTokenAssetIn {...session} />
+            <TransferTokenAssetOut {...session} />
           </div>
         </section>
         <section className="section">
@@ -160,19 +99,19 @@ export default function IndexPage() {
             </Typography>
           </Typography>
           <div className="section__content">
-            <Exchange {...session.value} receiveType="asset" payType="token" />
-            <Exchange {...session.value} receiveType="token" payType="asset" />
-            <Exchange {...session.value} receiveType="asset" payType="asset" />
-            <Exchange {...session.value} receiveType="asset" receiveCount={2} payType="asset" />
-            <Exchange {...session.value} receiveType="asset" payCount={2} payType="asset" />
-            <Exchange {...session.value} receiveType="asset" receiveCount={2} payType="asset" payCount={2} />
-            <Exchange {...session.value} receiveType="token" receiveCount={2} payType="asset" payCount={2} />
-            <Exchange {...session.value} receiveType="asset" receiveCount={5} payType="token" payCount={1} />
-            <Exchange {...session.value} receiveCount={5} receiveType="asset" payCount={5} payType="asset" />
-            <Exchange {...session.value} receiveType="token" receiveCount={100000} payType="asset" payCount={1} />
-            <Exchange {...session.value} receiveType="token" receiveCount={0.001} payType="asset" payCount={1} />
-            <Exchange {...session.value} receiveType="token" receiveCount={100000.0001} payType="asset" payCount={1} />
-            <Exchange {...session.value} receiveType="token" receiveCount={0.000001} payType="asset" payCount={1} />
+            <Exchange {...session} receiveType="asset" payType="token" />
+            <Exchange {...session} receiveType="token" payType="asset" />
+            <Exchange {...session} receiveType="asset" payType="asset" />
+            <Exchange {...session} receiveType="asset" receiveCount={2} payType="asset" />
+            <Exchange {...session} receiveType="asset" payCount={2} payType="asset" />
+            <Exchange {...session} receiveType="asset" receiveCount={2} payType="asset" payCount={2} />
+            <Exchange {...session} receiveType="token" receiveCount={2} payType="asset" payCount={2} />
+            <Exchange {...session} receiveType="asset" receiveCount={5} payType="token" payCount={1} />
+            <Exchange {...session} receiveCount={5} receiveType="asset" payCount={5} payType="asset" />
+            <Exchange {...session} receiveType="token" receiveCount={100000} payType="asset" payCount={1} />
+            <Exchange {...session} receiveType="token" receiveCount={0.001} payType="asset" payCount={1} />
+            <Exchange {...session} receiveType="token" receiveCount={100000.0001} payType="asset" payCount={1} />
+            <Exchange {...session} receiveType="token" receiveCount={0.000001} payType="asset" payCount={1} />
           </div>
         </section>
         <section className="section">
@@ -245,11 +184,11 @@ export default function IndexPage() {
                 success: 'DID holding confirmed',
               }}
             />
-            <SignButton {...session.value} type="transaction" />
-            <SignButton {...session.value} type="text" />
-            <SignButton {...session.value} type="html" />
-            <SignButton {...session.value} type="digest" />
-            <AgentButton {...session.value} />
+            <SignButton {...session} type="transaction" />
+            <SignButton {...session} type="text" />
+            <SignButton {...session} type="html" />
+            <SignButton {...session} type="digest" />
+            <AgentButton {...session} />
             <AuthButton
               button="Multiple Claims"
               action="claim_multiple"
@@ -302,7 +241,7 @@ export default function IndexPage() {
           <div className="section__content">
             <AcquireMovieTicket count={1} />
             <AcquireMovieTicket count={2} />
-            <ConsumeAssetButton {...session.value} />
+            <ConsumeAssetButton {...session} />
           </div>
         </section>
         <section className="section">

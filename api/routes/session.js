@@ -5,7 +5,7 @@ const isNetlify = process.env.NETLIFY && JSON.parse(process.env.NETLIFY);
 
 module.exports = {
   init(app) {
-    app.get('/api/session', async (req, res) => {
+    app.get('/api/did/session', async (req, res) => {
       const data = await getTokenInfo();
       res.json({
         user: req.user,
