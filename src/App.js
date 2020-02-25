@@ -13,7 +13,7 @@ import MiniPage from './pages/index';
 
 import theme from './libs/theme';
 import env from './libs/env';
-import { SessionProvider } from './libs/session';
+import { SessionProvider } from './components/PlaygroundAction/session';
 
 const GlobalStyle = createGlobalStyle`
   a {

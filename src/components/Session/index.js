@@ -109,6 +109,7 @@ export default function createSessionContext(storageKey = 'login_token') {
       const { user, open, error, loading } = this.state;
 
       const state = {
+        api: this.service,
         session: {
           error,
           loading,

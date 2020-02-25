@@ -6,7 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import Tag from '@arcblock/ux/lib/Tag';
 
 import Layout from '../components/layout';
-import { SessionContext } from '../libs/session';
+import { SessionContext } from '../components/PlaygroundAction/session';
 
 import FundTbaButton from '../components/auth/fund_tba';
 import FundPlayButton from '../components/auth/fund_play';

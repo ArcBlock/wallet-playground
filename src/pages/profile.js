@@ -16,7 +16,7 @@ import Button from '@arcblock/ux/lib/Button';
 
 import Layout from '../components/layout';
 import forge from '../libs/sdk';
-import { SessionContext } from '../libs/session';
+import { SessionContext } from '../components/PlaygroundAction/session';
 
 export default function ProfilePage() {
   const { session } = useContext(SessionContext);
