@@ -7,6 +7,7 @@ import Tag from '@arcblock/ux/lib/Tag';
 
 import Layout from '../components/layout';
 import { SessionContext } from '../components/PlaygroundAction/session';
+import PlaygroundAction from '../components/PlaygroundAction';
 
 import FundTbaButton from '../components/auth/fund_tba';
 import FundPlayButton from '../components/auth/fund_play';
@@ -38,7 +39,12 @@ export default function MiniPage() {
             </Typography>
           </Typography>
           <div className="section__content">
-            <FundTbaButton {...session} action="fund_foreign" />
+            <PlaygroundAction
+              action="recharge_foreign"
+              className="action"
+              buttonText={`Get ${assetToken.symbol}`}
+              title={`Get ${assetToken.symbol}`}
+            />
             <FundPlayButton {...session} action="fund_local" />
           </div>
         </section>

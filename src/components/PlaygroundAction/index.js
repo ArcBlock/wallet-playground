@@ -11,25 +11,26 @@ import { SessionContext } from './session';
 // A white list of supported buttons
 const actions = {
   // Currency
-  ChargeLocal: 'fund_local',
-  ChargeForeign: 'fund_foreign',
-  SwapToken: 'swap_token',
+  recharge_local: 'fund_local',
+  recharge_foreign: 'fund_foreign',
+  swap_to_foreign: 'swap_token',
+  swap_to_local: 'swap_token',
 
   // Atomic swap
-  BuyForeignBadge: 'swap_badge',
-  SellForeignBadge: 'swap_badge',
-  BuyForeignCertificate: 'swap_certificate',
-  SellForeignCertificate: 'swap_certificate',
-  BuyForeignTicket: 'swap_ticket',
-  SellForeignTicket: 'swap_ticket',
+  buy_foreign_badge: 'swap_badge',
+  sell_foreign_badge: 'swap_badge',
+  buy_foreign_certificate: 'swap_certificate',
+  sell_foreign_certificate: 'swap_certificate',
+  buy_foreign_ticket: 'swap_ticket',
+  sell_foreign_ticket: 'swap_ticket',
 
   // Exchange
-  BuyLocalBadge: 'swap_badge',
-  SellLocalBadge: 'swap_badge',
-  BuyLocalCertificate: 'swap_certificate',
-  SellLocalCertificate: 'swap_certificate',
-  BuyLocalTicket: 'swap_ticket',
-  SellLocalTicket: 'swap_ticket',
+  buy_local_badge: 'swap_badge',
+  sell_local_badge: 'swap_badge',
+  buy_local_certificate: 'swap_certificate',
+  sell_local_certificate: 'swap_certificate',
+  buy_local_ticket: 'swap_ticket',
+  sell_local_ticket: 'swap_ticket',
 };
 
 export default function PlaygroundAction({
@@ -43,19 +44,24 @@ export default function PlaygroundAction({
   successMessage,
   confirmMessage,
   extraParams,
+  ...rest
 }) {
   const { api } = useContext(SessionContext);
   const [open, setOpen] = useState(false);
 
+  if (!actions[action]) {
+    throw new Error(`Supported playground action type ${action}`);
+  }
+
   return (
     <React.Fragment>
-      <Button color={buttonColor} variant={buttonVariant} size={buttonSize} onClick={() => setOpen(true)}>
+      <Button {...rest} color={buttonColor} variant={buttonVariant} size={buttonSize} onClick={() => setOpen(true)}>
         {buttonText}
       </Button>
       {open && (
         <Auth
           responsive
-          action={action}
+          action={actions[action]}
           checkFn={api.get}
           onClose={() => setOpen(false)}
           onSuccess={() => setOpen(false)}
