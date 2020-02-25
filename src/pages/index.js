@@ -42,6 +42,9 @@ export default function MiniPage() {
             <PlaygroundAction
               action="recharge_foreign"
               className="action"
+              buttonColor="danger"
+              buttonVariant="contained"
+              buttonRounded={false}
               buttonText={`Get ${assetToken.symbol}`}
               title={`Get ${assetToken.symbol}`}
             />

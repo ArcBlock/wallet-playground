@@ -39,6 +39,7 @@ export default function PlaygroundAction({
   buttonColor,
   buttonVariant,
   buttonSize,
+  buttonRounded,
   title,
   scanMessage,
   successMessage,
@@ -55,7 +56,13 @@ export default function PlaygroundAction({
 
   return (
     <React.Fragment>
-      <Button {...rest} color={buttonColor} variant={buttonVariant} size={buttonSize} onClick={() => setOpen(true)}>
+      <Button
+        {...rest}
+        rounded={buttonRounded}
+        color={buttonColor}
+        variant={buttonVariant}
+        size={buttonSize}
+        onClick={() => setOpen(true)}>
         {buttonText}
       </Button>
       {open && (
@@ -84,6 +91,7 @@ PlaygroundAction.propTypes = {
   buttonColor: PropTypes.string,
   buttonVariant: PropTypes.string,
   buttonSize: PropTypes.string,
+  buttonRounded: PropTypes.bool,
   title: PropTypes.string.isRequired,
   scanMessage: PropTypes.string,
   successMessage: PropTypes.string,
@@ -95,6 +103,7 @@ PlaygroundAction.defaultProps = {
   buttonColor: 'primary', // primary | secondary | reverse | error
   buttonVariant: 'contained', // contained | outlined | default
   buttonSize: 'large', // small | large | medium
+  buttonRounded: false,
   scanMessage: 'Scan the QRCode with your ABT Wallet',
   confirmMessage: 'Confirm in your ABT Wallet',
   successMessage: 'Operation success!',
