@@ -1,3 +1,4 @@
+/* eslint-disable react/destructuring-assignment */
 /* eslint-disable object-curly-newline */
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -8,7 +9,7 @@ import Auth from '@arcblock/did-react/lib/Auth/Login';
 import createService from '../Service';
 import createStorage from '../Storage';
 
-export default function createSessionContext(storageKey = 'login_token') {
+export default function createSessionContext(storageKey = 'login_token', requireLogin = true) {
   const storage = createStorage(storageKey);
   const { getToken, setToken, removeToken } = storage;
 
@@ -20,7 +21,7 @@ export default function createSessionContext(storageKey = 'login_token') {
       super(props);
 
       this.service = createService(props.serviceHost, storage);
-      this.state = { error: '', loading: true, open: false, user: null };
+      this.state = { error: '', loading: false, open: false, user: null };
 
       this.onLogin = this.onLogin.bind(this);
       this.onClose = this.onClose.bind(this);
@@ -55,8 +56,10 @@ export default function createSessionContext(storageKey = 'login_token') {
 
     async refresh(showProgress = false) {
       try {
-        if (showProgress) {
-          this.setState({ loading: true });
+        if (this.state.loading) {
+          // eslint-disable-next-line no-console
+          console.warn('SessionProvider.refresh is currently in progress, call it will be noop');
+          return;
         }
 
         const { prefix } = this.props;
@@ -64,22 +67,45 @@ export default function createSessionContext(storageKey = 'login_token') {
 
         if (status === 400) {
           removeToken();
-          this.setState(state => ({ user: null, error: '', loading: showProgress ? false : state.loading }));
-          return;
+          if (showProgress) {
+            this.setState({ user: null, error: '', loading: false });
+          } else {
+            this.setState({ user: null, error: '' });
+          }
         }
 
         if (data.error) {
-          this.setState(state => ({ error: data.error, open: false, loading: showProgress ? false : state.loading }));
+          if (showProgress) {
+            this.setState({ error: data.error, open: false, loading: false });
+          } else {
+            this.setState({ error: data.error, open: false });
+          }
+        } else if (requireLogin && data.user) {
+          if (showProgress) {
+            this.setState({ open: false, loading: false, ...data });
+          } else {
+            this.setState({ open: false, ...data });
+          }
         } else {
-          this.setState(state => ({ open: false, loading: showProgress ? false : state.loading, ...data }));
+          // eslint-disable-next-line no-lonely-if
+          if (showProgress) {
+            this.setState({ open: true, loading: true, ...data });
+          } else {
+            this.setState({ open: true, ...data });
+          }
         }
       } catch (err) {
-        this.setState(state => ({ error: err.message, loading: showProgress ? false : state.loading, open: false }));
+        // eslint-disable-next-line no-console
+        console.error('SessionProvider.refresh error', err);
+        if (showProgress) {
+          this.setState({ error: err.message, loading: false, open: false });
+        } else {
+          this.setState({ error: err.message, open: false });
+        }
       }
     }
 
     login() {
-      // eslint-disable-next-line react/destructuring-assignment
       if (this.state.user) {
         return;
       }
@@ -95,7 +121,7 @@ export default function createSessionContext(storageKey = 'login_token') {
       const token = loginToken || sessionToken;
       if (token) {
         setToken(token);
-        this.refresh(true);
+        this.setState({ loading: false }, () => this.refresh(true));
       }
     }
 
@@ -104,20 +130,17 @@ export default function createSessionContext(storageKey = 'login_token') {
     }
 
     render() {
-      // eslint-disable-next-line object-curly-newline
       const { children, action, prefix, locale, timeout, extraParams } = this.props;
-      const { user, open, error, loading } = this.state;
+      const { user, open, loading } = this.state;
 
       const state = {
         api: this.service,
         session: {
-          error,
-          loading,
-          user,
+          ...this.state,
+          loading: requireLogin ? !user || loading : loading,
           login: this.login,
           logout: this.logout,
           refresh: this.refresh,
-          ...this.state,
         },
       };
 
