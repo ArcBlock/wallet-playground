@@ -14,37 +14,34 @@ async function createSwapOrder(api) {
   return { traceId: res.data.traceId };
 }
 
-// A white list of supported buttons
 const actions = {
   // Currency
-  recharge_local: 'fund_local',
-  recharge_foreign: 'fund_foreign',
-  exchange_to_foreign: {
+  receive_local_token: {
+    action: 'receive_token',
+    extraParams: props => ({ chain: 'local', amount: props.amount || 1 }),
+  },
+  receive_foreign_token: {
+    action: 'receive_token',
+    extraParams: props => ({ chain: 'foreign', amount: props.amount || 1 }),
+  },
+  send_local_token: {
+    action: 'send_token',
+    extraParams: props => ({ chain: 'local', amount: props.amount || 1 }),
+  },
+  send_foreign_token: {
+    action: 'send_token',
+    extraParams: props => ({ chain: 'foreign', amount: props.amount || 1 }),
+  },
+  exchange_to_foreign_token: {
     action: 'swap_token',
     onStart: createSwapOrder,
     extraParams: props => ({ action: 'buy', rate: props.exchangeRate }),
   },
-  exchange_to_local: {
+  exchange_to_local_token: {
     action: 'swap_token',
     onStart: createSwapOrder,
     extraParams: props => ({ action: 'sell', rate: props.exchangeRate }),
   },
-
-  // Atomic swap
-  buy_foreign_badge: 'swap_badge',
-  sell_foreign_badge: 'swap_badge',
-  buy_foreign_certificate: 'swap_certificate',
-  sell_foreign_certificate: 'swap_certificate',
-  buy_foreign_ticket: 'swap_ticket',
-  sell_foreign_ticket: 'swap_ticket',
-
-  // Exchange
-  buy_local_badge: 'swap_badge',
-  sell_local_badge: 'swap_badge',
-  buy_local_certificate: 'swap_certificate',
-  sell_local_certificate: 'swap_certificate',
-  buy_local_ticket: 'swap_ticket',
-  sell_local_ticket: 'swap_ticket',
 };
 
 const getActionName = (config, props) => {
@@ -68,12 +65,16 @@ const getActionParams = (config, props) => {
     return {};
   }
 
-  if (typeof config.extraParams === 'object') {
-    return config.extraParams;
+  if (!config.extraParams) {
+    return {};
   }
 
   if (typeof config.extraParams === 'function') {
     return config.extraParams(props);
+  }
+
+  if (typeof config.extraParams === 'object') {
+    return config.extraParams;
   }
 
   return {};
@@ -112,6 +113,7 @@ export default function PlaygroundAction({
         setDynamicParams(params);
         setLoading(false);
       } catch (err) {
+        // eslint-disable-next-line no-console
         console.error(`Cannot generate dynamicParams for playground action ${getActionName(config, rest)}`);
       }
       setOpen(true);
@@ -129,7 +131,7 @@ export default function PlaygroundAction({
         variant={buttonVariant}
         size={buttonSize}
         onClick={onStart}>
-        {buttonText} {loading && <CircularProgress size={12} color="#fff" />}
+        {buttonText || title} {loading && <CircularProgress size={12} color="#fff" />}
       </Button>
       {open && (
         <Auth
@@ -155,7 +157,7 @@ export default function PlaygroundAction({
 
 PlaygroundAction.propTypes = {
   action: PropTypes.string.isRequired,
-  buttonText: PropTypes.string.isRequired,
+  buttonText: PropTypes.string,
   buttonColor: PropTypes.string,
   buttonVariant: PropTypes.string,
   buttonSize: PropTypes.string,
@@ -169,6 +171,7 @@ PlaygroundAction.propTypes = {
 };
 
 PlaygroundAction.defaultProps = {
+  buttonText: '',
   buttonColor: 'primary', // primary | secondary | reverse | error
   buttonVariant: 'contained', // contained | outlined | default
   buttonSize: 'large', // small | large | medium

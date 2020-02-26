@@ -51,7 +51,12 @@ const getTokenInfo = async () => {
     { conn: env.assetChainId }
   );
 
-  return { [env.chainId]: data.state.token, [env.assetChainId]: data2.state.token };
+  return {
+    [env.chainId]: data.state.token,
+    [env.assetChainId]: data2.state.token,
+    local: data.state.token,
+    foreign: data2.state.token,
+  };
 };
 
 const getAccountStateOptions = { ignoreFields: [/\.withdrawItems/, /\.items/] };

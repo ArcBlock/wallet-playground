@@ -9,9 +9,6 @@ import Layout from '../components/layout';
 import { SessionContext } from '../components/PlaygroundAction/session';
 import PlaygroundAction from '../components/PlaygroundAction';
 
-import TransferTokenOut from '../components/auth/transfer_token_out';
-import TransferTokenIn from '../components/auth/transfer_token_in';
-
 import { version } from '../../package.json';
 
 // 临时 demo 的页面
@@ -37,20 +34,32 @@ export default function MiniPage() {
           </Typography>
           <div className="section__content">
             <PlaygroundAction
-              action="recharge_foreign"
+              action="receive_foreign_token"
               className="action"
               buttonColor="danger"
               buttonVariant="contained"
               buttonRounded={false}
-              buttonText={`Get ${assetToken.symbol}`}
-              title={`Get ${assetToken.symbol}`}
+              amount="random"
+              title={`Get Random ${assetToken.symbol}`}
             />
             <PlaygroundAction
-              action="recharge_local"
+              action="receive_foreign_token"
               className="action"
-              buttonVariant="contained"
-              buttonText={`Get ${token.symbol}`}
-              title={`Get ${token.symbol}`}
+              buttonColor="danger"
+              amount={10}
+              title={`Get 10 ${assetToken.symbol}`}
+            />
+            <PlaygroundAction
+              action="receive_local_token"
+              className="action"
+              amount="random"
+              title={`Get Random ${token.symbol}`}
+            />
+            <PlaygroundAction
+              action="receive_local_token"
+              className="action"
+              amount={9.99}
+              title={`Get 9.99 ${token.symbol}`}
             />
           </div>
         </section>
@@ -63,7 +72,7 @@ export default function MiniPage() {
           </Typography>
           <div className="section__content">
             <PlaygroundAction
-              action="exchange_to_foreign"
+              action="exchange_to_foreign_token"
               title="Exchange Currency"
               className="action"
               buttonVariant="contained"
@@ -71,7 +80,7 @@ export default function MiniPage() {
               exchangeRate={5}
             />
             <PlaygroundAction
-              action="exchange_to_local"
+              action="exchange_to_local_token"
               title="Exchange Currency"
               className="action"
               buttonVariant="contained"
@@ -88,8 +97,20 @@ export default function MiniPage() {
             </Typography>
           </Typography>
           <div className="section__content">
-            <TransferTokenOut {...session} />
-            <TransferTokenIn {...session} />
+            <PlaygroundAction
+              action="send_foreign_token"
+              className="action"
+              buttonVariant="contained"
+              amount={0.1}
+              title={`Send 0.1 ${assetToken.symbol}`}
+            />
+            <PlaygroundAction
+              action="send_local_token"
+              className="action"
+              buttonVariant="contained"
+              amount={10}
+              title={`Send 10 ${token.symbol}`}
+            />
           </div>
         </section>
       </Main>

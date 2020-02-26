@@ -9,6 +9,10 @@ module.exports = {
   action: 'swap_token',
   claims: {
     swap: async ({ userDid, extraParams: { traceId, action, rate } }) => {
+      if (!Number(rate)) {
+        throw new Error('Invalid rate param for swap token playground action');
+      }
+
       if (action === 'buy') {
         // User buy 1 TBA with 5 Play
         try {
