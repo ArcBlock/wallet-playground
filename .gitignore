@@ -28,3 +28,4 @@ api/dist
 .vscode
 node_modules
 coverage
+packages/did-playground/lib
