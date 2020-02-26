@@ -6,6 +6,6 @@ lerna run build
 lerna publish $VERSION --yes
 
 # update readme
-node tools/update-readme.js
+node scripts/update-readme.js
 git commit -nam 'update readme'
 git push origin master --no-verify
