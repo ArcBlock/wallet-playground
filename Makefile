@@ -35,10 +35,6 @@ all: pre-build build post-build
 test:
 	@echo "Running test suites..."
 
-lint:
-	@echo "Linting the software..."
-	@yarn lint
-
 doc:
 	@echo "Building the documenation..."
 
