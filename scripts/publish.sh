@@ -10,7 +10,7 @@ git branch -a
 changed=$(lerna changed)
 echo "lerna changed ${changed}"
 if [ "$changed" != "" ]; then
-  DEBUG=* node tools/setup-ci.js
+  DEBUG=* node scripts/setup-ci.js
 
   git checkout master
   git commit -am "update yarn.lock file"
@@ -26,5 +26,5 @@ if [ "$changed" != "" ]; then
 	make release
 
   # trigger cnpm sync
-  node tools/post-publish.js
+  node scripts/post-publish.js
 fi
