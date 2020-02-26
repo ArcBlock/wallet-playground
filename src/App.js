@@ -25,7 +25,7 @@ const GlobalStyle = createGlobalStyle`
 export const App = () => (
   <MuiThemeProvider theme={theme}>
     <ThemeProvider theme={theme}>
-      <SessionProvider serviceHost={env.baseUrl}>
+      <SessionProvider serviceHost={env.baseUrl} autoLogin>
         {({ session }) => {
           if (session.loading) {
             return <CircularProgress />;
