@@ -6,7 +6,13 @@ branches:
   only:
   - master
 script: make travis
-before_deploy: make travis-deploy
+deploy:
+- provider: script
+  skip_cleanup: true
+  script: bash ./scripts/publish.sh
+  on:
+    branch: master
+    node_js: 12
 env:
   global:
   - secure: EFxV6rmAOrTKHB/zdn40tC0N9wohjZ2licW7XDsBFCgAKPrHYexzlq49EvgcC6lilfamrHSA80bl2Rl9d2TPb1+0Xk5RKVrkb9B/xx0xxk3NWD2oY1LWxsxkOBlhGbMv+THNxm52mr9Os7THt+caLgR5rXMUmfjgMiG0YRTUPbxVIs/LBNht+hfO+z2q4R2LY5vR5JjhEjxc2VhQVCgiprxJvA3pUaa5X6nIAqhh12Re5xPUnM/hPZu4hLk1KLSzl1V9Q/c4zqBKxTezD/cW/maIEjVt/ZgihxgaXajHBNgpD+xDm/ndr2FaznkJA13i8MEiTYgKgDupVI58xIzdautX00gDRekh1ZdNtXijzjMGcx0l4rp4HUt/txI0PxKIBcyeaClSqFrshklUQlHsI7nX87f5I7VlD7oOoDOlNGnnN/05s1NbMKAvB5g3PilODCLKuCqEqhZrm/QPk5ROgeouB4Nun9AQp4oGw9qSzp17VNGRE0KAuYn62BEWdrVo1WJmjHohm8lwbIwACnGlHbKt7FSQyuUJOXFpR3HUIBNgGw6EnH0iKvP/8FyODsewOsoJpymGxQr8dacPzyAG0jwSFi79zGOCbPw7e9A6kmzQT6WU0lOMuPcft3PYoozlMh5KAbyjOyTWAnMnRw4BOAepypzQflub/6zlojfUfWA=
