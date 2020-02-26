@@ -54,7 +54,7 @@ travis: init coverage
 
 travis-deploy:
 	@echo "Deploy the software by travis"
-	@bash ./tools/publish.sh
+	@bash ./scripts/publish.sh
 
 clean:
 	@echo "Cleaning the build..."
