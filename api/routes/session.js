@@ -1,6 +1,5 @@
 const env = require('../libs/env');
 const { getTokenInfo } = require('../libs/util');
-const { getExchangeRate } = require('../libs/currency');
 
 const isNetlify = process.env.NETLIFY && JSON.parse(process.env.NETLIFY);
 
@@ -12,7 +11,6 @@ module.exports = {
         user: req.user,
         token: data[env.chainId],
         assetToken: data[env.assetChainId],
-        exchangeRate: isNetlify ? getExchangeRate() : 5,
       });
     });
 
