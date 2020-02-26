@@ -32,6 +32,7 @@ if (env.chainHost) {
 
 const wallet = fromSecretKey(process.env.APP_SK, type).toJSON();
 const isRestricted = process.env.APP_RESTRICTED_DECLARE && JSON.parse(process.env.APP_RESTRICTED_DECLARE);
+const isNetlify = process.env.NETLIFY && JSON.parse(process.env.NETLIFY);
 
 let icon = 'https://releases.arcblockio.cn/playground.png';
 if (process.env.STAGING && JSON.parse(process.env.STAGING)) {
@@ -39,7 +40,7 @@ if (process.env.STAGING && JSON.parse(process.env.STAGING)) {
 }
 const walletAuth = new WalletAuthenticator({
   wallet,
-  baseUrl: env.baseUrl,
+  baseUrl: isNetlify ? env.baseUrl.replace('/.netlify/functions/app', '') : env.baseUrl,
   appInfo: {
     name: env.appName,
     description: env.appDescription,
