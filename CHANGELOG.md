@@ -1,3 +1,7 @@
+## 0.63.0 (February 26, 2020)
+
+- fix: lerna publish
+
 ## 0.62.0 (February 26, 2020)
 
 
