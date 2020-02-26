@@ -1,3 +1,13 @@
+## 0.64.0 (February 27, 2020)
+
+- fix: onStart when user not logged in is not properly handled
+- fix: rename requireLogin to autoLogin
+- fix: support xmark props for playground action button
+- fix: currency page
+- fix: netlify api prefix
+- [skip ci] fix: publis script
+- update readme
+
 ## 0.63.0 (February 26, 2020)
 
 - fix: lerna publish
