@@ -35,30 +35,15 @@ export default function MiniPage() {
             <PlaygroundAction
               action="receive_foreign_token"
               className="action"
-              buttonColor="danger"
               buttonVariant="contained"
-              buttonRounded={false}
-              amount="random"
-              title={`Get Random ${assetToken.symbol}`}
-            />
-            <PlaygroundAction
-              action="receive_foreign_token"
-              className="action"
-              buttonColor="danger"
               amount={10}
               title={`Get 10 ${assetToken.symbol}`}
             />
             <PlaygroundAction
               action="receive_local_token"
               className="action"
-              amount="random"
-              title={`Get Random ${token.symbol}`}
-            />
-            <PlaygroundAction
-              action="receive_local_token"
-              className="action"
-              amount={9.99}
-              title={`Get 9.99 ${token.symbol}`}
+              amount={400}
+              title={`Get 400 ${token.symbol}`}
             />
           </div>
         </section>
@@ -75,16 +60,16 @@ export default function MiniPage() {
               title="Exchange Currency"
               className="action"
               buttonVariant="contained"
-              buttonText={`Buy 1 ${assetToken.symbol} with 5 ${token.symbol}`}
-              exchangeRate={5}
+              buttonText={`Buy 1 ${assetToken.symbol} with 195.8 ${token.symbol}`}
+              exchangeRate={195.8}
             />
             <PlaygroundAction
               action="exchange_to_local_token"
               title="Exchange Currency"
               className="action"
               buttonVariant="contained"
-              buttonText={`Sell 1 ${assetToken.symbol} for 5 ${token.symbol}`}
-              exchangeRate={5}
+              buttonText={`Sell 1 ${assetToken.symbol} for 195.8 ${token.symbol}`}
+              exchangeRate={195.8}
             />
           </div>
         </section>
