@@ -46,6 +46,6 @@
   "publishConfig": {
     "access": "public"
   },
-  "devDependencies": {},
-  "gitHead": "e8a64a410287cda986b687d2edc9daf200185b99"
+  "devDependencies": {
+  }
 }
