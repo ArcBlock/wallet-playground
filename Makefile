@@ -3,8 +3,11 @@ README=$(TOP_DIR)/README.md
 
 VERSION=$(strip $(shell cat version))
 
-build:
+build: init
 	@echo "Building the software..."
+	@cd packages/did-playground && yarn link
+	@yarn link @arcblock/did-playground
+	@yarn build
 
 init: install dep
 	@echo "Initializing the repo..."
