@@ -75,16 +75,16 @@
 "@arcblock/did-playground@./packages/did-playground":
   version "0.61.0"
   dependencies:
-    "@arcblock/did-react" "^0.68.0"
+    "@arcblock/did-react" "^0.68.1"
     "@arcblock/ux" "^0.68.0"
     "@material-ui/core" "^4.9.1"
     axios "^0.19.2"
     core-js "^3.6.4"
 
-"@arcblock/did-react@^0.68.0":
-  version "0.68.0"
-  resolved "https://registry.yarnpkg.com/@arcblock/did-react/-/did-react-0.68.0.tgz#7c648b60eecf176e9549e4db77efec29239935c6"
-  integrity sha512-5y1+daSGEl4Pwo6/oCCOC5hYfBaR1vHwkUIwLiVkYJEyH3IBEovtQwD6TsUWkngJFlQuuMGtw1T+yyWU0eF2lw==
+"@arcblock/did-react@^0.68.1":
+  version "0.68.1"
+  resolved "https://registry.yarnpkg.com/@arcblock/did-react/-/did-react-0.68.1.tgz#5c64f348ba7e95e4b8462aa68705b3378a752408"
+  integrity sha512-b/Z2yT161RMQCeSi+4bnKLj/vqurxE8MMWb5RDUMdWMY0VtBmH1RjerRZW3zcJ9hEtBb0UqCXyemMiTFg6vo+g==
   dependencies:
     "@arcblock/event-client" "^1.0.23"
     "@arcblock/react-hooks" "^0.68.0"
@@ -10142,7 +10142,7 @@ node-notifier@^5.4.2:
     shellwords "^0.1.1"
     which "^1.3.0"
 
-node-pre-gyp@*, node-pre-gyp@^0.14.0:
+node-pre-gyp@^0.14.0:
   version "0.14.0"
   resolved "https://registry.yarnpkg.com/node-pre-gyp/-/node-pre-gyp-0.14.0.tgz#9a0596533b877289bcad4e143982ca3d904ddc83"
   integrity sha512-+CvDC7ZttU/sSt9rFjix/P05iS43qHCOOGzcr3Ry99bXG7VX953+vFyEuph/tfqoYu8dttBkE86JSKBO2OzcxA==
