@@ -4,15 +4,11 @@ const ForgeSDK = require('@arcblock/forge-sdk');
 
 const env = require('../../libs/env');
 const { swapStorage, wallet } = require('../../libs/auth');
-const { getExchangeRate } = require('../../libs/currency');
-
-const isNetlify = process.env.NETLIFY && JSON.parse(process.env.NETLIFY);
 
 module.exports = {
-  action: 'swap-token',
+  action: 'swap_token',
   claims: {
-    swap: async ({ userDid, extraParams: { traceId, action } }) => {
-      const rate = isNetlify ? getExchangeRate() : 5;
+    swap: async ({ userDid, extraParams: { traceId, action, rate } }) => {
       if (action === 'buy') {
         // User buy 1 TBA with 5 Play
         try {

@@ -9,9 +9,6 @@ import Layout from '../components/layout';
 import { SessionContext } from '../components/PlaygroundAction/session';
 import PlaygroundAction from '../components/PlaygroundAction';
 
-import FundTbaButton from '../components/auth/fund_tba';
-import FundPlayButton from '../components/auth/fund_play';
-import SwapTokenButton from '../components/auth/swap_token';
 import TransferTokenOut from '../components/auth/transfer_token_out';
 import TransferTokenIn from '../components/auth/transfer_token_in';
 
@@ -48,7 +45,13 @@ export default function MiniPage() {
               buttonText={`Get ${assetToken.symbol}`}
               title={`Get ${assetToken.symbol}`}
             />
-            <FundPlayButton {...session} action="fund_local" />
+            <PlaygroundAction
+              action="recharge_local"
+              className="action"
+              buttonVariant="contained"
+              buttonText={`Get ${token.symbol}`}
+              title={`Get ${token.symbol}`}
+            />
           </div>
         </section>
         <section className="section">
@@ -59,8 +62,22 @@ export default function MiniPage() {
             </Typography>
           </Typography>
           <div className="section__content">
-            <SwapTokenButton {...session} action="buy" />
-            <SwapTokenButton {...session} action="sell" />
+            <PlaygroundAction
+              action="exchange_to_foreign"
+              title="Exchange Currency"
+              className="action"
+              buttonVariant="contained"
+              buttonText={`Buy 1 ${assetToken.symbol} with 5 ${token.symbol}`}
+              exchangeRate={5}
+            />
+            <PlaygroundAction
+              action="exchange_to_local"
+              title="Exchange Currency"
+              className="action"
+              buttonVariant="contained"
+              buttonText={`Sell 1 ${assetToken.symbol} for 5 ${token.symbol}`}
+              exchangeRate={5}
+            />
           </div>
         </section>
         <section className="section">
