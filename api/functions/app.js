@@ -106,12 +106,15 @@ app.use((req, res, next) => {
 
 const router = express.Router();
 
+// Currency
+walletHandlers.attach(Object.assign({ app: router }, require('../routes/auth/receive_token')));
+walletHandlers.attach(Object.assign({ app: router }, require('../routes/auth/send_token')));
+swapHandlers.attach(Object.assign({ app: router }, require('../routes/auth/swap_token')));
+
 walletHandlers.attach(Object.assign({ app: router }, require('../routes/auth/login')));
 walletHandlers.attach(Object.assign({ app: router }, require('../routes/auth/payment')));
 walletHandlers.attach(Object.assign({ app: router }, require('../routes/auth/fund_play')));
 walletHandlers.attach(Object.assign({ app: router }, require('../routes/auth/fund_tba')));
-walletHandlers.attach(Object.assign({ app: router }, require('../routes/auth/fund_local')));
-walletHandlers.attach(Object.assign({ app: router }, require('../routes/auth/fund_foreign')));
 walletHandlers.attach(Object.assign({ app: router }, require('../routes/auth/claim_profile')));
 walletHandlers.attach(Object.assign({ app: router }, require('../routes/auth/claim_signature')));
 walletHandlers.attach(Object.assign({ app: router }, require('../routes/auth/claim_create_did')));
@@ -121,8 +124,6 @@ walletHandlers.attach(Object.assign({ app: router }, require('../routes/auth/cla
 walletHandlers.attach(Object.assign({ app: router }, require('../routes/auth/claim_multiple_step')));
 walletHandlers.attach(Object.assign({ app: router }, require('../routes/auth/error')));
 walletHandlers.attach(Object.assign({ app: router }, require('../routes/auth/timeout')));
-walletHandlers.attach(Object.assign({ app: router }, require('../routes/auth/transfer_token_in')));
-walletHandlers.attach(Object.assign({ app: router }, require('../routes/auth/transfer_token_out')));
 walletHandlers.attach(Object.assign({ app: router }, require('../routes/auth/transfer_asset_out')));
 walletHandlers.attach(Object.assign({ app: router }, require('../routes/auth/transfer_asset_in')));
 walletHandlers.attach(Object.assign({ app: router }, require('../routes/auth/transfer_token_asset_in')));
@@ -133,7 +134,6 @@ walletHandlers.attach(Object.assign({ app: router }, require('../routes/auth/exc
 swapHandlers.attach(Object.assign({ app: router }, require('../routes/auth/pickup_swap')));
 swapHandlers.attach(Object.assign({ app: router }, require('../routes/auth/swap_badge')));
 swapHandlers.attach(Object.assign({ app: router }, require('../routes/auth/swap_badges')));
-swapHandlers.attach(Object.assign({ app: router, signedResponse: true }, require('../routes/auth/swap_token')));
 swapHandlers.attach(Object.assign({ app: router }, require('../routes/auth/swap_ticket')));
 swapHandlers.attach(Object.assign({ app: router }, require('../routes/auth/swap_certificate')));
 agentHandlers.attach(Object.assign({ app: router }, require('../routes/auth/claim_profile'))); // we can reuse something here

@@ -6,9 +6,9 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Link from '@material-ui/core/Link';
 import UserAvatar from '@arcblock/did-react/lib/Avatar';
+import { SessionContext } from '@arcblock/did-playground';
 
 import env from '../libs/env';
-import { SessionContext } from '../libs/session';
 
 export default function Header() {
   const { session } = useContext(SessionContext);

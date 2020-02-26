@@ -5,9 +5,9 @@ import styled from 'styled-components';
 import Typography from '@material-ui/core/Typography';
 import WalletDownload from '@arcblock/ux/lib/Wallet/Download';
 import Tag from '@arcblock/ux/lib/Tag';
+import { SessionContext } from '@arcblock/did-playground';
 
 import Layout from '../components/layout';
-import { SessionContext } from '../libs/session';
 
 import AuthButton from '../components/auth/general';
 import SignButton from '../components/auth/auth/sign';

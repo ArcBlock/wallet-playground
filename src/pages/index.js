@@ -4,23 +4,15 @@ import styled from 'styled-components';
 
 import Typography from '@material-ui/core/Typography';
 import Tag from '@arcblock/ux/lib/Tag';
+import { SessionContext, PlaygroundAction } from '@arcblock/did-playground';
 
 import Layout from '../components/layout';
-import { SessionContext } from '../libs/session';
-
-import FundTbaButton from '../components/auth/fund_tba';
-import FundPlayButton from '../components/auth/fund_play';
-import SwapTokenButton from '../components/auth/swap_token';
-import TransferTokenOut from '../components/auth/transfer_token_out';
-import TransferTokenIn from '../components/auth/transfer_token_in';
 
 import { version } from '../../package.json';
 
 // 临时 demo 的页面
 export default function MiniPage() {
   const { session } = useContext(SessionContext);
-  console.log(session);
-
   const { token, assetToken } = session;
 
   return (
@@ -40,8 +32,34 @@ export default function MiniPage() {
             </Typography>
           </Typography>
           <div className="section__content">
-            <FundTbaButton {...session} action="fund_foreign" />
-            <FundPlayButton {...session} action="fund_local" />
+            <PlaygroundAction
+              action="receive_foreign_token"
+              className="action"
+              buttonColor="danger"
+              buttonVariant="contained"
+              buttonRounded={false}
+              amount="random"
+              title={`Get Random ${assetToken.symbol}`}
+            />
+            <PlaygroundAction
+              action="receive_foreign_token"
+              className="action"
+              buttonColor="danger"
+              amount={10}
+              title={`Get 10 ${assetToken.symbol}`}
+            />
+            <PlaygroundAction
+              action="receive_local_token"
+              className="action"
+              amount="random"
+              title={`Get Random ${token.symbol}`}
+            />
+            <PlaygroundAction
+              action="receive_local_token"
+              className="action"
+              amount={9.99}
+              title={`Get 9.99 ${token.symbol}`}
+            />
           </div>
         </section>
         <section className="section">
@@ -52,8 +70,22 @@ export default function MiniPage() {
             </Typography>
           </Typography>
           <div className="section__content">
-            <SwapTokenButton {...session} action="buy" />
-            <SwapTokenButton {...session} action="sell" />
+            <PlaygroundAction
+              action="exchange_to_foreign_token"
+              title="Exchange Currency"
+              className="action"
+              buttonVariant="contained"
+              buttonText={`Buy 1 ${assetToken.symbol} with 5 ${token.symbol}`}
+              exchangeRate={5}
+            />
+            <PlaygroundAction
+              action="exchange_to_local_token"
+              title="Exchange Currency"
+              className="action"
+              buttonVariant="contained"
+              buttonText={`Sell 1 ${assetToken.symbol} for 5 ${token.symbol}`}
+              exchangeRate={5}
+            />
           </div>
         </section>
         <section className="section">
@@ -64,8 +96,20 @@ export default function MiniPage() {
             </Typography>
           </Typography>
           <div className="section__content">
-            <TransferTokenOut {...session} />
-            <TransferTokenIn {...session} />
+            <PlaygroundAction
+              action="send_foreign_token"
+              className="action"
+              buttonVariant="contained"
+              amount={0.1}
+              title={`Send 0.1 ${assetToken.symbol}`}
+            />
+            <PlaygroundAction
+              action="send_local_token"
+              className="action"
+              buttonVariant="contained"
+              amount={10}
+              title={`Send 10 ${token.symbol}`}
+            />
           </div>
         </section>
       </Main>

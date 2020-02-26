@@ -5,33 +5,39 @@ const { wallet } = require('../../libs/auth');
 const { getTokenInfo } = require('../../libs/util');
 const env = require('../../libs/env');
 
-const chainInfo = {
-  host: env.assetChainHost,
-  id: env.assetChainId,
-};
-
 module.exports = {
-  action: 'fund_foreign',
-  authPrincipal: { chainInfo },
+  action: 'receive_token',
   claims: {
-    signature: async ({ userDid, extraParams: { locale } }) => {
-      const amount = Number((Math.random() * 10).toPrecision(8));
-      const data = await getTokenInfo();
+    signature: async ({ userDid, extraParams: { locale, chain, amount } }) => {
+      const token = await getTokenInfo();
+      if (amount === 'random') {
+        // eslint-disable-next-line no-param-reassign
+        amount = (Math.random() * 10).toFixed(6);
+      }
+
+      if (!Number(amount)) {
+        throw new Error('Invalid amount param for receive token playground action');
+      }
+
       const description = {
-        en: `Sign this text to get ${amount} ${data[env.assetChainId].symbol} for test`,
-        zh: `签名该文本，你将获得 ${amount} 个测试用的 ${data[env.assetChainId].symbol}`,
+        en: `Sign this text to get ${amount} ${token[chain].symbol} for test`,
+        zh: `签名该文本，你将获得 ${amount} 个测试用的 ${token[chain].symbol}`,
       };
 
       return {
         description: description[locale],
         data: JSON.stringify({ amount, userDid }, null, 2),
         type: 'mime:text/plain',
-        chainInfo,
+        chainInfo: {
+          host: chain === 'local' ? env.chainHost : env.assetChainHost,
+          id: chain === 'local' ? env.chainId : env.assetChainId,
+        },
       };
     },
   },
 
-  onAuth: async ({ userDid, userPk, claims }) => {
+  // eslint-disable-next-line object-curly-newline
+  onAuth: async ({ userDid, userPk, claims, extraParams: { chain } }) => {
     try {
       const type = toTypeInfo(userDid);
       const user = ForgeSDK.Wallet.fromPublicKey(userPk, type);
@@ -49,13 +55,13 @@ module.exports = {
           token: data.amount,
           wallet: app,
         },
-        { conn: env.assetChainId }
+        { conn: chain === 'local' ? env.chainId : env.assetChainId }
       );
-      console.log('fund.onAuth', hash, data);
+      console.log('receive_token.onAuth', hash, data);
       return { hash };
     } catch (err) {
-      console.error('fund.onAuth.error', err);
-      throw new Error(`抽奖失败 ${err.message}`);
+      console.error('receive_token.onAuth.error', err);
+      throw new Error(`Receive token failed ${err.message}`);
     }
   },
 };

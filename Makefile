@@ -3,8 +3,11 @@ README=$(TOP_DIR)/README.md
 
 VERSION=$(strip $(shell cat version))
 
-build:
+build: init
 	@echo "Building the software..."
+	@cd packages/did-playground && yarn link
+	@yarn link @arcblock/did-playground
+	@yarn build
 
 init: install dep
 	@echo "Initializing the repo..."
@@ -14,11 +17,12 @@ travis-init: install dep
 
 install:
 	@echo "Install software required for this repo..."
-	@npm install -g yarn
+	@npm install -g lerna yarn
 
 dep:
 	@echo "Install dependencies required for this repo..."
-	@yarn
+	@lerna bootstrap
+	@lerna run build --scope @arcblock/*
 
 pre-build: install dep
 	@echo "Running scripts before the build..."
@@ -31,19 +35,24 @@ all: pre-build build post-build
 test:
 	@echo "Running test suites..."
 
-lint:
-	@echo "Linting the software..."
-	@yarn lint
-
 doc:
 	@echo "Building the documenation..."
 
-precommit: dep lint doc build test
+coverage:
+	@echo "Collecting test coverage ..."
+	@lerna run coverage
 
-travis: precommit
+lint:
+	@echo "Linting the software..."
+	@lerna run lint
+
+precommit: dep lint build test
+
+travis: init coverage
 
 travis-deploy:
 	@echo "Deploy the software by travis"
+	@bash ./scripts/publish.sh
 
 clean:
 	@echo "Cleaning the build..."
