@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Auth from '@arcblock/did-react/lib/Auth';
 import Button from '@arcblock/ux/lib/Button';
+import { mergeProps } from '@arcblock/ux/lib/Util';
 
 import { SessionContext } from './session';
 
@@ -80,21 +81,24 @@ const getActionParams = (config, props) => {
   return {};
 };
 
-export default function PlaygroundAction({
-  action,
-  buttonText,
-  buttonColor,
-  buttonVariant,
-  buttonSize,
-  buttonRounded,
-  title,
-  scanMessage,
-  successMessage,
-  confirmMessage,
-  extraParams,
-  timeout,
-  ...rest
-}) {
+export default function PlaygroundAction(props) {
+  const newProps = mergeProps(props, PlaygroundAction, []);
+  const {
+    action,
+    buttonText,
+    buttonColor,
+    buttonVariant,
+    buttonSize,
+    buttonRounded,
+    title,
+    scanMessage,
+    successMessage,
+    confirmMessage,
+    extraParams,
+    timeout,
+    ...rest
+  } = newProps;
+
   const { api, session } = useContext(SessionContext);
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -106,6 +110,13 @@ export default function PlaygroundAction({
   }
 
   const onStart = async () => {
+    if (!session.user) {
+      session.login(() => {
+        setOpen(true);
+      });
+      return;
+    }
+
     if (typeof config.onStart === 'function') {
       try {
         setLoading(true);
