@@ -14,11 +14,13 @@ travis-init: install dep
 
 install:
 	@echo "Install software required for this repo..."
-	@npm install -g yarn
+	@npm install -g lerna yarn
 
 dep:
 	@echo "Install dependencies required for this repo..."
-	@yarn
+	@lerna clean --yes
+	@lerna bootstrap
+	@lerna run build --scope @arcblock/*
 
 pre-build: install dep
 	@echo "Running scripts before the build..."
@@ -38,12 +40,21 @@ lint:
 doc:
 	@echo "Building the documenation..."
 
-precommit: dep lint doc build test
+coverage:
+	@echo "Collecting test coverage ..."
+	@lerna run coverage
 
-travis: precommit
+lint:
+	@echo "Linting the software..."
+	@lerna run lint
+
+precommit: dep lint build test
+
+travis: init coverage
 
 travis-deploy:
 	@echo "Deploy the software by travis"
+	@bash ./tools/publish.sh
 
 clean:
 	@echo "Cleaning the build..."

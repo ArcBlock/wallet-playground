@@ -7,6 +7,7 @@ module.exports = {
     browser: true,
     node: true,
     mocha: true,
+    jest: true,
   },
   rules: {
     'react/jsx-filename-extension': 'off',

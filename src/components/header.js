@@ -8,7 +8,7 @@ import Link from '@material-ui/core/Link';
 import UserAvatar from '@arcblock/did-react/lib/Avatar';
 
 import env from '../libs/env';
-import { SessionContext } from './PlaygroundAction/session';
+import { SessionContext } from '../../packages/did-playground/src/Action/session';
 
 export default function Header() {
   const { session } = useContext(SessionContext);

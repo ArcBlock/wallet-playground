@@ -32,12 +32,16 @@ if [ -f $VERSION ]; then
     echo -ne "${QUESTION_FLAG} ${CYAN}Enter a version number [${WHITE}$SUGGESTED_VERSION${CYAN}]: "
     read INPUT_STRING
     if [ "$INPUT_STRING" = "" ]; then
-	INPUT_STRING=$SUGGESTED_VERSION
+        INPUT_STRING=$SUGGESTED_VERSION
     fi
     echo -e "${NOTICE_FLAG} Will set new version to be ${WHITE}$INPUT_STRING"
     echo $INPUT_STRING > $VERSION
-    echo "## $INPUT_STRING ($NOW)" > tmpfile
-    git log --pretty=format:"  - %s" "v$BASE_STRING"...HEAD >> tmpfile
+
+    # tigger change
+    cp $VERSION packages/did-playground/
+
+    echo "## $INPUT_STRING ($NOW)\n" > tmpfile
+    git log --pretty=format:"- %s" "v$BASE_STRING"...HEAD >> tmpfile
     echo "" >> tmpfile
     echo "" >> tmpfile
     cat CHANGELOG.md >> tmpfile
@@ -45,5 +49,4 @@ if [ -f $VERSION ]; then
     echo -e "$ADJUSTMENTS_MSG"
     read
     git add CHANGELOG.md $VERSION
-    [ -f package.json ] && .makefiles/bump_node_version.sh
 fi

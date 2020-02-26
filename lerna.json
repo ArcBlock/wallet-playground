@@ -1,0 +1,13 @@
+{
+  "packages": [
+    "packages/*"
+  ],
+  "useWorkspaces": true,
+  "npmClient": "yarn",
+  "ignoreChanges": [
+    "**/tools/**",
+    "**/docs/**",
+    "**/test/**"
+  ],
+  "version": "0.61.0"
+}

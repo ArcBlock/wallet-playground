@@ -6,8 +6,8 @@ import Typography from '@material-ui/core/Typography';
 import Tag from '@arcblock/ux/lib/Tag';
 
 import Layout from '../components/layout';
-import { SessionContext } from '../components/PlaygroundAction/session';
-import PlaygroundAction from '../components/PlaygroundAction';
+import { SessionContext } from '../../packages/did-playground/src/Action/session';
+import PlaygroundAction from '../../packages/did-playground/src/Action';
 
 import { version } from '../../package.json';
 
