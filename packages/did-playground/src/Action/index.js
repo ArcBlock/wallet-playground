@@ -109,14 +109,7 @@ export default function PlaygroundAction(props) {
     throw new Error(`Supported playground action type ${action}`);
   }
 
-  const onStart = async () => {
-    if (!session.user) {
-      session.login(() => {
-        setOpen(true);
-      });
-      return;
-    }
-
+  const doStart = async () => {
     if (typeof config.onStart === 'function') {
       try {
         setLoading(true);
@@ -131,6 +124,15 @@ export default function PlaygroundAction(props) {
     } else {
       setOpen(true);
     }
+  };
+
+  const onStart = async () => {
+    if (!session.user) {
+      session.login(doStart);
+      return;
+    }
+
+    await doStart();
   };
 
   return (
