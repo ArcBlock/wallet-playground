@@ -21,7 +21,6 @@ install:
 
 dep:
 	@echo "Install dependencies required for this repo..."
-	@lerna clean --yes
 	@lerna bootstrap
 	@lerna run build --scope @arcblock/*
 
