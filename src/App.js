@@ -2,6 +2,7 @@ import React from 'react';
 import { MuiThemeProvider } from '@material-ui/core/styles';
 import { createGlobalStyle, ThemeProvider } from 'styled-components';
 import { BrowserRouter as Router, Route, Switch, Redirect, withRouter } from 'react-router-dom';
+import { SessionProvider } from '@arcblock/did-playground';
 
 import CssBaseline from '@material-ui/core/CssBaseline';
 import CircularProgress from '@material-ui/core/CircularProgress';
@@ -13,7 +14,6 @@ import MiniPage from './pages/index';
 
 import theme from './libs/theme';
 import env from './libs/env';
-import { SessionProvider } from './components/PlaygroundAction/session';
 
 const GlobalStyle = createGlobalStyle`
   a {

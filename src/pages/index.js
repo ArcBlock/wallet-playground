@@ -4,10 +4,9 @@ import styled from 'styled-components';
 
 import Typography from '@material-ui/core/Typography';
 import Tag from '@arcblock/ux/lib/Tag';
+import { SessionContext, PlaygroundAction } from '@arcblock/did-playground';
 
 import Layout from '../components/layout';
-import { SessionContext } from '../../packages/did-playground/src/Action/session';
-import PlaygroundAction from '../../packages/did-playground/src/Action';
 
 import { version } from '../../package.json';
 

@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import useAsyncFn from 'react-use/lib/useAsyncFn';
 import useToggle from 'react-use/lib/useToggle';
 import { fromUnitToToken } from '@arcblock/forge-util';
+import { SessionContext } from '@arcblock/did-playground';
 
 import Grid from '@material-ui/core/Grid';
 import List from '@material-ui/core/List';
@@ -16,7 +17,6 @@ import Button from '@arcblock/ux/lib/Button';
 
 import Layout from '../components/layout';
 import forge from '../libs/sdk';
-import { SessionContext } from '../components/PlaygroundAction/session';
 
 export default function ProfilePage() {
   const { session } = useContext(SessionContext);
