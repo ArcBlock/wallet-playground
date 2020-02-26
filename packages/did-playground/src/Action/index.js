@@ -135,6 +135,9 @@ export default function PlaygroundAction(props) {
     await doStart();
   };
 
+  const onClose = () => setOpen(false);
+  const onSuccess = () => setTimeout(onClose, 2000);
+
   return (
     <React.Fragment>
       <Button
@@ -151,8 +154,8 @@ export default function PlaygroundAction(props) {
           responsive
           action={getActionName(config, rest)}
           checkFn={api.get}
-          onClose={() => setOpen(false)}
-          onSuccess={() => setOpen(false)}
+          onClose={onClose}
+          onSuccess={onSuccess}
           checkTimeout={timeout}
           // 3 layers of extraParams: user props, dynamically generated, from other props
           extraParams={Object.assign(getActionParams(config, rest), dynamicParams, extraParams)}
