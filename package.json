@@ -29,7 +29,7 @@
     "@arcblock/did-auth": "^1.0.34",
     "@arcblock/did-auth-storage-mongo": "^1.0.13",
     "@arcblock/did-playground": "./packages/did-playground",
-    "@arcblock/did-react": "^0.68.1",
+    "@arcblock/did-react": "^0.68.2",
     "@arcblock/did-util": "^1.0.33",
     "@arcblock/event-client": "^1.0.23",
     "@arcblock/event-server": "^1.0.23",
