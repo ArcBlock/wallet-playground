@@ -28,8 +28,8 @@
     "@arcblock/did-agent-storage-mongo": "^1.0.13",
     "@arcblock/did-auth": "^1.0.34",
     "@arcblock/did-auth-storage-mongo": "^1.0.13",
-    "@arcblock/did-react": "^0.68.1",
     "@arcblock/did-playground": "./packages/did-playground",
+    "@arcblock/did-react": "^0.68.1",
     "@arcblock/did-util": "^1.0.33",
     "@arcblock/event-client": "^1.0.23",
     "@arcblock/event-server": "^1.0.23",
@@ -105,21 +105,21 @@
     ]
   },
   "devDependencies": {
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.8.4",
+    "@babel/preset-env": "^7.8.4",
+    "@babel/preset-react": "^7.8.3",
     "babel-eslint": "^10.0.3",
     "eslint": "5.16.0",
     "eslint-config-airbnb": "17.1.0",
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-jsx-a11y": "^6.1.1",
     "eslint-plugin-react": "^7.18.3",
+    "jest": "^24.1.0",
     "lerna": "^3.20.2",
     "netlify-lambda": "^1.4.13",
     "nodemon": "^1.19.1",
-    "npm-run-all": "^4.1.5",
-    "@babel/cli": "^7.8.4",
-    "@babel/core": "^7.8.4",
-    "@babel/preset-env": "^7.8.4",
-    "@babel/preset-react": "^7.8.3",
-    "jest": "^24.1.0"
+    "npm-run-all": "^4.1.5"
   },
   "license": "Apache-2.0"
 }
