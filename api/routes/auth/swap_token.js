@@ -1,5 +1,4 @@
 /* eslint-disable no-console */
-/* eslint-disable camelcase */
 const ForgeSDK = require('@arcblock/forge-sdk');
 
 const env = require('../../libs/env');
@@ -8,9 +7,13 @@ const { swapStorage, wallet } = require('../../libs/auth');
 module.exports = {
   action: 'swap_token',
   claims: {
-    swap: async ({ userDid, extraParams: { traceId, action, rate } }) => {
+    // eslint-disable-next-line object-curly-newline
+    swap: async ({ userDid, extraParams: { traceId, action, rate, amount } }) => {
       if (!Number(rate)) {
-        throw new Error('Invalid rate param for swap token playground action');
+        throw new Error('Invalid exchange rate param for swap token action');
+      }
+      if (!Number(amount)) {
+        throw new Error('Invalid exchange amount param for swap token action');
       }
 
       if (action === 'buy') {
@@ -20,13 +23,13 @@ module.exports = {
             offerChainId: env.assetChainId,
             offerChainHost: env.assetChainHost,
             offerAssets: [],
-            offerToken: (await ForgeSDK.fromTokenToUnit(1, { conn: env.assetChainId })).toString(),
+            offerToken: (await ForgeSDK.fromTokenToUnit(amount, { conn: env.assetChainId })).toString(),
             offerUserAddress: wallet.address, // 卖家地址
 
             demandChainId: env.chainId,
             demandChainHost: env.chainHost,
             demandAssets: [],
-            demandToken: (await ForgeSDK.fromTokenToUnit(rate, { conn: env.chainId })).toString(),
+            demandToken: (await ForgeSDK.fromTokenToUnit(rate * amount, { conn: env.chainId })).toString(),
             demandUserAddress: userDid, // 买家地址
             demandLocktime: await ForgeSDK.toLocktime(2400, { conn: env.chainId }),
           };
@@ -53,13 +56,13 @@ module.exports = {
             offerChainId: env.chainId,
             offerChainHost: env.chainHost,
             offerAssets: [],
-            offerToken: (await ForgeSDK.fromTokenToUnit(rate, { conn: env.chainId })).toString(),
+            offerToken: (await ForgeSDK.fromTokenToUnit(rate * amount, { conn: env.chainId })).toString(),
             offerUserAddress: wallet.address, // 卖家地址
 
             demandChainId: env.assetChainId,
             demandChainHost: env.assetChainHost,
             demandAssets: [],
-            demandToken: (await ForgeSDK.fromTokenToUnit(1, { conn: env.assetChainId })).toString(),
+            demandToken: (await ForgeSDK.fromTokenToUnit(amount, { conn: env.assetChainId })).toString(),
             demandUserAddress: userDid, // 买家地址
             demandLocktime: await ForgeSDK.toLocktime(2400, { conn: env.assetChainId }),
           };
@@ -83,8 +86,5 @@ module.exports = {
     },
   },
 
-  // eslint-disable-next-line object-curly-newline
-  onAuth: async ({ claims, userDid, token }) => {
-    return {};
-  },
+  onAuth: async () => {},
 };

@@ -36,12 +36,12 @@ const actions = {
   exchange_to_foreign_token: {
     action: 'swap_token',
     onStart: createSwapOrder,
-    extraParams: props => ({ action: 'buy', rate: props.exchangeRate }),
+    extraParams: props => ({ action: 'buy', rate: props.exchangeRate, amount: props.amount || 1 }),
   },
   exchange_to_local_token: {
     action: 'swap_token',
     onStart: createSwapOrder,
-    extraParams: props => ({ action: 'sell', rate: props.exchangeRate }),
+    extraParams: props => ({ action: 'sell', rate: props.exchangeRate, amount: props.amount || 1 }),
   },
 };
 

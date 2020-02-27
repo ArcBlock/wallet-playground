@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import Typography from '@material-ui/core/Typography';
 import WalletDownload from '@arcblock/ux/lib/Wallet/Download';
 import Tag from '@arcblock/ux/lib/Tag';
-import { SessionContext } from '@arcblock/did-playground';
+import { SessionContext, PlaygroundAction } from '@arcblock/did-playground';
 
 import Layout from '../components/layout';
 
@@ -17,14 +17,11 @@ import AcquireMovieTicket from '../components/auth/acquire_ticket';
 import Exchange from '../components/auth/exchange';
 import FundTbaButton from '../components/auth/fund_tba';
 import FundPlayButton from '../components/auth/fund_play';
-import SwapTokenButton from '../components/auth/swap_token';
 import BuyBadgeButton from '../components/auth/swap_badge';
 import SwapBadgesButton from '../components/auth/swap_badges';
 // import SwapAssetsButton from '../components/auth/swap_assets';
 import BuyTicketButton from '../components/auth/swap_ticket';
 import CertificateButton from '../components/auth/swap_certificate';
-import TransferTokenOut from '../components/auth/transfer_token_out';
-import TransferTokenIn from '../components/auth/transfer_token_in';
 import TransferAssetOut from '../components/auth/transfer_asset_out';
 import TransferAssetIn from '../components/auth/transfer_asset_in';
 import TransferTokenAssetIn from '../components/auth/transfer_token_asset_in';
@@ -69,8 +66,24 @@ export default function IndexPage() {
             <BuyTicketButton {...session} />
             <CertificateButton {...session} action="buy" />
             <CertificateButton {...session} action="sell" />
-            <SwapTokenButton {...session} action="buy" />
-            <SwapTokenButton {...session} action="sell" />
+            <PlaygroundAction
+              action="exchange_to_foreign_token"
+              title="Exchange Currency"
+              className="action"
+              buttonVariant="contained"
+              buttonText={`Buy 1 ${assetToken.symbol} with 5 ${token.symbol}`}
+              exchangeRate={5}
+              amount={1}
+            />
+            <PlaygroundAction
+              action="exchange_to_local_token"
+              title="Exchange Currency"
+              className="action"
+              buttonVariant="contained"
+              buttonText={`Sell 1 ${assetToken.symbol} for 5 ${token.symbol}`}
+              exchangeRate={5}
+              amount={1}
+            />
             <SwapBadgesButton {...session} action="buy" />
             <SwapBadgesButton {...session} action="sell" />
           </div>
@@ -83,8 +96,18 @@ export default function IndexPage() {
             </Typography>
           </Typography>
           <div className="section__content">
-            <TransferTokenOut {...session} />
-            <TransferTokenIn {...session} />
+            <PlaygroundAction
+              action="receive_local_token"
+              className="action"
+              amount={1}
+              title={`Send 1 ${token.symbol} to me`}
+            />
+            <PlaygroundAction
+              action="send_local_token"
+              className="action"
+              amount={1}
+              title={`Send 1 ${token.symbol} to application`}
+            />
             <TransferAssetOut {...session} />
             <TransferAssetIn {...session} />
             <TransferTokenAssetIn {...session} />
