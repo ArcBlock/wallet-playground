@@ -1,4 +1,6 @@
+/* eslint-disable object-curly-newline */
 const ForgeSDK = require('@arcblock/forge-sdk');
+const { AssetRecipient } = require('@arcblock/asset-factory');
 
 const env = require('./env');
 
@@ -61,8 +63,40 @@ const getTokenInfo = async () => {
 
 const getAccountStateOptions = { ignoreFields: [/\.withdrawItems/, /\.items/] };
 
+const ensureAsset = async (
+  factory,
+  { userPk, userDid, type, name, description, backgroundUrl, logoUrl, location = 'China' }
+) => {
+  const methods = {
+    badge: factory.createBadge,
+    ticket: factory.createTicket,
+    certificate: factory.createCertificate,
+  };
+
+  const [asset] = await methods[type]({
+    backgroundUrl,
+    data: {
+      name,
+      description,
+      reason: description,
+      logoUrl,
+      location,
+      issueTime: Date.now() + 7 * 24 * 60 * 60 * 1000,
+      expireTime: -1,
+      recipient: new AssetRecipient({
+        wallet: ForgeSDK.Wallet.fromPublicKey(userPk),
+        name: userDid,
+        location,
+      }),
+    },
+  });
+
+  return asset;
+};
+
 module.exports = {
   getTransferrableAssets,
   getTokenInfo,
   getAccountStateOptions,
+  ensureAsset,
 };

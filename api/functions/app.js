@@ -111,6 +111,9 @@ walletHandlers.attach(Object.assign({ app: router }, require('../routes/auth/rec
 walletHandlers.attach(Object.assign({ app: router }, require('../routes/auth/send_token')));
 swapHandlers.attach(Object.assign({ app: router }, require('../routes/auth/swap_token')));
 
+// Assets
+swapHandlers.attach(Object.assign({ app: router }, require('../routes/auth/swap_asset')));
+
 walletHandlers.attach(Object.assign({ app: router }, require('../routes/auth/login')));
 walletHandlers.attach(Object.assign({ app: router }, require('../routes/auth/payment')));
 walletHandlers.attach(Object.assign({ app: router }, require('../routes/auth/claim_profile')));

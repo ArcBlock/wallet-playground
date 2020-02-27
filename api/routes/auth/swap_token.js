@@ -8,11 +8,11 @@ module.exports = {
   action: 'swap_token',
   claims: {
     // eslint-disable-next-line object-curly-newline
-    swap: async ({ userDid, extraParams: { traceId, action, rate, amount } }) => {
-      if (!Number(rate)) {
+    swap: async ({ userDid, extraParams: { tid, action, rate, amount } }) => {
+      if (Number(rate) <= 0) {
         throw new Error('Invalid exchange rate param for swap token action');
       }
-      if (!Number(amount)) {
+      if (Number(amount) <= 0) {
         throw new Error('Invalid exchange amount param for swap token action');
       }
 
@@ -34,12 +34,12 @@ module.exports = {
             demandLocktime: await ForgeSDK.toLocktime(2400, { conn: env.chainId }),
           };
 
-          const res = await swapStorage.finalize(traceId, payload);
+          const res = await swapStorage.finalize(tid, payload);
           console.log('swap.finalize', res);
-          const swap = await swapStorage.read(traceId);
+          const swap = await swapStorage.read(tid);
 
           return {
-            swapId: traceId,
+            swapId: tid,
             receiver: wallet.address,
             ...swap,
           };
@@ -64,15 +64,15 @@ module.exports = {
             demandAssets: [],
             demandToken: (await ForgeSDK.fromTokenToUnit(amount, { conn: env.assetChainId })).toString(),
             demandUserAddress: userDid, // 买家地址
-            demandLocktime: await ForgeSDK.toLocktime(2400, { conn: env.assetChainId }),
+            demandLocktime: await ForgeSDK.toLocktime(2400, { conn: env.assetChainId }), // 30 minutes at 3 seconds/block
           };
 
-          const res = await swapStorage.finalize(traceId, payload);
+          const res = await swapStorage.finalize(tid, payload);
           console.log('swap.finalize', res);
-          const swap = await swapStorage.read(traceId);
+          const swap = await swapStorage.read(tid);
 
           return {
-            swapId: traceId,
+            swapId: tid,
             receiver: wallet.address,
             ...swap,
           };

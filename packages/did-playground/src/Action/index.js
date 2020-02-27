@@ -11,8 +11,8 @@ import { mergeProps } from '@arcblock/ux/lib/Util';
 import { SessionContext } from './session';
 
 async function createSwapOrder(api) {
-  const res = await api.post('/api/swap', {});
-  return { traceId: res.data.traceId };
+  const res = await api.post('/api/did/swap', {});
+  return { tid: res.data.traceId };
 }
 
 const actions = {

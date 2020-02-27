@@ -75,12 +75,12 @@ export default function ProfilePage() {
                 <ListItemText
                   primary={
                     balance.value ? (
-                      `${fromUnitToToken(balance.value.balance, token.decimal)} ${token.symbol}`
+                      `${fromUnitToToken(balance.value.balance, token.local.decimal)} ${token.local.symbol}`
                     ) : (
                       <CircularProgress size={18} />
                     )
                   }
-                  secondary="Account Balance"
+                  secondary="Local Balance"
                 />
               </ListItem>
             </List>
