@@ -27,5 +27,3 @@ api/dist
 .env.staging
 .vscode
 node_modules
-coverage
-packages/did-playground/lib
