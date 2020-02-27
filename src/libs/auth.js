@@ -1,6 +1,6 @@
 import store from 'store/dist/store.modern';
 
-const storageKey = 'login_token';
+const storageKey = 'did.playground.token';
 
 export function setToken(token) {
   if (typeof window === 'undefined') {
