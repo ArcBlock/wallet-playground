@@ -9,80 +9,10 @@ import Button from '@arcblock/ux/lib/Button';
 import { mergeProps } from '@arcblock/ux/lib/Util';
 
 import { SessionContext } from './session';
-
-async function createSwapOrder(api) {
-  const res = await api.post('/api/did/swap', {});
-  return { tid: res.data.traceId };
-}
-
-const actions = {
-  // Currency
-  receive_local_token: {
-    action: 'receive_token',
-    extraParams: props => ({ chain: 'local', amount: props.amount || 1 }),
-  },
-  receive_foreign_token: {
-    action: 'receive_token',
-    extraParams: props => ({ chain: 'foreign', amount: props.amount || 1 }),
-  },
-  send_local_token: {
-    action: 'send_token',
-    extraParams: props => ({ chain: 'local', amount: props.amount || 1 }),
-  },
-  send_foreign_token: {
-    action: 'send_token',
-    extraParams: props => ({ chain: 'foreign', amount: props.amount || 1 }),
-  },
-  exchange_to_foreign_token: {
-    action: 'swap_token',
-    onStart: createSwapOrder,
-    extraParams: props => ({ action: 'buy', rate: props.exchangeRate, amount: props.amount || 1 }),
-  },
-  exchange_to_local_token: {
-    action: 'swap_token',
-    onStart: createSwapOrder,
-    extraParams: props => ({ action: 'sell', rate: props.exchangeRate, amount: props.amount || 1 }),
-  },
-};
-
-const getActionName = (config, props) => {
-  if (typeof config === 'string') {
-    return config;
-  }
-
-  if (typeof config.action === 'string') {
-    return config.action;
-  }
-
-  if (typeof config.action === 'function') {
-    return config.action(props);
-  }
-
-  throw new Error('Cannot determine playground button action');
-};
-
-const getActionParams = (config, props) => {
-  if (typeof config === 'string') {
-    return {};
-  }
-
-  if (!config.extraParams) {
-    return {};
-  }
-
-  if (typeof config.extraParams === 'function') {
-    return config.extraParams(props);
-  }
-
-  if (typeof config.extraParams === 'object') {
-    return config.extraParams;
-  }
-
-  return {};
-};
+import { actions, getActionName, getActionParams } from './actions';
 
 export default function PlaygroundAction(props) {
-  const newProps = mergeProps(props, PlaygroundAction, []);
+  const newProps = mergeProps(props, PlaygroundAction, ['buttonRounded', 'extraParams', 'timeout']);
   const {
     action,
     buttonText,

@@ -6,11 +6,26 @@ const env = require('../../libs/env');
 const { swapStorage, wallet, foreignFactory, localFactory } = require('../../libs/auth');
 const { getTransferrableAssets, ensureAsset } = require('../../libs/util');
 
+const chains = {
+  local: {
+    host: env.chainHost,
+    id: env.chainId,
+  },
+  foreign: {
+    host: env.assetChainHost,
+    id: env.assetChainId,
+  },
+};
+
 // pfc => pay from chain
 module.exports = {
   action: 'swap_asset',
   claims: {
-    swap: async ({ userDid, userPk, extraParams: { tid, pfc, action, type, name, price, desc, bg, logo } }) => {
+    swap: async ({
+      userDid,
+      userPk,
+      extraParams: { tid, pfc, action, type, name, price, desc, start, end, bg, logo, loc },
+    }) => {
       if (Number(price) <= 0) {
         throw new Error('Cannot buy/sell foreign asset without a valid price');
       }
@@ -19,7 +34,7 @@ module.exports = {
         throw new Error('Cannot buy/sell foreign asset without a valid name');
       }
 
-      if (['local', 'foreign'].includes(pfc)) {
+      if (['local', 'foreign'].includes(pfc) === false) {
         throw new Error('Invalid pay from chain param');
       }
 
@@ -27,27 +42,35 @@ module.exports = {
 
       if (action === 'buy') {
         try {
-          const offerChain = pfc === 'local' ? env.assetChainId : env.chainId;
-          const demandChain = pfc === 'local' ? env.chainId : env.assetChainId;
+          const offerChain = pfc === 'local' ? chains.foreign : chains.local;
+          const demandChain = pfc === 'local' ? chains.local : chains.foreign;
 
           const asset = await ensureAsset(assetFactory, {
             userPk,
             userDid,
             type,
             name,
-            description: desc,
-            backgroundUrl: bg,
-            logoUrl: logo,
+            description: desc || name,
+            location: loc || 'China',
+            backgroundUrl: bg || '',
+            logoUrl: logo || 'https://releases.arcblockio.cn/arcblock-logo.png',
+            startTime: start || new Date(),
+            endTime: end || new Date(),
           });
 
           const payload = {
+            offerChainId: offerChain.id,
+            offerChainHost: offerChain.host,
             offerAssets: [asset.address],
-            offerToken: (await ForgeSDK.fromTokenToUnit(0, { conn: offerChain })).toString(),
+            offerToken: (await ForgeSDK.fromTokenToUnit(0, { conn: offerChain.id })).toString(),
             offerUserAddress: wallet.address, // 卖家地址
+
+            demandChainId: demandChain.id,
+            demandChainHost: demandChain.host,
             demandAssets: [],
-            demandToken: (await ForgeSDK.fromTokenToUnit(price, { conn: demandChain })).toString(),
+            demandToken: (await ForgeSDK.fromTokenToUnit(price, { conn: demandChain.id })).toString(),
             demandUserAddress: userDid, // 买家地址
-            demandLocktime: await ForgeSDK.toLocktime(600, { conn: demandChain }),
+            demandLocktime: await ForgeSDK.toLocktime(600, { conn: demandChain.id }),
           };
 
           const res = await swapStorage.finalize(tid, payload);
@@ -66,10 +89,10 @@ module.exports = {
       }
 
       if (action === 'sell') {
-        const offerChain = pfc === 'local' ? env.chainId : env.assetChainId;
-        const demandChain = pfc === 'local' ? env.assetChainId : env.chainId;
+        const offerChain = pfc === 'local' ? chains.local : chains.foreign;
+        const demandChain = pfc === 'local' ? chains.foreign : chains.local;
 
-        const assets = await getTransferrableAssets(userDid);
+        const assets = await getTransferrableAssets(userDid, 200, demandChain.id);
         const asset = assets.find(x => x.moniker === name);
 
         if (!asset) {
@@ -78,18 +101,18 @@ module.exports = {
 
         // Since we are doing swap with reversed chain
         const payload = {
-          offerChainId: offerChain,
-          offerChainHost: env.assetChainHost,
+          offerChainId: offerChain.id,
+          offerChainHost: offerChain.host,
           offerAssets: [],
-          offerToken: (await ForgeSDK.fromTokenToUnit(price, { conn: offerChain })).toString(),
+          offerToken: (await ForgeSDK.fromTokenToUnit(price, { conn: offerChain.id })).toString(),
           offerUserAddress: wallet.address, // 卖家地址
 
-          demandChainId: demandChain,
-          demandChainHost: env.chainHost,
+          demandChainId: demandChain.id,
+          demandChainHost: demandChain.host,
           demandAssets: [asset.address],
-          demandToken: (await ForgeSDK.fromTokenToUnit(0, { conn: demandChain })).toString(),
+          demandToken: (await ForgeSDK.fromTokenToUnit(0, { conn: demandChain.id })).toString(),
           demandUserAddress: userDid, // 买家地址
-          demandLocktime: await ForgeSDK.toLocktime(600, { conn: demandChain }),
+          demandLocktime: await ForgeSDK.toLocktime(600, { conn: demandChain.id }),
         };
 
         const res = await swapStorage.finalize(tid, payload);
