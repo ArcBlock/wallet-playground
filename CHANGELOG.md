@@ -1,3 +1,8 @@
+## 0.71.0 (February 28, 2020)
+
+- fix: pickup and orders page
+- chore: cleanup unused
+
 ## 0.70.0 (February 28, 2020)
 
 - chore: elimate client dependency on forge-sdk
