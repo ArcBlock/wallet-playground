@@ -34,7 +34,7 @@ const wallet = fromSecretKey(process.env.APP_SK, type).toJSON();
 const isRestricted = process.env.APP_RESTRICTED_DECLARE && JSON.parse(process.env.APP_RESTRICTED_DECLARE);
 const isNetlify = process.env.NETLIFY && JSON.parse(process.env.NETLIFY);
 
-let icon = 'https://releases.arcblockio.cn/playground.png';
+let icon = 'https://releases.arcblockio.cn/dapps/playground/logo.jpg';
 if (process.env.STAGING && JSON.parse(process.env.STAGING)) {
   icon = 'https://releases.arcblockio.cn/playground-staging.png';
 }
@@ -70,7 +70,7 @@ const agentAuth = new AgentAuthenticator({
   appInfo: {
     name: 'Agent Service',
     description: 'This is a demo agent service that can do did-auth on be-half-of another application',
-    icon: 'https://releases.arcblock.io/agent.png',
+    icon,
     link: env.baseUrl,
   },
   chainInfo: {
@@ -117,7 +117,7 @@ const localFactory = new AssetFactory({
   issuer: {
     name: 'ArcBlock',
     url: 'https://www.arcblock.io',
-    logo: 'https://releases.arcblockio.cn/arcblock-logo.png',
+    logo: icon,
   },
 });
 
@@ -128,7 +128,7 @@ const foreignFactory = new AssetFactory({
   issuer: {
     name: 'ArcBlock',
     url: 'https://www.arcblock.io',
-    logo: 'https://releases.arcblockio.cn/arcblock-logo.png',
+    logo: icon,
   },
 });
 
