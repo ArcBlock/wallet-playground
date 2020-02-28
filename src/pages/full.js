@@ -14,7 +14,6 @@ import SignButton from '../components/auth/auth/sign';
 import AgentButton from '../components/auth/auth/agent';
 import ConsumeAssetButton from '../components/auth/consume_asset';
 import AcquireMovieTicket from '../components/auth/acquire_ticket';
-import Exchange from '../components/auth/exchange';
 import TransferAssetOut from '../components/auth/transfer_asset_out';
 import TransferAssetIn from '../components/auth/transfer_asset_in';
 import TransferTokenAssetIn from '../components/auth/transfer_token_asset_in';
@@ -287,29 +286,6 @@ export default function IndexPage() {
               receiveAmount={1}
               name="Local Ticket"
             />
-          </div>
-        </section>
-        <section className="section">
-          <Typography component="h3" variant="h5" className="section__header" color="textPrimary" gutterBottom>
-            Exchange Scenarios{' '}
-            <Typography component="small" color="textSecondary">
-              Help to generate different exchange transactions in ABT Wallet
-            </Typography>
-          </Typography>
-          <div className="section__content">
-            <Exchange {...session} receiveType="asset" payType="token" />
-            <Exchange {...session} receiveType="token" payType="asset" />
-            <Exchange {...session} receiveType="asset" payType="asset" />
-            <Exchange {...session} receiveType="asset" receiveCount={2} payType="asset" />
-            <Exchange {...session} receiveType="asset" payCount={2} payType="asset" />
-            <Exchange {...session} receiveType="asset" receiveCount={2} payType="asset" payCount={2} />
-            <Exchange {...session} receiveType="token" receiveCount={2} payType="asset" payCount={2} />
-            <Exchange {...session} receiveType="asset" receiveCount={5} payType="token" payCount={1} />
-            <Exchange {...session} receiveCount={5} receiveType="asset" payCount={5} payType="asset" />
-            <Exchange {...session} receiveType="token" receiveCount={100000} payType="asset" payCount={1} />
-            <Exchange {...session} receiveType="token" receiveCount={0.001} payType="asset" payCount={1} />
-            <Exchange {...session} receiveType="token" receiveCount={100000.0001} payType="asset" payCount={1} />
-            <Exchange {...session} receiveType="token" receiveCount={0.000001} payType="asset" payCount={1} />
           </div>
         </section>
         <section className="section">

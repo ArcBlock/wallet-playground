@@ -114,8 +114,6 @@ swapHandlers.attach(Object.assign({ app: router }, require('../routes/auth/swap_
 // Assets
 swapHandlers.attach(Object.assign({ app: router }, require('../routes/auth/swap_asset')));
 
-walletHandlers.attach(Object.assign({ app: router }, require('../routes/auth/exchange_asset')));
-
 walletHandlers.attach(Object.assign({ app: router }, require('../routes/auth/login')));
 walletHandlers.attach(Object.assign({ app: router }, require('../routes/auth/claim_profile')));
 walletHandlers.attach(Object.assign({ app: router }, require('../routes/auth/claim_signature')));
@@ -132,7 +130,7 @@ walletHandlers.attach(Object.assign({ app: router }, require('../routes/auth/tra
 walletHandlers.attach(Object.assign({ app: router }, require('../routes/auth/transfer_token_asset_out')));
 walletHandlers.attach(Object.assign({ app: router }, require('../routes/auth/consume_asset')));
 walletHandlers.attach(Object.assign({ app: router }, require('../routes/auth/acquire_asset')));
-walletHandlers.attach(Object.assign({ app: router }, require('../routes/auth/exchange')));
+walletHandlers.attach(Object.assign({ app: router }, require('../routes/auth/exchange_asset')));
 swapHandlers.attach(Object.assign({ app: router }, require('../routes/auth/pickup_swap')));
 agentHandlers.attach(Object.assign({ app: router }, require('../routes/auth/claim_profile'))); // we can reuse something here
 
