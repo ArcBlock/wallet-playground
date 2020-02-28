@@ -33,6 +33,14 @@ export default function MiniPage() {
           </Typography>
           <div className="section__content">
             <PlaygroundAction
+              action="login"
+              className="action"
+              buttonRounded
+              buttonVariant="contained"
+              buttonText="Please Login"
+              successMessage="Hello {{user.email}}"
+            />
+            <PlaygroundAction
               action="receive_foreign_token"
               className="action"
               buttonVariant="contained"

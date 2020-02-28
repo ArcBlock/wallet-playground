@@ -2,6 +2,7 @@
 /* eslint-disable react/jsx-one-expression-per-line */
 import React, { useContext, useState } from 'react';
 import PropTypes from 'prop-types';
+import mustache from 'mustache';
 
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Auth from '@arcblock/did-react/lib/Auth';
@@ -10,6 +11,16 @@ import { mergeProps } from '@arcblock/ux/lib/Util';
 
 import { SessionContext } from './session';
 import { actions, getActionName, getActionParams } from './actions';
+
+function getMessage(message, session) {
+  try {
+    return mustache.render(message, { user: session.user || {}, token: session.token || {} });
+  } catch (err) {
+    // eslint-disable-next-line no-console
+    console.error('Cannot render message', { message, session });
+    return message;
+  }
+}
 
 export default function PlaygroundAction(props) {
   const newProps = mergeProps(props, PlaygroundAction, ['buttonRounded', 'extraParams', 'timeout']);
@@ -34,9 +45,38 @@ export default function PlaygroundAction(props) {
   const [loading, setLoading] = useState(false);
   const [dynamicParams, setDynamicParams] = useState({});
 
+  // If this is just a login button, we do not do anything actually
+  if (action === 'login') {
+    if (session.user) {
+      return (
+        <Button
+          {...rest}
+          rounded={buttonRounded}
+          color={buttonColor}
+          variant={buttonVariant}
+          size={buttonSize}
+          disabled>
+          {getMessage(successMessage || `Hello ${session.user.name}`, session)}
+        </Button>
+      );
+    }
+
+    return (
+      <Button
+        {...rest}
+        rounded={buttonRounded}
+        color={buttonColor}
+        variant={buttonVariant}
+        size={buttonSize}
+        onClick={() => session.login()}>
+        {getMessage(buttonText || title, session)}
+      </Button>
+    );
+  }
+
   const config = actions[action];
   if (!actions[action]) {
-    throw new Error(`Supported playground action type ${action}`);
+    throw new Error(`Unsupported playground action ${action}`);
   }
 
   const doStart = async () => {
@@ -77,7 +117,7 @@ export default function PlaygroundAction(props) {
         variant={buttonVariant}
         size={buttonSize}
         onClick={onStart}>
-        {buttonText || title} {loading && <CircularProgress size={12} color="#fff" />}
+        {getMessage(buttonText || title, session)} {loading && <CircularProgress size={12} color="#fff" />}
       </Button>
       {open && (
         <Auth
@@ -90,10 +130,10 @@ export default function PlaygroundAction(props) {
           // 3 layers of extraParams: user props, dynamically generated, from other props
           extraParams={Object.assign(getActionParams(config, rest), dynamicParams, extraParams)}
           messages={{
-            title,
-            scan: scanMessage,
-            confirm: confirmMessage,
-            success: successMessage,
+            title: getMessage(title, session),
+            scan: getMessage(scanMessage, session),
+            confirm: getMessage(confirmMessage, session),
+            success: getMessage(successMessage, session),
           }}
         />
       )}
