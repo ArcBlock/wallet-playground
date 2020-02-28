@@ -180,6 +180,66 @@ export const actions = {
       name: props.name,
     }),
   },
+  buy_local_certificate_with_local_token: {
+    action: 'exchange_assets',
+    extraParams: props => ({
+      payAmount: props.payAmount || 1,
+      payType: 'token',
+      receiveAmount: props.receiveAmount || 1,
+      receiveType: 'certificate',
+      name: props.name,
+    }),
+  },
+  sell_local_certificate_with_local_token: {
+    action: 'exchange_assets',
+    extraParams: props => ({
+      payAmount: props.payAmount || 1,
+      payType: 'certificate',
+      receiveAmount: props.receiveAmount || 1,
+      receiveType: 'token',
+      name: props.name,
+    }),
+  },
+  buy_local_badge_with_local_token: {
+    action: 'exchange_assets',
+    extraParams: props => ({
+      payAmount: props.payAmount || 1,
+      payType: 'token',
+      receiveAmount: props.receiveAmount || 1,
+      receiveType: 'badge',
+      name: props.name,
+    }),
+  },
+  sell_local_badge_with_local_token: {
+    action: 'exchange_assets',
+    extraParams: props => ({
+      payAmount: props.payAmount || 1,
+      payType: 'badge',
+      receiveAmount: props.receiveAmount || 1,
+      receiveType: 'token',
+      name: props.name,
+    }),
+  },
+  buy_local_ticket_with_local_token: {
+    action: 'exchange_assets',
+    extraParams: props => ({
+      payAmount: props.payAmount || 1,
+      payType: 'token',
+      receiveAmount: props.receiveAmount || 1,
+      receiveType: 'ticket',
+      name: props.name,
+    }),
+  },
+  sell_local_ticket_with_local_token: {
+    action: 'exchange_assets',
+    extraParams: props => ({
+      payAmount: props.payAmount || 1,
+      payType: 'ticket',
+      receiveAmount: props.receiveAmount || 1,
+      receiveType: 'token',
+      name: props.name,
+    }),
+  },
 };
 
 export const getActionName = (config, props) => {

@@ -223,6 +223,64 @@ export default function IndexPage() {
             </Typography>
           </Typography>
           <div className="section__content">
+            <PlaygroundAction
+              className="action"
+              title={`Buy 1 Local Certificate with 1 ${token.local.symbol}`}
+              action="buy_local_certificate_with_local_token"
+              payAmount={1}
+              receiveAmount={1}
+              name="Local Certificate"
+            />
+            <PlaygroundAction
+              className="action"
+              title={`Sell 1 Local Certificate with 1 ${token.local.symbol}`}
+              action="sell_local_certificate_with_local_token"
+              payAmount={1}
+              receiveAmount={1}
+              name="Local Certificate"
+            />
+            <PlaygroundAction
+              className="action"
+              title={`Buy 1 Local Badge with 1 ${token.local.symbol}`}
+              action="buy_local_badge_with_local_token"
+              payAmount={1}
+              receiveAmount={1}
+              name="Local Badge"
+            />
+            <PlaygroundAction
+              className="action"
+              title={`Sell 1 Local Badge with 1 ${token.local.symbol}`}
+              action="sell_local_badge_with_local_token"
+              payAmount={1}
+              receiveAmount={1}
+              name="Local Badge"
+            />
+            <PlaygroundAction
+              className="action"
+              title={`Buy 1 Local Ticket with 1 ${token.local.symbol}`}
+              action="buy_local_ticket_with_local_token"
+              payAmount={1}
+              receiveAmount={1}
+              name="Local Ticket"
+            />
+            <PlaygroundAction
+              className="action"
+              title={`Sell 1 Local Ticket with 1 ${token.local.symbol}`}
+              action="sell_local_ticket_with_local_token"
+              payAmount={1}
+              receiveAmount={1}
+              name="Local Ticket"
+            />
+          </div>
+        </section>
+        <section className="section">
+          <Typography component="h3" variant="h5" className="section__header" color="textPrimary" gutterBottom>
+            Exchange Scenarios{' '}
+            <Typography component="small" color="textSecondary">
+              Help to generate different exchange transactions in ABT Wallet
+            </Typography>
+          </Typography>
+          <div className="section__content">
             <Exchange {...session} receiveType="asset" payType="token" />
             <Exchange {...session} receiveType="token" payType="asset" />
             <Exchange {...session} receiveType="asset" payType="asset" />

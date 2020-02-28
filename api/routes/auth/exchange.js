@@ -60,11 +60,7 @@ const getPays = async (type, count = 1, userDid) => {
 module.exports = {
   action: 'exchange',
   claims: {
-    signature: async ({
-      userPk,
-      userDid,
-      extraParams: { receiveType, receiveCount, payType, payCount },
-    }) => {
+    signature: async ({ userPk, userDid, extraParams: { receiveType, receiveCount, payType, payCount } }) => {
       const receives = await getReceives(receiveType, receiveCount, userPk);
 
       console.log('RECEIVES:');
