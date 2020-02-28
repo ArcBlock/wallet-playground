@@ -271,6 +271,22 @@ export default function IndexPage() {
               receiveAmount={1}
               name="Local Ticket"
             />
+            <PlaygroundAction
+              className="action"
+              title="Buy 1 Local Ticket with 1 Certificate"
+              action="buy_local_ticket_with_local_certificate"
+              payAmount={1}
+              receiveAmount={1}
+              name="Local Ticket"
+            />
+            <PlaygroundAction
+              className="action"
+              title="Buy 1 Local Certificate with 1 Ticket"
+              action="buy_local_certificate_with_local_ticket"
+              payAmount={1}
+              receiveAmount={1}
+              name="Local Ticket"
+            />
           </div>
         </section>
         <section className="section">
