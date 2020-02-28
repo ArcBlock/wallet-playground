@@ -30,49 +30,55 @@ const getAssets = async ({ amount = 1, type, userPk, userDid, name, desc, start,
 
 const getTransactionAssetType = type => (type === 'token' ? 'value' : 'assets');
 
+/**
+ * pa => pay amount
+ * pt => pay type
+ * ra => receive amount
+ * rt => receive type
+ */
 module.exports = {
   action: 'exchange_assets',
   claims: {
     signature: async ({
       userPk,
       userDid,
-      extraParams: { payAmount, payType, receiveAmount, receiveType, name, desc, start, end, bg, logo, loc },
+      extraParams: { pa, pt, ra, rt, name, desc, start, end, bg, logo, loc },
     }) => {
       if (!name) {
         throw new Error('Cannot buy/sell asset without a valid name');
       }
 
-      if (payType !== 'token' && AssetType[payType] === undefined) {
-        throw new Error(`Invalid asset type: ${payType}`);
+      if (pt !== 'token' && AssetType[pt] === undefined) {
+        throw new Error(`Invalid asset type: ${pt}`);
       }
 
-      if (receiveType !== 'token' && AssetType[receiveType] === undefined) {
-        throw new Error(`Invalid asset type: ${receiveType}`);
+      if (rt !== 'token' && AssetType[rt] === undefined) {
+        throw new Error(`Invalid asset type: ${rt}`);
       }
 
       let senderPayload = null;
       let receiverPayload = null;
 
-      if (payType === 'token') {
-        senderPayload = await ForgeSDK.fromTokenToUnit(payAmount);
+      if (pt === 'token') {
+        senderPayload = await ForgeSDK.fromTokenToUnit(pa);
       } else {
         const assets = await getTransferrableAssets(userDid);
         senderPayload = assets
-          .filter(item => JSON.parse(item.data.value).type === AssetType[payType])
+          .filter(item => JSON.parse(item.data.value).type === AssetType[pt])
           .map(item => item.address)
-          .slice(0, payAmount);
+          .slice(0, pa);
 
-        if (senderPayload.length < payAmount) {
+        if (senderPayload.length < pa) {
           throw new Error('Not sufficient Assets');
         }
       }
 
-      if (receiveType === 'token') {
-        receiverPayload = await ForgeSDK.fromTokenToUnit(payAmount);
+      if (rt === 'token') {
+        receiverPayload = await ForgeSDK.fromTokenToUnit(pa);
       } else {
         receiverPayload = await getAssets({
-          amount: receiveAmount,
-          type: receiveType,
+          amount: ra,
+          type: rt,
           userPk,
           userDid,
           name,
@@ -90,10 +96,10 @@ module.exports = {
           itx: {
             to: userDid,
             sender: {
-              [getTransactionAssetType(receiveType)]: receiverPayload,
+              [getTransactionAssetType(rt)]: receiverPayload,
             },
             receiver: {
-              [getTransactionAssetType(payType)]: senderPayload,
+              [getTransactionAssetType(pt)]: senderPayload,
             },
           },
         },
