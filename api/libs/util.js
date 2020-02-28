@@ -24,8 +24,9 @@ const getTransferrableAssets = async (userDid, assetCount, chainId) => {
 };
 
 const getTokenInfo = async () => {
-  const { getForgeState: data } = await ForgeSDK.doRawQuery(
-    `{
+  const [{ getForgeState: data }, { getForgeState: data2 }] = await Promise.all([
+    ForgeSDK.doRawQuery(
+      `{
       getForgeState {
         code
         state {
@@ -36,11 +37,10 @@ const getTokenInfo = async () => {
         }
       }
     }`,
-    { conn: env.chainId }
-  );
-
-  const { getForgeState: data2 } = await ForgeSDK.doRawQuery(
-    `{
+      { conn: env.chainId }
+    ),
+    ForgeSDK.doRawQuery(
+      `{
       getForgeState {
         code
         state {
@@ -51,14 +51,49 @@ const getTokenInfo = async () => {
         }
       }
     }`,
-    { conn: env.assetChainId }
-  );
+      { conn: env.assetChainId }
+    ),
+  ]);
 
   return {
     [env.chainId]: data.state.token,
     [env.assetChainId]: data2.state.token,
     local: data.state.token,
     foreign: data2.state.token,
+  };
+};
+
+const getAccountBalance = async userDid => {
+  const [{ getAccountState: data }, { getAccountState: data2 }] = await Promise.all([
+    ForgeSDK.doRawQuery(
+      `{
+      getAccountState(address: "${userDid}") {
+        code
+        state {
+          balance
+        }
+      }
+    }`,
+      { conn: env.chainId }
+    ),
+    ForgeSDK.doRawQuery(
+      `{
+      getAccountState(address: "${userDid}") {
+        code
+        state {
+          balance
+        }
+      }
+    }`,
+      { conn: env.assetChainId }
+    ),
+  ]);
+
+  return {
+    [env.chainId]: data.state ? data.state.balance : 0,
+    [env.assetChainId]: data2.state ? data2.state.balance : 0,
+    local: data.state ? data.state.balance : 0,
+    foreign: data2.state ? data2.state.balance : 0,
   };
 };
 
@@ -119,6 +154,7 @@ const ensureAsset = async (
 module.exports = {
   getTransferrableAssets,
   getTokenInfo,
+  getAccountBalance,
   getAccountStateOptions,
   ensureAsset,
 };

@@ -16,28 +16,14 @@ import Avatar from '@arcblock/did-react/lib/Avatar';
 import Button from '@arcblock/ux/lib/Button';
 
 import Layout from '../components/layout';
-import forge from '../libs/sdk';
 
 export default function ProfilePage() {
   const { session } = useContext(SessionContext);
-  const [isFetched, setFetched] = useToggle(false);
-  const [balance, fetchBalance] = useAsyncFn(async () => {
-    const address = session.user.did;
-    const { state: account } = await forge.getAccountState({ address });
-    return account;
-  }, []);
 
   const onLogout = () => {
     session.logout();
     window.location.href = '/';
   };
-
-  if (!isFetched) {
-    setTimeout(() => {
-      setFetched(true);
-      fetchBalance();
-    }, 100);
-  }
 
   const { user, token } = session;
 
@@ -73,14 +59,14 @@ export default function ProfilePage() {
               </ListItem>
               <ListItem className="meta-item">
                 <ListItemText
-                  primary={
-                    balance.value ? (
-                      `${fromUnitToToken(balance.value.balance, token.local.decimal)} ${token.local.symbol}`
-                    ) : (
-                      <CircularProgress size={18} />
-                    )
-                  }
+                  primary={`${fromUnitToToken(session.balance.local, token.local.decimal)} ${token.local.symbol}`}
                   secondary="Local Balance"
+                />
+              </ListItem>
+              <ListItem className="meta-item">
+                <ListItemText
+                  primary={`${fromUnitToToken(session.balance.foreign, token.foreign.decimal)} ${token.foreign.symbol}`}
+                  secondary="Foreign Balance"
                 />
               </ListItem>
             </List>

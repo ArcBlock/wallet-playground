@@ -2,6 +2,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import useAsync from 'react-use/lib/useAsync';
+import { fromUnitToToken } from '@arcblock/forge-util';
 
 import Typography from '@material-ui/core/Typography';
 import Link from '@material-ui/core/Link';
@@ -24,7 +25,6 @@ import DidAuth from '@arcblock/did-react/lib/Auth';
 import DidAddress from '@arcblock/did-react/lib/Address';
 
 import Layout from '../components/layout';
-import sdk from '../libs/sdk';
 import api from '../libs/api';
 
 function getChainExplorerAddress(url = '') {
@@ -150,7 +150,7 @@ export default function OrdersPage() {
                 </TableCell>
                 <TableCell>
                   {x.offerToken > 0 &&
-                    `${sdk.Util.fromUnitToToken(x.offerToken, tokenInfo[x.offerChainId].decimal)} ${
+                    `${fromUnitToToken(x.offerToken, tokenInfo[x.offerChainId].decimal)} ${
                       tokenInfo[x.offerChainId].symbol
                     }`}
                   {x.offerAssets.map(asset => (
@@ -164,7 +164,7 @@ export default function OrdersPage() {
                 </TableCell>
                 <TableCell>
                   {x.demandToken > 0 &&
-                    `${sdk.Util.fromUnitToToken(x.demandToken, tokenInfo[x.demandChainId].decimal)} ${
+                    `${fromUnitToToken(x.demandToken, tokenInfo[x.demandChainId].decimal)} ${
                       tokenInfo[x.demandChainId].symbol
                     }`}
                   {x.demandAssets.map(asset => (

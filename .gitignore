@@ -27,3 +27,5 @@ api/dist
 .env.staging
 .vscode
 node_modules
+.env.china
+.env.netlify
