@@ -1,3 +1,9 @@
+## 0.72.0 (February 28, 2020)
+
+- chore: bump forge sdk version
+- chore: correct way to simulate netlify on local
+- chore: bump forge sdk version
+
 ## 0.71.0 (February 28, 2020)
 
 - fix: pickup and orders page
