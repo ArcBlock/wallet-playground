@@ -1,3 +1,7 @@
+## 0.70.0 (February 28, 2020)
+
+- chore: elimate client dependency on forge-sdk
+
 ## 0.69.2 (February 28, 2020)
 
 - add exchagne asset for free
