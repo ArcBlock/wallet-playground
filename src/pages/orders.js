@@ -57,7 +57,7 @@ function OrderStatus({ traceId, status }) {
           onClose={() => setOpen()}
           checkTimeout={5 * 60 * 1000}
           onSuccess={() => window.location.reload()}
-          extraParams={{ traceId }}
+          extraParams={{ tid: traceId }}
           messages={{
             title: 'Checkout',
             scan: 'Scan QR code to checkout',
@@ -120,6 +120,7 @@ export default function OrdersPage() {
   }
 
   const { orders, tokenInfo } = state.value;
+  const filterByChain = x => tokenInfo[x.offerChainId] || tokenInfo[x.demandChainId];
 
   return (
     <Layout title="Orders">
@@ -140,52 +141,54 @@ export default function OrdersPage() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {orders.map(x => (
-              // eslint-disable-next-line
-              <TableRow key={x._id}>
-                <TableCell>
-                  <ClickToCopy content={x.traceId}>
-                    <TextCollapse maxWidth={90}>{x.traceId}</TextCollapse>
-                  </ClickToCopy>
-                </TableCell>
-                <TableCell>
-                  {x.offerToken > 0 &&
-                    `${fromUnitToToken(x.offerToken, tokenInfo[x.offerChainId].decimal)} ${
-                      tokenInfo[x.offerChainId].symbol
-                    }`}
-                  {x.offerAssets.map(asset => (
-                    <Link
-                      key={asset}
-                      href={`${getChainExplorerAddress(x.offerChainHost)}/assets/${asset}`}
-                      target="_blank">
-                      <DidAddress copyable={false}>{asset}</DidAddress>
-                    </Link>
-                  ))}
-                </TableCell>
-                <TableCell>
-                  {x.demandToken > 0 &&
-                    `${fromUnitToToken(x.demandToken, tokenInfo[x.demandChainId].decimal)} ${
-                      tokenInfo[x.demandChainId].symbol
-                    }`}
-                  {x.demandAssets.map(asset => (
-                    <Link
-                      key={asset}
-                      href={`${getChainExplorerAddress(x.demandChainHost)}/assets/${asset}`}
-                      target="_blank">
-                      <DidAddress copyable={false}>{asset}</DidAddress>
-                    </Link>
-                  ))}
-                </TableCell>
-                <TableCell>
-                  <OrderStatus {...x} />
-                </TableCell>
-                <TableCell>{new Date(x.createdAt).toLocaleString()}</TableCell>
-                <TableCell>{new Date(x.updatedAt).toLocaleString()}</TableCell>
-                <TableCell>
-                  <OrderDetail {...x} />
-                </TableCell>
-              </TableRow>
-            ))}
+            {orders
+              .filter(x => filterByChain(x))
+              .map(x => (
+                // eslint-disable-next-line
+                <TableRow key={x._id}>
+                  <TableCell>
+                    <ClickToCopy content={x.traceId}>
+                      <TextCollapse maxWidth={90}>{x.traceId}</TextCollapse>
+                    </ClickToCopy>
+                  </TableCell>
+                  <TableCell>
+                    {x.offerToken > 0 &&
+                      `${fromUnitToToken(x.offerToken, tokenInfo[x.offerChainId].decimal)} ${
+                        tokenInfo[x.offerChainId].symbol
+                      }`}
+                    {x.offerAssets.map(asset => (
+                      <Link
+                        key={asset}
+                        href={`${getChainExplorerAddress(x.offerChainHost)}/assets/${asset}`}
+                        target="_blank">
+                        <DidAddress copyable={false}>{asset}</DidAddress>
+                      </Link>
+                    ))}
+                  </TableCell>
+                  <TableCell>
+                    {x.demandToken > 0 &&
+                      `${fromUnitToToken(x.demandToken, tokenInfo[x.demandChainId].decimal)} ${
+                        tokenInfo[x.demandChainId].symbol
+                      }`}
+                    {x.demandAssets.map(asset => (
+                      <Link
+                        key={asset}
+                        href={`${getChainExplorerAddress(x.demandChainHost)}/assets/${asset}`}
+                        target="_blank">
+                        <DidAddress copyable={false}>{asset}</DidAddress>
+                      </Link>
+                    ))}
+                  </TableCell>
+                  <TableCell>
+                    <OrderStatus {...x} />
+                  </TableCell>
+                  <TableCell>{new Date(x.createdAt).toLocaleString()}</TableCell>
+                  <TableCell>{new Date(x.updatedAt).toLocaleString()}</TableCell>
+                  <TableCell>
+                    <OrderDetail {...x} />
+                  </TableCell>
+                </TableRow>
+              ))}
           </TableBody>
         </Table>
       </Main>
