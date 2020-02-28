@@ -1,6 +1,5 @@
 /* eslint-disable no-console */
 const ForgeSDK = require('@arcblock/forge-sdk');
-const { AssetType } = require('@arcblock/asset-factory');
 const { wallet } = require('../../libs/auth');
 const env = require('../../libs/env');
 
@@ -10,19 +9,12 @@ module.exports = {
   action: 'consume_asset',
   claims: {
     signature: async ({ userDid, userPk }) => {
-      let { assets } = await ForgeSDK.listAssets({ ownerAddress: userDid }, { conn: env.chainId }); // TODO: support both chains
-
-      assets = assets
-        .filter(x => x.data.typeUrl === 'json' && x.data.value)
-        .map(x => {
-          x.data = JSON.parse(x.data.value);
-          return x;
-        });
-
-      // TODO: support consume any valid asset type
-      const [ticket] = assets.filter(x => x.data.type === AssetType.ticket && x.consumedTime === '');
+      const { assets } = await ForgeSDK.listAssets({ ownerAddress: userDid });
+      const [ticket] = assets.filter(
+        x => x.data.typeUrl === 'fg:x:movie_ticket' && x.consumedTime === ''
+      );
       if (!ticket) {
-        throw new Error('You have not purchased any ticket yet or all tickets are consumed!');
+        throw new Error('You have not purchased any movie ticket yet or all tickets are consumed!');
       }
 
       console.log('about to consume ticket', ticket);
@@ -49,13 +41,13 @@ module.exports = {
       return {
         type: 'ConsumeAssetTx',
         data: tx,
-        description: 'Sign this transaction to confirm the ticket consumption',
+        description: 'Sign this transaction to confirm the movie ticket consumption',
       };
     },
   },
   onAuth: async ({ claims, userDid }) => {
     const claim = claims.find(x => x.type === 'signature');
-    console.log('consume_asset.auth.claim', claim);
+    console.log('consume_ticket.auth.claim', claim);
 
     const tx = ForgeSDK.decodeTx(claim.origin);
     const signer = tx.signaturesList.filter(x => x.signer === userDid);
@@ -64,7 +56,7 @@ module.exports = {
     }
 
     try {
-      console.log('consume_asset.auth.tx', tx);
+      console.log('consume_ticket.auth.tx', tx);
       const hash = await ForgeSDK.sendConsumeAssetTx({ tx, wallet: app });
       console.log('hash:', hash);
       return { hash, tx: claim.origin };

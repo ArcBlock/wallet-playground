@@ -13,13 +13,8 @@ export default function ConsumeAsset({ count }) {
 
   return (
     <React.Fragment>
-      <Button
-        color="secondary"
-        variant="contained"
-        size="large"
-        className="action"
-        onClick={() => setOpen(true)}>
-        Consume Movie Ticket
+      <Button color="secondary" variant="contained" size="large" className="action" onClick={() => setOpen(true)}>
+        Consume Asset
       </Button>
       {isOpen && (
         <Auth
