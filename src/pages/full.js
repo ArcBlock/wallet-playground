@@ -232,6 +232,14 @@ export default function IndexPage() {
             />
             <PlaygroundAction
               className="action"
+              title="Buy 1 Local Certificate for Free"
+              action="buy_local_certificate_with_local_token"
+              payAmount={0}
+              receiveAmount={1}
+              name="Local Certificate"
+            />
+            <PlaygroundAction
+              className="action"
               title={`Sell 1 Local Certificate For 1 ${token.local.symbol}`}
               action="sell_local_certificate_for_local_token"
               payAmount={1}
@@ -248,6 +256,14 @@ export default function IndexPage() {
             />
             <PlaygroundAction
               className="action"
+              title="Buy 1 Local Badge for Free"
+              action="buy_local_badge_with_local_token"
+              payAmount={0}
+              receiveAmount={1}
+              name="Local Badge"
+            />
+            <PlaygroundAction
+              className="action"
               title={`Sell 1 Local Badge For 1 ${token.local.symbol}`}
               action="sell_local_badge_for_local_token"
               payAmount={1}
@@ -259,6 +275,14 @@ export default function IndexPage() {
               title={`Buy 1 Local Ticket with 1 ${token.local.symbol}`}
               action="buy_local_ticket_with_local_token"
               payAmount={1}
+              receiveAmount={1}
+              name="Local Ticket"
+            />
+            <PlaygroundAction
+              className="action"
+              title="Buy 1 Local Ticket for Free"
+              action="buy_local_ticket_with_local_token"
+              payAmount={0}
               receiveAmount={1}
               name="Local Ticket"
             />
