@@ -180,14 +180,20 @@ export const actions = {
       name: props.name,
     }),
   },
+
+  // Exchange Scenarios
   buy_local_certificate_with_local_token: {
     action: 'exchange_assets',
     extraParams: props => ({
-      pa: props.payAmount || 1,
+      pa: props.payAmount || props.price || 1,
       pt: 'token',
       ra: props.receiveAmount || 1,
       rt: 'certificate',
       name: props.name,
+      desc: props.description,
+      loc: props.location,
+      bg: props.backgroundUrl,
+      logo: props.logoUrl,
     }),
   },
   sell_local_certificate_for_local_token: {
@@ -195,7 +201,7 @@ export const actions = {
     extraParams: props => ({
       pa: props.payAmount || 1,
       pt: 'certificate',
-      ra: props.receiveAmount || 1,
+      ra: props.receiveAmount || props.price || 1,
       rt: 'token',
       name: props.name,
     }),
@@ -203,11 +209,15 @@ export const actions = {
   buy_local_badge_with_local_token: {
     action: 'exchange_assets',
     extraParams: props => ({
-      pa: props.payAmount || 1,
+      pa: props.payAmount || props.price || 1,
       pt: 'token',
       ra: props.receiveAmount || 1,
       rt: 'badge',
       name: props.name,
+      desc: props.description,
+      loc: props.location,
+      bg: props.backgroundUrl,
+      logo: props.logoUrl,
     }),
   },
   sell_local_badge_for_local_token: {
@@ -215,7 +225,7 @@ export const actions = {
     extraParams: props => ({
       pa: props.payAmount || 1,
       pt: 'badge',
-      ra: props.receiveAmount || 1,
+      ra: props.receiveAmount || props.price || 1,
       rt: 'token',
       name: props.name,
     }),
@@ -223,11 +233,15 @@ export const actions = {
   buy_local_ticket_with_local_token: {
     action: 'exchange_assets',
     extraParams: props => ({
-      pa: props.payAmount || 1,
+      pa: props.payAmount || props.price || 1,
       pt: 'token',
       ra: props.receiveAmount || 1,
       rt: 'ticket',
       name: props.name,
+      desc: props.description,
+      loc: props.location,
+      bg: props.backgroundUrl,
+      logo: props.logoUrl,
     }),
   },
   sell_local_ticket_for_local_token: {
@@ -235,7 +249,7 @@ export const actions = {
     extraParams: props => ({
       pa: props.payAmount || 1,
       pt: 'ticket',
-      ra: props.receiveAmount || 1,
+      ra: props.receiveAmount || props.price || 1,
       rt: 'token',
       name: props.name,
     }),
