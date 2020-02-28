@@ -1,3 +1,15 @@
+## 0.65.0 (February 28, 2020)
+
+- chore: bump ux lib and forge sdk version, cleanup useless files
+- feat: support cross chain asset and token swap
+- chore: upgrade did-auth lib
+- fix: orders page
+- chore: basic skeleton for assets
+- chore: refactor session.token info
+- feat: support amount param on exchange buttons
+- chore: update git ignore
+- fix: publish script
+
 ## 0.64.0 (February 27, 2020)
 
 - fix: onStart when user not logged in is not properly handled
