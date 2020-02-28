@@ -1,3 +1,7 @@
+## 0.69.2 (February 28, 2020)
+
+- add exchagne asset for free
+
 ## 0.69.1 (February 28, 2020)
 
 - remove useless exchange code
