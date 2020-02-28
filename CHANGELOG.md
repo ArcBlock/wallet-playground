@@ -1,3 +1,8 @@
+## 0.67.0 (February 28, 2020)
+
+- feat: support login button as playground action
+- [skip ci] chore: remove useless file
+
 ## 0.66.0 (February 28, 2020)
 
 - chore: bump ux lib version
