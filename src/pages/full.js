@@ -15,11 +15,6 @@ import AgentButton from '../components/auth/auth/agent';
 import ConsumeAssetButton from '../components/auth/consume_asset';
 import AcquireMovieTicket from '../components/auth/acquire_ticket';
 import Exchange from '../components/auth/exchange';
-import BuyBadgeButton from '../components/auth/swap_badge';
-import SwapBadgesButton from '../components/auth/swap_badges';
-// import SwapAssetsButton from '../components/auth/swap_assets';
-import BuyTicketButton from '../components/auth/swap_ticket';
-import CertificateButton from '../components/auth/swap_certificate';
 import TransferAssetOut from '../components/auth/transfer_asset_out';
 import TransferAssetIn from '../components/auth/transfer_asset_in';
 import TransferTokenAssetIn from '../components/auth/transfer_token_asset_in';
@@ -65,16 +60,12 @@ export default function IndexPage() {
         </section>
         <section className="section">
           <Typography component="h3" variant="h5" className="section__header" color="textPrimary" gutterBottom>
-            Atomic Swap Scenarios{' '}
+            Cross Chain Currency Scenarios{' '}
             <Typography component="small" color="textSecondary">
               Show the full potential of cross-chain transactions.
             </Typography>
           </Typography>
           <div className="section__content">
-            <BuyBadgeButton {...session} />
-            <BuyTicketButton {...session} />
-            <CertificateButton {...session} action="buy" />
-            <CertificateButton {...session} action="sell" />
             <PlaygroundAction
               action="exchange_to_foreign_token"
               title="Exchange Currency"
@@ -93,8 +84,6 @@ export default function IndexPage() {
               exchangeRate={5}
               amount={1}
             />
-            <SwapBadgesButton {...session} action="buy" />
-            <SwapBadgesButton {...session} action="sell" />
           </div>
         </section>
         <section className="section">
@@ -121,6 +110,109 @@ export default function IndexPage() {
             <TransferAssetIn {...session} />
             <TransferTokenAssetIn {...session} />
             <TransferTokenAssetOut {...session} />
+          </div>
+        </section>
+        <section className="section">
+          <Typography component="h3" variant="h5" className="section__header" color="textPrimary" gutterBottom>
+            Cross Chain Asset Scenarios{' '}
+            <Typography component="small" color="textSecondary">
+              Buy/sell assets from another chain
+            </Typography>
+          </Typography>
+          <div className="section__content">
+            <PlaygroundAction
+              action="buy_local_certificate_with_foreign_token"
+              className="action"
+              price={0.99}
+              title={`Buy Local Certificate with 0.99 ${token.foreign.symbol}`}
+              name="Local Certificate"
+              description="This is a test certificate that is on local chain"
+            />
+            <PlaygroundAction
+              action="sell_local_certificate_for_foreign_token"
+              className="action"
+              price={1}
+              title={`Sell Local Certificate for 1 ${token.foreign.symbol}`}
+              name="Local Certificate"
+            />
+
+            <PlaygroundAction
+              action="buy_local_badge_with_foreign_token"
+              className="action"
+              price={0.99}
+              title={`Buy Local Badge with 0.99 ${token.foreign.symbol}`}
+              name="Local Badge"
+              description="This is a test badge that is on local chain"
+            />
+            <PlaygroundAction
+              action="sell_local_badge_for_foreign_token"
+              className="action"
+              price={1}
+              title={`Sell Local Badge for 1 ${token.foreign.symbol}`}
+              name="Local Badge"
+            />
+
+            <PlaygroundAction
+              action="buy_local_ticket_with_foreign_token"
+              className="action"
+              price={0.99}
+              title={`Buy Local Ticket with 0.99 ${token.foreign.symbol}`}
+              name="Local Ticket"
+              description="This is a test ticket that is on local chain"
+            />
+            <PlaygroundAction
+              action="sell_local_ticket_for_foreign_token"
+              className="action"
+              price={1}
+              title={`Sell Local Ticket for 1 ${token.foreign.symbol}`}
+              name="Local Ticket"
+            />
+
+            <PlaygroundAction
+              action="buy_foreign_certificate_with_local_token"
+              className="action"
+              price={0.99}
+              title={`Buy Foreign Certificate with 0.99 ${token.local.symbol}`}
+              name="Foreign Certificate"
+              description="This is a test certificate that is on foreign chain"
+            />
+            <PlaygroundAction
+              action="sell_foreign_certificate_for_local_token"
+              className="action"
+              price={1}
+              title={`Sell Foreign Certificate for 1 ${token.local.symbol}`}
+              name="Foreign Certificate"
+            />
+            <PlaygroundAction
+              action="buy_foreign_badge_with_local_token"
+              className="action"
+              price={0.99}
+              title={`Buy Foreign Badge with 0.99 ${token.local.symbol}`}
+              name="Foreign Badge"
+              description="This is a test badge that is on foreign chain"
+            />
+            <PlaygroundAction
+              action="sell_foreign_badge_for_local_token"
+              className="action"
+              price={1}
+              title={`Sell Foreign Badge for 1 ${token.local.symbol}`}
+              name="Foreign Badge"
+            />
+            <PlaygroundAction
+              action="buy_foreign_ticket_with_local_token"
+              className="action"
+              price={0.99}
+              title={`Buy Foreign Ticket with 0.99 ${token.local.symbol}`}
+              name="Foreign Ticket"
+              description="This is a test ticket that is on foreign chain"
+            />
+            <PlaygroundAction
+              action="sell_foreign_ticket_for_local_token"
+              className="action"
+              price={1}
+              title={`Sell Foreign Ticket for 1 ${token.local.symbol}`}
+              name="Foreign Ticket"
+            />
           </div>
         </section>
         <section className="section">
