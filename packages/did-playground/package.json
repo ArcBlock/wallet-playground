@@ -33,7 +33,7 @@
     "url": "https://github.com/ArcBlock/wallet-playground/issues"
   },
   "dependencies": {
-    "@arcblock/did-react": "^0.68.3",
+    "@arcblock/did-react": "^0.68.4",
     "@arcblock/ux": "^0.68.3",
     "@material-ui/core": "^4.9.1",
     "axios": "^0.19.2",
