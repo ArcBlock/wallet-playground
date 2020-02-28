@@ -1,3 +1,7 @@
+## 0.69.0 (February 28, 2020)
+
+- chore: add more prop fields when exchange with assets
+
 ## 0.68.0 (February 28, 2020)
 
 - add assets balance check
