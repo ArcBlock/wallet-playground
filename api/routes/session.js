@@ -9,8 +9,7 @@ module.exports = {
       const data = await getTokenInfo();
       res.json({
         user: req.user,
-        token: data[env.chainId],
-        assetToken: data[env.assetChainId],
+        token: { local: data[env.chainId], foreign: data[env.assetChainId] },
       });
     });
 

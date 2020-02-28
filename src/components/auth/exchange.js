@@ -11,7 +11,7 @@ import api from '../../libs/api';
 const getExchangeAssetDesc = (type, count, token) => {
   let result = '';
   if (type === 'token') {
-    result = token.symbol;
+    result = token.local.symbol;
   } else {
     result = count <= 1 ? 'Asset' : 'Assets';
   }

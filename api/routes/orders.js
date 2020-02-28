@@ -5,8 +5,8 @@ const { getTokenInfo } = require('../libs/util');
 module.exports = {
   init(app) {
     app.get('/api/orders', async (req, res) => {
+      const tokenInfo = await getTokenInfo();
       if (req.user) {
-        const tokenInfo = await getTokenInfo();
         const orders = await swapStorage.listByDemandAddress(req.user.did);
 
         res.json({
@@ -15,7 +15,11 @@ module.exports = {
           tokenInfo,
         });
       } else {
-        res.json([]);
+        res.json({
+          user: null,
+          orders: [],
+          tokenInfo,
+        });
       }
     });
   },

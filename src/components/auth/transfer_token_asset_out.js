@@ -18,7 +18,7 @@ export default function TransferTokenAssetOut({ token }) {
         size="large"
         className="action"
         onClick={() => setOpen(true)}>
-        Send 1 {token.symbol} + 1 Asset to Application
+        Send 1 {token.local.symbol} + 1 Asset to Application
       </Button>
       {isOpen && (
         <Auth

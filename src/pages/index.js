@@ -13,7 +13,7 @@ import { version } from '../../package.json';
 // 临时 demo 的页面
 export default function MiniPage() {
   const { session } = useContext(SessionContext);
-  const { token, assetToken } = session;
+  const { token } = session;
 
   return (
     <Layout title="Home">
@@ -22,7 +22,7 @@ export default function MiniPage() {
           ABT Wallet Playground Mini<Tag type="success">V{version}</Tag>
         </Typography>
         <Typography component="h3" variant="subtitle1" color="textSecondary">
-          {token.symbol} is the token on Local Chain, {assetToken.symbol} is the token on Foreign Chain.
+          {token.local.symbol} is the token on Local Chain, {token.foreign.symbol} is the token on Foreign Chain.
         </Typography>
         <section className="section">
           <Typography component="h3" variant="h5" className="section__header" color="textPrimary" gutterBottom>
@@ -37,13 +37,13 @@ export default function MiniPage() {
               className="action"
               buttonVariant="contained"
               amount={10}
-              title={`Get 10 ${assetToken.symbol}`}
+              title={`Get 10 ${token.foreign.symbol}`}
             />
             <PlaygroundAction
               action="receive_local_token"
               className="action"
               amount={400}
-              title={`Get 400 ${token.symbol}`}
+              title={`Get 400 ${token.local.symbol}`}
             />
           </div>
         </section>
@@ -60,7 +60,7 @@ export default function MiniPage() {
               title="Exchange Currency"
               className="action"
               buttonVariant="contained"
-              buttonText={`Buy 1 ${assetToken.symbol} with 195.8 ${token.symbol}`}
+              buttonText={`Buy 1 ${token.foreign.symbol} with 195.8 ${token.local.symbol}`}
               exchangeRate={195.8}
             />
             <PlaygroundAction
@@ -68,7 +68,7 @@ export default function MiniPage() {
               title="Exchange Currency"
               className="action"
               buttonVariant="contained"
-              buttonText={`Sell 1 ${assetToken.symbol} for 195.8 ${token.symbol}`}
+              buttonText={`Sell 1 ${token.foreign.symbol} for 195.8 ${token.local.symbol}`}
               exchangeRate={195.8}
             />
           </div>
@@ -86,14 +86,14 @@ export default function MiniPage() {
               className="action"
               buttonVariant="contained"
               amount={0.1}
-              title={`Send 0.1 ${assetToken.symbol}`}
+              title={`Send 0.1 ${token.foreign.symbol}`}
             />
             <PlaygroundAction
               action="send_local_token"
               className="action"
               buttonVariant="contained"
               amount={10}
-              title={`Send 10 ${token.symbol}`}
+              title={`Send 10 ${token.local.symbol}`}
             />
           </div>
         </section>

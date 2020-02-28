@@ -99,6 +99,9 @@ const swapHandlers = new SwapHandlers({
     demandChainId: env.assetChainId,
     demandChainHost: env.assetChainHost,
   },
+  options: {
+    swapKey: 'tid',
+  },
 });
 
 const agentHandlers = new AgentWalletHandlers({
@@ -107,9 +110,20 @@ const agentHandlers = new AgentWalletHandlers({
   agentStorage,
 });
 
-const factory = new AssetFactory({
+const localFactory = new AssetFactory({
   chainId: env.chainId,
   chainHost: env.chainHost,
+  wallet: fromJSON(wallet),
+  issuer: {
+    name: 'ArcBlock',
+    url: 'https://www.arcblock.io',
+    logo: 'https://releases.arcblockio.cn/arcblock-logo.png',
+  },
+});
+
+const foreignFactory = new AssetFactory({
+  chainId: env.assetChainId,
+  chainHost: env.assetChainHost,
   wallet: fromJSON(wallet),
   issuer: {
     name: 'ArcBlock',
@@ -128,5 +142,6 @@ module.exports = {
   agentHandlers,
 
   wallet,
-  factory,
+  localFactory,
+  foreignFactory,
 };

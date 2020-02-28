@@ -5,7 +5,7 @@
     ".",
     "packages/*"
   ],
-  "version": "0.64.0",
+  "version": "0.65.0",
   "author": "wangshijun <shijun@arcblock.io> https://github.com/wangshijun",
   "keywords": [
     "arcblock",
@@ -23,13 +23,13 @@
     "email": "shijun@arcblock.io"
   },
   "dependencies": {
-    "@arcblock/asset-factory": "^1.0.33",
+    "@arcblock/asset-factory": "^1.0.36",
     "@arcblock/did": "^1.0.33",
     "@arcblock/did-agent-storage-mongo": "^1.0.13",
-    "@arcblock/did-auth": "^1.0.34",
+    "@arcblock/did-auth": "^1.0.35",
     "@arcblock/did-auth-storage-mongo": "^1.0.13",
     "@arcblock/did-playground": "./packages/did-playground",
-    "@arcblock/did-react": "^0.68.2",
+    "@arcblock/did-react": "^0.68.3",
     "@arcblock/did-util": "^1.0.33",
     "@arcblock/event-client": "^1.0.23",
     "@arcblock/event-server": "^1.0.23",
@@ -40,7 +40,7 @@
     "@arcblock/forge-wallet": "^1.0.33",
     "@arcblock/mcrypto": "^1.0.33",
     "@arcblock/swap-storage-mongo": "^1.0.13",
-    "@arcblock/ux": "^0.68.0",
+    "@arcblock/ux": "^0.68.3",
     "@material-ui/core": "^4.9.1",
     "@material-ui/icons": "4.5.1",
     "axios": "^0.19.0",
