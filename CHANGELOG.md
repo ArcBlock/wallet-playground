@@ -1,3 +1,8 @@
+## 0.68.0 (February 28, 2020)
+
+- add assets balance check
+- add exchange asset with token seneries
+
 ## 0.67.0 (February 28, 2020)
 
 - feat: support login button as playground action

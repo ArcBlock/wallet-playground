@@ -30,12 +30,12 @@ const ensureAsset = async (userPk, userDid) => {
 const getReceives = async (type, count = 1, userPk, userDid) => {
   switch (lodash.toLower(type)) {
     case 'asset': {
-      const receiveAssets = [];
+      const receiverPayload = [];
       for (let i = 0; i < count; i += 1) {
-        receiveAssets.push((await ensureAsset(userPk, userDid)).address); // eslint-disable-line
+        receiverPayload.push((await ensureAsset(userPk, userDid)).address); // eslint-disable-line
       }
 
-      return receiveAssets;
+      return receiverPayload;
     }
     case 'token':
       return ForgeSDK.fromTokenToUnit(count);
@@ -60,19 +60,15 @@ const getPays = async (type, count = 1, userDid) => {
 module.exports = {
   action: 'exchange',
   claims: {
-    signature: async ({
-      userPk,
-      userDid,
-      extraParams: { receiveType, receiveCount, payType, payCount },
-    }) => {
+    signature: async ({ userPk, userDid, extraParams: { receiveType, receiveCount, payType, payCount } }) => {
       const receives = await getReceives(receiveType, receiveCount, userPk);
 
       console.log('RECEIVES:');
       console.log(receives);
 
-      const payAssets = await getPays(payType, payCount, userDid);
+      const senderPayload = await getPays(payType, payCount, userDid);
       console.log('PAYS:');
-      console.log(payAssets);
+      console.log(senderPayload);
 
       const receiverType = receiveType === 'asset' ? 'assets' : 'value';
       const senderType = payType === 'asset' ? 'assets' : 'value';
@@ -84,7 +80,7 @@ module.exports = {
               [receiverType]: receives,
             },
             receiver: {
-              [senderType]: payAssets,
+              [senderType]: senderPayload,
             },
           },
         },

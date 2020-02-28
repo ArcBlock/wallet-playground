@@ -180,6 +180,86 @@ export const actions = {
       name: props.name,
     }),
   },
+  buy_local_certificate_with_local_token: {
+    action: 'exchange_assets',
+    extraParams: props => ({
+      pa: props.payAmount || 1,
+      pt: 'token',
+      ra: props.receiveAmount || 1,
+      rt: 'certificate',
+      name: props.name,
+    }),
+  },
+  sell_local_certificate_for_local_token: {
+    action: 'exchange_assets',
+    extraParams: props => ({
+      pa: props.payAmount || 1,
+      pt: 'certificate',
+      ra: props.receiveAmount || 1,
+      rt: 'token',
+      name: props.name,
+    }),
+  },
+  buy_local_badge_with_local_token: {
+    action: 'exchange_assets',
+    extraParams: props => ({
+      pa: props.payAmount || 1,
+      pt: 'token',
+      ra: props.receiveAmount || 1,
+      rt: 'badge',
+      name: props.name,
+    }),
+  },
+  sell_local_badge_for_local_token: {
+    action: 'exchange_assets',
+    extraParams: props => ({
+      pa: props.payAmount || 1,
+      pt: 'badge',
+      ra: props.receiveAmount || 1,
+      rt: 'token',
+      name: props.name,
+    }),
+  },
+  buy_local_ticket_with_local_token: {
+    action: 'exchange_assets',
+    extraParams: props => ({
+      pa: props.payAmount || 1,
+      pt: 'token',
+      ra: props.receiveAmount || 1,
+      rt: 'ticket',
+      name: props.name,
+    }),
+  },
+  sell_local_ticket_for_local_token: {
+    action: 'exchange_assets',
+    extraParams: props => ({
+      pa: props.payAmount || 1,
+      pt: 'ticket',
+      ra: props.receiveAmount || 1,
+      rt: 'token',
+      name: props.name,
+    }),
+  },
+  buy_local_ticket_with_local_certificate: {
+    action: 'exchange_assets',
+    extraParams: props => ({
+      pa: props.payAmount || 1,
+      pt: 'certificate',
+      ra: props.receiveAmount || 1,
+      rt: 'ticket',
+      name: props.name,
+    }),
+  },
+  buy_local_certificate_with_local_ticket: {
+    action: 'exchange_assets',
+    extraParams: props => ({
+      pa: props.payAmount || 1,
+      pt: 'ticket',
+      ra: props.receiveAmount || 1,
+      rt: 'certificate',
+      name: props.name,
+    }),
+  },
 };
 
 export const getActionName = (config, props) => {
