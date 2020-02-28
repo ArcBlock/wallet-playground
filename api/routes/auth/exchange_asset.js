@@ -61,6 +61,10 @@ module.exports = {
           .filter(item => JSON.parse(item.data.value).type === AssetType[payType])
           .map(item => item.address)
           .slice(0, payAmount);
+
+        if (payAssets.length < payAmount) {
+          throw new Error('Not sufficient Assets');
+        }
       }
 
       if (receiveType === 'token') {
