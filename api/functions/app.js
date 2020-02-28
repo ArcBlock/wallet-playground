@@ -182,6 +182,8 @@ if (isProduction) {
     console.error(err.stack);
     res.status(500).send('Something broke!');
   });
+} else if (isNetlify) {
+  app.use('/.netlify/functions/app', router);
 } else {
   app.use(router);
 }
