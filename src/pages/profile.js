@@ -1,8 +1,6 @@
 /* eslint-disable react/jsx-one-expression-per-line */
 import React, { useContext } from 'react';
 import styled from 'styled-components';
-import useAsyncFn from 'react-use/lib/useAsyncFn';
-import useToggle from 'react-use/lib/useToggle';
 import { fromUnitToToken } from '@arcblock/forge-util';
 import { SessionContext } from '@arcblock/did-playground';
 
@@ -11,7 +9,6 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Typography from '@material-ui/core/Typography';
-import CircularProgress from '@material-ui/core/CircularProgress';
 import Avatar from '@arcblock/did-react/lib/Avatar';
 import Button from '@arcblock/ux/lib/Button';
 
