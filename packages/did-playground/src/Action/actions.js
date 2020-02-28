@@ -4,6 +4,18 @@ async function createSwapOrder(api) {
   return { tid: res.data.traceId };
 }
 
+const getValidPayAmount = (payAmount, price) => {
+  if (payAmount !== undefined) {
+    return payAmount;
+  }
+
+  if (price !== undefined) {
+    return price;
+  }
+
+  return 1;
+};
+
 // https://github.com/ArcBlock/gatsby-extensions/issues/56
 export const actions = {
   // Currency
@@ -185,7 +197,7 @@ export const actions = {
   buy_local_certificate_with_local_token: {
     action: 'exchange_assets',
     extraParams: props => ({
-      pa: props.payAmount || props.price || 1,
+      pa: getValidPayAmount(props.payAmount, props.price),
       pt: 'token',
       ra: props.receiveAmount || 1,
       rt: 'certificate',
@@ -209,7 +221,7 @@ export const actions = {
   buy_local_badge_with_local_token: {
     action: 'exchange_assets',
     extraParams: props => ({
-      pa: props.payAmount || props.price || 1,
+      pa: getValidPayAmount(props.payAmount, props.price),
       pt: 'token',
       ra: props.receiveAmount || 1,
       rt: 'badge',
@@ -233,7 +245,7 @@ export const actions = {
   buy_local_ticket_with_local_token: {
     action: 'exchange_assets',
     extraParams: props => ({
-      pa: props.payAmount || props.price || 1,
+      pa: getValidPayAmount(props.payAmount, props.price),
       pt: 'token',
       ra: props.receiveAmount || 1,
       rt: 'ticket',
