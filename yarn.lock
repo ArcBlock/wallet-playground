@@ -55,10 +55,10 @@
   resolved "https://registry.yarnpkg.com/@arcblock/did-auth-storage/-/did-auth-storage-1.0.13.tgz#acc03e51cfcc38d52d691935b10ca421638fd494"
   integrity sha512-9nT2MYAzswSuY0WyDd8ednQWIKIxz2N+v/Zlj9xT62RXfBn/NU7Ibi51Q0MAVck97CLoSuezKUDUCo+cLBUDqg==
 
-"@arcblock/did-auth@^1.0.37":
-  version "1.0.37"
-  resolved "https://registry.yarnpkg.com/@arcblock/did-auth/-/did-auth-1.0.37.tgz#95db708d6af162c32b3d93f8d70ac889ce17780b"
-  integrity sha512-WeUqJRetLYPfAiDpaCcd/ud6FBllSW8/odjSqc0BAt/tyuaeY8WF2Z4+6AQI9neGKQCW1snYl0Gwx0Dy+xXoUg==
+"@arcblock/did-auth@^1.0.38":
+  version "1.0.38"
+  resolved "https://registry.yarnpkg.com/@arcblock/did-auth/-/did-auth-1.0.38.tgz#9909f6d327040a5988bb2d27ad8246fd86af11df"
+  integrity sha512-lEW9K4cZav3PhA7Fedo8mG6hm9FPbC55hmNYNG3lCYMEB6qxAMVtDxHueBnuzR04WFfo51FHWHtpxvPt/9W85w==
   dependencies:
     "@arcblock/did" "^1.0.33"
     "@arcblock/forge-sdk" "^1.0.33"
@@ -73,7 +73,7 @@
     lodash.get "^4.4.2"
 
 "@arcblock/did-playground@./packages/did-playground":
-  version "0.70.0"
+  version "0.71.0"
   dependencies:
     "@arcblock/did-react" "^0.68.4"
     "@arcblock/ux" "^0.68.3"
