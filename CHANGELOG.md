@@ -1,3 +1,7 @@
+## 0.66.0 (February 28, 2020)
+
+- chore: bump ux lib version
+
 ## 0.65.0 (February 28, 2020)
 
 - chore: bump ux lib and forge sdk version, cleanup useless files
