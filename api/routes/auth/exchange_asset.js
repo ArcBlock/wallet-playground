@@ -50,27 +50,27 @@ module.exports = {
         throw new Error(`Invalid asset type: ${receiveType}`);
       }
 
-      let payAssets = null;
-      let receiveAssets = null;
+      let senderPayload = null;
+      let receiverPayload = null;
 
       if (payType === 'token') {
-        payAssets = await ForgeSDK.fromTokenToUnit(payAmount);
+        senderPayload = await ForgeSDK.fromTokenToUnit(payAmount);
       } else {
         const assets = await getTransferrableAssets(userDid);
-        payAssets = assets
+        senderPayload = assets
           .filter(item => JSON.parse(item.data.value).type === AssetType[payType])
           .map(item => item.address)
           .slice(0, payAmount);
 
-        if (payAssets.length < payAmount) {
+        if (senderPayload.length < payAmount) {
           throw new Error('Not sufficient Assets');
         }
       }
 
       if (receiveType === 'token') {
-        receiveAssets = await ForgeSDK.fromTokenToUnit(payAmount);
+        receiverPayload = await ForgeSDK.fromTokenToUnit(payAmount);
       } else {
-        receiveAssets = await getAssets({
+        receiverPayload = await getAssets({
           amount: receiveAmount,
           type: receiveType,
           userPk,
@@ -90,10 +90,10 @@ module.exports = {
           itx: {
             to: userDid,
             sender: {
-              [getTransactionAssetType(receiveType)]: receiveAssets,
+              [getTransactionAssetType(receiveType)]: receiverPayload,
             },
             receiver: {
-              [getTransactionAssetType(payType)]: payAssets,
+              [getTransactionAssetType(payType)]: senderPayload,
             },
           },
         },
