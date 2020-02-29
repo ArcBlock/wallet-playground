@@ -24,6 +24,7 @@ const { decode } = require('../libs/jwt');
 const { walletHandlers, swapHandlers, agentHandlers, wallet } = require('../libs/auth');
 const { getAccountStateOptions } = require('../libs/util');
 
+const netlifyPrefix = '/.netlify/functions/app';
 const isProduction = process.env.NODE_ENV === 'production';
 const isNetlify = process.env.NETLIFY && JSON.parse(process.env.NETLIFY);
 
@@ -165,7 +166,7 @@ ForgeSDK.getAccountState({ address: wallet.address }, getAccountStateOptions)
 // ------------------------------------------------------
 if (isProduction) {
   if (isNetlify) {
-    app.use('/.netlify/functions/app', router);
+    app.use(netlifyPrefix, router);
   } else {
     app.use(compression());
     app.use(router);
@@ -184,7 +185,7 @@ if (isProduction) {
     res.status(500).send('Something broke!');
   });
 } else if (isNetlify) {
-  app.use('/.netlify/functions/app', router);
+  app.use(netlifyPrefix, router);
 } else {
   app.use(router);
 }
