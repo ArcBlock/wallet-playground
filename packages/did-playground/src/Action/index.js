@@ -53,13 +53,7 @@ export default function PlaygroundAction(props) {
   if (action === 'login') {
     if (session.user) {
       return (
-        <Button
-          {...rest}
-          rounded={buttonRounded}
-          color={buttonColor}
-          variant={buttonVariant}
-          size={buttonSize}
-          disabled>
+        <Button {...rest} rounded={buttonRounded} color={buttonColor} variant={buttonVariant} size={buttonSize}>
           {getMessage(successMessage || `Hello ${session.user.name}`, session)}
         </Button>
       );
