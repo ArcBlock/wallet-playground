@@ -1,3 +1,8 @@
+## 0.73.1 (February 29, 2020)
+
+- fix: netlify app url
+- chore: add charge api
+
 ## 0.73.0 (February 29, 2020)
 
 - fix: login button should not be disabled
