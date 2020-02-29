@@ -1,3 +1,9 @@
+## 0.73.0 (February 29, 2020)
+
+- fix: login button should not be disabled
+- fix: orders page
+- fix: logo
+
 ## 0.72.0 (February 28, 2020)
 
 - chore: bump forge sdk version
