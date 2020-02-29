@@ -137,6 +137,7 @@ agentHandlers.attach(Object.assign({ app: router }, require('../routes/auth/clai
 require('../routes/session').init(router);
 require('../routes/authorizations').init(router);
 require('../routes/orders').init(router);
+require('../routes/charge').init(router);
 
 // Check for application account
 ForgeSDK.getAccountState({ address: wallet.address }, getAccountStateOptions)
