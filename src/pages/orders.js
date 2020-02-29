@@ -120,7 +120,7 @@ export default function OrdersPage() {
   }
 
   const { orders, tokenInfo } = state.value;
-  const filterByChain = x => tokenInfo[x.offerChainId] || tokenInfo[x.demandChainId];
+  const filterByChain = x => tokenInfo[x.offerChainId] && tokenInfo[x.demandChainId];
 
   return (
     <Layout title="Orders">
