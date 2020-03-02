@@ -288,9 +288,10 @@ export const actions = {
   },
   consume_asset: {
     action: 'consume_asset',
-    extraParams: ({ type, pfc }) => ({
+    extraParams: ({ type, pfc, typeUrl }) => ({
       type,
       pfc,
+      typeUrl,
     }),
   },
 };

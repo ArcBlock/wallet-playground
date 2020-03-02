@@ -9,34 +9,61 @@ const app = ForgeSDK.Wallet.fromJSON(wallet);
 
 const getChainConnection = pfc => (pfc === PFC.local ? env.chainId : env.assetChainId);
 
+const findAssetByType = async ({ userDid, conn, type }) => {
+  if (AssetType[type] === undefined) {
+    throw new Error('Invalid asset type');
+  }
+
+  const { assets } = await ForgeSDK.listAssets({ ownerAddress: userDid }, { conn });
+
+  const asset = assets.find(x => {
+    if (x.data.value && x.data.typeUrl === 'json') {
+      const value = JSON.parse(x.data.value);
+      console.log('-----');
+      console.log(x.consumedTime, value.type);
+      return value.type === AssetType[type] && x.consumedTime === '';
+    }
+
+    return false;
+  });
+
+  if (!asset) {
+    throw new Error(`You have not purchased any ${type} yet or all ${type}s are consumed!`);
+  }
+
+  return asset;
+};
+
+const findAssetByTypeUrl = async ({ userDid, conn, typeUrl }) => {
+  const { assets } = await ForgeSDK.listAssets({ ownerAddress: userDid }, { conn });
+
+  const asset = assets.find(x => x.data.typeUrl === typeUrl && x.consumedTime === '');
+
+  if (!asset) {
+    throw new Error('No matching asset found');
+  }
+
+  return asset;
+};
+
 /**
  * pfc => pay from chain
  */
 module.exports = {
   action: 'consume_asset',
   claims: {
-    signature: async ({ userDid, userPk, extraParams: { type, pfc } }) => {
-      if (AssetType[type] === undefined) {
-        throw new Error('Invalid asset type');
-      }
-
+    signature: async ({ userDid, userPk, extraParams: { type, pfc, typeUrl = '' } }) => {
       if (!PFC[pfc]) {
         throw new Error('Invalid pay from chain param');
       }
 
       const conn = getChainConnection(pfc);
-      let { assets } = await ForgeSDK.listAssets({ ownerAddress: userDid }, { conn });
 
-      assets = assets
-        .filter(x => x.data.typeUrl === 'json' && x.data.value)
-        .map(x => {
-          x.data = JSON.parse(x.data.value);
-          return x;
-        });
-
-      const [asset] = assets.filter(x => x.data.type === AssetType[type] && x.consumedTime === '');
-      if (!asset) {
-        throw new Error(`You have not purchased any ${type} yet or all ${type}s are consumed!`);
+      let asset = null;
+      if (typeUrl) {
+        asset = await findAssetByTypeUrl({ userDid, conn, typeUrl });
+      } else {
+        asset = await findAssetByType({ userDid, conn, type });
       }
 
       console.log(`about to consume ${type}`, asset);

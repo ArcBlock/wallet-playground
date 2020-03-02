@@ -491,7 +491,13 @@ export default function IndexPage() {
           <div className="section__content">
             <AcquireMovieTicket count={1} />
             <AcquireMovieTicket count={2} />
-            <ConsumeAssetButton {...session} />
+            <PlaygroundAction
+              className="action"
+              title="Consume Movie Ticket"
+              action="consume_asset"
+              pfc="local"
+              typeUrl="fg:x:movie_ticket"
+            />
           </div>
         </section>
         <section className="section">
