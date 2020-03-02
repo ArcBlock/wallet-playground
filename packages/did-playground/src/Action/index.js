@@ -22,7 +22,7 @@ function getMessage(message, session) {
         balance: session.balance || {},
       },
       {},
-      ['<%', '%>']
+      ['(%', '%)']
     );
   } catch (err) {
     // eslint-disable-next-line no-console
