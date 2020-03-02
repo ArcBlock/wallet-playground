@@ -4,6 +4,7 @@ const UserSchema = new mongoose.Schema({
   did: { type: String, required: true },
   name: { type: String, required: true },
   email: { type: String, default: '' },
+  emailVerified: { type: Boolean, default: false },
   mobile: { type: String, default: '' },
   extraDid: { type: Array, default: [] },
   createdAt: { type: Date },

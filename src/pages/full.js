@@ -607,6 +607,48 @@ export default function IndexPage() {
         </section>
         <section className="section">
           <Typography component="h3" variant="h5" className="section__header" color="textPrimary" gutterBottom>
+            Verified Credential{' '}
+            <Typography component="small" color="textSecondary">
+              verify your email
+            </Typography>
+          </Typography>
+          <div className="section__content">
+          <AuthButton
+              button="verify email"
+              action="verify_email"
+              messages={{
+                title: 'mail Required',
+                scan: 'Scan QR code to provide profile',
+                confirm: 'Confirm on your ABT Wallet',
+                success: 'Profile provided',
+              }}
+            />
+            <AuthButton
+              button="require email vc"
+              action="require_email_vc"
+              extraParams={{ type: 'text' }}
+              messages={{
+                title: 'sign a message',
+                scan: 'Scan QR code to sign a message',
+                confirm: 'Confirm on your ABT Wallet',
+                success: 'vc have send',
+              }}
+            />
+            <AuthButton
+              button="consume email vc"
+              action="consume_vc"
+              messages={{
+                title: 'sign a message',
+                scan: 'Scan QR code to sign a message',
+                confirm: 'Confirm on your ABT Wallet',
+                success: 'vc have send',
+              }}
+            />
+
+          </div>
+        </section>
+        <section className="section">
+          <Typography component="h3" variant="h5" className="section__header" color="textPrimary" gutterBottom>
             Do not have ABT Wallet?
           </Typography>
           <div className="section__content">
