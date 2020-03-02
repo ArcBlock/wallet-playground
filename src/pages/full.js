@@ -624,11 +624,11 @@ export default function IndexPage() {
               }}
             />
             <AuthButton
-              button="require email vc"
-              action="require_email_vc"
+              button="issue email vc"
+              action="issue_email_vc"
               extraParams={{ type: 'text' }}
               messages={{
-                title: 'sign a message',
+                title: 'sign a message and get a vc',
                 scan: 'Scan QR code to sign a message',
                 confirm: 'Confirm on your ABT Wallet',
                 success: 'vc have send',
@@ -637,8 +637,9 @@ export default function IndexPage() {
             <AuthButton
               button="consume email vc"
               action="consume_vc"
+              extraParams={{ item: ['EmailVerificationCredential'] }}
               messages={{
-                title: 'sign a message',
+                title: 'provide your vc',
                 scan: 'Scan QR code to sign a message',
                 confirm: 'Confirm on your ABT Wallet',
                 success: 'vc have send',

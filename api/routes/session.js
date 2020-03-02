@@ -6,21 +6,25 @@ const isNetlify = process.env.NETLIFY && JSON.parse(process.env.NETLIFY);
 module.exports = {
   init(app) {
     app.get('/api/did/session', async (req, res) => {
-      const data = await getTokenInfo();
-      if (req.user) {
-        const balance = await getAccountBalance(req.user.did);
+      try {
+        const data = await getTokenInfo();
+        if (req.user) {
+          const balance = await getAccountBalance(req.user.did);
+          return res.json({
+            user: req.user,
+            token: { local: data[env.chainId], foreign: data[env.assetChainId] },
+            balance,
+          });
+        }
         return res.json({
           user: req.user,
           token: { local: data[env.chainId], foreign: data[env.assetChainId] },
-          balance,
+          balance: {},
         });
+      } catch (e) {
+        console.error('did.session', e);
+        return res.json({});
       }
-
-      return res.json({
-        user: req.user,
-        token: { local: data[env.chainId], foreign: data[env.assetChainId] },
-        balance: {},
-      });
     });
 
     app.post('/api/logout', (req, res) => {

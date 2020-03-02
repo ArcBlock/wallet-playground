@@ -4,12 +4,13 @@ const Mcrypto = require('@arcblock/mcrypto');
 const { toTypeInfo } = require('@arcblock/did');
 const stringify = require('json-stable-stringify')
 const {wallet} = require('../../libs/auth')
+const { User, VerificationToken } = require('../../models');
 
 const data = 'abcdefghijklmnopqrstuvwxyz'.repeat(32);
 const hasher = Mcrypto.getHasher(Mcrypto.types.HashType.SHA3);
 
 module.exports = {
-  action: 'require_email_vc',
+  action: 'issue_email_vc',
   claims: {
     signature: async ({ userDid, userPk, extraParams: { type } }) => {
       const params = {
@@ -49,7 +50,7 @@ module.exports = {
         throw new Error(`Unsupported signature type ${type}`);
       }
 
-      return Object.assign({ description: `Please sign the ${type}` }, params[type]);
+      return Object.assign({ description: `Please sign the ${type} to prove yourself`}, params[type]);
     },
   },
 
@@ -72,24 +73,28 @@ module.exports = {
         throw new Error('Digest 签名错误');
       }
     }
-
-    const vc = {
-      '@context': ['', ''],
-      id: "00001",
-      type: "emailAuthenticated",
-      issuer: '',
-      issuanceDate: new Date().toDateString,
-      credentialSubject: {
-        id: userDid,
-        emailDigest: "emailDigest",
-        method: "SHA3"
-      },
-    };
-
-    const strVC = stringify(vc)
-
-    //const ForgeSDK.Util.toBase64(strVC)
+    
+    let userProfile = await User.findOne({ did: userDid });
+    if(userProfile.emailVerified == false){
+      throw new Error('没有验证过邮箱')
+    }
     const w = ForgeSDK.Wallet.fromJSON(wallet)
+    const emailDigest = hasher(userProfile.email, 1)
+    const subject = {
+      id: userDid,
+      emailDigest: ForgeSDK.Util.toBase64(emailDigest),
+      method: "SHA3"
+    }
+    const vcId =  ForgeSDK.Util.toBase58(hasher(stringify(subject), 1))
+    const vc = {
+      '@context': "https://schema.arcblock.io/v0.1/context.jsonld",
+      id: vcId,
+      type: "EmailVerificationCredential",
+      issuer: w.toAddress(),
+      issuanceDate: new Date().toDateString,
+      credentialSubject: subject
+    };
+    const strVC = stringify(vc)
     const hexSig = w.sign(strVC)
     
     const proof = {
@@ -98,23 +103,12 @@ module.exports = {
       proofPurpose: 'assertionMethod',
       jws: ForgeSDK.Util.toBase64(hexSig),
     };
-    
+    console.log(`user email:${userProfile.email}`)
     return {
       disposition: 'attachment',
       type: 'VerifiableCredential',
-      data: {
-        '@context': ['https://schema.arcblock.io'],
-        id: "00001",
-        type: "emailAuthenticated",
-        issuer: w.userDid,
-        issuanceDate: new Date().toDateString,
-        credentialSubject: {
-          id: userDid,
-          emailDigest: "emailDigest",
-          method: "SHA3"
-        },
-        proof: proof
-      }
+      data: Object.assign({proof: proof}, vc),
+      tag: userProfile.email
     }
   },
 };
