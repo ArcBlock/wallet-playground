@@ -314,6 +314,58 @@ export default function IndexPage() {
         </section>
         <section className="section">
           <Typography component="h3" variant="h5" className="section__header" color="textPrimary" gutterBottom>
+            Consume Asset Scenarios{' '}
+            <Typography component="small" color="textSecondary">
+              Consume an asset
+            </Typography>
+          </Typography>
+          <div className="section__content">
+            <PlaygroundAction
+              className="action"
+              title="Consume Local Certificate"
+              action="consume_asset"
+              pfc="local"
+              type="certificate"
+            />
+            <PlaygroundAction
+              className="action"
+              title="Consume Local Badge"
+              action="consume_asset"
+              pfc="local"
+              type="badge"
+            />
+            <PlaygroundAction
+              className="action"
+              title="Consume Local Ticket"
+              action="consume_asset"
+              pfc="local"
+              type="ticket"
+            />
+            <PlaygroundAction
+              className="action"
+              title="Consume Foreign Certificate"
+              action="consume_asset"
+              pfc="foreign"
+              type="certificate"
+            />
+            <PlaygroundAction
+              className="action"
+              title="Consume Foreign Badge"
+              action="consume_asset"
+              pfc="foreign"
+              type="badge"
+            />
+            <PlaygroundAction
+              className="action"
+              title="Consume Foreign Ticket"
+              action="consume_asset"
+              pfc="foreign"
+              type="ticket"
+            />
+          </div>
+        </section>
+        <section className="section">
+          <Typography component="h3" variant="h5" className="section__header" color="textPrimary" gutterBottom>
             DID Auth Claims{' '}
             <Typography component="small" color="textSecondary">
               Help to test different DID Auth Claims in ABT Wallet

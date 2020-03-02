@@ -286,6 +286,13 @@ export const actions = {
       name: props.name,
     }),
   },
+  consume_asset: {
+    action: 'consume_asset',
+    extraParams: ({ type, pfc }) => ({
+      type,
+      pfc,
+    }),
+  },
 };
 
 export const getActionName = (config, props) => {
