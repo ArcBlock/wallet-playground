@@ -1,3 +1,7 @@
+## 0.73.2 (March 02, 2020)
+
+- fix: mustache template delimiter in action button attrs
+
 ## 0.73.1 (February 29, 2020)
 
 - fix: netlify app url
