@@ -1,3 +1,7 @@
+## 0.73.3 (March 02, 2020)
+
+- add consume asset scenarios
+
 ## 0.73.2 (March 02, 2020)
 
 - fix: mustache template delimiter in action button attrs

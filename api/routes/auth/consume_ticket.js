@@ -50,7 +50,7 @@ module.exports = {
     console.log('consume_ticket.auth.claim', claim);
 
     const tx = ForgeSDK.decodeTx(claim.origin);
-    const signer = tx.signaturesList.filter(x => x.signer === userDid);
+    const signer = tx.signaturesList.find(x => x.signer === userDid);
     if (signer) {
       signer.signature = claim.sig;
     }
@@ -62,7 +62,7 @@ module.exports = {
       return { hash, tx: claim.origin };
     } catch (err) {
       console.log(err.errors);
-      console.error(err);
+      throw err;
     }
   },
 };
