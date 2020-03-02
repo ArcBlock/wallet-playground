@@ -14,11 +14,16 @@ import { actions, getActionName, getActionParams } from './actions';
 
 function getMessage(message, session) {
   try {
-    return mustache.render(message, {
-      user: session.user || {},
-      token: session.token || {},
-      balance: session.balance || {},
-    });
+    return mustache.render(
+      message,
+      {
+        user: session.user || {},
+        token: session.token || {},
+        balance: session.balance || {},
+      },
+      {},
+      ['<%', '%>']
+    );
   } catch (err) {
     // eslint-disable-next-line no-console
     console.error('Cannot render message', { message, session });
