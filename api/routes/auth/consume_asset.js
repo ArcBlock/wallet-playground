@@ -9,7 +9,7 @@ const app = ForgeSDK.Wallet.fromJSON(wallet);
 
 const getChainConnection = pfc => (pfc === PFC.local ? env.chainId : env.assetChainId);
 
-const checkparams = ({ pfc, type }) => {
+const checkParams = ({ pfc, type }) => {
   if (!PFC[pfc]) {
     throw new Error('Invalid pay from chain param');
   }
@@ -26,8 +26,9 @@ const checkparams = ({ pfc, type }) => {
 module.exports = {
   action: 'consume_asset',
   claims: {
+    // eslint-disable-next-line object-curly-newline
     signature: async ({ userDid, userPk, extraParams: { pfc, type, tu, name, did } }) => {
-      checkparams({ pfc, type });
+      checkParams({ pfc, type });
 
       const conn = getChainConnection(pfc);
       let { assets } = await ForgeSDK.listAssets({ ownerAddress: userDid }, { conn });
@@ -65,7 +66,7 @@ module.exports = {
       }
 
       if (!asset) {
-        throw new Error('You have not the asset yet!');
+        throw new Error('You have no matching asset to consume!');
       }
 
       console.log(`about to consume ${type}`, asset);
@@ -93,6 +94,10 @@ module.exports = {
         type: 'ConsumeAssetTx',
         data: tx,
         description: `Sign this transaction to confirm the ${asset.moniker} consumption`,
+        chainInfo: {
+          host: pfc === 'local' ? env.chainHost : env.assetChainHost,
+          id: pfc === 'local' ? env.chainId : env.assetChainId,
+        },
       };
     },
   },

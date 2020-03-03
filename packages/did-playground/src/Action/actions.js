@@ -286,27 +286,52 @@ export const actions = {
       name: props.name,
     }),
   },
-  consume_asset: {
+
+  consume_local_asset: {
     action: 'consume_asset',
-    extraParams: ({ type, pfc, typeUrl, name, did }) => ({
-      pfc,
+    extraParams: ({ type, typeUrl, name, did }) => ({
+      pfc: 'local',
       type,
       tu: typeUrl,
       name,
       did,
     }),
   },
-  consume_asset_by_name: {
+  consume_foreign_asset: {
     action: 'consume_asset',
-    extraParams: ({ pfc, name }) => ({
-      pfc,
+    extraParams: ({ type, typeUrl, name, did }) => ({
+      pfc: 'foreign',
+      type,
+      tu: typeUrl,
+      name,
+      did,
+    }),
+  },
+  consume_local_asset_by_name: {
+    action: 'consume_asset',
+    extraParams: ({ name }) => ({
+      pfc: 'local',
       name,
     }),
   },
-  consume_asset_by_did: {
+  consume_foreign_asset_by_name: {
     action: 'consume_asset',
-    extraParams: ({ pfc, did }) => ({
-      pfc,
+    extraParams: ({ name }) => ({
+      pfc: 'foreign',
+      name,
+    }),
+  },
+  consume_local_asset_by_did: {
+    action: 'consume_asset',
+    extraParams: ({ did }) => ({
+      pfc: 'local',
+      did,
+    }),
+  },
+  consume_foreign_asset_by_did: {
+    action: 'consume_asset',
+    extraParams: ({ did }) => ({
+      pfc: 'foreign',
       did,
     }),
   },

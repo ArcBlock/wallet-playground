@@ -339,72 +339,62 @@ export default function IndexPage() {
             <PlaygroundAction
               className="action"
               title="Consume Local Certificate"
-              action="consume_asset"
-              pfc="local"
+              action="consume_local_asset"
               type="certificate"
             />
             <PlaygroundAction
               className="action"
               title="Consume Local Badge"
-              action="consume_asset"
-              pfc="local"
+              action="consume_local_asset"
               type="badge"
             />
             <PlaygroundAction
               className="action"
               title="Consume Local Ticket"
-              action="consume_asset"
-              pfc="local"
+              action="consume_local_asset"
               type="ticket"
             />
             <PlaygroundAction
               className="action"
               title="Consume Foreign Certificate"
-              action="consume_asset"
-              pfc="foreign"
+              action="consume_foreign_asset"
               type="certificate"
             />
             <PlaygroundAction
               className="action"
               title="Consume Foreign Badge"
-              action="consume_asset"
-              pfc="foreign"
+              action="consume_foreign_asset"
               type="badge"
             />
             <PlaygroundAction
               className="action"
               title="Consume Foreign Ticket"
-              action="consume_asset"
-              pfc="foreign"
+              action="consume_foreign_asset"
               type="ticket"
             />
             <PlaygroundAction
               className="action"
               title="Consume Local Asset by Asset Name"
-              action="consume_asset"
-              pfc="local"
+              action="consume_local_asset_by_name"
               name="Local Ticket"
             />
             <PlaygroundAction
               className="action"
               title="Consume Local Asset with Wrong Ticket Name"
-              action="consume_asset"
-              pfc="local"
+              action="consume_local_asset_by_name"
               name="Local Tickt"
             />
             <PlaygroundAction
               className="action"
               title="Consume The Asset Named Local Ticket"
-              action="consume_asset"
-              pfc="local"
+              action="consume_local_asset_by_name"
               name="Local Ticket"
             />
             {asset && (
               <PlaygroundAction
                 className="action"
                 title="Consume Local Asset by Address"
-                action="consume_asset_by_did"
-                pfc="local"
+                action="consume_local_asset_by_did"
                 did={asset.address}
                 onSuccess={() => window.location.reload()}
               />
@@ -541,8 +531,7 @@ export default function IndexPage() {
             <PlaygroundAction
               className="action"
               title="Consume Movie Ticket"
-              action="consume_asset"
-              pfc="local"
+              action="consume_local_asset"
               typeUrl="fg:x:movie_ticket"
             />
           </div>
