@@ -139,6 +139,7 @@ require('../routes/session').init(router);
 require('../routes/authorizations').init(router);
 require('../routes/orders').init(router);
 require('../routes/charge').init(router);
+require('../routes/assets').init(router);
 
 // Check for application account
 ForgeSDK.getAccountState({ address: wallet.address }, getAccountStateOptions)
