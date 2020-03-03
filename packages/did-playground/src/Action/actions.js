@@ -296,11 +296,17 @@ export const actions = {
       did,
     }),
   },
+  consume_asset_by_name: {
+    action: 'consume_asset',
+    extraParams: ({ pfc, name }) => ({
+      pfc,
+      name,
+    }),
+  },
   consume_asset_by_did: {
     action: 'consume_asset',
-    extraParams: ({ pfc, type, did }) => ({
+    extraParams: ({ pfc, did }) => ({
       pfc,
-      type,
       did,
     }),
   },
