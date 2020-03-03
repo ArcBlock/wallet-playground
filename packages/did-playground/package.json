@@ -38,7 +38,9 @@
     "@material-ui/core": "^4.9.1",
     "axios": "^0.19.2",
     "core-js": "^3.6.4",
-    "mustache": "^4.0.0"
+    "mustache": "^4.0.0",
+    "react-use": "^13.27.0",
+    "styled-components": "^5.0.1"
   },
   "peerDependencies": {
     "prop-types": "^15.7.2",
