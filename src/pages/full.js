@@ -37,7 +37,7 @@ export default function IndexPage() {
 
     getUnconsumedAsset();
     return () => {};
-  }, [window.location.href]);
+  }, [window.location.href, session.user.did]);
 
   const { token } = session;
 
