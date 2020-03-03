@@ -12,7 +12,6 @@ import Layout from '../components/layout';
 import AuthButton from '../components/auth/general';
 import SignButton from '../components/auth/auth/sign';
 import AgentButton from '../components/auth/auth/agent';
-import ConsumeAssetButton from '../components/auth/consume_asset';
 import AcquireMovieTicket from '../components/auth/acquire_ticket';
 import TransferAssetOut from '../components/auth/transfer_asset_out';
 import TransferAssetIn from '../components/auth/transfer_asset_in';

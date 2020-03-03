@@ -19,8 +19,6 @@ const findAssetByType = async ({ userDid, conn, type }) => {
   const asset = assets.find(x => {
     if (x.data.value && x.data.typeUrl === 'json') {
       const value = JSON.parse(x.data.value);
-      console.log('-----');
-      console.log(x.consumedTime, value.type);
       return value.type === AssetType[type] && x.consumedTime === '';
     }
 
@@ -34,10 +32,10 @@ const findAssetByType = async ({ userDid, conn, type }) => {
   return asset;
 };
 
-const findAssetByTypeUrl = async ({ userDid, conn, typeUrl }) => {
+const findAssetByTypeUrl = async ({ userDid, conn, tu }) => {
   const { assets } = await ForgeSDK.listAssets({ ownerAddress: userDid }, { conn });
 
-  const asset = assets.find(x => x.data.typeUrl === typeUrl && x.consumedTime === '');
+  const asset = assets.find(x => x.data.typeUrl === tu && x.consumedTime === '');
 
   if (!asset) {
     throw new Error('No matching asset found');
@@ -48,11 +46,12 @@ const findAssetByTypeUrl = async ({ userDid, conn, typeUrl }) => {
 
 /**
  * pfc => pay from chain
+ * tu => typeUrl
  */
 module.exports = {
   action: 'consume_asset',
   claims: {
-    signature: async ({ userDid, userPk, extraParams: { type, pfc, typeUrl = '' } }) => {
+    signature: async ({ userDid, userPk, extraParams: { type, pfc, tu = '' } }) => {
       if (!PFC[pfc]) {
         throw new Error('Invalid pay from chain param');
       }
@@ -60,8 +59,8 @@ module.exports = {
       const conn = getChainConnection(pfc);
 
       let asset = null;
-      if (typeUrl) {
-        asset = await findAssetByTypeUrl({ userDid, conn, typeUrl });
+      if (tu) {
+        asset = await findAssetByTypeUrl({ userDid, conn, tu });
       } else {
         asset = await findAssetByType({ userDid, conn, type });
       }

@@ -291,7 +291,7 @@ export const actions = {
     extraParams: ({ type, pfc, typeUrl }) => ({
       type,
       pfc,
-      typeUrl,
+      tu: typeUrl,
     }),
   },
 };
