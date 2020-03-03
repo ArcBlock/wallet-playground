@@ -392,6 +392,13 @@ export default function IndexPage() {
               pfc="local"
               name="Local Tickt"
             />
+            <PlaygroundAction
+              className="action"
+              title="Consume The Asset Named Local Ticket"
+              action="consume_asset"
+              pfc="local"
+              name="Local Ticket"
+            />
             {asset && (
               <PlaygroundAction
                 className="action"
