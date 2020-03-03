@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-one-expression-per-line */
-import React, { useContext } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import styled from 'styled-components';
 
 import Typography from '@material-ui/core/Typography';
@@ -17,11 +17,28 @@ import TransferAssetOut from '../components/auth/transfer_asset_out';
 import TransferAssetIn from '../components/auth/transfer_asset_in';
 import TransferTokenAssetIn from '../components/auth/transfer_token_asset_in';
 import TransferTokenAssetOut from '../components/auth/transfer_token_asset_out';
+import api from '../libs/api';
 
 import { version } from '../../package.json';
 
 export default function IndexPage() {
   const { session } = useContext(SessionContext);
+  const [asset, setAsset] = useState(null);
+
+  useEffect(() => {
+    const getUnconsumedAsset = async () => {
+      try {
+        const { data } = await api.get(`/api/get_unconsumed_asset?userDid=${session.user.did}`);
+        setAsset(data);
+      } catch (error) {
+        console.warn('load available asset failed:', { error });
+      }
+    };
+
+    getUnconsumedAsset();
+    return () => {};
+  }, [window.location.href]);
+
   const { token } = session;
 
   return (
@@ -361,6 +378,30 @@ export default function IndexPage() {
               pfc="foreign"
               type="ticket"
             />
+            <PlaygroundAction
+              className="action"
+              title="Consume Local Asset by Asset Name"
+              action="consume_asset"
+              pfc="local"
+              name="Local Ticket"
+            />
+            <PlaygroundAction
+              className="action"
+              title="Consume Local Asset with Wrong Ticket Name"
+              action="consume_asset"
+              pfc="local"
+              name="Local Tickt"
+            />
+            {asset && (
+              <PlaygroundAction
+                className="action"
+                title="Consume Local Asset by Address"
+                action="consume_asset_by_address"
+                pfc="local"
+                address={asset.address}
+                onSuccess={() => window.location.reload()}
+              />
+            )}
           </div>
         </section>
         <section className="section">

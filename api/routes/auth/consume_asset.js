@@ -9,39 +9,14 @@ const app = ForgeSDK.Wallet.fromJSON(wallet);
 
 const getChainConnection = pfc => (pfc === PFC.local ? env.chainId : env.assetChainId);
 
-const findAssetByType = async ({ userDid, conn, type }) => {
-  if (AssetType[type] === undefined) {
+const checkparams = ({ pfc, type }) => {
+  if (!PFC[pfc]) {
+    throw new Error('Invalid pay from chain param');
+  }
+
+  if (type && AssetType[type] === undefined) {
     throw new Error('Invalid asset type');
   }
-
-  const { assets } = await ForgeSDK.listAssets({ ownerAddress: userDid }, { conn });
-
-  const asset = assets.find(x => {
-    if (x.data.value && x.data.typeUrl === 'json') {
-      const value = JSON.parse(x.data.value);
-      return value.type === AssetType[type] && x.consumedTime === '';
-    }
-
-    return false;
-  });
-
-  if (!asset) {
-    throw new Error(`You have not purchased any ${type} yet or all ${type}s are consumed!`);
-  }
-
-  return asset;
-};
-
-const findAssetByTypeUrl = async ({ userDid, conn, tu }) => {
-  const { assets } = await ForgeSDK.listAssets({ ownerAddress: userDid }, { conn });
-
-  const asset = assets.find(x => x.data.typeUrl === tu && x.consumedTime === '');
-
-  if (!asset) {
-    throw new Error('No matching asset found');
-  }
-
-  return asset;
 };
 
 /**
@@ -51,18 +26,46 @@ const findAssetByTypeUrl = async ({ userDid, conn, tu }) => {
 module.exports = {
   action: 'consume_asset',
   claims: {
-    signature: async ({ userDid, userPk, extraParams: { type, pfc, tu = '' } }) => {
-      if (!PFC[pfc]) {
-        throw new Error('Invalid pay from chain param');
-      }
+    signature: async ({ userDid, userPk, extraParams: { pfc, type, tu, name, ad: address } }) => {
+      checkparams({ pfc, type });
 
       const conn = getChainConnection(pfc);
+      let { assets } = await ForgeSDK.listAssets({ ownerAddress: userDid }, { conn });
+      assets = assets.filter(x => x.consumedTime === '');
 
       let asset = null;
-      if (tu) {
-        asset = await findAssetByTypeUrl({ userDid, conn, tu });
+      if (address) {
+        asset = assets.find(x => x.address === address);
       } else {
-        asset = await findAssetByType({ userDid, conn, type });
+        asset = assets.find(x => {
+          const conditions = [];
+          if (name) {
+            conditions.push(x.moniker === name);
+          }
+
+          if (tu) {
+            conditions.push(x.data.typeUrl === tu);
+          }
+
+          if ((typeof type === 'string' && type !== '') || type) {
+            if (x.data.typeUrl === 'json' && x.data.value) {
+              const value = JSON.parse(x.data.value);
+              conditions.push(value.type === AssetType[type]);
+            } else {
+              conditions.push(false);
+            }
+          }
+
+          if (conditions.length === 0) {
+            return false;
+          }
+
+          return conditions.reduce((acc, cur) => cur && acc, true);
+        });
+      }
+
+      if (!asset) {
+        throw new Error('You have not the asset yet!');
       }
 
       console.log(`about to consume ${type}`, asset);
@@ -89,7 +92,7 @@ module.exports = {
       return {
         type: 'ConsumeAssetTx',
         data: tx,
-        description: `Sign this transaction to confirm the ${type} consumption`,
+        description: `Sign this transaction to confirm the ${asset.moniker} consumption`,
       };
     },
   },
