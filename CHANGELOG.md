@@ -1,3 +1,7 @@
+## 0.73.5 (March 03, 2020)
+
+- chore: split consume asset actions
+
 ## 0.73.4 (March 03, 2020)
 
 - extend consume asset action
