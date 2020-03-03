@@ -38,7 +38,7 @@ export default function MiniPage() {
               buttonRounded
               buttonVariant="contained"
               buttonText="Please Login"
-              successMessage="Hello {{user.email}}"
+              successMessage="Hello (%user.name%)"
             />
             <PlaygroundAction
               action="receive_foreign_token"
