@@ -1,3 +1,8 @@
+## 0.73.6 (March 03, 2020)
+
+- 扩展 PlaygroundAction 组件成功后的展示
+- fix: action button template delimiter
+
 ## 0.73.5 (March 03, 2020)
 
 - chore: split consume asset actions
