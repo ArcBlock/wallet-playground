@@ -26,7 +26,7 @@ const checkparams = ({ pfc, type }) => {
 module.exports = {
   action: 'consume_asset',
   claims: {
-    signature: async ({ userDid, userPk, extraParams: { pfc, type, tu, name, ad: address } }) => {
+    signature: async ({ userDid, userPk, extraParams: { pfc, type, tu, name, did } }) => {
       checkparams({ pfc, type });
 
       const conn = getChainConnection(pfc);
@@ -34,8 +34,8 @@ module.exports = {
       assets = assets.filter(x => x.consumedTime === '');
 
       let asset = null;
-      if (address) {
-        asset = assets.find(x => x.address === address);
+      if (did) {
+        asset = assets.find(x => x.address === did);
       } else {
         asset = assets.find(x => {
           const conditions = [];

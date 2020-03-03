@@ -288,20 +288,20 @@ export const actions = {
   },
   consume_asset: {
     action: 'consume_asset',
-    extraParams: ({ type, pfc, typeUrl, name, address }) => ({
+    extraParams: ({ type, pfc, typeUrl, name, did }) => ({
       pfc,
       type,
       tu: typeUrl,
       name,
-      ad: address,
+      did,
     }),
   },
-  consume_asset_by_address: {
+  consume_asset_by_did: {
     action: 'consume_asset',
-    extraParams: ({ pfc, type, address }) => ({
+    extraParams: ({ pfc, type, did }) => ({
       pfc,
       type,
-      ad: address,
+      did,
     }),
   },
 };

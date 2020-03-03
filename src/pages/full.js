@@ -37,7 +37,7 @@ export default function IndexPage() {
 
     getUnconsumedAsset();
     return () => {};
-  }, [window.location.href, session.user.did]);
+  }, [session.user.did]);
 
   const { token } = session;
 
@@ -396,9 +396,9 @@ export default function IndexPage() {
               <PlaygroundAction
                 className="action"
                 title="Consume Local Asset by Address"
-                action="consume_asset_by_address"
+                action="consume_asset_by_did"
                 pfc="local"
-                address={asset.address}
+                did={asset.address}
                 onSuccess={() => window.location.reload()}
               />
             )}
