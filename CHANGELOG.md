@@ -1,3 +1,8 @@
+## 0.73.4 (March 03, 2020)
+
+- extend consume asset action
+- fix-review: remove useless code and rename typeUrl to tu
+
 ## 0.73.3 (March 02, 2020)
 
 - add consume asset scenarios
