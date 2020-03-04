@@ -1,3 +1,8 @@
+## 0.74.0 (March 04, 2020)
+
+- feat: make playground action button props mustache templates
+- add comment to playgroundaction
+
 ## 0.73.6 (March 03, 2020)
 
 - 扩展 PlaygroundAction 组件成功后的展示
