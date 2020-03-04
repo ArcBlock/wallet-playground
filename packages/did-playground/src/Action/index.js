@@ -56,6 +56,7 @@ const CloseContainer = styled.div`
 function PlaygroundAction(props) {
   const newProps = mergeProps(props, PlaygroundAction, ['buttonRounded', 'extraParams', 'timeout']);
   const {
+    autoClose,
     action,
     buttonText,
     buttonColor,
@@ -140,6 +141,7 @@ function PlaygroundAction(props) {
   };
 
   const onClose = () => setOpen(false);
+
   const onSuccess = () => {
     setSuccess(true);
     if (successUrl) {
@@ -150,11 +152,36 @@ function PlaygroundAction(props) {
       } else {
         window.open(successUrl, '_self');
       }
-    } else {
-      setSuccess(true);
+    } else if (autoClose) {
       setTimeout(onClose, 2000);
     }
   };
+
+  const renderRedirectUrlAfterSuccess = () => (
+    <>
+      <Close onClose={onClose} />
+      <div>
+        Redirecting to{' '}
+        <a href={successUrl} target={successTarget}>
+          {successUrl}
+        </a>
+      </div>
+    </>
+  );
+
+  const renderFrameAfterSuccess = () => (
+    <>
+      <Close onClose={onClose} />
+      <iframe
+        style={{ width: '80%', height: '80%' }}
+        allow="fullscreen"
+        id="successFrame"
+        title="successFrame"
+        src={successUrl}
+        {...frameProps}
+      />
+    </>
+  );
 
   return (
     <React.Fragment>
@@ -175,35 +202,13 @@ function PlaygroundAction(props) {
           fullScreen={showFrame || width < theme.breakpoints.values.sm}>
           <DialogContent
             style={{
-              padding: success && !showFrame ? 55 : 0,
+              padding: success && !showFrame && successUrl ? 55 : 0,
               display: 'flex',
               justifyContent: 'center',
               alignItems: 'center',
             }}>
-            {successUrl && success && !showFrame && (
-              <>
-                <Close onClose={onClose} />
-                <div>
-                  Redirecting to{' '}
-                  <a href={successUrl} target={successTarget}>
-                    {successUrl}
-                  </a>
-                </div>
-              </>
-            )}
-            {showFrame && (
-              <>
-                <Close onClose={onClose} />
-                <iframe
-                  style={{ width: '80%', height: '80%' }}
-                  allow="fullscreen"
-                  id="successFrame"
-                  title="successFrame"
-                  src={successUrl}
-                  {...frameProps}
-                />
-              </>
-            )}
+            {successUrl && success && !showFrame && renderRedirectUrlAfterSuccess()}
+            {showFrame && renderFrameAfterSuccess()}
             {(!successUrl || (successUrl && !success)) && (
               <BasicAuth
                 action={getActionName(config, rest)}
@@ -217,7 +222,7 @@ function PlaygroundAction(props) {
                   title: getMessage(title, session),
                   scan: getMessage(scanMessage, session),
                   confirm: getMessage(confirmMessage, session),
-                  success: children || successMessage,
+                  success: children || getMessage(successMessage, session),
                 }}
               />
             )}
@@ -230,6 +235,7 @@ function PlaygroundAction(props) {
 
 PlaygroundAction.propTypes = {
   action: PropTypes.string.isRequired,
+  autoClose: PropTypes.bool,
   buttonText: PropTypes.string,
   buttonColor: PropTypes.string,
   buttonVariant: PropTypes.string,
@@ -247,6 +253,7 @@ PlaygroundAction.propTypes = {
 };
 
 PlaygroundAction.defaultProps = {
+  autoClose: true,
   buttonText: '',
   buttonColor: 'primary', // primary | secondary | reverse | error
   buttonVariant: 'contained', // contained | outlined | default
