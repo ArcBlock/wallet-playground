@@ -1,6 +1,6 @@
 /* eslint-disable object-curly-newline */
 /* eslint-disable react/jsx-one-expression-per-line */
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import mustache from 'mustache';
 import useWindowSize from 'react-use/lib/useWindowSize';
@@ -84,7 +84,15 @@ function PlaygroundAction(props) {
   const [dynamicParams, setDynamicParams] = useState({});
   const { width } = useWindowSize();
   const [success, setSuccess] = useState(false);
-  const [showFrame, setShowFrame] = useState(false);
+  const [showFrame, setShowFrame] = useState(success && successUrl && successTarget === 'frame');
+
+  useEffect(
+    () => () => {
+      setSuccess(false);
+      setShowFrame(false);
+    },
+    [open]
+  );
 
   // If this is just a login button, we do not do anything actually
   if (action === 'login') {
@@ -146,7 +154,7 @@ function PlaygroundAction(props) {
     setSuccess(true);
     if (successUrl) {
       if (successTarget === 'frame') {
-        setShowFrame(successUrl);
+        setShowFrame(!!successUrl);
       } else if (successTarget === '_blank') {
         window.open(successUrl, '_blank');
       } else {
@@ -158,7 +166,7 @@ function PlaygroundAction(props) {
   };
 
   const renderRedirectUrlAfterSuccess = () => (
-    <>
+    <React.Fragment>
       <Close onClose={onClose} />
       <div>
         Redirecting to{' '}
@@ -166,21 +174,21 @@ function PlaygroundAction(props) {
           {successUrl}
         </a>
       </div>
-    </>
+    </React.Fragment>
   );
 
   const renderFrameAfterSuccess = () => (
-    <>
+    <React.Fragment>
       <Close onClose={onClose} />
       <iframe
-        style={{ width: '80%', height: '80%' }}
+        style={{ width: '100%', height: '100%' }}
         allow="fullscreen"
         id="successFrame"
         title="successFrame"
         src={successUrl}
         {...frameProps}
       />
-    </>
+    </React.Fragment>
   );
 
   return (
@@ -199,13 +207,16 @@ function PlaygroundAction(props) {
           open
           disableBackdropClick
           disableEscapeKeyDown
-          fullScreen={showFrame || width < theme.breakpoints.values.sm}>
+          fullScreen={width < theme.breakpoints.values.sm}
+          fullWidth={showFrame}
+          maxWidth={showFrame ? 'lg' : ''}>
           <DialogContent
             style={{
               padding: success && !showFrame && successUrl ? 55 : 0,
               display: 'flex',
               justifyContent: 'center',
               alignItems: 'center',
+              height: showFrame ? theme.breakpoints.values.md : '',
             }}>
             {successUrl && success && !showFrame && renderRedirectUrlAfterSuccess()}
             {showFrame && renderFrameAfterSuccess()}
