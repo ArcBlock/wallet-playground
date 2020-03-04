@@ -253,7 +253,7 @@ PlaygroundAction.propTypes = {
 };
 
 PlaygroundAction.defaultProps = {
-  autoClose: true,
+  autoClose: true, // 只在没有 successUrl 属性下有效
   buttonText: '',
   buttonColor: 'primary', // primary | secondary | reverse | error
   buttonVariant: 'contained', // contained | outlined | default
