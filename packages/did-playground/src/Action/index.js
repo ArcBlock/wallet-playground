@@ -86,6 +86,7 @@ function PlaygroundAction(props) {
   const [success, setSuccess] = useState(false);
   const [showFrame, setShowFrame] = useState(success && successUrl && successTarget === 'frame');
 
+  // 当打开或关闭组件时，重置部分状态
   useEffect(
     () => () => {
       setSuccess(false);
