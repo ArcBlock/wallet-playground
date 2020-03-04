@@ -335,6 +335,10 @@ export const actions = {
       did,
     }),
   },
+  claim_signature: {
+    action: 'claim_signature',
+    extraParams: ({ type }) => ({ type }),
+  },
 };
 
 export const getActionName = (config, props) => {

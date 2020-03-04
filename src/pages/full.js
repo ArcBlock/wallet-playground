@@ -326,6 +326,15 @@ export default function IndexPage() {
               receiveAmount={1}
               name="Local Ticket"
             />
+            <PlaygroundAction
+              className="action"
+              title="Buy Ticket for Free [Success React Component]"
+              action="buy_local_ticket_with_local_token"
+              payAmount={0}
+              receiveAmount={1}
+              name="Local Ticket"
+              successMessage={<Typography component="p">Complete!</Typography>}
+            />
           </div>
         </section>
         <section className="section">
@@ -396,9 +405,69 @@ export default function IndexPage() {
                 title="Consume Local Asset by Address"
                 action="consume_local_asset_by_did"
                 did={asset.address}
-                onSuccess={() => window.location.reload()}
               />
             )}
+          </div>
+        </section>
+        <section className="section">
+          <Typography component="h3" variant="h5" className="section__header" color="textPrimary" gutterBottom>
+            Custom Success Message Scenarios{' '}
+            <Typography component="small" color="textSecondary">
+              Custom Success Message
+            </Typography>
+          </Typography>
+          <div className="section__content">
+            <PlaygroundAction
+              className="action"
+              title="Simple Message"
+              action="claim_signature"
+              type="text"
+              name="Local Ticket"
+              successMessage="(%user.name%) Operation Success"
+            />
+            <PlaygroundAction
+              autoClose={false}
+              className="action"
+              title="Children React Component"
+              action="claim_signature"
+              type="text"
+              name="Local Ticket">
+              <PlaygroundAction
+                className="action"
+                title="Simple Message"
+                action="claim_signature"
+                type="text"
+                name="Local Ticket"
+                successMessage="Operation Success"
+              />
+            </PlaygroundAction>
+            <PlaygroundAction
+              className="action"
+              title="Open URL in Current Tab"
+              action="claim_signature"
+              type="text"
+              name="Local Ticket"
+              successTarget="_self"
+              successUrl="https://www.arcblock.io"
+            />
+            <PlaygroundAction
+              className="action"
+              title="Open URL in New Tab"
+              action="claim_signature"
+              type="text"
+              name="Local Ticket"
+              successTarget="_blank"
+              successUrl="https://www.arcblock.io"
+            />
+            <PlaygroundAction
+              className="action"
+              title="Open URL in iframe"
+              action="claim_signature"
+              type="text"
+              name="Local Ticket"
+              successTarget="frame"
+              successUrl="https://www.arcblock.io"
+            />
           </div>
         </section>
         <section className="section">
