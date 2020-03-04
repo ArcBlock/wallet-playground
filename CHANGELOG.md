@@ -1,3 +1,7 @@
+## 0.74.1 (March 04, 2020)
+
+- chore: bump ux lib version
+
 ## 0.74.0 (March 04, 2020)
 
 - feat: make playground action button props mustache templates
