@@ -2,7 +2,6 @@
 /* eslint-disable react/jsx-one-expression-per-line */
 import React, { useContext, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import mustache from 'mustache';
 import useWindowSize from 'react-use/lib/useWindowSize';
 import styled from 'styled-components';
 
@@ -15,26 +14,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import { withTheme } from '@material-ui/core/styles';
 
 import { SessionContext } from './session';
-import { actions, getActionName, getActionParams } from './actions';
-
-function getMessage(message, session) {
-  try {
-    return mustache.render(
-      message,
-      {
-        user: session.user || {},
-        token: session.token || {},
-        balance: session.balance || {},
-      },
-      {},
-      ['(%', '%)']
-    );
-  } catch (err) {
-    // eslint-disable-next-line no-console
-    console.error('Cannot render message', { message, session });
-    return message;
-  }
-}
+import { actions, getMessage, getActionName, getActionParams } from './actions';
 
 function Close({ onClose }) {
   return <CloseContainer onClick={onClose}>&times;</CloseContainer>;
@@ -161,6 +141,8 @@ function PlaygroundAction(props) {
       } else {
         window.open(successUrl, '_self');
       }
+    } else if (children) {
+      // Do nothing
     } else if (autoClose) {
       setTimeout(onClose, 2000);
     }
@@ -229,7 +211,7 @@ function PlaygroundAction(props) {
                 onSuccess={onSuccess}
                 checkTimeout={timeout}
                 // 3 layers of extraParams: user props, dynamically generated, from other props
-                extraParams={Object.assign(getActionParams(config, rest), dynamicParams, extraParams)}
+                extraParams={Object.assign(getActionParams(config, rest, session), dynamicParams, extraParams)}
                 messages={{
                   title: getMessage(title, session),
                   scan: getMessage(scanMessage, session),
@@ -277,7 +259,7 @@ PlaygroundAction.defaultProps = {
   extraParams: {},
   timeout: 5 * 60 * 1000,
   successUrl: '',
-  successTarget: 'self',
+  successTarget: '_self',
   frameProps: {},
 };
 

@@ -140,7 +140,7 @@ export default function IndexPage() {
               className="action"
               price={0.99}
               title={`Buy Local Certificate with 0.99 ${token.foreign.symbol}`}
-              name="Local Certificate"
+              name="Local Certificate (%token.local.symbol%)"
               description="This is a test certificate that is on local chain"
             />
             <PlaygroundAction
@@ -148,7 +148,7 @@ export default function IndexPage() {
               className="action"
               price={1}
               title={`Sell Local Certificate for 1 ${token.foreign.symbol}`}
-              name="Local Certificate"
+              name="Local Certificate (%token.local.symbol%)"
             />
 
             <PlaygroundAction
@@ -156,7 +156,7 @@ export default function IndexPage() {
               className="action"
               price={0.99}
               title={`Buy Local Badge with 0.99 ${token.foreign.symbol}`}
-              name="Local Badge"
+              name="Local Badge (%token.local.symbol%)"
               description="This is a test badge that is on local chain"
             />
             <PlaygroundAction
@@ -164,7 +164,7 @@ export default function IndexPage() {
               className="action"
               price={1}
               title={`Sell Local Badge for 1 ${token.foreign.symbol}`}
-              name="Local Badge"
+              name="Local Badge (%token.local.symbol%)"
             />
 
             <PlaygroundAction
@@ -172,7 +172,7 @@ export default function IndexPage() {
               className="action"
               price={0.99}
               title={`Buy Local Ticket with 0.99 ${token.foreign.symbol}`}
-              name="Local Ticket"
+              name="Local Ticket (%token.local.symbol%)"
               description="This is a test ticket that is on local chain"
             />
             <PlaygroundAction
@@ -180,7 +180,7 @@ export default function IndexPage() {
               className="action"
               price={1}
               title={`Sell Local Ticket for 1 ${token.foreign.symbol}`}
-              name="Local Ticket"
+              name="Local Ticket (%token.local.symbol%)"
             />
 
             <PlaygroundAction
@@ -188,7 +188,7 @@ export default function IndexPage() {
               className="action"
               price={0.99}
               title={`Buy Foreign Certificate with 0.99 ${token.local.symbol}`}
-              name="Foreign Certificate"
+              name="Foreign Certificate (%token.foreign.symbol%)"
               description="This is a test certificate that is on foreign chain"
             />
             <PlaygroundAction
@@ -196,14 +196,14 @@ export default function IndexPage() {
               className="action"
               price={1}
               title={`Sell Foreign Certificate for 1 ${token.local.symbol}`}
-              name="Foreign Certificate"
+              name="Foreign Certificate (%token.foreign.symbol%)"
             />
             <PlaygroundAction
               action="buy_foreign_badge_with_local_token"
               className="action"
               price={0.99}
               title={`Buy Foreign Badge with 0.99 ${token.local.symbol}`}
-              name="Foreign Badge"
+              name="Foreign Badge (%token.foreign.symbol%)"
               description="This is a test badge that is on foreign chain"
             />
             <PlaygroundAction
@@ -211,14 +211,14 @@ export default function IndexPage() {
               className="action"
               price={1}
               title={`Sell Foreign Badge for 1 ${token.local.symbol}`}
-              name="Foreign Badge"
+              name="Foreign Badge (%token.foreign.symbol%)"
             />
             <PlaygroundAction
               action="buy_foreign_ticket_with_local_token"
               className="action"
               price={0.99}
               title={`Buy Foreign Ticket with 0.99 ${token.local.symbol}`}
-              name="Foreign Ticket"
+              name="Foreign Ticket (%token.foreign.symbol%)"
               description="This is a test ticket that is on foreign chain"
             />
             <PlaygroundAction
@@ -226,7 +226,7 @@ export default function IndexPage() {
               className="action"
               price={1}
               title={`Sell Foreign Ticket for 1 ${token.local.symbol}`}
-              name="Foreign Ticket"
+              name="Foreign Ticket (%token.foreign.symbol%)"
             />
           </div>
         </section>
@@ -244,7 +244,7 @@ export default function IndexPage() {
               action="buy_local_certificate_with_local_token"
               payAmount={1}
               receiveAmount={1}
-              name="Local Certificate"
+              name="Local Certificate (%token.local.symbol%)"
             />
             <PlaygroundAction
               className="action"
@@ -252,7 +252,7 @@ export default function IndexPage() {
               action="buy_local_certificate_with_local_token"
               payAmount={0}
               receiveAmount={1}
-              name="Local Certificate"
+              name="Local Certificate (%token.local.symbol%)"
             />
             <PlaygroundAction
               className="action"
@@ -260,7 +260,7 @@ export default function IndexPage() {
               action="sell_local_certificate_for_local_token"
               payAmount={1}
               receiveAmount={1}
-              name="Local Certificate"
+              name="Local Certificate (%token.local.symbol%)"
             />
             <PlaygroundAction
               className="action"
@@ -268,7 +268,7 @@ export default function IndexPage() {
               action="buy_local_badge_with_local_token"
               payAmount={1}
               receiveAmount={1}
-              name="Local Badge"
+              name="Local Badge (%token.local.symbol%)"
             />
             <PlaygroundAction
               className="action"
@@ -276,7 +276,7 @@ export default function IndexPage() {
               action="buy_local_badge_with_local_token"
               payAmount={0}
               receiveAmount={1}
-              name="Local Badge"
+              name="Local Badge (%token.local.symbol%)"
             />
             <PlaygroundAction
               className="action"
@@ -284,7 +284,7 @@ export default function IndexPage() {
               action="sell_local_badge_for_local_token"
               payAmount={1}
               receiveAmount={1}
-              name="Local Badge"
+              name="Local Badge (%token.local.symbol%)"
             />
             <PlaygroundAction
               className="action"
@@ -292,7 +292,7 @@ export default function IndexPage() {
               action="buy_local_ticket_with_local_token"
               payAmount={1}
               receiveAmount={1}
-              name="Local Ticket"
+              name="Local Ticket (%token.local.symbol%)"
             />
             <PlaygroundAction
               className="action"
@@ -300,7 +300,7 @@ export default function IndexPage() {
               action="buy_local_ticket_with_local_token"
               payAmount={0}
               receiveAmount={1}
-              name="Local Ticket"
+              name="Local Ticket (%token.local.symbol%)"
             />
             <PlaygroundAction
               className="action"
@@ -308,7 +308,7 @@ export default function IndexPage() {
               action="sell_local_ticket_for_local_token"
               payAmount={1}
               receiveAmount={1}
-              name="Local Ticket"
+              name="Local Ticket (%token.local.symbol%)"
             />
             <PlaygroundAction
               className="action"
@@ -316,7 +316,7 @@ export default function IndexPage() {
               action="buy_local_ticket_with_local_certificate"
               payAmount={1}
               receiveAmount={1}
-              name="Local Ticket"
+              name="Local Ticket (%token.local.symbol%)"
             />
             <PlaygroundAction
               className="action"
@@ -324,7 +324,7 @@ export default function IndexPage() {
               action="buy_local_certificate_with_local_ticket"
               payAmount={1}
               receiveAmount={1}
-              name="Local Ticket"
+              name="Local Ticket (%token.local.symbol%)"
             />
             <PlaygroundAction
               className="action"
@@ -332,7 +332,7 @@ export default function IndexPage() {
               action="buy_local_ticket_with_local_token"
               payAmount={0}
               receiveAmount={1}
-              name="Local Ticket"
+              name="Local Ticket (%token.local.symbol%)"
               successMessage={<Typography component="p">Complete!</Typography>}
             />
           </div>
@@ -385,7 +385,7 @@ export default function IndexPage() {
               className="action"
               title="Consume Local Asset by Asset Name"
               action="consume_local_asset_by_name"
-              name="Local Ticket"
+              name="Local Ticket (%token.local.symbol%)"
             />
             <PlaygroundAction
               className="action"
@@ -397,7 +397,7 @@ export default function IndexPage() {
               className="action"
               title="Consume The Asset Named Local Ticket"
               action="consume_local_asset_by_name"
-              name="Local Ticket"
+              name="Local Ticket (%token.local.symbol%)"
             />
             {asset && (
               <PlaygroundAction
@@ -422,7 +422,7 @@ export default function IndexPage() {
               title="Simple Message"
               action="claim_signature"
               type="text"
-              name="Local Ticket"
+              name="Local Ticket (%token.local.symbol%)"
               successMessage="(%user.name%) Operation Success"
             />
             <PlaygroundAction
@@ -431,13 +431,13 @@ export default function IndexPage() {
               title="Children React Component"
               action="claim_signature"
               type="text"
-              name="Local Ticket">
+              name="Local Ticket (%token.local.symbol%)">
               <PlaygroundAction
                 className="action"
                 title="Simple Message"
                 action="claim_signature"
                 type="text"
-                name="Local Ticket"
+                name="Local Ticket (%token.local.symbol%)"
                 successMessage="Operation Success"
               />
             </PlaygroundAction>
@@ -446,7 +446,7 @@ export default function IndexPage() {
               title="Open URL in Current Tab"
               action="claim_signature"
               type="text"
-              name="Local Ticket"
+              name="Local Ticket (%token.local.symbol%)"
               successTarget="_self"
               successUrl="https://www.arcblock.io"
             />
@@ -455,7 +455,7 @@ export default function IndexPage() {
               title="Open URL in New Tab"
               action="claim_signature"
               type="text"
-              name="Local Ticket"
+              name="Local Ticket (%token.local.symbol%)"
               successTarget="_blank"
               successUrl="https://www.arcblock.io"
             />
@@ -464,7 +464,7 @@ export default function IndexPage() {
               title="Open URL in iframe"
               action="claim_signature"
               type="text"
-              name="Local Ticket"
+              name="Local Ticket (%token.local.symbol%)"
               successTarget="frame"
               successUrl="https://www.arcblock.io"
             />

@@ -1,3 +1,5 @@
+import mustache from 'mustache';
+
 /* eslint-disable object-curly-newline */
 async function createSwapOrder(api) {
   const res = await api.post('/api/did/swap', {});
@@ -14,6 +16,25 @@ const getValidPayAmount = (payAmount, price) => {
   }
 
   return 1;
+};
+
+export const getMessage = (message, session) => {
+  try {
+    return mustache.render(
+      message,
+      {
+        user: session.user || {},
+        token: session.token || {},
+        balance: session.balance || {},
+      },
+      {},
+      ['(%', '%)']
+    );
+  } catch (err) {
+    // eslint-disable-next-line no-console
+    console.error('Cannot render message', { message, session });
+    return message;
+  }
 };
 
 // https://github.com/ArcBlock/gatsby-extensions/issues/56
@@ -50,14 +71,14 @@ export const actions = {
   buy_foreign_certificate_with_local_token: {
     action: 'swap_asset',
     onStart: createSwapOrder,
-    extraParams: props => ({
+    extraParams: (props, session) => ({
       action: 'buy',
       type: 'certificate',
       pfc: 'local',
       price: props.price || 1,
-      name: props.name,
-      desc: props.description,
-      loc: props.location,
+      name: getMessage(props.name, session),
+      desc: getMessage(props.description, session),
+      loc: getMessage(props.location, session),
       bg: props.backgroundUrl,
       logo: props.logoUrl,
     }),
@@ -65,14 +86,14 @@ export const actions = {
   buy_foreign_badge_with_local_token: {
     action: 'swap_asset',
     onStart: createSwapOrder,
-    extraParams: props => ({
+    extraParams: (props, session) => ({
       action: 'buy',
       type: 'badge',
       pfc: 'local',
       price: props.price || 1,
-      name: props.name,
-      desc: props.description,
-      loc: props.location,
+      name: getMessage(props.name, session),
+      desc: getMessage(props.description, session),
+      loc: getMessage(props.location, session),
       bg: props.backgroundUrl,
       logo: props.logoUrl,
     }),
@@ -80,14 +101,14 @@ export const actions = {
   buy_foreign_ticket_with_local_token: {
     action: 'swap_asset',
     onStart: createSwapOrder,
-    extraParams: props => ({
+    extraParams: (props, session) => ({
       action: 'buy',
       type: 'ticket',
       pfc: 'local',
       price: props.price || 1,
-      name: props.name,
-      desc: props.description,
-      loc: props.location,
+      name: getMessage(props.name, session),
+      desc: getMessage(props.description, session),
+      loc: getMessage(props.location, session),
       bg: props.backgroundUrl,
       logo: props.logoUrl,
     }),
@@ -95,36 +116,48 @@ export const actions = {
   sell_foreign_certificate_for_local_token: {
     action: 'swap_asset',
     onStart: createSwapOrder,
-    extraParams: props => ({
+    extraParams: (props, session) => ({
       action: 'sell',
       type: 'certificate',
       pfc: 'local',
       price: props.price || 1,
-      name: props.name,
+      name: getMessage(props.name, session),
     }),
   },
   sell_foreign_badge_for_local_token: {
     action: 'swap_asset',
     onStart: createSwapOrder,
-    extraParams: props => ({ action: 'sell', type: 'badge', pfc: 'local', price: props.price || 1, name: props.name }),
+    extraParams: (props, session) => ({
+      action: 'sell',
+      type: 'badge',
+      pfc: 'local',
+      price: props.price || 1,
+      name: getMessage(props.name, session),
+    }),
   },
   sell_foreign_ticket_for_local_token: {
     action: 'swap_asset',
     onStart: createSwapOrder,
-    extraParams: props => ({ action: 'sell', type: 'ticket', pfc: 'local', price: props.price || 1, name: props.name }),
+    extraParams: (props, session) => ({
+      action: 'sell',
+      type: 'ticket',
+      pfc: 'local',
+      price: props.price || 1,
+      name: getMessage(props.name, session),
+    }),
   },
 
   buy_local_certificate_with_foreign_token: {
     action: 'swap_asset',
     onStart: createSwapOrder,
-    extraParams: props => ({
+    extraParams: (props, session) => ({
       action: 'buy',
       type: 'certificate',
       pfc: 'foreign',
       price: props.price || 1,
-      name: props.name,
-      desc: props.description,
-      loc: props.location,
+      name: getMessage(props.name, session),
+      desc: getMessage(props.description, session),
+      loc: getMessage(props.location, session),
       bg: props.backgroundUrl,
       logo: props.logoUrl,
     }),
@@ -132,14 +165,14 @@ export const actions = {
   buy_local_badge_with_foreign_token: {
     action: 'swap_asset',
     onStart: createSwapOrder,
-    extraParams: props => ({
+    extraParams: (props, session) => ({
       action: 'buy',
       type: 'badge',
       pfc: 'foreign',
       price: props.price || 1,
-      name: props.name,
-      desc: props.description,
-      loc: props.location,
+      name: getMessage(props.name, session),
+      desc: getMessage(props.description, session),
+      loc: getMessage(props.location, session),
       bg: props.backgroundUrl,
       logo: props.logoUrl,
     }),
@@ -147,14 +180,14 @@ export const actions = {
   buy_local_ticket_with_foreign_token: {
     action: 'swap_asset',
     onStart: createSwapOrder,
-    extraParams: props => ({
+    extraParams: (props, session) => ({
       action: 'buy',
       type: 'ticket',
       pfc: 'foreign',
       price: props.price || 1,
-      name: props.name,
-      desc: props.description,
-      loc: props.location,
+      name: getMessage(props.name, session),
+      desc: getMessage(props.description, session),
+      loc: getMessage(props.location, session),
       bg: props.backgroundUrl,
       logo: props.logoUrl,
     }),
@@ -162,163 +195,163 @@ export const actions = {
   sell_local_certificate_for_foreign_token: {
     action: 'swap_asset',
     onStart: createSwapOrder,
-    extraParams: props => ({
+    extraParams: (props, session) => ({
       action: 'sell',
       type: 'certificate',
       pfc: 'foreign',
       price: props.price || 1,
-      name: props.name,
+      name: getMessage(props.name, session),
     }),
   },
   sell_local_badge_for_foreign_token: {
     action: 'swap_asset',
     onStart: createSwapOrder,
-    extraParams: props => ({
+    extraParams: (props, session) => ({
       action: 'sell',
       type: 'badge',
       pfc: 'foreign',
       price: props.price || 1,
-      name: props.name,
+      name: getMessage(props.name, session),
     }),
   },
   sell_local_ticket_for_foreign_token: {
     action: 'swap_asset',
     onStart: createSwapOrder,
-    extraParams: props => ({
+    extraParams: (props, session) => ({
       action: 'sell',
       type: 'ticket',
       pfc: 'foreign',
       price: props.price || 1,
-      name: props.name,
+      name: getMessage(props.name, session),
     }),
   },
 
   // Exchange Scenarios
   buy_local_certificate_with_local_token: {
     action: 'exchange_assets',
-    extraParams: props => ({
+    extraParams: (props, session) => ({
       pa: getValidPayAmount(props.payAmount, props.price),
       pt: 'token',
       ra: props.receiveAmount || 1,
       rt: 'certificate',
-      name: props.name,
-      desc: props.description,
-      loc: props.location,
+      name: getMessage(props.name, session),
+      desc: getMessage(props.description, session),
+      loc: getMessage(props.location, session),
       bg: props.backgroundUrl,
       logo: props.logoUrl,
     }),
   },
   sell_local_certificate_for_local_token: {
     action: 'exchange_assets',
-    extraParams: props => ({
+    extraParams: (props, session) => ({
       pa: props.payAmount || 1,
       pt: 'certificate',
       ra: props.receiveAmount || props.price || 1,
       rt: 'token',
-      name: props.name,
+      name: getMessage(props.name, session),
     }),
   },
   buy_local_badge_with_local_token: {
     action: 'exchange_assets',
-    extraParams: props => ({
+    extraParams: (props, session) => ({
       pa: getValidPayAmount(props.payAmount, props.price),
       pt: 'token',
       ra: props.receiveAmount || 1,
       rt: 'badge',
-      name: props.name,
-      desc: props.description,
-      loc: props.location,
+      name: getMessage(props.name, session),
+      desc: getMessage(props.description, session),
+      loc: getMessage(props.location, session),
       bg: props.backgroundUrl,
       logo: props.logoUrl,
     }),
   },
   sell_local_badge_for_local_token: {
     action: 'exchange_assets',
-    extraParams: props => ({
+    extraParams: (props, session) => ({
       pa: props.payAmount || 1,
       pt: 'badge',
       ra: props.receiveAmount || props.price || 1,
       rt: 'token',
-      name: props.name,
+      name: getMessage(props.name, session),
     }),
   },
   buy_local_ticket_with_local_token: {
     action: 'exchange_assets',
-    extraParams: props => ({
+    extraParams: (props, session) => ({
       pa: getValidPayAmount(props.payAmount, props.price),
       pt: 'token',
       ra: props.receiveAmount || 1,
       rt: 'ticket',
-      name: props.name,
-      desc: props.description,
-      loc: props.location,
+      name: getMessage(props.name, session),
+      desc: getMessage(props.description, session),
+      loc: getMessage(props.location, session),
       bg: props.backgroundUrl,
       logo: props.logoUrl,
     }),
   },
   sell_local_ticket_for_local_token: {
     action: 'exchange_assets',
-    extraParams: props => ({
+    extraParams: (props, session) => ({
       pa: props.payAmount || 1,
       pt: 'ticket',
       ra: props.receiveAmount || props.price || 1,
       rt: 'token',
-      name: props.name,
+      name: getMessage(props.name, session),
     }),
   },
   buy_local_ticket_with_local_certificate: {
     action: 'exchange_assets',
-    extraParams: props => ({
+    extraParams: (props, session) => ({
       pa: props.payAmount || 1,
       pt: 'certificate',
       ra: props.receiveAmount || 1,
       rt: 'ticket',
-      name: props.name,
+      name: getMessage(props.name, session),
     }),
   },
   buy_local_certificate_with_local_ticket: {
     action: 'exchange_assets',
-    extraParams: props => ({
+    extraParams: (props, session) => ({
       pa: props.payAmount || 1,
       pt: 'ticket',
       ra: props.receiveAmount || 1,
       rt: 'certificate',
-      name: props.name,
+      name: getMessage(props.name, session),
     }),
   },
 
   consume_local_asset: {
     action: 'consume_asset',
-    extraParams: ({ type, typeUrl, name, did }) => ({
+    extraParams: ({ type, typeUrl, name, did }, session) => ({
       pfc: 'local',
       type,
       tu: typeUrl,
-      name,
+      name: getMessage(name, session),
       did,
     }),
   },
   consume_foreign_asset: {
     action: 'consume_asset',
-    extraParams: ({ type, typeUrl, name, did }) => ({
+    extraParams: ({ type, typeUrl, name, did }, session) => ({
       pfc: 'foreign',
       type,
       tu: typeUrl,
-      name,
+      name: getMessage(name, session),
       did,
     }),
   },
   consume_local_asset_by_name: {
     action: 'consume_asset',
-    extraParams: ({ name }) => ({
+    extraParams: ({ name }, session) => ({
       pfc: 'local',
-      name,
+      name: getMessage(name, session),
     }),
   },
   consume_foreign_asset_by_name: {
     action: 'consume_asset',
-    extraParams: ({ name }) => ({
+    extraParams: ({ name }, session) => ({
       pfc: 'foreign',
-      name,
+      name: getMessage(name, session),
     }),
   },
   consume_local_asset_by_did: {
@@ -357,7 +390,7 @@ export const getActionName = (config, props) => {
   throw new Error('Cannot determine playground button action');
 };
 
-export const getActionParams = (config, props) => {
+export const getActionParams = (config, props, session) => {
   if (typeof config === 'string') {
     return {};
   }
@@ -367,7 +400,7 @@ export const getActionParams = (config, props) => {
   }
 
   if (typeof config.extraParams === 'function') {
-    return config.extraParams(props);
+    return config.extraParams(props, session);
   }
 
   if (typeof config.extraParams === 'object') {
