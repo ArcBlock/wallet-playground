@@ -413,7 +413,7 @@ export default function IndexPage() {
           <Typography component="h3" variant="h5" className="section__header" color="textPrimary" gutterBottom>
             Custom Success Message Scenarios{' '}
             <Typography component="small" color="textSecondary">
-              Consume an asset
+              Custom Success Message
             </Typography>
           </Typography>
           <div className="section__content">
