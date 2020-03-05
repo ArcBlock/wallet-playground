@@ -624,7 +624,7 @@ export default function IndexPage() {
               }}
             />
             <AuthButton
-              button="issue email vc"
+              button="issue email VC"
               action="issue_email_vc"
               extraParams={{ type: 'text' }}
               messages={{
@@ -635,7 +635,7 @@ export default function IndexPage() {
               }}
             />
             <AuthButton
-              button="consume email vc"
+              button="consume email VC"
               action="consume_vc"
               extraParams={{ item: ['EmailVerificationCredential'] }}
               messages={{

@@ -11,10 +11,14 @@ module.exports = {
       description: 'Please provide your email',
       fields: ['email'],
     }),
-    verifiableCredential: async () => ({
-      description: 'Please provide your vc which proves your information',
-      items: 'EmailVerificationCredential',
-    }),
+    verifiableCredential: async () => {
+      const w = ForgeSDK.Wallet.fromJSON(wallet);
+      return {
+        description: 'Please provide your vc which proves your information',
+        item: 'EmailVerificationCredential',
+        trustIssuers: [w.toAddress()]  
+      }
+    }
   },
 
   onAuth: async ({ claims, userDid, token, storage }) => {

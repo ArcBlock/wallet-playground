@@ -90,7 +90,7 @@ module.exports = {
       '@context': "https://schema.arcblock.io/v0.1/context.jsonld",
       id: vcId,
       type: "EmailVerificationCredential",
-      issuer: w.toAddress(),
+      issuer: "z1YSRejNkcjjDt9neD7NU1c9kagSRozS9Tg",
       issuanceDate: new Date().toDateString,
       credentialSubject: subject
     };
