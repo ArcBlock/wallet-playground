@@ -1,3 +1,7 @@
+## 0.74.2 (March 06, 2020)
+
+- v0.74.1
+
 ## 0.74.1 (March 04, 2020)
 
 - chore: bump ux lib version
