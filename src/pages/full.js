@@ -613,7 +613,7 @@ export default function IndexPage() {
             </Typography>
           </Typography>
           <div className="section__content">
-          <AuthButton
+            <AuthButton
               button="verify email"
               action="verify_email"
               messages={{
@@ -635,6 +635,28 @@ export default function IndexPage() {
               }}
             />
             <AuthButton
+              button="Fake issuer VC"
+              action="fake_issuer_vc"
+              extraParams={{ type: 'text' }}
+              messages={{
+                title: 'Issue you vc from random issuer',
+                scan: 'Scan QR code to sign a message',
+                confirm: 'Confirm on your ABT Wallet',
+                success: 'vc have send',
+              }}
+            />
+            <AuthButton
+              button="Fake email VC"
+              action="fake_email_vc"
+              extraParams={{ type: 'text' }}
+              messages={{
+                title: 'Issue you vc from random email',
+                scan: 'Scan QR code to sign a message',
+                confirm: 'Confirm on your ABT Wallet',
+                success: 'vc have send',
+              }}
+            />
+            <AuthButton
               button="consume email VC"
               action="consume_vc"
               extraParams={{ item: ['EmailVerificationCredential'] }}
@@ -642,7 +664,7 @@ export default function IndexPage() {
                 title: 'provide your vc',
                 scan: 'Scan QR code to sign a message',
                 confirm: 'Confirm on your ABT Wallet',
-                success: 'vc have send',
+                success: 'vc have been checked',
               }}
             />
 

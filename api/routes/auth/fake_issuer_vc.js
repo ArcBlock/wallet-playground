@@ -5,14 +5,13 @@ const Mcrypto = require('@arcblock/mcrypto');
 const { toTypeInfo } = require('@arcblock/did');
 const { create } = require('@arcblock/vc');
 
-const { wallet } = require('../../libs/auth');
 const { User } = require('../../models');
 
 const data = 'abcdefghijklmnopqrstuvwxyz'.repeat(32);
 const hasher = Mcrypto.getHasher(Mcrypto.types.HashType.SHA3);
 
 module.exports = {
-  action: 'issue_email_vc',
+  action: 'fake_issuer_vc',
   claims: {
     signature: async ({ userDid, userPk, extraParams: { type } }) => {
       const params = {
@@ -80,7 +79,7 @@ module.exports = {
     if (vt.emailVerified === false) {
       throw new Error('没有验证过邮箱');
     }
-    const w = ForgeWallet.fromJSON(wallet);
+    const w = ForgeWallet.fromRandom();
     const emailDigest = hasher(vt.email, 1);
     const vc = create({
       type: 'EmailVerificationCredential',
