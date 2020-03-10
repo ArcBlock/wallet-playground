@@ -7,6 +7,7 @@ import WalletDownload from '@arcblock/ux/lib/Wallet/Download';
 import Tag from '@arcblock/ux/lib/Tag';
 import { SessionContext, PlaygroundAction } from '@arcblock/did-playground';
 
+import Button from '@arcblock/ux/lib/Button';
 import Layout from '../components/layout';
 
 import AuthButton from '../components/auth/general';
@@ -602,6 +603,59 @@ export default function IndexPage() {
               title="Consume Movie Ticket"
               action="consume_local_asset"
               typeUrl="fg:x:movie_ticket"
+            />
+          </div>
+        </section>
+        <section className="section">
+          <Typography component="h3" variant="h5" className="section__header" color="textPrimary" gutterBottom>
+            Verified Credential{' '}
+            <Typography component="small" color="textSecondary">
+              verify your email
+            </Typography>
+          </Typography>
+          <div className="section__content">
+            <Button
+              variant="contained"
+              color="primary"
+              size="large"
+              className="action"
+              onClick={() => {
+                window.open('https://did-kyc.netlify.com/', '_blank');
+              }}>
+              Apply for VC
+            </Button>
+            <AuthButton
+              button="Fake issuer VC"
+              action="fake_issuer_vc"
+              extraParams={{ type: 'text' }}
+              messages={{
+                title: 'Issue you vc from random issuer',
+                scan: 'Scan QR code to sign a message',
+                confirm: 'Confirm on your ABT Wallet',
+                success: 'vc have send',
+              }}
+            />
+            <AuthButton
+              button="Fake email VC"
+              action="fake_email_vc"
+              extraParams={{ type: 'text' }}
+              messages={{
+                title: 'Issue you vc from random email',
+                scan: 'Scan QR code to sign a message',
+                confirm: 'Confirm on your ABT Wallet',
+                success: 'vc have send',
+              }}
+            />
+            <AuthButton
+              button="consume email VC"
+              action="consume_vc"
+              extraParams={{ item: ['EmailVerificationCredential'] }}
+              messages={{
+                title: 'provide your vc',
+                scan: 'Scan QR code to sign a message',
+                confirm: 'Confirm on your ABT Wallet',
+                success: 'vc have been checked',
+              }}
             />
           </div>
         </section>

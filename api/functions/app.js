@@ -16,6 +16,7 @@ const compression = require('compression');
 const nocache = require('nocache');
 const ForgeSDK = require('@arcblock/forge-sdk');
 const EventServer = require('@arcblock/event-server');
+const logger = require('../libs/logger');
 
 // ------------------------------------------------------------------------------
 // Routes: due to limitations of netlify functions, we need to import routes here
@@ -51,9 +52,10 @@ mongoose.connection.on('reconnected', () => {
 });
 
 // Create and config express application
+
 const app = express();
 const server = http.createServer(app);
-
+logger.initialize(app);
 // Only enable socket server in production, since live reload will also have socket server
 if (isProduction && !isNetlify) {
   const eventServer = new EventServer(server, ['auth']);
@@ -132,11 +134,17 @@ walletHandlers.attach(Object.assign({ app: router }, require('../routes/auth/tra
 walletHandlers.attach(Object.assign({ app: router }, require('../routes/auth/consume_asset')));
 walletHandlers.attach(Object.assign({ app: router }, require('../routes/auth/acquire_asset')));
 walletHandlers.attach(Object.assign({ app: router }, require('../routes/auth/exchange_asset')));
+walletHandlers.attach(Object.assign({ app: router }, require('../routes/auth/verify_email')));
+walletHandlers.attach(Object.assign({ app: router }, require('../routes/auth/send_verified_email')));
+walletHandlers.attach(Object.assign({ app: router }, require('../routes/auth/issue_email_vc')));
+walletHandlers.attach(Object.assign({ app: router }, require('../routes/auth/fake_issuer_vc')));
+walletHandlers.attach(Object.assign({ app: router }, require('../routes/auth/fake_email_vc')));
+walletHandlers.attach(Object.assign({ app: router }, require('../routes/auth/consume_vc')));
 swapHandlers.attach(Object.assign({ app: router }, require('../routes/auth/pickup_swap')));
 agentHandlers.attach(Object.assign({ app: router }, require('../routes/auth/claim_profile'))); // we can reuse something here
-
 require('../routes/session').init(router);
 require('../routes/authorizations').init(router);
+require('../routes/users').init(router);
 require('../routes/orders').init(router);
 require('../routes/charge').init(router);
 require('../routes/assets').init(router);
