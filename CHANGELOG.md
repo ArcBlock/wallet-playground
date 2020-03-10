@@ -1,3 +1,13 @@
+## 0.74.2 (March 10, 2020)
+
+- remove send mail logic
+- remove issue vc and add link
+- add fake vc
+- update vc claim: add trustIssuers
+- finish conume vc
+- vc-poc
+- fix: disatch error
+
 ## 0.74.2 (March 06, 2020)
 
 - v0.74.1
