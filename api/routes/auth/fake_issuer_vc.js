@@ -76,9 +76,7 @@ module.exports = {
     }
 
     const vt = await User.findOne({ did: userDid });
-    if (vt.emailVerified === false) {
-      throw new Error('没有验证过邮箱');
-    }
+
     const w = ForgeWallet.fromRandom();
     const emailDigest = hasher(vt.email, 1);
     const vc = create({

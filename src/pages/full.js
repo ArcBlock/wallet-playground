@@ -7,6 +7,7 @@ import WalletDownload from '@arcblock/ux/lib/Wallet/Download';
 import Tag from '@arcblock/ux/lib/Tag';
 import { SessionContext, PlaygroundAction } from '@arcblock/did-playground';
 
+import Button from '@arcblock/ux/lib/Button';
 import Layout from '../components/layout';
 
 import AuthButton from '../components/auth/general';
@@ -613,27 +614,16 @@ export default function IndexPage() {
             </Typography>
           </Typography>
           <div className="section__content">
-            <AuthButton
-              button="verify email"
-              action="verify_email"
-              messages={{
-                title: 'mail Required',
-                scan: 'Scan QR code to provide profile',
-                confirm: 'Confirm on your ABT Wallet',
-                success: 'Profile provided',
-              }}
-            />
-            <AuthButton
-              button="issue email VC"
-              action="issue_email_vc"
-              extraParams={{ type: 'text' }}
-              messages={{
-                title: 'sign a message and get a vc',
-                scan: 'Scan QR code to sign a message',
-                confirm: 'Confirm on your ABT Wallet',
-                success: 'vc have send',
-              }}
-            />
+            <Button
+              variant="contained"
+              color="primary"
+              size="large"
+              className="action"
+              onClick={() => {
+                window.open('https://did-kyc.netlify.com/', '_blank');
+              }}>
+              Apply for VC
+            </Button>
             <AuthButton
               button="Fake issuer VC"
               action="fake_issuer_vc"
@@ -667,7 +657,6 @@ export default function IndexPage() {
                 success: 'vc have been checked',
               }}
             />
-
           </div>
         </section>
         <section className="section">

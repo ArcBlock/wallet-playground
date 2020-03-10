@@ -15,7 +15,7 @@ module.exports = {
       return {
         description: 'Please provide your vc which proves your information',
         item: 'EmailVerificationCredential',
-        trustedIssuers: [w.toAddress()],
+        trustedIssuers: [w.toAddress(), 'zNKmAZ88dywkBw3mtCf2UCFpfreaZSMMWkyi'],
       };
     },
   },
