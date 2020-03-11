@@ -657,6 +657,17 @@ export default function IndexPage() {
                 success: 'vc have been checked',
               }}
             />
+
+            <AuthButton
+              button="Random Fake Badge"
+              action="issue_badge"
+              messages={{
+                title: 'You will get a random badge',
+                scan: 'Scan QR code to sign a message',
+                confirm: 'Confirm on your ABT Wallet',
+                success: 'badge have been checked',
+              }}
+            />
           </div>
         </section>
         <section className="section">
