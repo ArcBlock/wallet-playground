@@ -1,3 +1,22 @@
+## 0.74.4 (March 16, 2020)
+
+
+
+## 0.74.3 (March 13, 2020)
+
+- add fake bdage
+- chore: bump forge sdk version
+- Merge pull request #29 from ArcBlock/feat-issue-vc
+- bump version
+- remove send mail logic
+- Merge pull request #27 from ArcBlock/feat-issue-vc
+- remove issue vc and add link
+- add fake vc
+- update vc claim: add trustIssuers
+- finish conume vc
+- vc-poc
+- fix: disatch error
+
 ## 0.74.2 (March 10, 2020)
 
 - remove send mail logic
