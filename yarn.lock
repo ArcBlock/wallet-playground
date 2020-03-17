@@ -2,25 +2,25 @@
 # yarn lockfile v1
 
 
-"@arcblock/asset-factory@^1.0.39":
-  version "1.0.39"
-  resolved "https://registry.yarnpkg.com/@arcblock/asset-factory/-/asset-factory-1.0.39.tgz#89317e5b107facde583d3950ae16ea6188c59f0e"
-  integrity sha512-QLEzOGLXNMncJUIn44/vUFcB+mO74nVYVx5Scegyw/71XN3NCPp225/YCikBvHUkEcqstyhYPjip4PhuuPUgxg==
+"@arcblock/asset-factory@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.npm.taobao.org/@arcblock/asset-factory/download/@arcblock/asset-factory-1.1.0.tgz#fd4a0014fb23e13e5b7f4469498842c395fcb987"
+  integrity sha1-/UoAFPsj4T5bf0RpSYhCw5X8uYc=
   dependencies:
-    "@arcblock/forge-sdk" "^1.0.39"
+    "@arcblock/forge-sdk" "^1.1.0"
     "@arcblock/forge-wallet" "^1.0.39"
     debug "^4.1.1"
     json-stable-stringify "^1.0.1"
     lodash "^4.17.15"
 
-"@arcblock/client-extension@^1.0.39":
-  version "1.0.39"
-  resolved "https://registry.yarnpkg.com/@arcblock/client-extension/-/client-extension-1.0.39.tgz#bca3220a97d10dde53a636d30468dc7288785bea"
-  integrity sha512-Cpe64gZ8GwRaYylA0SFfldOfeoocc/g2IlQprzZIFHmfEyOLUCl1xk3QU9r8RjCyjWpKi/YgRMNMNzC2agUEjg==
+"@arcblock/client-extension@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.npm.taobao.org/@arcblock/client-extension/download/@arcblock/client-extension-1.1.0.tgz#7509a5829a2dbdbf5dcc6851018a5341556de4b8"
+  integrity sha1-dQmlgpotvb9dzGhRAYpTQVVt5Lg=
   dependencies:
     "@arcblock/did" "^1.0.39"
-    "@arcblock/did-util" "^1.0.39"
-    "@arcblock/forge-message" "^1.0.33"
+    "@arcblock/did-util" "^1.1.0"
+    "@arcblock/forge-message" "^1.1.0"
     "@arcblock/forge-proto" "^1.0.33"
     "@arcblock/forge-util" "^1.0.33"
     "@arcblock/forge-wallet" "^1.0.39"
@@ -55,25 +55,25 @@
   resolved "https://registry.yarnpkg.com/@arcblock/did-auth-storage/-/did-auth-storage-1.0.13.tgz#acc03e51cfcc38d52d691935b10ca421638fd494"
   integrity sha512-9nT2MYAzswSuY0WyDd8ednQWIKIxz2N+v/Zlj9xT62RXfBn/NU7Ibi51Q0MAVck97CLoSuezKUDUCo+cLBUDqg==
 
-"@arcblock/did-auth@^1.0.39":
-  version "1.0.39"
-  resolved "https://registry.yarnpkg.com/@arcblock/did-auth/-/did-auth-1.0.39.tgz#4a7d22f10eec57cfbd370ae0850c1f1a67621dea"
-  integrity sha512-qD9Cl50BYF6BDFCeliPYA7b9FJ9YUUnXiuPxVgAz/0XRcnuQH/n22ujOrW550bDBBCiyYlFg4xgZnevfupmpYg==
+"@arcblock/did-auth@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.npm.taobao.org/@arcblock/did-auth/download/@arcblock/did-auth-1.1.0.tgz#05722a57a87accd80f76060a58a9fa542cc88e31"
+  integrity sha1-BXIqV6h6zNgPdgYKWKn6VCzIjjE=
   dependencies:
     "@arcblock/did" "^1.0.39"
-    "@arcblock/forge-sdk" "^1.0.39"
+    "@arcblock/forge-sdk" "^1.1.0"
     "@arcblock/forge-util" "^1.0.33"
     "@arcblock/forge-wallet" "^1.0.39"
     "@arcblock/mcrypto" "^1.0.39"
-    "@arcblock/swap-retriever" "^1.0.39"
-    "@arcblock/tx-util" "^1.0.39"
+    "@arcblock/swap-retriever" "^1.1.0"
+    "@arcblock/tx-util" "^1.1.0"
     axios "^0.19.0"
     debug "^4.1.1"
     json-stable-stringify "^1.0.1"
     lodash.get "^4.4.2"
 
 "@arcblock/did-playground@./packages/did-playground":
-  version "0.74.2"
+  version "0.74.4"
   dependencies:
     "@arcblock/did-react" "^0.69.2"
     "@arcblock/ux" "^0.69.2"
@@ -101,13 +101,13 @@
     react-use "^13.22.4"
     styled-components "^5.0.0"
 
-"@arcblock/did-util@^1.0.39":
-  version "1.0.39"
-  resolved "https://registry.yarnpkg.com/@arcblock/did-util/-/did-util-1.0.39.tgz#4cc7fa275bfa04e1b2d17bdb95170c775135f272"
-  integrity sha512-iacpzvjpQ09vwtAW+97vfLKsU9EIKGrslZTUy7xsPGntPykbtRC6LbDF1UUTj90hwsAAn/lUXfPaaGT/1hOMCg==
+"@arcblock/did-util@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@arcblock/did-util/-/did-util-1.1.0.tgz#1ae5bd45a0ce5fd819e1ef3df0133c3c9eeb0703"
+  integrity sha512-cuU5P+n23KTlYh+W5CVAvuzB9hzbFToPZQIEP0urqriJg2Qxw4i54Qtk3IpBe49bD+F5KayhIiSsoG8ZsL/4aw==
   dependencies:
     "@arcblock/did" "^1.0.39"
-    "@arcblock/forge-message" "^1.0.33"
+    "@arcblock/forge-message" "^1.1.0"
     "@arcblock/forge-proto" "^1.0.33"
     "@arcblock/forge-util" "^1.0.33"
     "@arcblock/forge-wallet" "^1.0.39"
@@ -144,10 +144,10 @@
     uuid "^3.3.3"
     ws "^7.2.0"
 
-"@arcblock/forge-message@^1.0.33":
-  version "1.0.33"
-  resolved "https://registry.yarnpkg.com/@arcblock/forge-message/-/forge-message-1.0.33.tgz#e69cbf5648912ad05343fd7fc85bcceb0e1ed272"
-  integrity sha512-DvvI0tcHf5rbqHrNc3OVWdYmJwnBZ5oMtNDeFaXAyMQ8x7hQf7Qp0GEp4XSSJzw5Hvs0CkcWotY2aOyeRed2lg==
+"@arcblock/forge-message@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@arcblock/forge-message/-/forge-message-1.1.0.tgz#d6b990cfa888f32f9f6e71576896b2b76586a632"
+  integrity sha512-YmjJ4ItbzLXTk9Y8QBmf+jV79qYcOB5b+Y+aGNiRIFjKto3LxMK4Lk7RgjQxzam9rKiA+iMejPz0l1bWmV6V3g==
   dependencies:
     "@arcblock/forge-proto" "^1.0.33"
     "@arcblock/forge-util" "^1.0.33"
@@ -163,17 +163,17 @@
     debug "^4.1.1"
     lodash "^4.17.15"
 
-"@arcblock/forge-sdk@^1.0.39":
-  version "1.0.39"
-  resolved "https://registry.yarnpkg.com/@arcblock/forge-sdk/-/forge-sdk-1.0.39.tgz#a050e01ab987fb0edc7e2495a0c1f70e4ae4d672"
-  integrity sha512-T953E+avDfunPKsfnn2TN+AJtUGq7fSLm09dubOzGj79Z7CAsHF8AkWqwkJd5cN+G4aUzt1MDNS1aruWGeekrg==
+"@arcblock/forge-sdk@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.npm.taobao.org/@arcblock/forge-sdk/download/@arcblock/forge-sdk-1.1.0.tgz#40777ffdcb1820193ed0e0007d4c061cb5c43073"
+  integrity sha1-QHd//csYIBk+0OAAfUwGHLXEMHM=
   dependencies:
-    "@arcblock/did-util" "^1.0.39"
-    "@arcblock/forge-message" "^1.0.33"
+    "@arcblock/did-util" "^1.1.0"
+    "@arcblock/forge-message" "^1.1.0"
     "@arcblock/forge-util" "^1.0.33"
     "@arcblock/forge-wallet" "^1.0.39"
-    "@arcblock/graphql-client" "^1.0.39"
-    "@arcblock/grpc-client" "^1.0.39"
+    "@arcblock/graphql-client" "^1.1.0"
+    "@arcblock/grpc-client" "^1.1.0"
     debug "^4.1.1"
     react-app-polyfill "^1.0.1"
 
@@ -198,12 +198,12 @@
     "@arcblock/mcrypto" "^1.0.39"
     lodash.upperfirst "^4.3.1"
 
-"@arcblock/graphql-client@^1.0.39":
-  version "1.0.39"
-  resolved "https://registry.yarnpkg.com/@arcblock/graphql-client/-/graphql-client-1.0.39.tgz#f8fef2b461b91c7d8dbe908cda864ce0ee6fc51d"
-  integrity sha512-kbBJnp4Ebw+A+A+P71l1Gy3Nw1uWV32SFM0+buoqLqaMcIxnjRbLNUZecmBAisBhRFBC8urCeK04cF83oUH1Fg==
+"@arcblock/graphql-client@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.npm.taobao.org/@arcblock/graphql-client/download/@arcblock/graphql-client-1.1.0.tgz#f1718355fa1a44f8a2d50e805c3f46e5c9af56bb"
+  integrity sha1-8XGDVfoaRPii1Q6AXD9G5cmvVrs=
   dependencies:
-    "@arcblock/client-extension" "^1.0.39"
+    "@arcblock/client-extension" "^1.1.0"
     "@arcblock/sdk-util" "^0.25.0"
     blueimp-md5 "^2.10.0"
     debug "^4.1.1"
@@ -213,13 +213,13 @@
     react-app-polyfill "^1.0.1"
     wolfy87-eventemitter "^5.2.5"
 
-"@arcblock/grpc-client@^1.0.39":
-  version "1.0.39"
-  resolved "https://registry.yarnpkg.com/@arcblock/grpc-client/-/grpc-client-1.0.39.tgz#c13d9caa5e6aa960e1372c0a28711a4b858540e3"
-  integrity sha512-jfJzHoK06t30FlcnmSy5Y+2pRCuvRxjhJV2MVUTkn8CadhkkBxfEkDd4BY3KFymbdtQO1Yz1jSMvCx3539Z/pQ==
+"@arcblock/grpc-client@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.npm.taobao.org/@arcblock/grpc-client/download/@arcblock/grpc-client-1.1.0.tgz#6d17c1e65727dafb3293aa5ae52ed582f6db7e16"
+  integrity sha1-bRfB5lcn2vsyk6pa5S7VgvbbfhY=
   dependencies:
-    "@arcblock/client-extension" "^1.0.39"
-    "@arcblock/forge-message" "^1.0.33"
+    "@arcblock/client-extension" "^1.1.0"
+    "@arcblock/forge-message" "^1.1.0"
     "@arcblock/forge-proto" "^1.0.33"
     debug "^4.1.1"
     grpc "^1.24.0"
@@ -261,13 +261,13 @@
     lodash.get "^4.4.2"
     lodash.set "^4.3.2"
 
-"@arcblock/swap-retriever@^1.0.39":
-  version "1.0.39"
-  resolved "https://registry.yarnpkg.com/@arcblock/swap-retriever/-/swap-retriever-1.0.39.tgz#34802c73e5d02dc04dc1379e6bca09bf842ae82b"
-  integrity sha512-eHYJyqKTr84Co67o2jnLtKp86gk2/JT7HhwFimrswsvmLop8CfCVuzuoKIpY3M0btXovve8N9fEHgUqvil84dg==
+"@arcblock/swap-retriever@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.npm.taobao.org/@arcblock/swap-retriever/download/@arcblock/swap-retriever-1.1.0.tgz#91c198c804e575f345f116439366ea867cceef19"
+  integrity sha1-kcGYyATldfNF8RZDk2bqhnzO7xk=
   dependencies:
-    "@arcblock/forge-sdk" "^1.0.39"
-    "@arcblock/tx-util" "^1.0.39"
+    "@arcblock/forge-sdk" "^1.1.0"
+    "@arcblock/tx-util" "^1.1.0"
     debug "^4.1.1"
     lodash "^4.17.15"
 
@@ -284,12 +284,12 @@
   resolved "https://registry.yarnpkg.com/@arcblock/swap-storage/-/swap-storage-1.0.13.tgz#c1c5289f643933cdeff00346d88d74300dc77a6e"
   integrity sha512-K62vaQx4kqgD1Prp5k7gqhMjfXG1DwSkMYBrB8dQOe0xfBm8vnEMfeux5GZI91q+bYElHawPq5+fd1VLhA1Dvg==
 
-"@arcblock/tx-util@^1.0.39":
-  version "1.0.39"
-  resolved "https://registry.yarnpkg.com/@arcblock/tx-util/-/tx-util-1.0.39.tgz#968340b22bdb9d4a0df53fd2a030b9e3a5c67b1b"
-  integrity sha512-glKRhKa3hfcIt9uq9mrsdL0K9eKCrqjQ0gnG7oXasXx8UQ40VFRgfdn7uWYLvVGNEhafTgzgCATT/uamtXnyjQ==
+"@arcblock/tx-util@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.npm.taobao.org/@arcblock/tx-util/download/@arcblock/tx-util-1.1.0.tgz#bd261f57256674fad6e79fcd3fea1d91ce693e0f"
+  integrity sha1-vSYfVyVmdPrW55/NP+odkc5pPg8=
   dependencies:
-    "@arcblock/forge-sdk" "^1.0.39"
+    "@arcblock/forge-sdk" "^1.1.0"
     debug "^4.1.1"
 
 "@arcblock/ux@^0.69.2":

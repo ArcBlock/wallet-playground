@@ -1,3 +1,8 @@
+## 0.74.5 (March 17, 2020)
+
+- support vc asset
+- fix asset content
+
 ## 0.74.4 (March 16, 2020)
 
 

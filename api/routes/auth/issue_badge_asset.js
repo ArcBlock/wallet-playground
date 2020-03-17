@@ -31,15 +31,15 @@ const ensureAsset = async (userPk, userDid) => {
       },
     },
   });
-  const asset = Object.assign({
+  const asset = {
     moniker: `badge-svg-${badgeIndex % 10}`,
     readonly: true,
     transferrable: true,
     data: {
       typeUrl: 'vc',
-      value: JSON.stringify(vc),
+      value: vc,
     },
-  });
+  };
   asset.address = ForgeSDK.Util.toAssetAddress(asset);
   const hash = await ForgeSDK.sendCreateAssetTx(
     {
