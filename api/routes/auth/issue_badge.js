@@ -2,10 +2,11 @@
 const ForgeWallet = require('@arcblock/forge-wallet');
 const { create } = require('@arcblock/vc');
 
-
 const { wallet } = require('../../libs/auth');
 
 const badgeArray = require('../../libs/svg');
+
+let index = 0;
 
 module.exports = {
   action: 'issue_badge',
@@ -16,8 +17,9 @@ module.exports = {
     }),
   },
 
-  onAuth: async ({ userDid, userPk ,claims}) => {
-    const svg = badgeArray[Math.floor(Math.random() * 10)];
+  onAuth: async ({ userDid, userPk, claims }) => {
+    const svg = badgeArray[index % 10];
+    index += 1;
     const w = ForgeWallet.fromJSON(wallet);
 
     const vc = create({
@@ -40,7 +42,7 @@ module.exports = {
       disposition: 'attachment',
       type: 'VerifiableCredential',
       data: vc,
-      tag: 'badge-01',
+      tag: `badge-${index % 10}`,
     };
   },
 };

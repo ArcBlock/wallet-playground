@@ -10,11 +10,11 @@ const { wallet } = require('../../libs/auth');
 const w = ForgeWallet.fromJSON(wallet);
 const badgeArray = require('../../libs/svg');
 
+let badgeIndex = 0;
 
 const ensureAsset = async (userPk, userDid) => {
-  const badgeIndex = Math.floor(Math.random() * 10);
-  const svg = badgeArray[badgeIndex];
-
+  const svg = badgeArray[badgeIndex % 10];
+  badgeIndex += 1;
   const vc = create({
     type: 'WalletPlaygroundAchievement',
     issuer: {
@@ -31,14 +31,13 @@ const ensureAsset = async (userPk, userDid) => {
       },
     },
   });
-
   const asset = Object.assign({
-    moniker: `badge-svg-${badgeIndex}`,
+    moniker: `badge-svg-${badgeIndex % 10}`,
     readonly: true,
     transferrable: true,
     data: {
       typeUrl: 'vc',
-      value: [vc],
+      value: JSON.stringify(vc),
     },
   });
   asset.address = ForgeSDK.Util.toAssetAddress(asset);
