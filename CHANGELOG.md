@@ -1,3 +1,8 @@
+## 0.75.0 (March 19, 2020)
+
+- chore: polish responsive
+- chore: make things responsive
+
 ## 0.74.5 (March 17, 2020)
 
 - support vc asset
