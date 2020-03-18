@@ -5,7 +5,7 @@
     ".",
     "packages/*"
   ],
-  "version": "0.75.0",
+  "version": "0.75.1",
   "author": "wangshijun <shijun@arcblock.io> https://github.com/wangshijun",
   "keywords": [
     "arcblock",

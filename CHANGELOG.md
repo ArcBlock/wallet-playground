@@ -1,3 +1,7 @@
+## 0.75.1 (March 19, 2020)
+
+- fix: playground action button routes and config
+
 ## 0.75.0 (March 19, 2020)
 
 - chore: polish responsive
