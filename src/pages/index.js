@@ -125,7 +125,7 @@ const Main = styled.main`
   }
 
   .section {
-    margin-top: 48px;
+    margin-top: 32px;
     .section__header {
       margin-bottom: 24px;
     }
@@ -139,7 +139,10 @@ const Main = styled.main`
       .action {
         margin-bottom: 16px;
         margin-right: 32px;
-        max-width: 320px;
+        max-width: 360px;
+        @media (max-width: ${props => props.theme.breakpoints.values.sm}px) {
+          margin-right: 0;
+        }
         width: 100%;
         display: block;
       }

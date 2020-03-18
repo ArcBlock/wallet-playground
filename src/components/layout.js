@@ -96,12 +96,12 @@ export default function Layout({ title, children, contentOnly }) {
             <ListItemText primary="Everything" />
           </ListItem>
         </Link>
-        <Link href="/orders" className="nav-item">
+        <Link href="/profile">
           <ListItem button>
             <ListItemText primary="Profile" />
           </ListItem>
         </Link>
-        <Link href="/profile">
+        <Link href="/orders" className="nav-item">
           <ListItem button>
             <ListItemText primary="Orders" />
           </ListItem>
@@ -109,6 +109,11 @@ export default function Layout({ title, children, contentOnly }) {
       </List>
       <Divider />
       <List>
+        <Link href="https://www.arcblock.io/en/try-identity-now/" target="_blank" className="nav-item">
+          <ListItem button>
+            <ListItemText primary="I DID It " />
+          </ListItem>
+        </Link>
         {!!env.chainHost && (
           <Link href={getExplorerUrl(env.chainHost, 'local')} target="_blank" className="nav-item">
             <ListItem button>
@@ -135,7 +140,7 @@ export default function Layout({ title, children, contentOnly }) {
   return (
     <Div className={classes.root}>
       <Helmet title={`${title} - ${env.appName}`} />
-      <AppBar position="fixed" className={classes.appBar} color="default" style={{ height: 64 }}>
+      <AppBar position="fixed" className={classes.appBar} color="default" style={{ height: 56 }}>
         <Toolbar>
           <IconButton
             color="inherit"
@@ -178,7 +183,7 @@ export default function Layout({ title, children, contentOnly }) {
       </nav>
       <div className={classes.content}>
         <div className={classes.toolbar} />
-        <Container style={{ padding: 0 }}>{children}</Container>
+        {children}
         <Footer />
       </div>
     </Div>
