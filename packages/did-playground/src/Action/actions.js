@@ -7,11 +7,11 @@ async function createSwapOrder(api) {
 }
 
 const getValidPayAmount = (payAmount, price) => {
-  if (payAmount !== undefined) {
+  if (Number(payAmount) > 0) {
     return payAmount;
   }
 
-  if (price !== undefined) {
+  if (Number(price) > 0) {
     return price;
   }
 
@@ -246,7 +246,7 @@ export const actions = {
     extraParams: (props, session) => ({
       pa: props.payAmount || 1,
       pt: 'certificate',
-      ra: props.receiveAmount || props.price || 1,
+      ra: getValidPayAmount(props.receiveAmount, props.price),
       rt: 'token',
       name: getMessage(props.name, session),
     }),
@@ -270,7 +270,7 @@ export const actions = {
     extraParams: (props, session) => ({
       pa: props.payAmount || 1,
       pt: 'badge',
-      ra: props.receiveAmount || props.price || 1,
+      ra: getValidPayAmount(props.receiveAmount, props.price),
       rt: 'token',
       name: getMessage(props.name, session),
     }),
@@ -294,7 +294,7 @@ export const actions = {
     extraParams: (props, session) => ({
       pa: props.payAmount || 1,
       pt: 'ticket',
-      ra: props.receiveAmount || props.price || 1,
+      ra: getValidPayAmount(props.receiveAmount, props.price),
       rt: 'token',
       name: getMessage(props.name, session),
     }),

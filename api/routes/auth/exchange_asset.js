@@ -78,7 +78,7 @@ const getExchangeSig = async ({ userPk, userDid, pa, pt, ra, rt, name, desc, sta
   }
 
   if (rt === 'token') {
-    receiverPayload = await ForgeSDK.fromTokenToUnit(pa);
+    receiverPayload = await ForgeSDK.fromTokenToUnit(ra);
   } else {
     receiverPayload = await getAssets({
       amount: ra,

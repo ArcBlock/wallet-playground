@@ -155,7 +155,7 @@ export default function Layout({ title, children, contentOnly }) {
           </Typography>
         </Toolbar>
       </AppBar>
-      <nav className={classes.drawer} aria-label="mailbox folders">
+      <nav className={classes.drawer}>
         <Hidden smUp implementation="css">
           <Drawer
             variant="temporary"
