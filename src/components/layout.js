@@ -111,7 +111,7 @@ export default function Layout({ title, children, contentOnly }) {
       <List>
         <Link href="https://www.arcblock.io/en/try-identity-now/" target="_blank" className="nav-item">
           <ListItem button>
-            <ListItemText primary="I DID It " />
+            <ListItemText primary="Demo Apps" />
           </ListItem>
         </Link>
         {!!env.chainHost && (
