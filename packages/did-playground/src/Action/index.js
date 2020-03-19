@@ -3,15 +3,17 @@
 import React, { useContext, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import useWindowSize from 'react-use/lib/useWindowSize';
+import useBrowser from '@arcblock/react-hooks/lib/useBrowser';
 import styled from 'styled-components';
 
 import CircularProgress from '@material-ui/core/CircularProgress';
-import BasicAuth from '@arcblock/did-react/lib/Auth/basic';
-import Button from '@arcblock/ux/lib/Button';
-import { mergeProps } from '@arcblock/ux/lib/Util';
 import Dialog from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
 import { withTheme } from '@material-ui/core/styles';
+
+import BasicAuth from '@arcblock/did-react/lib/Auth/basic';
+import Button from '@arcblock/ux/lib/Button';
+import { mergeProps } from '@arcblock/ux/lib/Util';
 
 import { SessionContext } from './session';
 import { actions, getMessage, getActionName, getActionParams } from './actions';
@@ -58,6 +60,7 @@ function PlaygroundAction(props) {
     ...rest
   } = newProps;
 
+  const browser = useBrowser();
   const { api, session } = useContext(SessionContext);
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -190,7 +193,7 @@ function PlaygroundAction(props) {
           open
           disableBackdropClick
           disableEscapeKeyDown
-          fullScreen={width < theme.breakpoints.values.sm}
+          fullScreen={width < theme.breakpoints.values.sm && !browser.wallet}
           fullWidth={showFrame}
           maxWidth={showFrame ? 'lg' : ''}>
           <DialogContent
