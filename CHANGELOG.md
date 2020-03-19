@@ -1,3 +1,9 @@
+## 0.75.2 (March 19, 2020)
+
+- chore: bump forge sdk version
+- feat: make download responsive
+- chore: make playground action button work in abt wallet
+
 ## 0.75.1 (March 19, 2020)
 
 - fix: playground action button routes and config
