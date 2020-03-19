@@ -1,6 +1,7 @@
 /* eslint-disable react/jsx-one-expression-per-line */
 import React, { useContext, useState, useEffect } from 'react';
 import styled from 'styled-components';
+import useBrowser from '@arcblock/react-hooks/lib/useBrowser';
 
 import Typography from '@material-ui/core/Typography';
 import WalletDownload from '@arcblock/ux/lib/Wallet/Download';
@@ -23,6 +24,7 @@ import api from '../libs/api';
 import { version } from '../../package.json';
 
 export default function IndexPage() {
+  const browser = useBrowser();
   const { session } = useContext(SessionContext);
   const [asset, setAsset] = useState(null);
 
@@ -680,19 +682,21 @@ export default function IndexPage() {
             />
           </div>
         </section>
-        <section className="section">
-          <Typography component="h3" variant="h5" className="section__header" color="textPrimary" gutterBottom>
-            Do not have ABT Wallet?
-          </Typography>
-          <div className="section__content">
-            <div style={{ padding: 24, background: '#44cdc6', color: 'rgb(255, 255, 255)' }}>
-              <WalletDownload
-                layout="horizontal"
-                title="Make sure you have your phone handy with the ABT Wallet downloaded."
-              />
+        {!browser.wallet && (
+          <section className="section">
+            <Typography component="h3" variant="h5" className="section__header" color="textPrimary" gutterBottom>
+              Do not have ABT Wallet?
+            </Typography>
+            <div className="section__content">
+              <div style={{ padding: 24, background: '#44cdc6', color: 'rgb(255, 255, 255)' }}>
+                <WalletDownload
+                  layout={browser.mobile.any ? 'vertical' : 'horizontal'}
+                  title="Make sure you have your phone handy with the ABT Wallet downloaded."
+                />
+              </div>
             </div>
-          </div>
-        </section>
+          </section>
+        )}
       </Main>
     </Layout>
   );
