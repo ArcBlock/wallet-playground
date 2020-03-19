@@ -55,10 +55,10 @@
   resolved "https://registry.yarnpkg.com/@arcblock/did-auth-storage/-/did-auth-storage-1.0.13.tgz#acc03e51cfcc38d52d691935b10ca421638fd494"
   integrity sha512-9nT2MYAzswSuY0WyDd8ednQWIKIxz2N+v/Zlj9xT62RXfBn/NU7Ibi51Q0MAVck97CLoSuezKUDUCo+cLBUDqg==
 
-"@arcblock/did-auth@^1.1.1":
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/@arcblock/did-auth/-/did-auth-1.1.1.tgz#99065a236b10173306cd7e6c52d2eb33d82425f6"
-  integrity sha512-LrBOgf99/IJsayF5/1jEdVNhlw4/qPQlLhIp0wc7QYDkiodViwxPZFyGToFbeDuVgXV/0IxUVblGxhhH1SnDsQ==
+"@arcblock/did-auth@^1.1.2":
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/@arcblock/did-auth/-/did-auth-1.1.2.tgz#e3b0c545ebccedd142bf4ab341c9c390f5ae981a"
+  integrity sha512-qh+S55GsHevEtW1Dgx+ax0H8nIvLqUp6IhEf30JRpoRHG4QiK8EbarZJWDeDtbRrsGgXToBCLwmrDhiwePw3dw==
   dependencies:
     "@arcblock/did" "^1.0.39"
     "@arcblock/forge-sdk" "^1.1.1"
@@ -73,11 +73,11 @@
     lodash.get "^4.4.2"
 
 "@arcblock/did-playground@./packages/did-playground":
-  version "0.75.2"
+  version "0.75.3"
   dependencies:
-    "@arcblock/did-react" "^0.70.2"
+    "@arcblock/did-react" "^0.70.3"
     "@arcblock/react-hooks" "^0.70.0"
-    "@arcblock/ux" "^0.70.2"
+    "@arcblock/ux" "^0.70.3"
     "@material-ui/core" "^4.9.1"
     axios "^0.19.2"
     core-js "^3.6.4"
@@ -85,14 +85,14 @@
     react-use "^13.27.0"
     styled-components "^5.0.1"
 
-"@arcblock/did-react@^0.70.2":
-  version "0.70.2"
-  resolved "https://registry.yarnpkg.com/@arcblock/did-react/-/did-react-0.70.2.tgz#169803deb898511474147ea19ebffa81d6a39c33"
-  integrity sha512-+p6jKwMn7SK4+oBj+o4gIHdRBJUdqEaL+dia/xnnnDVG6wsybEcYneJxDqriLQaV40vz5oYzuBFNVTHFs3MPPg==
+"@arcblock/did-react@^0.70.3":
+  version "0.70.3"
+  resolved "https://registry.yarnpkg.com/@arcblock/did-react/-/did-react-0.70.3.tgz#1a0217d9f8899439447384f0eabb73a21827d078"
+  integrity sha512-h3ZdNk1E9/WYTsbZrROV1ru4zlTW96JnjEKXRjQhrVsbd89W0vykak1O9kxDIs+9MC4t1wajJULD0306L9v4Wg==
   dependencies:
     "@arcblock/event-client" "^1.0.23"
     "@arcblock/react-hooks" "^0.70.0"
-    "@arcblock/ux" "^0.70.2"
+    "@arcblock/ux" "^0.70.3"
     "@material-ui/core" "^4.9.1"
     axios "^0.19.2"
     core-js "^3.6.4"
@@ -292,10 +292,10 @@
     "@arcblock/forge-sdk" "^1.1.1"
     debug "^4.1.1"
 
-"@arcblock/ux@^0.70.2":
-  version "0.70.2"
-  resolved "https://registry.yarnpkg.com/@arcblock/ux/-/ux-0.70.2.tgz#aa318d4736c5b201bf23e55ba65a33380f29bba7"
-  integrity sha512-xClUA8pgjY+5Mv4hiZMEsAR4B3Fbg7um4l8yLi+3aoDNjCNclkZSdiV8gz8G/+aoibGSEy6yiCKPgceiXHxJww==
+"@arcblock/ux@^0.70.3":
+  version "0.70.3"
+  resolved "https://registry.yarnpkg.com/@arcblock/ux/-/ux-0.70.3.tgz#d5e4f253c0637487117f3331ac73cb4fb71efbdc"
+  integrity sha512-tAFXjJYtfqNlNGCk2cL6rXvnrwtgg0pBIsLFyP9Tp7gl+IJzd45ySWC4OK3htk+C8okB4kt3HdCJBpZM+JlKnA==
   dependencies:
     "@arcblock/react-hooks" "^0.70.0"
     "@babel/plugin-syntax-dynamic-import" "^7.8.3"
