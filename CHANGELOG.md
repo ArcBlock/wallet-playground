@@ -1,3 +1,7 @@
+## 0.74.6 (March 19, 2020)
+
+- add challenge & presentation
+
 ## 0.74.5 (March 17, 2020)
 
 - support vc asset
