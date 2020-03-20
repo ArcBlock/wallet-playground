@@ -101,14 +101,13 @@ const getAccountStateOptions = { ignoreFields: [/\.withdrawItems/, /\.items/] };
 
 const ensureAsset = async (
   factory,
-  { userPk, userDid, type, name, description, backgroundUrl, logoUrl, startTime, endTime, location = 'China' }
+  { userPk, userDid, type, name, description, backgroundUrl, logoUrl, svg, startTime, endTime, location = 'China' }
 ) => {
   const methods = {
     badge: factory.createBadge.bind(factory),
     ticket: factory.createTicket.bind(factory),
     certificate: factory.createCertificate.bind(factory),
   };
-
   const [asset, hash] = await methods[type]({
     backgroundUrl,
     data: {
@@ -117,6 +116,7 @@ const ensureAsset = async (
       reason: description,
       logoUrl,
       location,
+      svg,
       issueTime: Date.now(),
       startTime,
       endTime,
@@ -143,6 +143,7 @@ const ensureAsset = async (
     description,
     backgroundUrl,
     logoUrl,
+    svg,
     location,
     asset,
     hash,
