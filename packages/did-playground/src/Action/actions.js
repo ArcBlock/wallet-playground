@@ -96,7 +96,6 @@ export const actions = {
       loc: getMessage(props.location, session),
       bg: props.backgroundUrl,
       logo: props.logoUrl,
-      svg: props.svg,
     }),
   },
   buy_foreign_ticket_with_local_token: {
@@ -176,7 +175,6 @@ export const actions = {
       loc: getMessage(props.location, session),
       bg: props.backgroundUrl,
       logo: props.logoUrl,
-      svg: props.svg,
     }),
   },
   buy_local_ticket_with_foreign_token: {
@@ -265,7 +263,6 @@ export const actions = {
       loc: getMessage(props.location, session),
       bg: props.backgroundUrl,
       logo: props.logoUrl,
-      svg: props.svg,
     }),
   },
   sell_local_badge_for_local_token: {

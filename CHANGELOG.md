@@ -1,7 +1,3 @@
-## 0.77.0 (March 20, 2020)
-
-- Badge Button to VC
-
 ## 0.76.0 (March 20, 2020)
 
 - chore: text update
