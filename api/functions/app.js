@@ -139,6 +139,7 @@ walletHandlers.attach(Object.assign({ app: router }, require('../routes/auth/fak
 walletHandlers.attach(Object.assign({ app: router }, require('../routes/auth/consume_vc')));
 walletHandlers.attach(Object.assign({ app: router }, require('../routes/auth/issue_badge')));
 walletHandlers.attach(Object.assign({ app: router }, require('../routes/auth/issue_badge_asset')));
+walletHandlers.attach(Object.assign({ app: router }, require('../routes/auth/extra_params')));
 swapHandlers.attach(Object.assign({ app: router }, require('../routes/auth/pickup_swap')));
 agentHandlers.attach(Object.assign({ app: router }, require('../routes/auth/claim_profile'))); // we can reuse something here
 require('../routes/session').init(router);
