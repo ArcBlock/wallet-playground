@@ -1,3 +1,7 @@
+## 0.78.0 (March 22, 2020)
+
+- chore: add test case for all param types
+
 ## 0.77.0 (March 20, 2020)
 
 - Badge Button to VC

@@ -399,7 +399,7 @@ export default function IndexPage() {
               className="action"
               title="Consume Local Asset with Wrong Ticket Name"
               action="consume_local_asset_by_name"
-              name="Local Tickt"
+              name="Local Ticket"
             />
             <PlaygroundAction
               className="action"
@@ -571,6 +571,23 @@ export default function IndexPage() {
                 scan: 'Scan QR code to get multiple claims in sequential',
                 confirm: 'Confirm on your ABT Wallet',
                 success: 'Claims processed successfully',
+              }}
+            />
+            <AuthButton
+              button="Extra Params"
+              action="extra_params"
+              extraParams={{
+                string: 'string',
+                // object: { key: 'value' },
+                number: 1234,
+                boolean: true,
+                array: ['abcd', '1234', 'ABCD'],
+              }}
+              messages={{
+                title: 'Extra Params',
+                scan: 'Scan to see if your wallet can pass through correct extra params',
+                confirm: 'Confirm on your ABT Wallet',
+                success: 'Operation Success',
               }}
             />
           </div>
