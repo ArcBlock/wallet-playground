@@ -73,7 +73,7 @@
     lodash.get "^4.4.2"
 
 "@arcblock/did-playground@./packages/did-playground":
-  version "0.76.0"
+  version "0.78.0"
   dependencies:
     "@arcblock/did-react" "^0.72.0"
     "@arcblock/react-hooks" "^0.72.0"
@@ -8376,8 +8376,8 @@ isexe@^2.0.0:
 
 ismobilejs@^1.0.3:
   version "1.0.3"
-  resolved "https://registry.yarnpkg.com/ismobilejs/-/ismobilejs-1.0.3.tgz#69ec3faccd17dfeeadd471e70955d1e192a46eb6"
-  integrity sha512-6rTcdWK7PHIWPYlCPdTbU9eE9yzdnIQSpiH+8Ln5OqugpEszQK5KHlsjZrDae26fEhki9rPvQmsjI1q4CLuKIA==
+  resolved "https://registry.npm.taobao.org/ismobilejs/download/ismobilejs-1.0.3.tgz#69ec3faccd17dfeeadd471e70955d1e192a46eb6"
+  integrity sha1-aew/rM0X3+6t1HHnCVXR4ZKkbrY=
 
 isobject@^2.0.0:
   version "2.1.0"
