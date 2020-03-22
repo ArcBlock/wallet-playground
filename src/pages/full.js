@@ -274,7 +274,7 @@ export default function IndexPage() {
               payAmount={1}
               receiveAmount={1}
               name="Local Badge (%token.local.symbol%)"
-              svg="https://raw.githubusercontent.com/PaperHS/paperhs.github.io/master/Assets/eaglebadge_86364.svg"
+              svg="./public/static/images/badge.svg"
             />
             <PlaygroundAction
               className="action"

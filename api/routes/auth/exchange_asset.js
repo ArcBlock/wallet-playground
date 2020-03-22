@@ -3,24 +3,13 @@ const ForgeSDK = require('@arcblock/forge-sdk');
 const { AssetType } = require('@arcblock/asset-factory');
 const { toTypeInfo } = require('@arcblock/did');
 const upperFirst = require('lodash/upperFirst');
-const axios = require('axios');
-const pako = require('pako');
-const { toBase64 } = require('@arcblock/forge-util');
 
 const { wallet, localFactory: assetFactory } = require('../../libs/auth');
 const { ensureAsset, getTransferrableAssets } = require('../../libs/util');
 
 const getAssets = async ({ amount = 1, type, userPk, userDid, name, desc, start, end, bg, logo, loc, svg }) => {
   const tasks = [];
-  let svgGzip = '';
-  if (svg) {
-    try {
-      const response = await axios.get(svg);
-      svgGzip = toBase64(pako.gzip(response.data));
-    } catch (error) {
-      console.error('download.svg.error', error);
-    }
-  }
+
   for (let i = 0; i < amount; i += 1) {
     tasks.push(
       ensureAsset(assetFactory, {
@@ -28,7 +17,7 @@ const getAssets = async ({ amount = 1, type, userPk, userDid, name, desc, start,
         userDid,
         type,
         name,
-        svg: svgGzip,
+        svg,
         description: desc || name,
         location: loc || 'China',
         backgroundUrl: bg || '',

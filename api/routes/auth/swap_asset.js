@@ -1,8 +1,5 @@
 /* eslint-disable object-curly-newline */
 const ForgeSDK = require('@arcblock/forge-sdk');
-const axios = require('axios');
-const pako = require('pako');
-const { toBase64 } = require('@arcblock/forge-util');
 
 const env = require('../../libs/env');
 const { swapStorage, wallet, foreignFactory, localFactory } = require('../../libs/auth');
@@ -46,15 +43,7 @@ module.exports = {
         try {
           const offerChain = pfc === 'local' ? chains.foreign : chains.local;
           const demandChain = pfc === 'local' ? chains.local : chains.foreign;
-          let svgGzip = '';
-          if (svg) {
-            try {
-              const response = await axios.get(svg);
-              svgGzip = toBase64(pako.gzip(response.data));
-            } catch (error) {
-              console.error('download.svg.error', error);
-            }
-          }
+          
           const asset = await ensureAsset(assetFactory, {
             userPk,
             userDid,
@@ -64,7 +53,7 @@ module.exports = {
             location: loc || 'China',
             backgroundUrl: bg || '',
             logoUrl: logo || 'https://releases.arcblockio.cn/arcblock-logo.png',
-            svg: svgGzip,
+            svg,
             startTime: start || new Date(),
             endTime: end || new Date(),
           });

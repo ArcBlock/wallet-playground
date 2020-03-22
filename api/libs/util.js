@@ -1,6 +1,11 @@
 /* eslint-disable object-curly-newline */
 const ForgeSDK = require('@arcblock/forge-sdk');
 const { AssetRecipient, AssetIssuer } = require('@arcblock/asset-factory');
+const axios = require('axios');
+const fs = require('fs');
+const path = require('path');
+const pako = require('pako');
+const { toBase64 } = require('@arcblock/forge-util');
 
 const env = require('./env');
 const { wallet } = require('./auth');
@@ -99,15 +104,53 @@ const getAccountBalance = async userDid => {
 
 const getAccountStateOptions = { ignoreFields: [/\.withdrawItems/, /\.items/] };
 
+const fetchAndGzipSvg = async svg => {
+  if (!svg) return null;
+  try {
+    if (svg.indexOf('http') === 0) {
+      const response = await axios.get(svg);
+      return toBase64(pako.gzip(response.data));
+    }
+    if (fs.existsSync(svg)) {
+      return toBase64(pako.gzip(fs.readFileSync(svg, 'utf8')));
+    }
+    console.info(`dirname:${process.cwd()}`);
+    if (fs.existsSync(path.join(process.cwd(), svg))) {
+      return toBase64(pako.gzip(fs.readFileSync(path.join(process.cwd(), svg), 'utf8')));
+    }
+    throw Error('svg file is not exists');
+  } catch (error) {
+    console.error('download.svg.error', error);
+    return null;
+  }
+};
+
 const ensureAsset = async (
   factory,
-  { userPk, userDid, type, name, description, backgroundUrl, logoUrl, svg, startTime, endTime, location = 'China',badgeType = 'WalletPlaygroundAchievement' }
+  {
+    userPk,
+    userDid,
+    type,
+    name,
+    description,
+    backgroundUrl,
+    logoUrl,
+    svg,
+    startTime,
+    endTime,
+    location = 'China',
+    badgeType = 'WalletPlaygroundAchievement',
+  }
 ) => {
   const methods = {
     badge: factory.createBadge.bind(factory),
     ticket: factory.createTicket.bind(factory),
     certificate: factory.createCertificate.bind(factory),
   };
+  if (type === 'badge' && !svg) {
+    throw Error('Badge need a svg to display');
+  }
+  const gzipSvg = await fetchAndGzipSvg(svg);
   const [asset, hash] = await methods[type]({
     backgroundUrl,
     data: {
@@ -116,8 +159,8 @@ const ensureAsset = async (
       reason: description,
       logoUrl,
       location,
-      svg,
-      badgeType,
+      display: gzipSvg,
+      type: badgeType,
       issueTime: Date.now(),
       startTime,
       endTime,
@@ -144,7 +187,7 @@ const ensureAsset = async (
     description,
     backgroundUrl,
     logoUrl,
-    svg,
+    gzipSvg,
     location,
     asset,
     hash,
