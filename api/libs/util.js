@@ -101,7 +101,7 @@ const getAccountStateOptions = { ignoreFields: [/\.withdrawItems/, /\.items/] };
 
 const ensureAsset = async (
   factory,
-  { userPk, userDid, type, name, description, backgroundUrl, logoUrl, svg, startTime, endTime, location = 'China' }
+  { userPk, userDid, type, name, description, backgroundUrl, logoUrl, svg, startTime, endTime, location = 'China',badgeType = 'WalletPlaygroundAchievement' }
 ) => {
   const methods = {
     badge: factory.createBadge.bind(factory),
@@ -117,6 +117,7 @@ const ensureAsset = async (
       logoUrl,
       location,
       svg,
+      badgeType,
       issueTime: Date.now(),
       startTime,
       endTime,
