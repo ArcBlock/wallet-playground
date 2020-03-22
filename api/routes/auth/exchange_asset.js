@@ -3,12 +3,24 @@ const ForgeSDK = require('@arcblock/forge-sdk');
 const { AssetType } = require('@arcblock/asset-factory');
 const { toTypeInfo } = require('@arcblock/did');
 const upperFirst = require('lodash/upperFirst');
+const axios = require('axios');
+const pako = require('pako');
+const { toBase64 } = require('@arcblock/forge-util');
 
 const { wallet, localFactory: assetFactory } = require('../../libs/auth');
 const { ensureAsset, getTransferrableAssets } = require('../../libs/util');
 
-const getAssets = async ({ amount = 1, type, userPk, userDid, name, desc, start, end, bg, logo, loc }) => {
+const getAssets = async ({ amount = 1, type, userPk, userDid, name, desc, start, end, bg, logo, loc, svg }) => {
   const tasks = [];
+  let svgGzip = '';
+  if (svg) {
+    try {
+      const response = await axios.get(svg);
+      svgGzip = toBase64(pako.gzip(response.data));
+    } catch (error) {
+      console.error('download.svg.error', error);
+    }
+  }
   for (let i = 0; i < amount; i += 1) {
     tasks.push(
       ensureAsset(assetFactory, {
@@ -16,6 +28,7 @@ const getAssets = async ({ amount = 1, type, userPk, userDid, name, desc, start,
         userDid,
         type,
         name,
+        svg: svgGzip,
         description: desc || name,
         location: loc || 'China',
         backgroundUrl: bg || '',
@@ -32,7 +45,7 @@ const getAssets = async ({ amount = 1, type, userPk, userDid, name, desc, start,
 
 const getTransactionAssetType = type => (type === 'token' ? 'value' : 'assets');
 
-const getTransferSig = async ({ userPk, userDid, ra, rt, name, desc, start, end, bg, logo, loc, locale = 'en' }) => {
+const getTransferSig = async ({ userPk, userDid, ra, rt, name, desc, start, end, bg, logo, loc, locale = 'en', svg }) => {
   const [assetAddress] = await getAssets({
     amount: ra,
     type: rt,
@@ -45,6 +58,7 @@ const getTransferSig = async ({ userPk, userDid, ra, rt, name, desc, start, end,
     bg,
     logo,
     loc,
+    svg,
   });
 
   const description = {
@@ -59,7 +73,7 @@ const getTransferSig = async ({ userPk, userDid, ra, rt, name, desc, start, end,
   };
 };
 
-const getExchangeSig = async ({ userPk, userDid, pa, pt, ra, rt, name, desc, start, end, bg, logo, loc }) => {
+const getExchangeSig = async ({ userPk, userDid, pa, pt, ra, rt, name, desc, start, end, bg, logo, loc, svg }) => {
   let senderPayload = null;
   let receiverPayload = null;
 
@@ -78,7 +92,7 @@ const getExchangeSig = async ({ userPk, userDid, pa, pt, ra, rt, name, desc, sta
   }
 
   if (rt === 'token') {
-    receiverPayload = await ForgeSDK.fromTokenToUnit(pa);
+    receiverPayload = await ForgeSDK.fromTokenToUnit(ra);
   } else {
     receiverPayload = await getAssets({
       amount: ra,
@@ -92,6 +106,7 @@ const getExchangeSig = async ({ userPk, userDid, pa, pt, ra, rt, name, desc, sta
       bg,
       logo,
       loc,
+      svg,
     });
   }
 
@@ -180,7 +195,7 @@ module.exports = {
     signature: async ({
       userPk,
       userDid,
-      extraParams: { pa = 1, pt, ra = 1, rt, name, desc, start, end, bg, logo, loc, locale = 'en' },
+      extraParams: { pa = 1, pt, ra = 1, rt, name, desc, start, end, bg, logo, svg, loc, locale = 'en' },
     }) => {
       if (!name) {
         throw new Error('Cannot buy/sell asset without a valid name');
@@ -196,11 +211,11 @@ module.exports = {
 
       try {
         if (pt === 'token' && Number(pa) === 0) {
-          const sig = await getTransferSig({ userPk, userDid, ra, rt, name, desc, start, end, bg, logo, loc, locale });
+          const sig = await getTransferSig({ userPk, userDid, ra, rt, name, desc, start, end, bg, logo, svg, loc, locale });
           return sig;
         }
 
-        const sig = await getExchangeSig({ userPk, userDid, pa, pt, ra, rt, name, desc, start, end, bg, logo, loc });
+        const sig = await getExchangeSig({ userPk, userDid, pa, pt, ra, rt, name, desc, start, end, bg, logo, svg, loc });
         return sig;
       } catch (error) {
         console.log('exchange_asset.generate_exchange.error:');

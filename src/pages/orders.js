@@ -197,8 +197,6 @@ export default function OrdersPage() {
 }
 
 const Main = styled.main`
-  margin: 80px 0;
-
   .page-title {
     margin-bottom: 32px;
   }

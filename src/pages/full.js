@@ -1,6 +1,7 @@
 /* eslint-disable react/jsx-one-expression-per-line */
 import React, { useContext, useState, useEffect } from 'react';
 import styled from 'styled-components';
+import useBrowser from '@arcblock/react-hooks/lib/useBrowser';
 
 import Typography from '@material-ui/core/Typography';
 import WalletDownload from '@arcblock/ux/lib/Wallet/Download';
@@ -23,6 +24,7 @@ import api from '../libs/api';
 import { version } from '../../package.json';
 
 export default function IndexPage() {
+  const browser = useBrowser();
   const { session } = useContext(SessionContext);
   const [asset, setAsset] = useState(null);
 
@@ -158,6 +160,7 @@ export default function IndexPage() {
               price={0.99}
               title={`Buy Local Badge with 0.99 ${token.foreign.symbol}`}
               name="Local Badge (%token.local.symbol%)"
+              svg="https://raw.githubusercontent.com/PaperHS/paperhs.github.io/master/Assets/eaglebadge_86364.svg"
               description="This is a test badge that is on local chain"
             />
             <PlaygroundAction
@@ -206,6 +209,7 @@ export default function IndexPage() {
               title={`Buy Foreign Badge with 0.99 ${token.local.symbol}`}
               name="Foreign Badge (%token.foreign.symbol%)"
               description="This is a test badge that is on foreign chain"
+              svg="https://raw.githubusercontent.com/PaperHS/paperhs.github.io/master/Assets/eaglebadge_86364.svg"
             />
             <PlaygroundAction
               action="sell_foreign_badge_for_local_token"
@@ -270,6 +274,7 @@ export default function IndexPage() {
               payAmount={1}
               receiveAmount={1}
               name="Local Badge (%token.local.symbol%)"
+              svg="https://raw.githubusercontent.com/PaperHS/paperhs.github.io/master/Assets/eaglebadge_86364.svg"
             />
             <PlaygroundAction
               className="action"
@@ -278,6 +283,7 @@ export default function IndexPage() {
               payAmount={0}
               receiveAmount={1}
               name="Local Badge (%token.local.symbol%)"
+              svg="https://raw.githubusercontent.com/PaperHS/paperhs.github.io/master/Assets/eaglebadge_86364.svg"
             />
             <PlaygroundAction
               className="action"
@@ -286,6 +292,7 @@ export default function IndexPage() {
               payAmount={1}
               receiveAmount={1}
               name="Local Badge (%token.local.symbol%)"
+              svg="https://raw.githubusercontent.com/PaperHS/paperhs.github.io/master/Assets/eaglebadge_86364.svg"
             />
             <PlaygroundAction
               className="action"
@@ -392,7 +399,7 @@ export default function IndexPage() {
               className="action"
               title="Consume Local Asset with Wrong Ticket Name"
               action="consume_local_asset_by_name"
-              name="Local Tickt"
+              name="Local Ticket"
             />
             <PlaygroundAction
               className="action"
@@ -566,6 +573,23 @@ export default function IndexPage() {
                 success: 'Claims processed successfully',
               }}
             />
+            <AuthButton
+              button="Extra Params"
+              action="extra_params"
+              extraParams={{
+                string: 'string',
+                // object: { key: 'value' },
+                number: 1234,
+                boolean: true,
+                array: ['abcd', '1234', 'ABCD'],
+              }}
+              messages={{
+                title: 'Extra Params',
+                scan: 'Scan to see if your wallet can pass through correct extra params',
+                confirm: 'Confirm on your ABT Wallet',
+                success: 'Operation Success',
+              }}
+            />
           </div>
         </section>
         <section className="section" style={{ display: 'none' }}>
@@ -680,27 +704,27 @@ export default function IndexPage() {
             />
           </div>
         </section>
-        <section className="section">
-          <Typography component="h3" variant="h5" className="section__header" color="textPrimary" gutterBottom>
-            Do not have ABT Wallet?
-          </Typography>
-          <div className="section__content">
-            <div style={{ padding: 24, background: '#44cdc6', color: 'rgb(255, 255, 255)' }}>
-              <WalletDownload
-                layout="horizontal"
-                title="Make sure you have your phone handy with the ABT Wallet downloaded."
-              />
+        {!browser.wallet && (
+          <section className="section">
+            <Typography component="h3" variant="h5" className="section__header" color="textPrimary" gutterBottom>
+              Do not have ABT Wallet?
+            </Typography>
+            <div className="section__content">
+              <div style={{ padding: 24, background: '#44cdc6', color: 'rgb(255, 255, 255)' }}>
+                <WalletDownload
+                  layout={browser.mobile.any ? 'vertical' : 'horizontal'}
+                  title="Make sure you have your phone handy with the ABT Wallet downloaded."
+                />
+              </div>
             </div>
-          </div>
-        </section>
+          </section>
+        )}
       </Main>
     </Layout>
   );
 }
 
 const Main = styled.main`
-  margin: 40px 0 0;
-
   a {
     color: ${props => props.theme.colors.green};
     text-decoration: none;
@@ -715,7 +739,7 @@ const Main = styled.main`
   }
 
   .section {
-    margin-top: 48px;
+    margin-top: 32px;
     .section__header {
       margin-bottom: 24px;
     }
@@ -729,7 +753,11 @@ const Main = styled.main`
       .action {
         margin-bottom: 16px;
         margin-right: 32px;
-        width: 360px;
+        @media (max-width: ${props => props.theme.breakpoints.values.sm}px) {
+          margin-right: 0;
+        }
+        width: 100%;
+        max-width: 360px;
         display: block;
       }
     }

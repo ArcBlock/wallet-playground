@@ -1,6 +1,41 @@
-## 0.74.6 (March 19, 2020)
+## 0.78.0 (March 22, 2020)
 
-- add challenge & presentation
+- chore: add test case for all param types
+
+## 0.77.0 (March 20, 2020)
+
+- Badge Button to VC
+
+## 0.76.0 (March 20, 2020)
+
+- chore: text update
+
+## 0.75.4 (March 20, 2020)
+
+- chore: bump ux lib version
+
+## 0.75.3 (March 20, 2020)
+
+
+
+## 0.75.3 (March 19, 2020)
+
+
+
+## 0.75.2 (March 19, 2020)
+
+- chore: bump forge sdk version
+- feat: make download responsive
+- chore: make playground action button work in abt wallet
+
+## 0.75.1 (March 19, 2020)
+
+- fix: playground action button routes and config
+
+## 0.75.0 (March 19, 2020)
+
+- chore: polish responsive
+- chore: make things responsive
 
 ## 0.74.5 (March 17, 2020)
 

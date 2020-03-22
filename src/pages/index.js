@@ -111,8 +111,6 @@ export default function MiniPage() {
 }
 
 const Main = styled.main`
-  margin: 40px 0 0;
-
   a {
     color: ${props => props.theme.colors.green};
     text-decoration: none;
@@ -127,7 +125,7 @@ const Main = styled.main`
   }
 
   .section {
-    margin-top: 48px;
+    margin-top: 32px;
     .section__header {
       margin-bottom: 24px;
     }
@@ -141,7 +139,11 @@ const Main = styled.main`
       .action {
         margin-bottom: 16px;
         margin-right: 32px;
-        width: 360px;
+        max-width: 360px;
+        @media (max-width: ${props => props.theme.breakpoints.values.sm}px) {
+          margin-right: 0;
+        }
+        width: 100%;
         display: block;
       }
     }
