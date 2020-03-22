@@ -1,3 +1,7 @@
+## 0.79.0 (March 23, 2020)
+
+- support svg file path
+
 ## 0.78.0 (March 22, 2020)
 
 - chore: add test case for all param types
