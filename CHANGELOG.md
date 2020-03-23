@@ -1,3 +1,7 @@
+## 0.80.0 (March 23, 2020)
+
+- fix: make dep should build local dependencies
+
 ## 0.79.0 (March 23, 2020)
 
 - support svg file path
