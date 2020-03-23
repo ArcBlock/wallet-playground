@@ -2,13 +2,14 @@
 # yarn lockfile v1
 
 
-"@arcblock/asset-factory@^1.1.1":
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/@arcblock/asset-factory/-/asset-factory-1.1.1.tgz#d82308ff0c7284b223b89aa32ac239dfba3e72cd"
-  integrity sha512-V8wNFoI7O8WKC5mnnrZswUu6tp5aRxGAqIQGjEtPOHThU49KRKZw3pBr9dy7jsn/t4NtyB+1kSO108zEGAAUAw==
+"@arcblock/asset-factory@^1.1.4":
+  version "1.1.4"
+  resolved "https://registry.npm.taobao.org/@arcblock/asset-factory/download/@arcblock/asset-factory-1.1.4.tgz#333d2b5ad2900bce628336c91cd209dd93c85392"
+  integrity sha1-Mz0rWtKQC85igzbJHNIJ3ZPIU5I=
   dependencies:
     "@arcblock/forge-sdk" "^1.1.1"
     "@arcblock/forge-wallet" "^1.0.39"
+    "@arcblock/vc" "^1.1.4"
     debug "^4.1.1"
     json-stable-stringify "^1.0.1"
     lodash "^4.17.15"
@@ -55,18 +56,18 @@
   resolved "https://registry.yarnpkg.com/@arcblock/did-auth-storage/-/did-auth-storage-1.0.13.tgz#acc03e51cfcc38d52d691935b10ca421638fd494"
   integrity sha512-9nT2MYAzswSuY0WyDd8ednQWIKIxz2N+v/Zlj9xT62RXfBn/NU7Ibi51Q0MAVck97CLoSuezKUDUCo+cLBUDqg==
 
-"@arcblock/did-auth@^1.1.2":
-  version "1.1.2"
-  resolved "https://registry.yarnpkg.com/@arcblock/did-auth/-/did-auth-1.1.2.tgz#e3b0c545ebccedd142bf4ab341c9c390f5ae981a"
-  integrity sha512-qh+S55GsHevEtW1Dgx+ax0H8nIvLqUp6IhEf30JRpoRHG4QiK8EbarZJWDeDtbRrsGgXToBCLwmrDhiwePw3dw==
+"@arcblock/did-auth@^1.1.4":
+  version "1.1.4"
+  resolved "https://registry.npm.taobao.org/@arcblock/did-auth/download/@arcblock/did-auth-1.1.4.tgz#f346427b319356432a10ff8a3bc299431ad66e2c"
+  integrity sha1-80ZCezGTVkMqEP+KO8KZQxrWbiw=
   dependencies:
     "@arcblock/did" "^1.0.39"
     "@arcblock/forge-sdk" "^1.1.1"
     "@arcblock/forge-util" "^1.0.33"
     "@arcblock/forge-wallet" "^1.0.39"
     "@arcblock/mcrypto" "^1.0.39"
-    "@arcblock/swap-retriever" "^1.1.1"
-    "@arcblock/tx-util" "^1.1.1"
+    "@arcblock/swap-retriever" "^1.1.4"
+    "@arcblock/tx-util" "^1.1.4"
     axios "^0.19.0"
     debug "^4.1.1"
     json-stable-stringify "^1.0.1"
@@ -261,13 +262,13 @@
     lodash.get "^4.4.2"
     lodash.set "^4.3.2"
 
-"@arcblock/swap-retriever@^1.1.1":
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/@arcblock/swap-retriever/-/swap-retriever-1.1.1.tgz#553bddb34816cc8305d52869ce646ea4acba4559"
-  integrity sha512-dCE9OktRqsZQjfGbJiLr17jAgyO+/LbEkZD4eGuR3/FCmLZhKE/CR+IRfsPHW5mUe9SHXeSDA+bi6/ileGp7Ng==
+"@arcblock/swap-retriever@^1.1.4":
+  version "1.1.4"
+  resolved "https://registry.npm.taobao.org/@arcblock/swap-retriever/download/@arcblock/swap-retriever-1.1.4.tgz#0f2c05ecb1673970beeabefec653256e36ac6605"
+  integrity sha1-DywF7LFnOXC+6r7+xlMlbjasZgU=
   dependencies:
     "@arcblock/forge-sdk" "^1.1.1"
-    "@arcblock/tx-util" "^1.1.1"
+    "@arcblock/tx-util" "^1.1.4"
     debug "^4.1.1"
     lodash "^4.17.15"
 
@@ -284,10 +285,10 @@
   resolved "https://registry.yarnpkg.com/@arcblock/swap-storage/-/swap-storage-1.0.13.tgz#c1c5289f643933cdeff00346d88d74300dc77a6e"
   integrity sha512-K62vaQx4kqgD1Prp5k7gqhMjfXG1DwSkMYBrB8dQOe0xfBm8vnEMfeux5GZI91q+bYElHawPq5+fd1VLhA1Dvg==
 
-"@arcblock/tx-util@^1.1.1":
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/@arcblock/tx-util/-/tx-util-1.1.1.tgz#dbcdee050e962ddc75bffb82777dc35d306cf573"
-  integrity sha512-R7Lk0eVJ2EACiQYQJip2ZXWNmXOFUdXONTGb9IAjnloQUr3n8wR+XqO/NOXBfA6MqJy0WjPOGWSe6LovtWCedw==
+"@arcblock/tx-util@^1.1.4":
+  version "1.1.4"
+  resolved "https://registry.npm.taobao.org/@arcblock/tx-util/download/@arcblock/tx-util-1.1.4.tgz#f9e02cf6a68f8efb8b712b07479327502773238d"
+  integrity sha1-+eAs9qaPjvuLcSsHR5MnUCdzI40=
   dependencies:
     "@arcblock/forge-sdk" "^1.1.1"
     debug "^4.1.1"
@@ -324,10 +325,10 @@
     xterm-addon-fit "^0.2.1"
     xterm-addon-web-links "^0.2.1"
 
-"@arcblock/vc@^1.0.39":
-  version "1.0.39"
-  resolved "https://registry.yarnpkg.com/@arcblock/vc/-/vc-1.0.39.tgz#6e790b4084a0853c58ea528feb23cc838f2626bf"
-  integrity sha512-kyfUvvsb9MRR9FD0VZoKN6dVB7QQpNDY3c3orT8xwWU8jioscdaNK0oBWG2GE/RlKiPqh7jdzdDMPHhg6LfhMg==
+"@arcblock/vc@^1.1.4":
+  version "1.1.4"
+  resolved "https://registry.npm.taobao.org/@arcblock/vc/download/@arcblock/vc-1.1.4.tgz#0d1d6538345bfd3c1aba5b67305c591ae6805b2b"
+  integrity sha1-DR1lODRb/TwaultnMFxZGuaAWys=
   dependencies:
     "@arcblock/did" "^1.0.39"
     "@arcblock/forge-util" "^1.0.33"
