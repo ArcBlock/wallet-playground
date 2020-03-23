@@ -1,3 +1,7 @@
+## 0.81.0 (March 23, 2020)
+
+- fix: hide logout when in wallet webview
+
 ## 0.80.0 (March 23, 2020)
 
 - fix: make dep should build local dependencies
