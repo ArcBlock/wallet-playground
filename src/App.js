@@ -20,6 +20,10 @@ const GlobalStyle = createGlobalStyle`
     color: ${props => props.theme.colors.green};
     text-decoration: none;
   }
+  a:hover,
+  a:hover * {
+    text-decoration: none !important;
+  }
 `;
 
 export const App = () => (

@@ -36,7 +36,7 @@ export default function ProfilePage() {
               My Orders
             </Button>
             {!browser.wallet && (
-              <Button color="danger" className="button" variant="contained" onClick={onLogout}>
+              <Button color="danger" className="button" variant="contained" href="#" onClick={onLogout}>
                 Logout
               </Button>
             )}
@@ -83,10 +83,9 @@ const Main = styled.main`
 
   .button {
     margin-bottom: 32px;
-
-    &:last-of-type {
-      margin-bottom: 0;
-    }
+  }
+  .button:last-of-type {
+    margin-bottom: 0;
   }
 
   .avatar {
