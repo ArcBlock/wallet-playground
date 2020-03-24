@@ -1,3 +1,9 @@
+## 0.82.0 (March 24, 2020)
+
+- chore: bump ux lib version
+- Merge branch 'master' of github.com:ArcBlock/wallet-playground
+- chore: polish style
+
 ## 0.81.0 (March 23, 2020)
 
 - fix: hide logout when in wallet webview
