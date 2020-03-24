@@ -74,9 +74,9 @@
     lodash.get "^4.4.2"
 
 "@arcblock/did-playground@./packages/did-playground":
-  version "0.81.0"
+  version "0.82.0"
   dependencies:
-    "@arcblock/did-react" "^0.73.0"
+    "@arcblock/did-react" "^0.73.1"
     "@arcblock/react-hooks" "^0.73.0"
     "@arcblock/ux" "^0.73.0"
     "@material-ui/core" "^4.9.1"
@@ -86,10 +86,10 @@
     react-use "^13.27.0"
     styled-components "^5.0.1"
 
-"@arcblock/did-react@^0.73.0":
-  version "0.73.0"
-  resolved "https://registry.npm.taobao.org/@arcblock/did-react/download/@arcblock/did-react-0.73.0.tgz#484d0395cfcf7468e3815ab92681443c0b62d0ec"
-  integrity sha1-SE0Dlc/PdGjjgVq5JoFEPAti0Ow=
+"@arcblock/did-react@^0.73.1":
+  version "0.73.1"
+  resolved "https://registry.yarnpkg.com/@arcblock/did-react/-/did-react-0.73.1.tgz#8a62402b67e6429cee47af0b04d19f3fbd611110"
+  integrity sha512-C0uxuSk41dukvGGRuE6m0U+mdMAL0TiC/5WCu3lUJCIBI4KSQetUAbnUOmxY2k0tXj1Nxs9keDHmZnPedbQdTA==
   dependencies:
     "@arcblock/event-client" "^1.0.23"
     "@arcblock/react-hooks" "^0.73.0"
