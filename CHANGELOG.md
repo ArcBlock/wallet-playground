@@ -1,3 +1,7 @@
+## 0.83.0 (March 24, 2020)
+
+- chore: bump ux lib version
+
 ## 0.82.0 (March 24, 2020)
 
 - chore: bump ux lib version
