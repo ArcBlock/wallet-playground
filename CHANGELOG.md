@@ -1,6 +1,28 @@
-## 0.80.0 (March 25, 2020)
+## 0.85.0 (March 25, 2020)
 
 - add preview when signature
+
+## 0.84.0 (March 25, 2020)
+
+
+
+## 0.83.0 (March 24, 2020)
+
+- chore: bump ux lib version
+
+## 0.82.0 (March 24, 2020)
+
+- chore: bump ux lib version
+- Merge branch 'master' of github.com:ArcBlock/wallet-playground
+- chore: polish style
+
+## 0.81.0 (March 23, 2020)
+
+- fix: hide logout when in wallet webview
+
+## 0.80.0 (March 23, 2020)
+
+- fix: make dep should build local dependencies
 
 ## 0.79.0 (March 23, 2020)
 

@@ -5,7 +5,6 @@ VERSION=$(strip $(shell cat version))
 
 build: init
 	@echo "Building the software..."
-	@cd packages/did-playground && yarn link
 	@yarn link @arcblock/did-playground
 	@yarn build
 
@@ -22,7 +21,8 @@ install:
 dep:
 	@echo "Install dependencies required for this repo..."
 	@lerna bootstrap
-	@lerna run build --scope @arcblock/*
+	@cd packages/did-playground && yarn build && yarn link
+	@yarn link @arcblock/did-playground
 
 pre-build: install dep
 	@echo "Running scripts before the build..."
