@@ -1,3 +1,7 @@
+## 0.80.0 (March 25, 2020)
+
+- add preview when signature
+
 ## 0.79.0 (March 23, 2020)
 
 - support svg file path
