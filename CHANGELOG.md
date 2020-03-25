@@ -1,3 +1,7 @@
+## 0.85.0 (March 25, 2020)
+
+- add preview when signature
+
 ## 0.84.0 (March 25, 2020)
 
 

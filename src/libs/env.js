@@ -40,4 +40,9 @@ module.exports = {
     process.env.FN_API_PREFIX ||
     process.env.API_PREFIX ||
     process.env.apiPrefix,
+  trustedIssuers:
+    process.env.TRUSTED_ISSUERS ||
+    process.env.GATSBY_TRUSTED_ISSUERS ||
+    process.env.REACT_APP_TRUSTED_ISSUERS ||
+    process.env.trustedIssuers,
 };

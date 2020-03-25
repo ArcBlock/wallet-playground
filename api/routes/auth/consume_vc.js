@@ -5,9 +5,9 @@ const stringify = require('json-stable-stringify');
 const { fromBase64, fromBase58 } = require('@arcblock/forge-util');
 
 const cloneDeep = require('lodash/cloneDeep');
-
 const { verify } = require('@arcblock/vc');
 const { types, getHasher } = require('@arcblock/mcrypto');
+const env = require('../../libs/env');
 const { wallet } = require('../../libs/auth');
 
 module.exports = {
@@ -19,10 +19,11 @@ module.exports = {
     }),
     verifiableCredential: async () => {
       const w = ForgeSDK.Wallet.fromJSON(wallet);
+      const trustedIssuers = (env.trustedIssuers || 'zNKrLtPXN5ur9qMkwKWMYNzGi4D6XjWqTEjQ').split(',').concat(w.toAddress());
       return {
         description: 'Please provide your vc which proves your information',
         item: 'EmailVerificationCredential',
-        trustedIssuers: [w.toAddress(), 'zNKmAZ88dywkBw3mtCf2UCFpfreaZSMMWkyi'],
+        trustedIssuers,
       };
     },
   },
