@@ -35,10 +35,7 @@ const netlifyPrefix = '/.netlify/functions/app';
 const isRestricted = process.env.APP_RESTRICTED_DECLARE && JSON.parse(process.env.APP_RESTRICTED_DECLARE);
 const isNetlify = process.env.NETLIFY && JSON.parse(process.env.NETLIFY);
 
-let icon = 'https://releases.arcblockio.cn/dapps/playground/logo.jpg';
-if (process.env.STAGING && JSON.parse(process.env.STAGING)) {
-  icon = 'https://releases.arcblockio.cn/playground-staging.png';
-}
+const icon = 'https://releases.arcblockio.cn/dapps/labs.png';
 const walletAuth = new WalletAuthenticator({
   wallet,
   baseUrl: isNetlify ? env.baseUrl.replace('/.netlify/functions/app', '') : env.baseUrl,
