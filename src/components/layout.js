@@ -36,7 +36,7 @@ export default function Layout({ title, children, contentOnly }) {
   links.push({ url: 'https://github.com/ArcBlock/wallet-playground', title: 'GitHub' });
 
   return (
-    <BaseLayout title={title} brand={env.appName} links={links} contentOnly={contentOnly}>
+    <BaseLayout title={title} brand={env.appName} links={links} contentOnly={contentOnly} baseUrl={env.baseUrl}>
       {children}
     </BaseLayout>
   );
