@@ -3,7 +3,7 @@ const ForgeSDK = require('@arcblock/forge-sdk');
 const ForgeWallet = require('@arcblock/forge-wallet');
 const { create } = require('@arcblock/vc');
 const { toTypeInfo } = require('@arcblock/did');
-
+const { UUID } = require('@arcblock/forge-util');
 
 const { wallet } = require('../../libs/auth');
 
@@ -14,7 +14,6 @@ let badgeIndex = 0;
 
 const ensureAsset = async (userPk, userDid) => {
   const svg = badgeArray[badgeIndex % 10];
-  badgeIndex += 1;
   const vc = create({
     type: 'WalletPlaygroundAchievement',
     issuer: {
@@ -41,24 +40,27 @@ const ensureAsset = async (userPk, userDid) => {
     },
   };
   asset.address = ForgeSDK.Util.toAssetAddress(asset);
-  const hash = await ForgeSDK.sendCreateAssetTx(
-    {
-      tx: { itx: asset },
-      wallet: w,
-    }
-  );
+  const hash = await ForgeSDK.sendCreateAssetTx({
+    tx: { itx: asset },
+    wallet: w,
+  });
   return [asset, hash];
 };
 
 module.exports = {
   action: 'issue_badge_asset',
   claims: {
-    signature: async ({ userDid, userPk }) => {
-      const [asset] = await ensureAsset(userPk, userDid);
+    signature: async (userPk, userDid) => {
+      badgeIndex += 1;
+      ensureAsset(userPk, userDid);
       return {
-        description: `签名该文本，你将获得 asset ${asset.address}`,
-        data: JSON.stringify({ asset: asset.address, userDid }, null, 2),
+        description: '签名该文本，你将获得如下徽章',
+        data: UUID(),
         type: 'mime:text/plain',
+        display: JSON.stringify({
+          type: 'svg_gzipped',
+          content: badgeArray[badgeIndex % 10],
+        }),
       };
     },
   },
