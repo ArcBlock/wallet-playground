@@ -642,10 +642,9 @@ export default function IndexPage() {
               variant="contained"
               color="primary"
               size="large"
-              className="action"
-              onClick={() => {
-                window.open('https://did-kyc.netlify.com/', '_blank');
-              }}>
+              href="https://kyc.didconnect.io/"
+              target="_blank"
+              className="action">
               Apply for VC
             </Button>
             <AuthButton
