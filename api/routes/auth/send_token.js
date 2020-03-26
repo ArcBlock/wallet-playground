@@ -68,10 +68,10 @@ module.exports = {
         { conn: chain === 'local' ? env.chainId : env.assetChainId }
       );
 
-      console.log('send_token.onAuth', { claims, userDid, hash });
+      logger.info('send_token.onAuth', { claims, userDid, hash });
       return { hash, tx: claim.origin };
     } catch (err) {
-      console.log('send_token.onAuth.error', err);
+      logger.info('send_token.onAuth.error', err);
       const errors = {
         en: 'Send token failed!',
         zh: '支付失败',

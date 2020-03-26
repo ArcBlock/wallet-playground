@@ -17,6 +17,7 @@ module.exports = {
     'react/forbid-prop-types': 'off',
     'react/no-unescaped-entities': 'off',
     'react/sort-comp': 'off',
+    'object-curly-newline': 'off',
     'class-methods-use-this': 'off',
     'max-len': [
       'error',

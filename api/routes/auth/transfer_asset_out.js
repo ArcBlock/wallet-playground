@@ -25,7 +25,7 @@ module.exports = {
   },
   onAuth: async ({ claims, userDid, extraParams: { locale } }) => {
     try {
-      console.log('transfer_asset_out.onAuth', { claims, userDid });
+      logger.info('transfer_asset_out.onAuth', { claims, userDid });
       const claim = claims.find(x => x.type === 'signature');
       const tx = ForgeSDK.decodeTx(claim.origin);
       const user = fromAddress(userDid);
@@ -39,10 +39,10 @@ module.exports = {
         { conn: env.chainId }
       );
 
-      console.log('transfer_asset_out.onAuth', hash);
+      logger.info('transfer_asset_out.onAuth', hash);
       return { hash, tx: claim.origin };
     } catch (err) {
-      console.log('transfer_asset_out.onAuth.error', err);
+      logger.info('transfer_asset_out.onAuth.error', err);
       const errors = {
         en: 'Payment failed!',
         zh: '支付失败',

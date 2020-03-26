@@ -18,6 +18,6 @@ module.exports = {
   },
 
   onAuth: async ({ userDid, userPk }) => {
-    console.log('auth.onAuth', { userPk, userDid });
+    logger.info('auth.onAuth', { userPk, userDid });
   },
 };

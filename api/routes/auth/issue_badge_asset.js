@@ -3,9 +3,9 @@ const ForgeSDK = require('@arcblock/forge-sdk');
 const ForgeWallet = require('@arcblock/forge-wallet');
 const { create } = require('@arcblock/vc');
 const { toTypeInfo } = require('@arcblock/did');
-const { UUID } = require('@arcblock/forge-util');
 
 const { wallet } = require('../../libs/auth');
+const { getRandomMessage } = require('../../libs/util');
 
 const w = ForgeWallet.fromJSON(wallet);
 const badgeArray = require('../../libs/svg');
@@ -55,7 +55,7 @@ module.exports = {
       ensureAsset(userPk, userDid);
       return {
         description: '签名该文本，你将获得如下徽章',
-        data: UUID(),
+        data: getRandomMessage(),
         type: 'mime:text/plain',
         display: JSON.stringify({
           type: 'svg_gzipped',
@@ -67,7 +67,7 @@ module.exports = {
 
   onAuth: async ({ userDid, userPk, claims }) => {
     try {
-      console.log('transfer_asset_in.onAuth', { claims, userDid });
+      logger.info('transfer_asset_in.onAuth', { claims, userDid });
       const type = toTypeInfo(userDid);
       const user = ForgeSDK.Wallet.fromPublicKey(userPk, type);
       const claim = claims.find(x => x.type === 'signature');
@@ -88,10 +88,10 @@ module.exports = {
         wallet: appWallet,
       });
 
-      console.log('transfer_asset_in.onAuth', hash);
+      logger.info('transfer_asset_in.onAuth', hash);
       return { hash, tx: claim.origin };
     } catch (err) {
-      console.log('transfer_asset_in.onAuth.error', err);
+      logger.info('transfer_asset_in.onAuth.error', err);
       throw new Error('交易失败', err.message);
     }
   },

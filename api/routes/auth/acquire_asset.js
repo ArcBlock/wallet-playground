@@ -59,8 +59,8 @@ module.exports = {
         pk: userPk,
       };
 
-      console.log('acquire asset data:');
-      console.log(JSON.stringify(data, null, 2));
+      logger.info('acquire asset data:');
+      logger.info(JSON.stringify(data, null, 2));
       return {
         type: 'AcquireAssetTx',
         data,
@@ -69,14 +69,14 @@ module.exports = {
   },
   onAuth: async ({ claims, userDid }) => {
     const claim = claims.find(x => x.type === 'signature');
-    console.log('did_auth_acquire.auth.claim', claim);
+    logger.info('did_auth_acquire.auth.claim', claim);
 
     const tx = ForgeSDK.decodeTx(claim.origin);
     tx.signature = claim.sig;
 
-    console.log('did_auth_acquire.auth.tx', tx);
+    logger.info('did_auth_acquire.auth.tx', tx);
     const hash = await ForgeSDK.sendAcquireAssetTx({ tx, wallet: fromAddress(userDid) });
-    console.log('hash:', hash);
+    logger.info('hash:', hash);
     return { hash, tx: claim.origin };
   },
 };

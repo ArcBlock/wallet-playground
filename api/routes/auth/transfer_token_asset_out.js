@@ -21,8 +21,8 @@ module.exports = {
       }
 
       const { state } = await ForgeSDK.getForgeState({ conn: env.assetChainId });
-      console.log('transfer to:', wallet.address);
-      console.log('asset:', asset.address);
+      logger.info('transfer to:', wallet.address);
+      logger.info('asset:', asset.address);
       return {
         type: 'TransferTx',
         data: {
@@ -38,7 +38,7 @@ module.exports = {
   },
   onAuth: async ({ claims, userDid }) => {
     try {
-      console.log('transfer_asset_token_out.onAuth', { claims, userDid });
+      logger.info('transfer_asset_token_out.onAuth', { claims, userDid });
       const claim = claims.find(({ type }) => type === 'signature');
       const tx = ForgeSDK.decodeTx(claim.origin);
       const user = fromAddress(userDid);
@@ -49,10 +49,10 @@ module.exports = {
         signature: claim.sig,
       });
 
-      console.log('transfer_asset_token_out.onAuth.hash', hash);
+      logger.info('transfer_asset_token_out.onAuth.hash', hash);
       return { hash, tx: claim.origin };
     } catch (err) {
-      console.log('transfer_asset_token_out.onAuth.error', err);
+      logger.info('transfer_asset_token_out.onAuth.error', err);
       throw new Error('交易失败', err.message);
     }
   },

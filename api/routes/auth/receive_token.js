@@ -1,9 +1,20 @@
-/* eslint-disable no-console */
+const logger = require('winston');
 const ForgeSDK = require('@arcblock/forge-sdk');
 const { toTypeInfo } = require('@arcblock/did');
 const { wallet } = require('../../libs/auth');
-const { getTokenInfo } = require('../../libs/util');
+const { getTokenInfo, getRandomMessage } = require('../../libs/util');
 const env = require('../../libs/env');
+
+const messages = {
+  amountInvalid: {
+    en: 'Invalid amount param for receive token playground action',
+    zh: 'amount 参数不正确',
+  },
+  signatureInvalid: {
+    en: 'Signature invalid',
+    zh: 'signature 参数不正确',
+  },
+};
 
 module.exports = {
   action: 'receive_token',
@@ -19,25 +30,18 @@ module.exports = {
       }),
     },
     {
-      signature: async ({ userDid, extraParams: { locale, chain, amount } }) => {
+      signature: async ({ extraParams: { locale, chain, amount } }) => {
         const token = await getTokenInfo();
-        if (amount === 'random') {
-          // eslint-disable-next-line no-param-reassign
-          amount = (Math.random() * 10).toFixed(6);
-        }
-
-        if (!Number(amount)) {
-          throw new Error('Invalid amount param for receive token playground action');
-        }
-
         const description = {
-          en: `Sign this text to get ${amount} ${token[chain].symbol} for test`,
-          zh: `签名该文本，你将获得 ${amount} 个测试用的 ${token[chain].symbol}`,
+          en: `Sign following text to get ${amount} ${token[chain].symbol} for test`,
+          zh: `签名如下随机串，以获得测试用的 ${token[chain].symbol}`,
         };
+
+        const random = getRandomMessage();
 
         return {
           description: description[locale],
-          data: JSON.stringify({ amount, userDid }, null, 2),
+          data: random,
           type: 'mime:text/plain',
           chainInfo: {
             host: chain === 'local' ? env.chainHost : env.assetChainHost,
@@ -49,7 +53,16 @@ module.exports = {
   ],
 
   // eslint-disable-next-line object-curly-newline
-  onAuth: async ({ userDid, userPk, claims, extraParams: { chain } }) => {
+  onAuth: async ({ userDid, userPk, claims, extraParams: { chain, locale, amount } }) => {
+    if (amount === 'random') {
+      // eslint-disable-next-line no-param-reassign
+      amount = (Math.random() * 10).toFixed(6);
+    }
+
+    if (!Number(amount)) {
+      throw new Error(messages.amountInvalid[locale]);
+    }
+
     try {
       const type = toTypeInfo(userDid);
       const user = ForgeSDK.Wallet.fromPublicKey(userPk, type);
@@ -60,19 +73,18 @@ module.exports = {
       }
 
       const app = ForgeSDK.Wallet.fromJSON(wallet);
-      const data = JSON.parse(ForgeSDK.Util.fromBase58(claim.origin));
       const hash = await ForgeSDK.transfer(
         {
-          to: data.userDid,
-          token: data.amount,
+          to: userDid,
+          token: amount,
           wallet: app,
         },
         { conn: chain === 'local' ? env.chainId : env.assetChainId }
       );
-      console.log('receive_token.onAuth', hash, data);
+      logger.info('receive_token.onAuth', hash, amount);
       return { hash };
     } catch (err) {
-      console.error('receive_token.onAuth.error', err);
+      logger.error('receive_token.onAuth.error', err);
       throw new Error(`Receive token failed ${err.message}`);
     }
   },

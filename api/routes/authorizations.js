@@ -34,7 +34,7 @@ module.exports = {
         },
         { conn: env.chainId }
       );
-      console.log('application.declare', { ownerDid, authorizeId, hash });
+      logger.info('application.declare', { ownerDid, authorizeId, hash });
 
       // Sign the token
       const now = Math.floor(Date.now() / 1000);
@@ -61,7 +61,7 @@ module.exports = {
         chainHost: env.chainHost,
         certificateContent: token,
       });
-      console.log('authorization.create', authorization);
+      logger.info('authorization.create', authorization);
 
       res.jsonp(authorization);
     });

@@ -74,7 +74,7 @@ module.exports.initialize = app => {
         ].join(' ');
 
         if (isNetlify) {
-          console.log(log);
+          logger.info(log);
         }
 
         return log;

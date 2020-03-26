@@ -4,8 +4,8 @@ const ForgeWallet = require('@arcblock/forge-wallet');
 const { create } = require('@arcblock/vc');
 const { toTypeInfo } = require('@arcblock/did');
 
-const { UUID } = require('@arcblock/forge-util');
 const { wallet } = require('../../libs/auth');
+const { getRandomMessage } = require('../../libs/util');
 
 const badgeArray = require('../../libs/svg');
 
@@ -14,17 +14,15 @@ let index = 0;
 module.exports = {
   action: 'issue_badge',
   claims: {
-    signature: async () => {
-      return {
-        description: '签名该文本，你将获得如下徽章',
-        data: UUID(),
-        type: 'mime:text/plain',
-        display: JSON.stringify({
-          type: 'svg_gzipped',
-          content: badgeArray[index % 10],
-        }),
-      };
-    },
+    signature: () => ({
+      description: '签名该文本，你将获得如下徽章',
+      data: getRandomMessage(),
+      type: 'mime:text/plain',
+      display: JSON.stringify({
+        type: 'svg_gzipped',
+        content: badgeArray[index % 10],
+      }),
+    }),
   },
 
   onAuth: async ({ userDid, userPk, claims }) => {

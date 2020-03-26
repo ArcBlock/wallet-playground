@@ -1,6 +1,4 @@
-/* eslint-disable object-curly-newline */
-/* eslint-disable no-console */
-
+const { getRandomMessage } = require('../../libs/util');
 module.exports = {
   action: 'claim_multiple',
   claims: {
@@ -20,9 +18,9 @@ module.exports = {
     ],
     signText: [
       'signature',
-      ({ userDid, userPk }) => ({
+      () => ({
         type: 'mime:text/plain',
-        data: JSON.stringify({ userDid, userPk, random: Math.random() }, null, 2),
+        data: getRandomMessage(),
         description: 'Please sign the text',
       }),
     ],
@@ -44,7 +42,7 @@ module.exports = {
   },
 
   onAuth: async ({ userDid, userPk, claims, step }) => {
-    console.log('claim.multiStep.onAuth', { step, userPk, userDid, claims });
+    logger.info('claim.multiStep.onAuth', { step, userPk, userDid, claims });
     // const type = toTypeInfo(userDid);
     // const user = ForgeSDK.Wallet.fromPublicKey(userPk, type);
     // const claim = claims.find(x => x.type === 'signature');

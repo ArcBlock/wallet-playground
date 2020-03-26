@@ -4,13 +4,13 @@ module.exports = {
   action: 'timeout',
   claims: {
     profile: async ({ extraParams: { stage } }) => {
-      console.log('timeout.start', stage);
+      logger.info('timeout.start', stage);
 
       if (stage === 'request') {
         await sleep(25000);
       }
 
-      console.log('timeout.end', stage);
+      logger.info('timeout.end', stage);
       return {
         description: 'Please provide your full profile',
         fields: ['fullName', 'email'],

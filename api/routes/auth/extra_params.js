@@ -11,7 +11,7 @@ module.exports = {
   action: 'extra_params',
   claims: {
     profile: ({ extraParams }) => {
-      console.log('extraParams', extraParams);
+      logger.info('extraParams', extraParams);
       if (extraParams.string !== params.string) {
         throw new Error('Your wallet is not handling string params correctly');
       }

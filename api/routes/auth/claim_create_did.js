@@ -2,8 +2,9 @@
 const ForgeSDK = require('@arcblock/forge-sdk');
 const { toTypeInfo } = require('@arcblock/did');
 const { types } = require('@arcblock/mcrypto');
+
 const { wallet } = require('../../libs/auth');
-const { getAccountStateOptions } = require('../../libs/util');
+const { getAccountStateOptions, getRandomMessage } = require('../../libs/util');
 const { User } = require('../../models');
 
 module.exports = {
@@ -26,10 +27,10 @@ module.exports = {
       },
     },
     {
-      signature: async ({ userDid, userPk }) => {
+      signature: () => {
         const params = {
           type: 'mime:text/plain',
-          data: JSON.stringify({ userDid, userPk }, null, 2),
+          data: getRandomMessage(),
         };
 
         return Object.assign({ description: 'Please sign the text' }, params);
@@ -40,7 +41,7 @@ module.exports = {
   // eslint-disable-next-line object-curly-newline
   onAuth: async ({ userDid, userPk, sessionDid, claims }) => {
     const claim = claims.find(x => x.type === 'signature');
-    console.log('claim.create_did.onAuth', { userPk, userDid, claim });
+    logger.info('claim.create_did.onAuth', { userPk, userDid, claim });
 
     // 1. we need to ensure that the wallet is returning expected did type
     const type = toTypeInfo(userDid);

@@ -69,7 +69,7 @@ module.exports = {
         throw new Error('You have no matching asset to consume!');
       }
 
-      console.log(`about to consume ${type}`, asset);
+      logger.info(`about to consume ${type}`, asset);
       const tx = await ForgeSDK.signConsumeAssetTx(
         {
           tx: { itx: { issuer: wallet.address, address: asset.address } },
@@ -104,7 +104,7 @@ module.exports = {
   onAuth: async ({ claims, userDid, extraParams: { pfc } }) => {
     try {
       const claim = claims.find(x => x.type === 'signature');
-      console.log('consume_asset.auth.claim', claim);
+      logger.info('consume_asset.auth.claim', claim);
 
       const tx = ForgeSDK.decodeTx(claim.origin);
       const signer = tx.signaturesList.find(x => x.signer === userDid);
@@ -113,12 +113,12 @@ module.exports = {
       }
 
       signer.signature = claim.sig;
-      console.log('consume_asset.auth.tx', tx);
+      logger.info('consume_asset.auth.tx', tx);
       const hash = await ForgeSDK.sendConsumeAssetTx({ tx, wallet: app }, { conn: getChainConnection(pfc) });
-      console.log('hash:', hash);
+      logger.info('hash:', hash);
       return { hash, tx: claim.origin };
     } catch (err) {
-      console.log(err.errors);
+      logger.info(err.errors);
       throw err;
     }
   },

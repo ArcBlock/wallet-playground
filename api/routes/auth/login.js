@@ -22,12 +22,12 @@ module.exports = {
       const profile = claims.find(x => x.type === 'profile');
       const exist = await User.findOne({ did: userDid });
       if (exist) {
-        console.log('update user', userDid, JSON.stringify(profile));
+        logger.info('update user', userDid, JSON.stringify(profile));
         exist.name = profile.fullName;
         exist.email = profile.email;
         await exist.save();
       } else {
-        console.log('create user', userDid, JSON.stringify(profile));
+        logger.info('create user', userDid, JSON.stringify(profile));
         const user = new User({
           did: userDid,
           name: profile.fullName,
@@ -39,7 +39,7 @@ module.exports = {
       // Generate new session token that client can save to localStorage
       const sessionToken = await login(userDid);
       await storage.update(token, { did: userDid, sessionToken });
-      console.error('login.onAuth.login', { userDid, sessionToken });
+      logger.error('login.onAuth.login', { userDid, sessionToken });
 
       return {
         callbackParams: {
@@ -47,7 +47,7 @@ module.exports = {
         },
       };
     } catch (err) {
-      console.error('login.onAuth.error', err);
+      logger.error('login.onAuth.error', err);
     }
   },
 };

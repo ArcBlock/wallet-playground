@@ -35,7 +35,7 @@ module.exports = {
           };
 
           const res = await swapStorage.finalize(tid, payload);
-          console.log('swap.finalize', res);
+          logger.info('swap.finalize', res);
           const swap = await swapStorage.read(tid);
 
           return {
@@ -44,7 +44,7 @@ module.exports = {
             ...swap,
           };
         } catch (err) {
-          console.error(err);
+          logger.error(err);
           throw new Error('换币失败，请重试');
         }
       }
@@ -68,7 +68,7 @@ module.exports = {
           };
 
           const res = await swapStorage.finalize(tid, payload);
-          console.log('swap.finalize', res);
+          logger.info('swap.finalize', res);
           const swap = await swapStorage.read(tid);
 
           return {
@@ -77,7 +77,7 @@ module.exports = {
             ...swap,
           };
         } catch (err) {
-          console.error(err);
+          logger.error(err);
           throw new Error('换币失败，请重试');
         }
       }

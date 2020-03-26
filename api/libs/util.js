@@ -1,10 +1,12 @@
 /* eslint-disable object-curly-newline */
 const ForgeSDK = require('@arcblock/forge-sdk');
+const Mcrypto = require('@arcblock/mcrypto');
 const { AssetRecipient, AssetIssuer } = require('@arcblock/asset-factory');
 const axios = require('axios');
 const fs = require('fs');
 const path = require('path');
 const pako = require('pako');
+const logger = require('winston');
 const { toBase64 } = require('@arcblock/forge-util');
 
 const env = require('./env');
@@ -114,13 +116,12 @@ const fetchAndGzipSvg = async svg => {
     if (fs.existsSync(svg)) {
       return toBase64(pako.gzip(fs.readFileSync(svg, 'utf8')));
     }
-    console.info(`dirname:${process.cwd()}`);
     if (fs.existsSync(path.join(process.cwd(), svg))) {
       return toBase64(pako.gzip(fs.readFileSync(path.join(process.cwd(), svg), 'utf8')));
     }
     throw Error('svg file is not exists');
   } catch (error) {
-    console.error('download.svg.error', error);
+    logger.error('download.svg.error', error);
     return null;
   }
 };
@@ -178,8 +179,7 @@ const ensureAsset = async (
     },
   });
 
-  // eslint-disable-next-line no-console
-  console.log('ensureAsset', {
+  logger.info('ensureAsset', {
     userPk,
     userDid,
     type,
@@ -196,10 +196,16 @@ const ensureAsset = async (
   return asset;
 };
 
+const getRandomMessage = (len = 16) => {
+  const hex = Mcrypto.getRandomBytes(len);
+  return hex.replace(/^0x/, '').toUpperCase();
+};
+
 module.exports = {
   getTransferrableAssets,
   getTokenInfo,
   getAccountBalance,
   getAccountStateOptions,
+  getRandomMessage,
   ensureAsset,
 };

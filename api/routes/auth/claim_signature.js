@@ -3,6 +3,8 @@ const ForgeSDK = require('@arcblock/forge-sdk');
 const Mcrypto = require('@arcblock/mcrypto');
 const { toTypeInfo } = require('@arcblock/did');
 
+const { getRandomMessage } = require('../../libs/util');
+
 const data = 'abcdefghijklmnopqrstuvwxyz'.repeat(32);
 const hasher = Mcrypto.getHasher(Mcrypto.types.HashType.SHA3);
 
@@ -10,7 +12,6 @@ module.exports = {
   action: 'claim_signature',
   claims: {
     signature: async ({ userDid, userPk, extraParams: { type } }) => {
-
       const params = {
         transaction: {
           type: 'DeclareTx',
@@ -21,7 +22,7 @@ module.exports = {
 
         text: {
           type: 'mime:text/plain',
-          data: JSON.stringify({ userDid, userPk, random: Math.random() }, null, 2),
+          data: getRandomMessage(),
         },
 
         html: {
@@ -57,7 +58,7 @@ module.exports = {
     const user = ForgeSDK.Wallet.fromPublicKey(userPk, type);
     const claim = claims.find(x => x.type === 'signature');
 
-    console.log('claim.signature.onAuth', { userPk, userDid, claim });
+    logger.info('claim.signature.onAuth', { userPk, userDid, claim });
 
     if (claim.origin) {
       if (user.verify(claim.origin, claim.sig) === false) {

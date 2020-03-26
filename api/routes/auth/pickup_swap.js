@@ -6,7 +6,7 @@ module.exports = {
   claims: {
     swap: async ({ extraParams: { tid } }) => {
       const swap = await swapStorage.read(tid);
-      console.log('pickup_swap', swap);
+      logger.info('pickup_swap', swap);
 
       const [{ info: offerChainInfo }, { info: demandChainInfo }] = await Promise.all([
         ForgeSDK.getChainInfo({ conn: swap.offerChainId }),

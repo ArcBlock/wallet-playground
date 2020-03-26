@@ -1,4 +1,5 @@
 /* eslint-disable object-curly-newline */
+const logger = require('winston');
 const ForgeSDK = require('@arcblock/forge-sdk');
 
 const env = require('../../libs/env');
@@ -43,7 +44,7 @@ module.exports = {
         try {
           const offerChain = pfc === 'local' ? chains.foreign : chains.local;
           const demandChain = pfc === 'local' ? chains.local : chains.foreign;
-          
+
           const asset = await ensureAsset(assetFactory, {
             userPk,
             userDid,
@@ -74,7 +75,7 @@ module.exports = {
           };
 
           const res = await swapStorage.finalize(tid, payload);
-          console.log(`${type}.buy.finalize`, res);
+          logger.info(`${type}.buy.finalize`, res);
           const swap = await swapStorage.read(tid);
 
           return {
@@ -83,7 +84,7 @@ module.exports = {
             ...swap,
           };
         } catch (err) {
-          console.error('asset create failed', err);
+          logger.error('asset create failed', err);
           throw new Error('asset create failed');
         }
       }
@@ -116,7 +117,7 @@ module.exports = {
         };
 
         const res = await swapStorage.finalize(tid, payload);
-        console.log(`${type}.sell.from.${pfc}.finalize`, res);
+        logger.info(`${type}.sell.from.${pfc}.finalize`, res);
         const swap = await swapStorage.read(tid);
 
         return {
@@ -131,6 +132,6 @@ module.exports = {
   },
 
   onAuth: async ({ claims, userDid, extraParams: { action, type, pfc } }) => {
-    console.log(`${type}.${action}.from.${pfc}.onAuth`, { userDid, claims });
+    logger.info(`${type}.${action}.from.${pfc}.onAuth`, { userDid, claims });
   },
 };

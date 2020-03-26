@@ -1,7 +1,8 @@
-/* eslint-disable no-console */
 const ForgeSDK = require('@arcblock/forge-sdk');
 const { toTypeInfo } = require('@arcblock/did');
+
 const { User } = require('../../models');
+const { getRandomMessage } = require('../../libs/util');
 
 module.exports = {
   action: 'claim_target',
@@ -26,10 +27,10 @@ module.exports = {
       },
     },
     {
-      signature: async ({ userDid, userPk }) => {
+      signature: () => {
         const params = {
           type: 'mime:text/plain',
-          data: JSON.stringify({ userDid, userPk }, null, 2),
+          data: getRandomMessage(),
         };
 
         return Object.assign({ description: 'Please sign the text to prove that you own the did' }, params);
@@ -39,7 +40,7 @@ module.exports = {
 
   onAuth: async ({ userDid, userPk, sessionDid, claims }) => {
     const claim = claims.find(x => x.type === 'signature');
-    console.log('claim.create_did.onAuth', { userPk, userDid, claim });
+    logger.info('claim.create_did.onAuth', { userPk, userDid, claim });
 
     const user = await User.findOne({ did: sessionDid });
     if (!user) {

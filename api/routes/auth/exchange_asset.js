@@ -1,4 +1,5 @@
-/* eslint-disable no-console */
+/* eslint-disable object-curly-newline */
+const logger = require('winston');
 const ForgeSDK = require('@arcblock/forge-sdk');
 const { AssetType } = require('@arcblock/asset-factory');
 const { toTypeInfo } = require('@arcblock/did');
@@ -34,7 +35,21 @@ const getAssets = async ({ amount = 1, type, userPk, userDid, name, desc, start,
 
 const getTransactionAssetType = type => (type === 'token' ? 'value' : 'assets');
 
-const getTransferSig = async ({ userPk, userDid, ra, rt, name, desc, start, end, bg, logo, loc, locale = 'en', svg }) => {
+const getTransferSig = async ({
+  userPk,
+  userDid,
+  ra,
+  rt,
+  name,
+  desc,
+  start,
+  end,
+  bg,
+  logo,
+  loc,
+  locale = 'en',
+  svg,
+}) => {
   const [assetAddress] = await getAssets({
     amount: ra,
     type: rt,
@@ -57,7 +72,7 @@ const getTransferSig = async ({ userPk, userDid, ra, rt, name, desc, start, end,
 
   return {
     description: description[locale],
-    data: JSON.stringify({ asset: assetAddress, userDid }, null, 2),
+    data: JSON.stringify(assetAddress),
     type: 'mime:text/plain',
   };
 };
@@ -119,7 +134,7 @@ const getExchangeSig = async ({ userPk, userDid, pa, pt, ra, rt, name, desc, sta
     signer: userDid,
   });
 
-  console.log('exchange.claims.signed', tx);
+  logger.info('exchange.claims.signed', tx);
 
   return {
     type: 'ExchangeTx',
@@ -130,7 +145,7 @@ const getExchangeSig = async ({ userPk, userDid, pa, pt, ra, rt, name, desc, sta
 
 const transferAsset = async ({ claim, userDid, userPk }) => {
   try {
-    console.log('exchange_asset.onAuth', { claim, userDid });
+    logger.info('exchange_asset.onAuth', { claim, userDid });
     const type = toTypeInfo(userDid);
     const user = ForgeSDK.Wallet.fromPublicKey(userPk, type);
 
@@ -139,21 +154,21 @@ const transferAsset = async ({ claim, userDid, userPk }) => {
     }
 
     const appWallet = ForgeSDK.Wallet.fromJSON(wallet);
-    const data = JSON.parse(ForgeSDK.Util.fromBase58(claim.origin));
+    const asset = JSON.parse(ForgeSDK.Util.fromBase58(claim.origin));
     const hash = await ForgeSDK.sendTransferTx({
       tx: {
         itx: {
-          to: data.userDid,
-          assets: [data.asset],
+          to: userDid,
+          assets: [asset],
         },
       },
       wallet: appWallet,
     });
 
-    console.log('exchange_asset.onAuth', hash);
+    logger.info('exchange_asset.onAuth', hash);
     return { hash, tx: claim.origin };
   } catch (err) {
-    console.log('exchange_asset.onAuth.error', err);
+    logger.info('exchange_asset.onAuth.error', err);
     throw new Error('交易失败', err.message);
   }
 };
@@ -168,7 +183,7 @@ const exchangeAsset = async claim => {
     wallet: ForgeSDK.Wallet.fromJSON(wallet),
   });
 
-  console.log('exchange tx hash:', hash);
+  logger.info('exchange tx hash:', hash);
   return { hash, tx: claim.origin };
 };
 
@@ -200,15 +215,44 @@ module.exports = {
 
       try {
         if (pt === 'token' && Number(pa) === 0) {
-          const sig = await getTransferSig({ userPk, userDid, ra, rt, name, desc, start, end, bg, logo, svg, loc, locale });
+          const sig = await getTransferSig({
+            userPk,
+            userDid,
+            ra,
+            rt,
+            name,
+            desc,
+            start,
+            end,
+            bg,
+            logo,
+            svg,
+            loc,
+            locale,
+          });
           return sig;
         }
 
-        const sig = await getExchangeSig({ userPk, userDid, pa, pt, ra, rt, name, desc, start, end, bg, logo, svg, loc });
+        const sig = await getExchangeSig({
+          userPk,
+          userDid,
+          pa,
+          pt,
+          ra,
+          rt,
+          name,
+          desc,
+          start,
+          end,
+          bg,
+          logo,
+          svg,
+          loc,
+        });
         return sig;
       } catch (error) {
-        console.log('exchange_asset.generate_exchange.error:');
-        console.log(error);
+        logger.info('exchange_asset.generate_exchange.error:');
+        logger.info(error);
 
         throw new Error(`Exchange failed: ${error.message}`);
       }
@@ -217,7 +261,7 @@ module.exports = {
   onAuth: async ({ claims, userDid, userPk }) => {
     try {
       const claim = claims.find(x => x.type === 'signature');
-      console.log('exchange.auth.claim', claim);
+      logger.info('exchange.auth.claim', claim);
 
       if (claim.typeUrl === 'mime:text/plain') {
         const tx = await transferAsset({ claim, userDid, userPk });
@@ -227,8 +271,8 @@ module.exports = {
       const tx = await exchangeAsset(claim);
       return tx;
     } catch (err) {
-      console.log('exchange_asset.error:');
-      console.log(err);
+      logger.info('exchange_asset.error:');
+      logger.info(err);
 
       throw new Error(`Exchange failed: ${err.message}`);
     }
