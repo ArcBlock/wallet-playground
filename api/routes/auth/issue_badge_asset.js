@@ -10,10 +10,9 @@ const { getRandomMessage } = require('../../libs/util');
 const w = ForgeWallet.fromJSON(wallet);
 const badgeArray = require('../../libs/svg');
 
-let badgeIndex = 0;
-
-const ensureAsset = async (userPk, userDid) => {
-  const svg = badgeArray[badgeIndex % 10];
+const ensureAsset = async userDid => {
+  const index = Math.floor(Math.random() * 10 + 1);
+  const svg = badgeArray[index];
   const vc = create({
     type: 'WalletPlaygroundAchievement',
     issuer: {
@@ -31,7 +30,7 @@ const ensureAsset = async (userPk, userDid) => {
     },
   });
   const asset = {
-    moniker: `badge-svg-${badgeIndex % 10}`,
+    moniker: `badge-svg-${index}`,
     readonly: true,
     transferrable: true,
     data: {
@@ -50,17 +49,16 @@ const ensureAsset = async (userPk, userDid) => {
 module.exports = {
   action: 'issue_badge_asset',
   claims: {
-    signature: async (userPk, userDid) => {
-      badgeIndex += 1;
-      ensureAsset(userPk, userDid);
+    signature: async ({ userDid }) => {
+      const [asset] = await ensureAsset(userDid);
       return {
         description: '签名该文本，你将获得如下徽章',
         data: getRandomMessage(),
         type: 'mime:text/plain',
-        display: JSON.stringify({
-          type: 'svg_gzipped',
-          content: badgeArray[badgeIndex % 10],
-        }),
+        meta: {
+          asset: asset.address,
+        },
+        display: JSON.stringify(asset.data.value.credentialSubject.display),
       };
     },
   },
@@ -77,19 +75,18 @@ module.exports = {
       }
 
       const appWallet = ForgeSDK.Wallet.fromJSON(wallet);
-      const data = JSON.parse(ForgeSDK.Util.fromBase58(claim.origin));
       const hash = await ForgeSDK.sendTransferTx({
         tx: {
           itx: {
-            to: data.userDid,
-            assets: [data.asset],
+            to: userDid,
+            assets: [claim.meta.asset],
           },
         },
         wallet: appWallet,
       });
 
       logger.info('transfer_asset_in.onAuth', hash);
-      return { hash, tx: claim.origin };
+      return { hash };
     } catch (err) {
       logger.info('transfer_asset_in.onAuth.error', err);
       throw new Error('交易失败', err.message);

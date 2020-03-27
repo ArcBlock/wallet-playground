@@ -9,20 +9,22 @@ const { getRandomMessage } = require('../../libs/util');
 
 const badgeArray = require('../../libs/svg');
 
-let index = 0;
-
 module.exports = {
   action: 'issue_badge',
   claims: {
-    signature: () => ({
-      description: '签名该文本，你将获得如下徽章',
-      data: getRandomMessage(),
-      type: 'mime:text/plain',
-      display: JSON.stringify({
-        type: 'svg_gzipped',
-        content: badgeArray[index % 10],
-      }),
-    }),
+    signature: () => {
+      const index = Math.floor(Math.random() * 10 + 1);
+      return {
+        description: '签名该文本，你将获得如下徽章',
+        data: getRandomMessage(),
+        type: 'mime:text/plain',
+        meta: { index },
+        display: JSON.stringify({
+          type: 'svg_gzipped',
+          content: badgeArray[index % 10],
+        }),
+      };
+    },
   },
 
   onAuth: async ({ userDid, userPk, claims }) => {
@@ -33,8 +35,7 @@ module.exports = {
       throw new Error('签名错误');
     }
 
-    const svg = badgeArray[index % 10];
-    index += 1;
+    const svg = badgeArray[claim.meta.index];
     const w = ForgeWallet.fromJSON(wallet);
 
     const vc = create({
@@ -53,11 +54,12 @@ module.exports = {
         },
       },
     });
+
     return {
       disposition: 'attachment',
       type: 'VerifiableCredential',
       data: vc,
-      tag: `badge-${index % 10}`,
+      tag: `badge-${claim.meta.index}`,
     };
   },
 };
