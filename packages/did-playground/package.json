@@ -1,6 +1,6 @@
 {
   "name": "@arcblock/did-playground",
-  "version": "0.85.0",
+  "version": "0.87.0",
   "description": "React components that works with wallet-playground",
   "keywords": [
     "react",
