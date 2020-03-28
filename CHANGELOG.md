@@ -1,3 +1,8 @@
+## 0.87.0 (March 28, 2020)
+
+- remove foreign object shape in svg
+- fix: badge issuer error
+
 ## 0.86.0 (March 27, 2020)
 
 
