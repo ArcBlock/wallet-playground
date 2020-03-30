@@ -1,7 +1,7 @@
 const fs = require('fs');
 const dotenv = require('dotenv');
 
-const env = dotenv.parse(fs.readFileSync('./.env-ididit'));
+const env = dotenv.parse(fs.readFileSync('./.env.ididit'));
 
 module.exports = {
   apps: [
