@@ -1,3 +1,7 @@
+## 0.87.4 (March 31, 2020)
+
+- modify i did it env file name
+
 ## 0.87.3 (March 30, 2020)
 
 - add i-did-it pm2 script
