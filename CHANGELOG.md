@@ -1,3 +1,7 @@
+## 0.87.3 (March 30, 2020)
+
+- add i-did-it pm2 script
+
 ## 0.87.2 (March 30, 2020)
 
 - fix applink error
