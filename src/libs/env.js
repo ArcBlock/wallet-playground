@@ -45,4 +45,5 @@ module.exports = {
     process.env.GATSBY_TRUSTED_ISSUERS ||
     process.env.REACT_APP_TRUSTED_ISSUERS ||
     process.env.trustedIssuers,
+  appIcon: process.env.REACT_APP_APP_ICON || process.env.GATSBY_APP_ICON || process.env.APP_ICON || process.env.appIcon,
 };
