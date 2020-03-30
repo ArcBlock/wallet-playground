@@ -43,7 +43,7 @@ const walletAuth = new WalletAuthenticator({
     name: env.appName,
     description: env.appDescription,
     icon: env.appIcon || icon,
-    link: isNetlify ? env.baseUrl.replace(netlifyPrefix, '') : env.baseUrl.replace('3030', '3000'),
+    link: env.appLink || (isNetlify ? env.baseUrl.replace(netlifyPrefix, '') : env.baseUrl.replace('3030', '3000')),
   },
   chainInfo: ({ locale }) => {
     if (locale === 'zh' && env.chainHostZh) {
