@@ -1,3 +1,7 @@
+## 0.87.1 (March 30, 2020)
+
+- make app icon configurable
+
 ## 0.87.0 (March 28, 2020)
 
 - remove foreign object shape in svg
