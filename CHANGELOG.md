@@ -1,3 +1,7 @@
+## 0.87.2 (March 30, 2020)
+
+- fix applink error
+
 ## 0.87.1 (March 30, 2020)
 
 - make app icon configurable
