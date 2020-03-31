@@ -1,3 +1,7 @@
+## 0.87.5 (March 31, 2020)
+
+- uniform trusted issuers
+
 ## 0.87.4 (March 31, 2020)
 
 - modify i did it env file name
