@@ -2,14 +2,14 @@
 # yarn lockfile v1
 
 
-"@arcblock/asset-factory@^1.2.1":
-  version "1.2.1"
-  resolved "https://registry.npm.taobao.org/@arcblock/asset-factory/download/@arcblock/asset-factory-1.2.1.tgz#b96da92cf4eb1e733900a1164c013277d9dc676b"
-  integrity sha1-uW2pLPTrHnM5AKEWTAEyd9ncZ2s=
+"@arcblock/asset-factory@^1.2.2":
+  version "1.2.2"
+  resolved "https://registry.npm.taobao.org/@arcblock/asset-factory/download/@arcblock/asset-factory-1.2.2.tgz#ded759ab50d259c625b55eb63a953df2b179500c"
+  integrity sha1-3tdZq1DSWcYltV62OpU98rF5UAw=
   dependencies:
     "@arcblock/forge-sdk" "^1.2.1"
     "@arcblock/forge-wallet" "^1.0.39"
-    "@arcblock/vc" "^1.1.4"
+    "@arcblock/vc" "^1.2.2"
     debug "^4.1.1"
     json-stable-stringify "^1.0.1"
     lodash "^4.17.15"
@@ -74,7 +74,7 @@
     lodash.get "^4.4.2"
 
 "@arcblock/did-playground@./packages/did-playground":
-  version "0.87.3"
+  version "0.87.4"
   dependencies:
     "@arcblock/did-react" "^0.73.3"
     "@arcblock/react-hooks" "^0.73.0"
@@ -325,10 +325,10 @@
     xterm-addon-fit "^0.2.1"
     xterm-addon-web-links "^0.2.1"
 
-"@arcblock/vc@^1.1.4":
-  version "1.1.4"
-  resolved "https://registry.npm.taobao.org/@arcblock/vc/download/@arcblock/vc-1.1.4.tgz#0d1d6538345bfd3c1aba5b67305c591ae6805b2b"
-  integrity sha1-DR1lODRb/TwaultnMFxZGuaAWys=
+"@arcblock/vc@^1.2.2":
+  version "1.2.2"
+  resolved "https://registry.npm.taobao.org/@arcblock/vc/download/@arcblock/vc-1.2.2.tgz#0ea53fc49501f65a40b4d52b4f31b7d89d5db759"
+  integrity sha1-DqU/xJUB9lpAtNUrTzG32J1dt1k=
   dependencies:
     "@arcblock/did" "^1.0.39"
     "@arcblock/forge-util" "^1.0.33"
