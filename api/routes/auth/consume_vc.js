@@ -5,7 +5,7 @@ const stringify = require('json-stable-stringify');
 const { fromBase64, fromBase58 } = require('@arcblock/forge-util');
 
 const cloneDeep = require('lodash/cloneDeep');
-const { verify } = require('@arcblock/vc');
+const { verify, verifyPresentation } = require('@arcblock/vc');
 const { types, getHasher } = require('@arcblock/mcrypto');
 const env = require('../../libs/env');
 const { wallet } = require('../../libs/auth');
@@ -19,7 +19,9 @@ module.exports = {
     }),
     verifiableCredential: async () => {
       const w = ForgeSDK.Wallet.fromJSON(wallet);
-      const trustedIssuers = (env.trustedIssuers || 'zNKrLtPXN5ur9qMkwKWMYNzGi4D6XjWqTEjQ').split(',').concat(w.toAddress());
+      const trustedIssuers = (env.trustedIssuers || 'zNKrLtPXN5ur9qMkwKWMYNzGi4D6XjWqTEjQ')
+        .split(',')
+        .concat(w.toAddress());
       return {
         description: 'Please provide your vc which proves your information',
         item: 'EmailVerificationCredential',
@@ -39,13 +41,6 @@ module.exports = {
       : [presentation.verifiableCredential];
     const hasher = getHasher(types.HashType.SHA3);
     const vc = JSON.parse(vcArray[0]);
-    const clone = cloneDeep(presentation);
-    const signature = presentation.proof.jws;
-    const recipience = fromPublicKey(fromBase58(clone.proof.pk), toTypeInfo(vc.credentialSubject.id));
-    delete clone.proof;
-    if (recipience.verify(stringify(clone), fromBase64(signature)) !== true) {
-      throw Error('presentation signature not valid');
-    }
     if (vc.type === 'EmailVerificationCredential') {
       const digest = ForgeSDK.Util.toBase64(hasher(userEmail, 1));
       if (vc.credentialSubject.emailDigest !== digest) {
@@ -55,7 +50,9 @@ module.exports = {
       throw Error('不是要求的VC类型');
     }
     const w = ForgeSDK.Wallet.fromJSON(wallet);
-    const trustedIssuers = (env.trustedIssuers || 'zNKrLtPXN5ur9qMkwKWMYNzGi4D6XjWqTEjQ').split(',').concat(w.toAddress());
-    verify({ vc, ownerDid: vc.credentialSubject.id, trustedIssuers });
+    const trustedIssuers = (env.trustedIssuers || 'zNKrLtPXN5ur9qMkwKWMYNzGi4D6XjWqTEjQ')
+      .split(',')
+      .concat(w.toAddress());
+    verifyPresentation({ presentation, trustedIssuers, challenge });
   },
 };
