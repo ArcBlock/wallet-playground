@@ -55,7 +55,7 @@ module.exports = {
       throw Error('不是要求的VC类型');
     }
     const w = ForgeSDK.Wallet.fromJSON(wallet);
-
-    verify({ vc, ownerDid: vc.credentialSubject.id, trustedIssuers: [w.toAddress()] });
+    const trustedIssuers = (env.trustedIssuers || 'zNKrLtPXN5ur9qMkwKWMYNzGi4D6XjWqTEjQ').split(',').concat(w.toAddress());
+    verify({ vc, ownerDid: vc.credentialSubject.id, trustedIssuers });
   },
 };
