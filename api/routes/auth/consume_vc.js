@@ -1,11 +1,5 @@
 const ForgeSDK = require('@arcblock/forge-sdk');
-const { fromPublicKey } = require('@arcblock/forge-wallet');
-const { toTypeInfo } = require('@arcblock/did');
-const stringify = require('json-stable-stringify');
-const { fromBase64, fromBase58 } = require('@arcblock/forge-util');
-
-const cloneDeep = require('lodash/cloneDeep');
-const { verify, verifyPresentation } = require('@arcblock/vc');
+const { verifyPresentation } = require('@arcblock/vc');
 const { types, getHasher } = require('@arcblock/mcrypto');
 const env = require('../../libs/env');
 const { wallet } = require('../../libs/auth');
