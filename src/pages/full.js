@@ -552,6 +552,9 @@ export default function IndexPage() {
             <SignButton {...session} type="text" />
             <SignButton {...session} type="html" />
             <SignButton {...session} type="digest" />
+            <SignButton {...session} type="evil_digest" />
+            <SignButton {...session} type="evil_text" />
+            <SignButton {...session} type="evil_html" />
             <AgentButton {...session} />
             <AuthButton
               button="Multiple Claims"
