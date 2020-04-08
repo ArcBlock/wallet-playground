@@ -8,6 +8,12 @@ build: init
 	@yarn link @arcblock/did-playground
 	@yarn build
 
+deploy-aliyun: init
+	@echo "Building the software..."
+	@git pull origin master
+	@make build
+	@pm2 restart wallet-playground
+
 init: install dep
 	@echo "Initializing the repo..."
 
