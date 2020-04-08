@@ -8,7 +8,7 @@ build: init
 	@yarn link @arcblock/did-playground
 	@yarn build
 
-deploy-aliyun: init
+deploy-aliyun:
 	@echo "Building the software..."
 	@git pull origin master
 	@make build
