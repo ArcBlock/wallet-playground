@@ -13,6 +13,7 @@ deploy-aliyun:
 	@git pull origin master
 	@make build
 	@pm2 restart wallet-playground
+	@pm2 restart i-did-it
 
 init: install dep
 	@echo "Initializing the repo..."
