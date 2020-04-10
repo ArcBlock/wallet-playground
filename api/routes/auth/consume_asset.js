@@ -51,7 +51,7 @@ module.exports = {
           if ((typeof type === 'string' && type !== '') || type) {
             if (x.data.typeUrl === 'json' && x.data.value) {
               const value = JSON.parse(x.data.value);
-              conditions.push(value.type === AssetType[type]);
+              conditions.push(value.type === (type === 'badge' ? 'WalletPlaygroundAchievement' : AssetType[type]));
             } else {
               conditions.push(false);
             }

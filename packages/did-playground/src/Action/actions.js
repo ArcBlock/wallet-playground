@@ -7,14 +7,12 @@ async function createSwapOrder(api) {
 }
 
 const getValidPayAmount = (payAmount, price) => {
-  if (Number(payAmount) > 0) {
+  if (Number(payAmount) >= 0) {
     return payAmount;
   }
-
-  if (Number(price) > 0) {
+  if (Number(price) >= 0) {
     return price;
   }
-
   return 1;
 };
 
@@ -170,7 +168,7 @@ export const actions = {
       action: 'buy',
       type: 'badge',
       pfc: 'foreign',
-      price: props.price || 1,
+      price: props.price || 0,
       name: getMessage(props.name, session),
       desc: getMessage(props.description, session),
       loc: getMessage(props.location, session),
@@ -210,7 +208,7 @@ export const actions = {
     onStart: createSwapOrder,
     extraParams: (props, session) => ({
       action: 'sell',
-      type: 'badge',
+      type: 'vc',
       pfc: 'foreign',
       price: props.price || 1,
       name: getMessage(props.name, session),

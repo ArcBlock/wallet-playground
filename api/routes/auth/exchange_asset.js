@@ -6,7 +6,7 @@ const { toTypeInfo } = require('@arcblock/did');
 const upperFirst = require('lodash/upperFirst');
 
 const { wallet, localFactory: assetFactory } = require('../../libs/auth');
-const { ensureAsset, getTransferrableAssets } = require('../../libs/util');
+const { ensureAsset, getTransferrableAssets, fetchAndGzipSvg } = require('../../libs/util');
 
 const getAssets = async ({ amount = 1, type, userPk, userDid, name, desc, start, end, bg, logo, loc, svg }) => {
   const tasks = [];
@@ -64,7 +64,7 @@ const getTransferSig = async ({
     loc,
     svg,
   });
-
+  const gzipSvg = await fetchAndGzipSvg(svg);
   const description = {
     en: `Sign this text to get ${upperFirst(rt)} asset`,
     zh: `签名该文本，你将获得 ${upperFirst(rt)} 资产`,
@@ -74,6 +74,10 @@ const getTransferSig = async ({
     description: description[locale],
     data: JSON.stringify(assetAddress),
     type: 'mime:text/plain',
+    display: JSON.stringify({
+      type: 'svg_gzipped',
+      content: gzipSvg,
+    }),
   };
 };
 
@@ -86,7 +90,7 @@ const getExchangeSig = async ({ userPk, userDid, pa, pt, ra, rt, name, desc, sta
   } else {
     const assets = await getTransferrableAssets(userDid);
     senderPayload = assets
-      .filter(item => JSON.parse(item.data.value).type === AssetType[pt])
+      .filter(item => JSON.parse(item.data.value).type === (pt === 'badge' ? 'WalletPlaygroundAchievement' : AssetType[pt]))
       .map(item => item.address)
       .slice(0, pa);
 

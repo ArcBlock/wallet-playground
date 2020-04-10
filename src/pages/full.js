@@ -160,7 +160,7 @@ export default function IndexPage() {
               price={0.99}
               title={`Buy Local Badge with 0.99 ${token.foreign.symbol}`}
               name="Local Badge (%token.local.symbol%)"
-              svg="https://raw.githubusercontent.com/PaperHS/paperhs.github.io/master/Assets/eaglebadge_86364.svg"
+              svg="./public/static/images/badge.svg"
               description="This is a test badge that is on local chain"
             />
             <PlaygroundAction
@@ -209,7 +209,7 @@ export default function IndexPage() {
               title={`Buy Foreign Badge with 0.99 ${token.local.symbol}`}
               name="Foreign Badge (%token.foreign.symbol%)"
               description="This is a test badge that is on foreign chain"
-              svg="https://raw.githubusercontent.com/PaperHS/paperhs.github.io/master/Assets/eaglebadge_86364.svg"
+              svg="./public/static/images/badge.svg"
             />
             <PlaygroundAction
               action="sell_foreign_badge_for_local_token"
@@ -283,7 +283,7 @@ export default function IndexPage() {
               payAmount={0}
               receiveAmount={1}
               name="Local Badge (%token.local.symbol%)"
-              svg="https://raw.githubusercontent.com/PaperHS/paperhs.github.io/master/Assets/eaglebadge_86364.svg"
+              svg="./public/static/images/badge.svg"
             />
             <PlaygroundAction
               className="action"
@@ -292,7 +292,7 @@ export default function IndexPage() {
               payAmount={1}
               receiveAmount={1}
               name="Local Badge (%token.local.symbol%)"
-              svg="https://raw.githubusercontent.com/PaperHS/paperhs.github.io/master/Assets/eaglebadge_86364.svg"
+              svg="./public/static/images/badge.svg"
             />
             <PlaygroundAction
               className="action"
