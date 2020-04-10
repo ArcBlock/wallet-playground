@@ -1,18 +1,24 @@
+## 0.91.0 (April 10, 2020)
+
+- fix badge vc bug
+- fix multi step error
+
 ## 0.90.0 (April 07, 2020)
 
-
+- chore: add test case for signature claim with hashing disabled
 
 ## 0.89.0 (April 03, 2020)
 
-
+- fix: need to restart i-did-it
+- chore: add new evil test case
 
 ## 0.88.0 (April 01, 2020)
 
-
+- chore: add script to deploy wallet-playground
 
 ## 0.87.6 (March 31, 2020)
 
-
+- chore: add script to deploy wallet-playground
 
 ## 0.87.5 (March 31, 2020)
 
