@@ -55,23 +55,36 @@ module.exports = {
         },
 
         // If we request user to sign some sensitive data or large piece of data
-        // Just ask him/her to sign the digest
+        // We should ask wallet to sign the hash of the data
+        // NOTE: this should fail in latest ABT Wallet
         digest: {
           // A developer should convert the hash of his data to base58 format => digest
           digest: ForgeSDK.Util.toBase58(hasher(data, 1)),
         },
 
+        // NOTE: this should fail in latest ABT Wallet
         evil_digest: {
           digest: ForgeSDK.Util.toBase58(hasher(origin, 1)),
           meta: { origin },
         },
+
+        // NOTE: this should fail in latest ABT Wallet
         evil_text: {
           data: hasher(origin, 1),
           meta: { origin },
         },
+
+        // NOTE: this should fail in latest ABT Wallet
         evil_html: {
           data: hasher(origin, 1),
           meta: { origin },
+        },
+
+        // Sign the origin without hashing
+        // Wallet should not throw error on this
+        skip_hash: {
+          data: hasher(origin, 1),
+          method: 'none',
         },
       };
 
