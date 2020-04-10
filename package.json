@@ -40,6 +40,7 @@
     "@arcblock/forge-wallet": "^1.0.39",
     "@arcblock/mcrypto": "^1.0.39",
     "@arcblock/react-hooks": "^0.75.0",
+    "@arcblock/nft-template": "1.1.4",
     "@arcblock/swap-storage-mongo": "^1.0.13",
     "@arcblock/ux": "^0.75.2",
     "@arcblock/vc": "^1.2.2",

@@ -76,9 +76,9 @@
 "@arcblock/did-playground@./packages/did-playground":
   version "0.90.0"
   dependencies:
-    "@arcblock/did-react" "^0.75.0"
+    "@arcblock/did-react" "^0.75.2"
     "@arcblock/react-hooks" "^0.75.0"
-    "@arcblock/ux" "^0.75.0"
+    "@arcblock/ux" "^0.75.2"
     "@material-ui/core" "^4.9.1"
     axios "^0.19.2"
     core-js "^3.6.4"

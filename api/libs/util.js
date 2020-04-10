@@ -1,6 +1,7 @@
 /* eslint-disable object-curly-newline */
 const ForgeSDK = require('@arcblock/forge-sdk');
 const Mcrypto = require('@arcblock/mcrypto');
+const { createZippedSvgDisplay, createCertSvg } = require('@arcblock/nft-template');
 const { AssetRecipient, AssetIssuer } = require('@arcblock/asset-factory');
 const axios = require('axios');
 const fs = require('fs');
@@ -107,6 +108,7 @@ const getAccountBalance = async userDid => {
 const getAccountStateOptions = { ignoreFields: [/\.withdrawItems/, /\.items/] };
 
 const fetchAndGzipSvg = async svg => {
+  console.info(`svg: ${svg}`);
   if (!svg) return null;
   try {
     if (svg.indexOf('http') === 0) {
@@ -152,31 +154,36 @@ const ensureAsset = async (
     throw Error('Badge need a svg to display');
   }
   const gzipSvg = await fetchAndGzipSvg(svg);
+  console.info(`gzipSvg: ${gzipSvg}`);
+  const data = {
+    name,
+    description,
+    reason: description,
+    logoUrl,
+    location,
+    display: gzipSvg,
+    type: type === 'badge' ? badgeType : null,
+    issueTime: Date.now(),
+    startTime,
+    endTime,
+    expireTime: Date.now() + 365 * 3600,
+    host: new AssetIssuer({
+      // Only for tickets?
+      wallet: ForgeSDK.Wallet.fromJSON(wallet),
+      name: wallet.address,
+    }),
+    recipient: new AssetRecipient({
+      wallet: ForgeSDK.Wallet.fromPublicKey(userPk),
+      name: userDid,
+      location: 'China, Beijing',
+    }),
+  };
+  const display = type === 'badge' ? gzipSvg : createZippedSvgDisplay(createCertSvg({ data }));
+  console.info(`display: ${display}`);
   const [asset, hash] = await methods[type]({
+    display,
     backgroundUrl,
-    data: {
-      name,
-      description,
-      reason: description,
-      logoUrl,
-      location,
-      display: gzipSvg,
-      type: badgeType,
-      issueTime: Date.now(),
-      startTime,
-      endTime,
-      expireTime: -1,
-      host: new AssetIssuer({
-        // Only for tickets?
-        wallet: ForgeSDK.Wallet.fromJSON(wallet),
-        name: wallet.address,
-      }),
-      recipient: new AssetRecipient({
-        wallet: ForgeSDK.Wallet.fromPublicKey(userPk),
-        name: userDid,
-        location: 'China, Beijing',
-      }),
-    },
+    data,
   });
 
   logger.info('ensureAsset', {

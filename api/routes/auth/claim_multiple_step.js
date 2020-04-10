@@ -3,6 +3,7 @@ const { getRandomMessage } = require('../../libs/util');
 
 const { wallet } = require('../../libs/auth');
 
+
 module.exports = {
   action: 'claim_multiple_step',
   claims: [
