@@ -206,6 +206,7 @@ module.exports = {
   getTokenInfo,
   getAccountBalance,
   getAccountStateOptions,
+  fetchAndGzipSvg,
   getRandomMessage,
   ensureAsset,
 };

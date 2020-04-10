@@ -1,19 +1,21 @@
+const ForgeSDK = require('@arcblock/forge-sdk');
 const { getRandomMessage } = require('../../libs/util');
+
+const { wallet } = require('../../libs/auth');
 
 module.exports = {
   action: 'claim_multiple_step',
   claims: [
     {
-      signature: async ({ userDid, userPk }) => ({
-        type: 'DeclareTx',
+      signature: async () => ({
+        type: 'TransferTx',
         data: {
-          itx: { moniker: 'wangshijun' },
-          data: {
-            type: 'json',
-            value: { userDid, userPk },
+          itx: {
+            to: wallet.address,
+            value: ForgeSDK.Util.fromTokenToUnit(1),
           },
         },
-        description: 'Please sign the transaction',
+        description: 'Please sign the transaction, you will send 1 token',
       }),
     },
     {
