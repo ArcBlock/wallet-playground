@@ -1,3 +1,9 @@
+## 0.92.0 (April 12, 2020)
+
+- fix: try to fix consume_asset api
+- chore: bump ux lib version
+- fix: sig verify for skip_hash test case
+
 ## 0.91.0 (April 10, 2020)
 
 - fix badge vc bug
