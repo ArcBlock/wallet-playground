@@ -105,7 +105,7 @@ module.exports = {
     logger.info('claim.signature.onAuth', { userPk, userDid, claim });
 
     if (claim.origin) {
-      if (user.verify(claim.origin, claim.sig) === false) {
+      if (user.verify(claim.origin, claim.sig, claim.method !== 'none') === false) {
         throw new Error('Origin 签名错误');
       }
     }
