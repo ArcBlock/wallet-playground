@@ -74,11 +74,11 @@
     lodash.get "^4.4.2"
 
 "@arcblock/did-playground@./packages/did-playground":
-  version "0.90.0"
+  version "0.91.0"
   dependencies:
-    "@arcblock/did-react" "^0.75.0"
+    "@arcblock/did-react" "^0.75.3"
     "@arcblock/react-hooks" "^0.75.0"
-    "@arcblock/ux" "^0.75.0"
+    "@arcblock/ux" "^0.75.3"
     "@material-ui/core" "^4.9.1"
     axios "^0.19.2"
     core-js "^3.6.4"
@@ -86,31 +86,14 @@
     react-use "^13.27.0"
     styled-components "^5.0.1"
 
-"@arcblock/did-react@^0.75.0":
-  version "0.75.0"
-  resolved "https://registry.npm.taobao.org/@arcblock/did-react/download/@arcblock/did-react-0.75.0.tgz#f3f05879d3c22bdee09fb6c025f95161a83695e3"
-  integrity sha1-8/BYedPCK97gn7bAJflRYag2leM=
+"@arcblock/did-react@^0.75.3":
+  version "0.75.3"
+  resolved "https://registry.yarnpkg.com/@arcblock/did-react/-/did-react-0.75.3.tgz#226f7de6c729ebba32d8ca6a6c4b4a5063435528"
+  integrity sha512-zhPpwN3u4NyxY0OfdHJunoodEsVUqK39rfi2DjKmuSY++82jcTuTQBXPj3gBwjSBbHlb0jWMyRpR/X03PgNTBw==
   dependencies:
     "@arcblock/event-client" "^1.0.23"
     "@arcblock/react-hooks" "^0.75.0"
-    "@arcblock/ux" "^0.75.0"
-    "@material-ui/core" "^4.9.7"
-    axios "^0.19.2"
-    core-js "^3.6.4"
-    dsbridge "3.1.4"
-    qrcode.react "^1.0.0"
-    react-load-script "^0.0.6"
-    react-use "^13.22.4"
-    styled-components "^5.0.0"
-
-"@arcblock/did-react@^0.75.2":
-  version "0.75.2"
-  resolved "https://registry.yarnpkg.com/@arcblock/did-react/-/did-react-0.75.2.tgz#2f4fc4178d42a8a51e10cffcabe76a6174d16305"
-  integrity sha512-fxPbMOmgtvuCYXXj3Eo1cgqDQIKvz5joJs6MIAemIdpTsjzIM6Oor3kAwXx8KQ3Pe4wWEIMGOG92bZgEo7l4Zg==
-  dependencies:
-    "@arcblock/event-client" "^1.0.23"
-    "@arcblock/react-hooks" "^0.75.0"
-    "@arcblock/ux" "^0.75.2"
+    "@arcblock/ux" "^0.75.3"
     "@material-ui/core" "^4.9.7"
     axios "^0.19.2"
     core-js "^3.6.4"
@@ -310,43 +293,10 @@
     "@arcblock/forge-sdk" "^1.2.3"
     debug "^4.1.1"
 
-"@arcblock/ux@^0.75.0":
-  version "0.75.0"
-  resolved "https://registry.npm.taobao.org/@arcblock/ux/download/@arcblock/ux-0.75.0.tgz#658cf5ce039c898624ea98f10c5e655c022c3b45"
-  integrity sha1-ZYz1zgOciYYk6pjxDF5lXAIsO0U=
-  dependencies:
-    "@arcblock/react-hooks" "^0.75.0"
-    "@babel/plugin-syntax-dynamic-import" "^7.8.3"
-    "@material-ui/core" "^4.9.7"
-    "@material-ui/icons" "4.5.1"
-    axios "^0.19.2"
-    browser-lang "^0.1.0"
-    copy-to-clipboard "^3.2.0"
-    core-js "^3.6.4"
-    d3-geo "^1.11.6"
-    devices.css "^0.1.15"
-    graphiql "^0.13.2"
-    graphiql-code-exporter "^2.0.5"
-    graphiql-explorer "^0.4.3"
-    graphql "^14.4.2"
-    highlight.js "^9.15.8"
-    js-cookie "^2.2.0"
-    react-helmet "^5.2.1"
-    react-load-script "^0.0.6"
-    react-player "^1.15.2"
-    react-use "^13.22.4"
-    rebound "^0.1.0"
-    styled-components "^5.0.0"
-    topojson-client "^3.0.0"
-    versor "^0.0.4"
-    xterm "4.1.0"
-    xterm-addon-fit "^0.2.1"
-    xterm-addon-web-links "^0.2.1"
-
-"@arcblock/ux@^0.75.2":
-  version "0.75.2"
-  resolved "https://registry.yarnpkg.com/@arcblock/ux/-/ux-0.75.2.tgz#1af42a53f80f8f63625c1ceaafc3a701580e5cb6"
-  integrity sha512-T65hKcVHa+Ob7UKuvsTLvbC1bOPOkYtx0j6pqNU4PGX02k/pX/t6jmGBkinFpuP09sdN3wOEWXpuNiVJI0rIGg==
+"@arcblock/ux@^0.75.3":
+  version "0.75.3"
+  resolved "https://registry.yarnpkg.com/@arcblock/ux/-/ux-0.75.3.tgz#c514d37d83d3404eb53faf4ed0ce7b011dcb61b4"
+  integrity sha512-4x+5MiOKp4m207wU0gHhuJLx+7QTnA3TsP3s5mESKjUXHRjxbodLfhU5fSjJgWGn06NVUZm9YgWW7DTKB/bNcA==
   dependencies:
     "@arcblock/react-hooks" "^0.75.0"
     "@babel/plugin-syntax-dynamic-import" "^7.8.3"
