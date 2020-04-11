@@ -1,4 +1,5 @@
 /* eslint-disable no-console */
+const get = require('lodash/get');
 const ForgeSDK = require('@arcblock/forge-sdk');
 const { AssetType } = require('@arcblock/asset-factory');
 const { wallet } = require('../../libs/auth');
@@ -32,7 +33,14 @@ module.exports = {
 
       const conn = getChainConnection(pfc);
       let { assets } = await ForgeSDK.listAssets({ ownerAddress: userDid }, { conn });
-      assets = assets.filter(x => x.consumedTime === '');
+      assets = assets
+        .filter(x => x.consumedTime === '')
+        .map(x => {
+          if (['json', 'vc'].includes(x.data.typeUrl) && x.data.value) {
+            x.data.value = JSON.parse(x.data.value);
+          }
+          return x;
+        });
 
       let asset = null;
       if (did) {
@@ -49,9 +57,10 @@ module.exports = {
           }
 
           if ((typeof type === 'string' && type !== '') || type) {
-            if (x.data.typeUrl === 'json' && x.data.value) {
-              const value = JSON.parse(x.data.value);
-              conditions.push(value.type === (type === 'badge' ? 'WalletPlaygroundAchievement' : AssetType[type]));
+            if (['json', 'vc'].includes(x.data.typeUrl) && x.data.value) {
+              conditions.push(
+                x.data.value.type === (type === 'badge' ? 'WalletPlaygroundAchievement' : AssetType[type])
+              );
             } else {
               conditions.push(false);
             }
@@ -94,6 +103,7 @@ module.exports = {
         type: 'ConsumeAssetTx',
         data: tx,
         description: `Sign this transaction to confirm the ${asset.moniker} consumption`,
+        display: get(asset, 'data.value.credentialSubject.display.content', ''),
         chainInfo: {
           host: pfc === 'local' ? env.chainHost : env.assetChainHost,
           id: pfc === 'local' ? env.chainId : env.assetChainId,
