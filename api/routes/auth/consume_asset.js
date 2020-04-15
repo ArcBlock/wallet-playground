@@ -3,6 +3,7 @@ const ForgeSDK = require('@arcblock/forge-sdk');
 const { AssetType } = require('@arcblock/asset-factory');
 const { wallet } = require('../../libs/auth');
 const { PFC } = require('../../libs/constant');
+const { transferVCTypeToAssetType } = require('../../libs/util');
 const env = require('../../libs/env');
 
 const app = ForgeSDK.Wallet.fromJSON(wallet);
@@ -47,11 +48,14 @@ module.exports = {
           if (tu) {
             conditions.push(x.data.typeUrl === tu);
           }
-
+          console.info(`type: ${type}`);
+          console.info(`type: ${x.data.typeUrl}`);
+          
           if ((typeof type === 'string' && type !== '') || type) {
-            if (x.data.typeUrl === 'json' && x.data.value) {
+            if (x.data.typeUrl === 'vc' && x.data.value) {
               const value = JSON.parse(x.data.value);
-              conditions.push(value.type === (type === 'badge' ? 'WalletPlaygroundAchievement' : AssetType[type]));
+              console.info(`result: ${transferVCTypeToAssetType(value.type)}`);
+              conditions.push(transferVCTypeToAssetType(value.type) === AssetType[type]);
             } else {
               conditions.push(false);
             }

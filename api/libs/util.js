@@ -2,7 +2,8 @@
 const ForgeSDK = require('@arcblock/forge-sdk');
 const Mcrypto = require('@arcblock/mcrypto');
 const { createZippedSvgDisplay, createCertSvg } = require('@arcblock/nft-template');
-const { AssetRecipient, AssetIssuer } = require('@arcblock/asset-factory');
+const { AssetRecipient, AssetIssuer, AssetType } = require('@arcblock/asset-factory');
+
 const axios = require('axios');
 const fs = require('fs');
 const path = require('path');
@@ -108,7 +109,6 @@ const getAccountBalance = async userDid => {
 const getAccountStateOptions = { ignoreFields: [/\.withdrawItems/, /\.items/] };
 
 const fetchAndGzipSvg = async svg => {
-  console.info(`svg: ${svg}`);
   if (!svg) return null;
   try {
     if (svg.indexOf('http') === 0) {
@@ -154,7 +154,6 @@ const ensureAsset = async (
     throw Error('Badge need a svg to display');
   }
   const gzipSvg = await fetchAndGzipSvg(svg);
-  console.info(`gzipSvg: ${gzipSvg}`);
   const data = {
     name,
     description,
@@ -179,7 +178,6 @@ const ensureAsset = async (
     }),
   };
   const display = type === 'badge' ? gzipSvg : createZippedSvgDisplay(createCertSvg({ data }));
-  console.info(`display: ${display}`);
   const [asset, hash] = await methods[type]({
     display,
     backgroundUrl,
@@ -208,11 +206,27 @@ const getRandomMessage = (len = 16) => {
   return hex.replace(/^0x/, '').toUpperCase();
 };
 
+const transferVCTypeToAssetType = str => {
+  let types = str;
+  if (!Array.isArray(str)) {
+    types = [str];
+  }
+  if (types.indexOf('NFTCertificate') > -1) {
+    return AssetType.certificate;
+  } if (types.indexOf('NFTTicket') > -1) {
+    return AssetType.ticket;
+  } if (types.indexOf('WalletPlaygroundAchievement') > -1) {
+    return AssetType.badge;
+  }
+  return AssetType.other;
+};
+
 module.exports = {
   getTransferrableAssets,
   getTokenInfo,
   getAccountBalance,
   getAccountStateOptions,
+  transferVCTypeToAssetType,
   fetchAndGzipSvg,
   getRandomMessage,
   ensureAsset,
