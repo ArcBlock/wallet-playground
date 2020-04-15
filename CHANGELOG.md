@@ -1,3 +1,7 @@
+## 0.93.0 (April 15, 2020)
+
+
+
 ## 0.92.0 (April 12, 2020)
 
 - fix: try to fix consume_asset api
