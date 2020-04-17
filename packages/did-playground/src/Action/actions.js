@@ -369,9 +369,15 @@ export const actions = {
       did,
     }),
   },
+
   claim_signature: {
     action: 'claim_signature',
     extraParams: ({ type }) => ({ type }),
+  },
+
+  consume_email_vc: {
+    action: 'consume_vc',
+    extraParams: {},
   },
 };
 

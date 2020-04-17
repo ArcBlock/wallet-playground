@@ -1,3 +1,7 @@
+## 0.92.0 (April 17, 2020)
+
+- fix: sig verify for skip_hash test case
+
 ## 0.91.0 (April 10, 2020)
 
 - fix badge vc bug
