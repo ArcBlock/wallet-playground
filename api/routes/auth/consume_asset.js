@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 const ForgeSDK = require('@arcblock/forge-sdk');
-const { AssetType } = require('@arcblock/asset-factory');
+const { NFTType } = require('@arcblock/nft/lib/enum');
 const { wallet } = require('../../libs/auth');
 const { PFC } = require('../../libs/constant');
 const { transferVCTypeToAssetType } = require('../../libs/util');
@@ -15,7 +15,7 @@ const checkParams = ({ pfc, type }) => {
     throw new Error('Invalid pay from chain param');
   }
 
-  if (type && AssetType[type] === undefined) {
+  if (type && NFTType[type] === undefined) {
     throw new Error('Invalid asset type');
   }
 };
@@ -50,12 +50,12 @@ module.exports = {
           }
           console.info(`type: ${type}`);
           console.info(`type: ${x.data.typeUrl}`);
-          
+
           if ((typeof type === 'string' && type !== '') || type) {
             if (x.data.typeUrl === 'vc' && x.data.value) {
               const value = JSON.parse(x.data.value);
               console.info(`result: ${transferVCTypeToAssetType(value.type)}`);
-              conditions.push(transferVCTypeToAssetType(value.type) === AssetType[type]);
+              conditions.push(transferVCTypeToAssetType(value.type) === NFTType[type]);
             } else {
               conditions.push(false);
             }

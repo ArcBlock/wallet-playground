@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 const ForgeSDK = require('@arcblock/forge-sdk');
 const { toTypeInfo } = require('@arcblock/did');
-const { AssetRecipient } = require('@arcblock/asset-factory');
+const { NFTRecipient } = require('@arcblock/nft');
 
 const { wallet, localFactory } = require('../../libs/auth');
 const { getRandomMessage } = require('../../libs/util');
@@ -16,7 +16,7 @@ const ensureAsset = async (userPk, userDid) => {
       logoUrl: 'https://releases.arcblockio.cn/arcblock-logo.png',
       issueTime: Date.now() + 7 * 24 * 60 * 60 * 1000,
       expireTime: -1,
-      recipient: new AssetRecipient({
+      recipient: new NFTRecipient({
         wallet: ForgeSDK.Wallet.fromPublicKey(userPk),
         name: userDid,
         location: '北京市',

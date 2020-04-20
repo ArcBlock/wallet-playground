@@ -4,7 +4,7 @@ const ForgeSDK = require('@arcblock/forge-sdk');
 const TokenMongoStorage = require('@arcblock/did-auth-storage-mongo');
 const AgentMongoStorage = require('@arcblock/did-agent-storage-mongo');
 const SwapMongoStorage = require('@arcblock/swap-storage-mongo');
-const { AssetFactory } = require('@arcblock/asset-factory');
+const { NFTFactory } = require('@arcblock/nft');
 const { fromSecretKey, fromJSON, WalletType } = require('@arcblock/forge-wallet');
 const {
   WalletAuthenticator,
@@ -108,7 +108,7 @@ const agentHandlers = new AgentWalletHandlers({
   agentStorage,
 });
 
-const localFactory = new AssetFactory({
+const localFactory = new NFTFactory({
   chainId: env.chainId,
   chainHost: env.chainHost,
   wallet: fromJSON(wallet),
@@ -119,7 +119,7 @@ const localFactory = new AssetFactory({
   },
 });
 
-const foreignFactory = new AssetFactory({
+const foreignFactory = new NFTFactory({
   chainId: env.assetChainId,
   chainHost: env.assetChainHost,
   wallet: fromJSON(wallet),

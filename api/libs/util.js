@@ -2,7 +2,8 @@
 const ForgeSDK = require('@arcblock/forge-sdk');
 const Mcrypto = require('@arcblock/mcrypto');
 const { createZippedSvgDisplay, createCertSvg } = require('@arcblock/nft-template');
-const { AssetRecipient, AssetIssuer, AssetType } = require('@arcblock/asset-factory');
+const { NFTRecipient, NFTIssuer } = require('@arcblock/nft');
+const { NFTType } = require('@arcblock/nft/lib/enum');
 
 const axios = require('axios');
 const fs = require('fs');
@@ -166,12 +167,12 @@ const ensureAsset = async (
     startTime,
     endTime,
     expireTime: Date.now() + 365 * 3600,
-    host: new AssetIssuer({
+    host: new NFTIssuer({
       // Only for tickets?
       wallet: ForgeSDK.Wallet.fromJSON(wallet),
       name: wallet.address,
     }),
-    recipient: new AssetRecipient({
+    recipient: new NFTRecipient({
       wallet: ForgeSDK.Wallet.fromPublicKey(userPk),
       name: userDid,
       location: 'China, Beijing',
@@ -212,13 +213,13 @@ const transferVCTypeToAssetType = str => {
     types = [str];
   }
   if (types.indexOf('NFTCertificate') > -1) {
-    return AssetType.certificate;
+    return NFTType.certificate;
   } if (types.indexOf('NFTTicket') > -1) {
-    return AssetType.ticket;
+    return NFTType.ticket;
   } if (types.indexOf('WalletPlaygroundAchievement') > -1) {
-    return AssetType.badge;
+    return NFTType.badge;
   }
-  return AssetType.other;
+  return NFTType.other;
 };
 
 module.exports = {

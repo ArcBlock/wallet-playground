@@ -1,7 +1,7 @@
 /* eslint-disable object-curly-newline */
 const logger = require('winston');
 const ForgeSDK = require('@arcblock/forge-sdk');
-const { AssetType } = require('@arcblock/asset-factory');
+const { NFTType } = require('@arcblock/nft/lib/enum');
 const { toTypeInfo } = require('@arcblock/did');
 const upperFirst = require('lodash/upperFirst');
 
@@ -87,7 +87,7 @@ const getExchangeSig = async ({ userPk, userDid, pa, pt, ra, rt, name, desc, sta
     const assets = await getTransferrableAssets(userDid);
     senderPayload = assets
       .filter(
-        item => (transferVCTypeToAssetType(JSON.parse(item.data.value).type) === AssetType[pt])
+        item => (transferVCTypeToAssetType(JSON.parse(item.data.value).type) === NFTType[pt])
       )
       .map(item => item.address)
       .slice(0, pa);
@@ -208,11 +208,11 @@ module.exports = {
         throw new Error('Cannot buy/sell asset without a valid name');
       }
 
-      if (pt !== 'token' && AssetType[pt] === undefined) {
+      if (pt !== 'token' && NFTType[pt] === undefined) {
         throw new Error(`Invalid asset type: ${pt}`);
       }
 
-      if (rt !== 'token' && AssetType[rt] === undefined) {
+      if (rt !== 'token' && NFTType[rt] === undefined) {
         throw new Error(`Invalid asset type: ${rt}`);
       }
 
