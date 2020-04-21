@@ -1,7 +1,7 @@
 /* eslint-disable object-curly-newline */
 const ForgeSDK = require('@arcblock/forge-sdk');
 const Mcrypto = require('@arcblock/mcrypto');
-const { createZippedSvgDisplay, createCertSvg } = require('@arcblock/nft-template');
+const { createZippedSvgDisplay, createCertSvg, createTicketSvg } = require('@arcblock/nft-template');
 const { NFTRecipient, NFTIssuer } = require('@arcblock/nft');
 const { NFTType } = require('@arcblock/nft/lib/enum');
 
@@ -178,7 +178,9 @@ const ensureAsset = async (
       location: 'China, Beijing',
     }),
   };
-  const display = type === 'badge' ? gzipSvg : createZippedSvgDisplay(createCertSvg({ data }));
+  const display = type === 'badge'
+    ? gzipSvg
+    : createZippedSvgDisplay(type === 'ticket' ? createTicketSvg({ data }) : createCertSvg({ data }));
   const [asset, hash] = await methods[type]({
     display,
     backgroundUrl,
@@ -214,9 +216,11 @@ const transferVCTypeToAssetType = str => {
   }
   if (types.indexOf('NFTCertificate') > -1) {
     return NFTType.certificate;
-  } if (types.indexOf('NFTTicket') > -1) {
+  }
+  if (types.indexOf('NFTTicket') > -1) {
     return NFTType.ticket;
-  } if (types.indexOf('WalletPlaygroundAchievement') > -1) {
+  }
+  if (types.indexOf('WalletPlaygroundAchievement') > -1) {
     return NFTType.badge;
   }
   return NFTType.other;
