@@ -2,18 +2,6 @@
 # yarn lockfile v1
 
 
-"@arcblock/asset-factory@^1.2.8":
-  version "1.2.8"
-  resolved "https://registry.npm.taobao.org/@arcblock/asset-factory/download/@arcblock/asset-factory-1.2.8.tgz#97da3e5d9c940aa8e20ce60e740da912869b9af3"
-  integrity sha1-l9o+XZyUCqjiDOYOdA2pEoabmvM=
-  dependencies:
-    "@arcblock/forge-sdk" "^1.2.8"
-    "@arcblock/forge-wallet" "^1.2.7"
-    "@arcblock/vc" "^1.2.7"
-    debug "^4.1.1"
-    json-stable-stringify "^1.0.1"
-    lodash "^4.17.15"
-
 "@arcblock/client-extension@^1.2.7":
   version "1.2.7"
   resolved "https://registry.npm.taobao.org/@arcblock/client-extension/download/@arcblock/client-extension-1.2.7.tgz#d4b3407498181e8ae125bee6c7f5a1ced565c919"
@@ -165,7 +153,7 @@
     debug "^4.1.1"
     lodash "^4.17.15"
 
-"@arcblock/forge-sdk@^1.2.10", "@arcblock/forge-sdk@^1.2.8":
+"@arcblock/forge-sdk@^1.2.10":
   version "1.2.10"
   resolved "https://registry.npm.taobao.org/@arcblock/forge-sdk/download/@arcblock/forge-sdk-1.2.10.tgz#52021c7503fc9a48c75a977fa8a18c0a596f05c5"
   integrity sha1-UgIcdQP8mkjHWpd/qKGMCllvBcU=

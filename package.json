@@ -24,7 +24,6 @@
   },
   "dependencies": {
     "@arcblock/nft": "^1.2.10",
-    "@arcblock/asset-factory": "^1.2.8",
     "@arcblock/did": "^1.2.7",
     "@arcblock/did-agent-storage-mongo": "^1.2.7",
     "@arcblock/did-auth": "^1.2.10",
