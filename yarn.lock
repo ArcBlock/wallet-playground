@@ -230,24 +230,24 @@
     randombytes "^2.0.6"
     tweetnacl "^1.0.1"
 
-"@arcblock/nft-template@^1.2.11":
-  version "1.2.11"
-  resolved "https://registry.npm.taobao.org/@arcblock/nft-template/download/@arcblock/nft-template-1.2.11.tgz#9e3026a6a0df0e184942f4999eadd69aea3ca5dd"
-  integrity sha1-njAmpqDfDhhJQvSZnq3Wmuo8pd0=
+"@arcblock/nft-template@^1.2.12":
+  version "1.2.12"
+  resolved "https://registry.npm.taobao.org/@arcblock/nft-template/download/@arcblock/nft-template-1.2.12.tgz#b5f127cc2e79f7eb67b408303d4cbd7e6728e9bf"
+  integrity sha1-tfEnzC559+tntAgwPUy9fmco6b8=
   dependencies:
     "@arcblock/did" "^1.2.7"
     "@arcblock/forge-util" "^1.2.7"
     "@arcblock/forge-wallet" "^1.2.7"
     "@arcblock/mcrypto" "^1.2.7"
-    "@arcblock/nft" "^1.2.10"
+    "@arcblock/nft" "^1.2.12"
     debug "^4.1.1"
     lodash "^4.17.14"
     pako "^1.0.11"
 
-"@arcblock/nft@^1.2.10":
-  version "1.2.10"
-  resolved "https://registry.npm.taobao.org/@arcblock/nft/download/@arcblock/nft-1.2.10.tgz#5eb55b01d39a090bb5705434642c50be109d7bdd"
-  integrity sha1-XrVbAdOaCQu1cFQ0ZCxQvhCde90=
+"@arcblock/nft@^1.2.12":
+  version "1.2.12"
+  resolved "https://registry.npm.taobao.org/@arcblock/nft/download/@arcblock/nft-1.2.12.tgz#fa4e1f89d524c510023fbf7445db57d6b0d7bb8c"
+  integrity sha1-+k4fidUkxRACP790RdtX1rDXu4w=
   dependencies:
     "@arcblock/forge-sdk" "^1.2.10"
     "@arcblock/forge-wallet" "^1.2.7"

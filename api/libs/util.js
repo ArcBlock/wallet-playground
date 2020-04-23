@@ -143,7 +143,7 @@ const ensureAsset = async (
     startTime,
     endTime,
     location = 'China',
-    badgeType = 'WalletPlaygroundAchievement',
+    badgeType = '',
   }
 ) => {
   const methods = {
@@ -220,7 +220,7 @@ const transferVCTypeToAssetType = str => {
   if (types.indexOf('NFTTicket') > -1) {
     return NFTType.ticket;
   }
-  if (types.indexOf('WalletPlaygroundAchievement') > -1) {
+  if (types.indexOf('WalletPlaygroundAchievement') > -1 || types.indexOf('NFTBadge') > -1) {
     return NFTType.badge;
   }
   return NFTType.other;
