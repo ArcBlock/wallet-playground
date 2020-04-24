@@ -56,7 +56,7 @@ module.exports = {
             logoUrl: logo || 'https://releases.arcblockio.cn/arcblock-logo.png',
             svg,
             startTime: start || new Date(),
-            endTime: end || new Date(),
+            endTime: end || new Date(Date.now() + 2 * 60 * 60 * 1000),
           });
 
           const payload = {
@@ -84,6 +84,7 @@ module.exports = {
             ...swap,
           };
         } catch (err) {
+          console.log(err);
           logger.error('asset create failed', err);
           throw new Error('asset create failed');
         }
