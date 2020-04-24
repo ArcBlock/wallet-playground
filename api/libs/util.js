@@ -10,10 +10,11 @@ const fs = require('fs');
 const path = require('path');
 const pako = require('pako');
 const logger = require('winston');
-const { toBase64 } = require('@arcblock/forge-util');
+const { toBase64, fromBase64 } = require('@arcblock/forge-util');
 
 const env = require('./env');
 const { wallet } = require('./auth');
+const badgeArray = require('./svg');
 
 const getTransferrableAssets = async (userDid, assetCount, chainId) => {
   const { assets } = await ForgeSDK.listAssets({ ownerAddress: userDid, paging: { size: 200 } }, { conn: chainId });
@@ -111,6 +112,11 @@ const getAccountStateOptions = { ignoreFields: [/\.withdrawItems/, /\.items/] };
 
 const fetchAndGzipSvg = async svg => {
   if (!svg) return null;
+
+  if (badgeArray.includes(svg)) {
+    return svg;
+  }
+
   try {
     if (svg.indexOf('http') === 0) {
       const response = await axios.get(svg);
@@ -170,7 +176,7 @@ const ensureAsset = async (
     host: new NFTIssuer({
       // Only for tickets?
       wallet: ForgeSDK.Wallet.fromJSON(wallet),
-      name: wallet.address,
+      name: 'Wallet Playground',
     }),
     recipient: new NFTRecipient({
       wallet: ForgeSDK.Wallet.fromPublicKey(userPk),
@@ -178,9 +184,10 @@ const ensureAsset = async (
       location: 'China, Beijing',
     }),
   };
-  const display = type === 'badge'
-    ? gzipSvg
-    : createZippedSvgDisplay(type === 'ticket' ? createTicketSvg({ data }) : createCertSvg({ data }));
+  const display =
+    type === 'badge'
+      ? gzipSvg
+      : createZippedSvgDisplay(type === 'ticket' ? createTicketSvg({ data }) : createCertSvg({ data }));
   const [asset, hash] = await methods[type]({
     display,
     backgroundUrl,
