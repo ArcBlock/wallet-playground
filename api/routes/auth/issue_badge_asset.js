@@ -14,7 +14,7 @@ const ensureAsset = async userDid => {
   const index = Math.floor(Math.random() * 10 + 1);
   const svg = badgeArray[index];
   const vc = create({
-    type: '',
+    type: 'badge',
     issuer: {
       wallet: w,
       name: 'ArcBlock.Badge',
