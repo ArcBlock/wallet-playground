@@ -149,7 +149,7 @@ const ensureAsset = async (
     startTime,
     endTime,
     location = 'China',
-    badgeType = '',
+    vcType = '',
   }
 ) => {
   const methods = {
@@ -168,7 +168,7 @@ const ensureAsset = async (
     logoUrl,
     location,
     display: gzipSvg,
-    type: type === 'badge' ? badgeType : null,
+    type: vcType,
     issueTime: Date.now(),
     startTime,
     endTime,

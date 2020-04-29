@@ -11,31 +11,34 @@ module.exports = {
       description: 'Please provide your email',
       fields: ['email'],
     }),
-    verifiableCredential: async () => {
+    verifiableCredential: async ({ extraParams: { type } }) => {
       const w = ForgeSDK.Wallet.fromJSON(wallet);
       const trustedIssuers = (env.trustedIssuers || 'zNKrLtPXN5ur9qMkwKWMYNzGi4D6XjWqTEjQ')
         .split(',')
         .concat(w.toAddress());
+
       return {
         description: 'Please provide your vc which proves your information',
-        item: 'EmailVerificationCredential',
+        item: type,
         trustedIssuers,
       };
     },
   },
 
-  onAuth: async ({ claims, challenge }) => {
+  onAuth: async ({ claims, challenge, extraParams: { type } }) => {
     const userEmail = claims.find(x => x.type === 'profile').email;
     const presentation = JSON.parse(claims.find(x => x.type === 'verifiableCredential').presentation);
     if (challenge !== presentation.challenge) {
       throw Error('unsafe response');
     }
+
     const vcArray = Array.isArray(presentation.verifiableCredential)
       ? presentation.verifiableCredential
       : [presentation.verifiableCredential];
+
     const hasher = getHasher(types.HashType.SHA3);
     const vc = JSON.parse(vcArray[0]);
-    if (vc.type === 'EmailVerificationCredential') {
+    if (vc.type === type) {
       const digest = ForgeSDK.Util.toBase64(hasher(userEmail, 1));
       if (vc.credentialSubject.emailDigest !== digest) {
         throw Error('VC 与您的邮箱不匹配');
@@ -43,10 +46,12 @@ module.exports = {
     } else {
       throw Error('不是要求的VC类型');
     }
+
     const w = ForgeSDK.Wallet.fromJSON(wallet);
     const trustedIssuers = (env.trustedIssuers || 'zNKrLtPXN5ur9qMkwKWMYNzGi4D6XjWqTEjQ')
       .split(',')
       .concat(w.toAddress());
+
     verifyPresentation({ presentation, trustedIssuers, challenge });
   },
 };
