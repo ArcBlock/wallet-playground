@@ -10,7 +10,7 @@ const fs = require('fs');
 const path = require('path');
 const pako = require('pako');
 const logger = require('winston');
-const { toBase64, fromBase64 } = require('@arcblock/forge-util');
+const { toBase64 } = require('@arcblock/forge-util');
 
 const env = require('./env');
 const { wallet } = require('./auth');
@@ -184,10 +184,9 @@ const ensureAsset = async (
       location: 'China, Beijing',
     }),
   };
-  const display =
-    type === 'badge'
-      ? gzipSvg
-      : createZippedSvgDisplay(type === 'ticket' ? createTicketSvg({ data }) : createCertSvg({ data }));
+  const display = type === 'badge'
+    ? gzipSvg
+    : createZippedSvgDisplay(type === 'ticket' ? createTicketSvg({ data }) : createCertSvg({ data }));
   const [asset, hash] = await methods[type]({
     display,
     backgroundUrl,
