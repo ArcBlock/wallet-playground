@@ -91,6 +91,23 @@
     react-use "^13.22.4"
     styled-components "^5.0.0"
 
+"@arcblock/did-react@^0.77.3":
+  version "0.77.3"
+  resolved "https://registry.npm.taobao.org/@arcblock/did-react/download/@arcblock/did-react-0.77.3.tgz#14d53fab98249a3c2155ea2662160d8a3d5683a5"
+  integrity sha1-FNU/q5gkmjwhVeomYhYNij1Wg6U=
+  dependencies:
+    "@arcblock/event-client" "^1.0.23"
+    "@arcblock/react-hooks" "^0.77.0"
+    "@arcblock/ux" "^0.77.3"
+    "@material-ui/core" "^4.9.7"
+    axios "^0.19.2"
+    core-js "^3.6.4"
+    dsbridge "3.1.4"
+    qrcode.react "^1.0.0"
+    react-load-script "^0.0.6"
+    react-use "^13.22.4"
+    styled-components "^5.0.0"
+
 "@arcblock/did-util@^1.2.13":
   version "1.2.13"
   resolved "https://registry.npm.taobao.org/@arcblock/did-util/download/@arcblock/did-util-1.2.13.tgz#8eef97a7c029a2d9ca75ff3832371d358b2a6da4"
@@ -230,28 +247,28 @@
     randombytes "^2.0.6"
     tweetnacl "^1.0.1"
 
-"@arcblock/nft-template@^1.2.14":
-  version "1.2.14"
-  resolved "https://registry.npm.taobao.org/@arcblock/nft-template/download/@arcblock/nft-template-1.2.14.tgz#0305345f0a3f3cc21bcdbd400978fa1fb2861696"
-  integrity sha1-AwU0Xwo/PMIbzb1ACXj6H7KGFpY=
+"@arcblock/nft-template@^1.2.16":
+  version "1.2.16"
+  resolved "https://registry.npm.taobao.org/@arcblock/nft-template/download/@arcblock/nft-template-1.2.16.tgz#6429aab6a1cfd25036958267e5d2e87916104934"
+  integrity sha1-ZCmqtqHP0lA2lYJn5dLoeRYQSTQ=
   dependencies:
     "@arcblock/did" "^1.2.13"
     "@arcblock/forge-util" "^1.2.13"
     "@arcblock/forge-wallet" "^1.2.13"
     "@arcblock/mcrypto" "^1.2.13"
-    "@arcblock/nft" "^1.2.13"
+    "@arcblock/nft" "^1.2.16"
     debug "^4.1.1"
     lodash "^4.17.14"
     pako "^1.0.11"
 
-"@arcblock/nft@^1.2.13":
-  version "1.2.13"
-  resolved "https://registry.npm.taobao.org/@arcblock/nft/download/@arcblock/nft-1.2.13.tgz#a4d6206a6cbfec99dfb3d60585e62b6484b005e5"
-  integrity sha1-pNYgamy/7Jnfs9YFheYrZISwBeU=
+"@arcblock/nft@^1.2.16":
+  version "1.2.16"
+  resolved "https://registry.npm.taobao.org/@arcblock/nft/download/@arcblock/nft-1.2.16.tgz#f7ca3fa897aab318be7aa807b9889f8e62357ff1"
+  integrity sha1-98o/qJeqsxi+eqgHuYifjmI1f/E=
   dependencies:
     "@arcblock/forge-sdk" "^1.2.13"
     "@arcblock/forge-wallet" "^1.2.13"
-    "@arcblock/vc" "^1.2.13"
+    "@arcblock/vc" "^1.2.16"
     debug "^4.1.1"
     json-stable-stringify "^1.0.1"
     lodash "^4.17.15"
@@ -341,10 +358,43 @@
     xterm-addon-fit "^0.2.1"
     xterm-addon-web-links "^0.2.1"
 
-"@arcblock/vc@^1.2.13":
-  version "1.2.13"
-  resolved "https://registry.npm.taobao.org/@arcblock/vc/download/@arcblock/vc-1.2.13.tgz#e9c82c89d3d4e94bc4e6dc41ded3ab1aff7daa03"
-  integrity sha1-6cgsidPU6UvE5txB3tOrGv99qgM=
+"@arcblock/ux@^0.77.3":
+  version "0.77.3"
+  resolved "https://registry.npm.taobao.org/@arcblock/ux/download/@arcblock/ux-0.77.3.tgz#5ef066a53b6a0315361fa7d6264e662c5bbcdc14"
+  integrity sha1-XvBmpTtqAxU2H6fWJk5mLFu83BQ=
+  dependencies:
+    "@arcblock/react-hooks" "^0.77.0"
+    "@babel/plugin-syntax-dynamic-import" "^7.8.3"
+    "@material-ui/core" "^4.9.7"
+    "@material-ui/icons" "4.5.1"
+    axios "^0.19.2"
+    browser-lang "^0.1.0"
+    copy-to-clipboard "^3.2.0"
+    core-js "^3.6.4"
+    d3-geo "^1.11.6"
+    devices.css "^0.1.15"
+    graphiql "^0.13.2"
+    graphiql-code-exporter "^2.0.5"
+    graphiql-explorer "^0.4.3"
+    graphql "^14.6.0"
+    highlight.js "^9.15.8"
+    js-cookie "^2.2.0"
+    react-helmet "^5.2.1"
+    react-load-script "^0.0.6"
+    react-player "^1.15.2"
+    react-use "^13.22.4"
+    rebound "^0.1.0"
+    styled-components "^5.0.0"
+    topojson-client "^3.0.0"
+    versor "^0.0.4"
+    xterm "4.1.0"
+    xterm-addon-fit "^0.2.1"
+    xterm-addon-web-links "^0.2.1"
+
+"@arcblock/vc@^1.2.16":
+  version "1.2.16"
+  resolved "https://registry.npm.taobao.org/@arcblock/vc/download/@arcblock/vc-1.2.16.tgz#e60ec5ee1b5507fa53d77ae3d25cb54a819e8b27"
+  integrity sha1-5g7F7htVB/pT13rj0ly1SoGeiyc=
   dependencies:
     "@arcblock/did" "^1.2.13"
     "@arcblock/forge-util" "^1.2.13"
