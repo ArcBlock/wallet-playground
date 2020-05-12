@@ -23,7 +23,6 @@
     "email": "shijun@arcblock.io"
   },
   "dependencies": {
-    "@arcblock/nft": "^1.2.16",
     "@arcblock/did": "^1.2.13",
     "@arcblock/did-agent-storage-mongo": "^1.2.7",
     "@arcblock/did-auth": "^1.2.15",
@@ -39,8 +38,9 @@
     "@arcblock/forge-util": "^1.2.13",
     "@arcblock/forge-wallet": "^1.2.13",
     "@arcblock/mcrypto": "^1.2.13",
-    "@arcblock/react-hooks": "^0.77.0",
+    "@arcblock/nft": "^1.2.16",
     "@arcblock/nft-template": "^1.2.16",
+    "@arcblock/react-hooks": "^0.77.0",
     "@arcblock/swap-storage-mongo": "^1.2.7",
     "@arcblock/ux": "^0.77.3",
     "@arcblock/vc": "^1.2.16",
