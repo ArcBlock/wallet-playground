@@ -39,7 +39,7 @@ module.exports = {
     const w = ForgeWallet.fromJSON(wallet);
 
     const vc = create({
-      type: 'WalletPlaygroundAchievement',
+      type: ['NFTBadge', 'VerifiableCredential'],
       issuer: {
         wallet: w,
         name: 'ArcBlock.Badge',

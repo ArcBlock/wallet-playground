@@ -1,32 +1,31 @@
 /* eslint-disable no-console */
 const ForgeSDK = require('@arcblock/forge-sdk');
 const { toTypeInfo } = require('@arcblock/did');
-const { AssetRecipient } = require('@arcblock/asset-factory');
 
 const env = require('../../libs/env');
-const { wallet, localFactory } = require('../../libs/auth');
-const { getRandomMessage } = require('../../libs/util');
+const { wallet, localFactory: assetFactory } = require('../../libs/auth');
+const { getRandomMessage, ensureAsset } = require('../../libs/util');
 
-const ensureAsset = async (userPk, userDid) => {
-  const [asset] = await localFactory.createCertificate({
-    backgroundUrl: '',
-    data: {
-      name: '普通话一级甲等证书',
-      description: '普通话一级甲等证书',
-      reason: '普通话标准',
-      logoUrl: 'https://releases.arcblockio.cn/arcblock-logo.png',
-      issueTime: Date.now() + 7 * 24 * 60 * 60 * 1000,
-      expireTime: -1,
-      recipient: new AssetRecipient({
-        wallet: ForgeSDK.Wallet.fromPublicKey(userPk),
-        name: userDid,
-        location: '北京市',
-      }),
-    },
-  });
+// const ensureAsset = async (userPk, userDid) => {
+//   const [asset] = await localFactory.createCertificate({
+//     backgroundUrl: '',
+//     data: {
+//       name: '普通话一级甲等证书',
+//       description: '普通话一级甲等证书',
+//       reason: '普通话标准',
+//       logoUrl: 'https://releases.arcblockio.cn/arcblock-logo.png',
+//       issueTime: Date.now() + 7 * 24 * 60 * 60 * 1000,
+//       expireTime: -1,
+//       recipient: new NFTRecipient({
+//         wallet: ForgeSDK.Wallet.fromPublicKey(userPk),
+//         name: userDid,
+//         location: '北京市',
+//       }),
+//     },
+//   });
 
-  return asset;
-};
+//   return asset;
+// };
 
 module.exports = {
   action: 'transfer_token_asset_in',
@@ -43,7 +42,17 @@ module.exports = {
   },
   onAuth: async ({ claims, userDid, userPk }) => {
     try {
-      const asset = await ensureAsset(userPk, userDid);
+      const asset = await ensureAsset(assetFactory, {
+        userPk,
+        userDid,
+        type: 'certificate',
+        name: 'Test Certificate',
+        description: 'Test Certificate Desc',
+        location: 'China',
+        logoUrl: 'https://releases.arcblockio.cn/arcblock-logo.png',
+        startTime: new Date(),
+        endTime: new Date(Date.now() + 2 * 60 * 60 * 1000),
+      });
       logger.info('transfer_asset_token_in.onAuth', { claims, userDid });
       const type = toTypeInfo(userDid);
       const user = ForgeSDK.Wallet.fromPublicKey(userPk, type);

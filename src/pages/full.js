@@ -676,7 +676,7 @@ export default function IndexPage() {
             <AuthButton
               button="consume email VC"
               action="consume_vc"
-              extraParams={{ item: ['EmailVerificationCredential'] }}
+              extraParams={{ type: 'EmailVerificationCredential' }}
               messages={{
                 title: 'provide your vc',
                 scan: 'Scan QR code to sign a message',
@@ -684,7 +684,6 @@ export default function IndexPage() {
                 success: 'vc have been checked',
               }}
             />
-
             <AuthButton
               button="Random Fake Badge"
               action="issue_badge"
@@ -703,6 +702,39 @@ export default function IndexPage() {
                 scan: 'Scan QR code to sign a message',
                 confirm: 'Confirm on your ABT Wallet',
                 success: 'badge have been sent',
+              }}
+            />
+            <AuthButton
+              button="Verify Certificate VC"
+              action="consume_vc"
+              extraParams={{ type: 'NFTCertificate' }}
+              messages={{
+                title: 'Provide your certificate',
+                scan: 'Scan QR code to sign a message',
+                confirm: 'Confirm on your ABT Wallet',
+                success: 'Certificate have been verified',
+              }}
+            />
+            <AuthButton
+              button="Verify Ticket VC"
+              action="consume_vc"
+              extraParams={{ type: 'NFTTicket' }}
+              messages={{
+                title: 'Provide your ticket',
+                scan: 'Scan QR code to sign a message',
+                confirm: 'Confirm on your ABT Wallet',
+                success: 'Ticket have been verified',
+              }}
+            />
+            <AuthButton
+              button="Verify Badge VC"
+              action="consume_vc"
+              extraParams={{ type: 'NFTBadge' }}
+              messages={{
+                title: 'Provide your badge',
+                scan: 'Scan QR code to sign a message',
+                confirm: 'Confirm on your ABT Wallet',
+                success: 'Badge have been verified',
               }}
             />
           </div>

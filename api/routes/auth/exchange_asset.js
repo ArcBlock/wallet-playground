@@ -1,12 +1,12 @@
 /* eslint-disable object-curly-newline */
 const logger = require('winston');
 const ForgeSDK = require('@arcblock/forge-sdk');
-const { AssetType } = require('@arcblock/asset-factory');
+const { NFTType } = require('@arcblock/nft/lib/enum');
 const { toTypeInfo } = require('@arcblock/did');
 const upperFirst = require('lodash/upperFirst');
 
 const { wallet, localFactory: assetFactory } = require('../../libs/auth');
-const { ensureAsset, getTransferrableAssets, fetchAndGzipSvg } = require('../../libs/util');
+const { ensureAsset, getTransferrableAssets, transferVCTypeToAssetType } = require('../../libs/util');
 
 const getAssets = async ({ amount = 1, type, userPk, userDid, name, desc, start, end, bg, logo, loc, svg }) => {
   const tasks = [];
@@ -30,7 +30,7 @@ const getAssets = async ({ amount = 1, type, userPk, userDid, name, desc, start,
   }
 
   const assets = await Promise.all(tasks);
-  return assets.map(item => item.address);
+  return assets;
 };
 
 const getTransactionAssetType = type => (type === 'token' ? 'value' : 'assets');
@@ -50,7 +50,7 @@ const getTransferSig = async ({
   locale = 'en',
   svg,
 }) => {
-  const [assetAddress] = await getAssets({
+  const [assets] = await getAssets({
     amount: ra,
     type: rt,
     userPk,
@@ -64,7 +64,6 @@ const getTransferSig = async ({
     loc,
     svg,
   });
-  const gzipSvg = await fetchAndGzipSvg(svg);
   const description = {
     en: `Sign this text to get ${upperFirst(rt)} asset`,
     zh: `签名该文本，你将获得 ${upperFirst(rt)} 资产`,
@@ -72,12 +71,9 @@ const getTransferSig = async ({
 
   return {
     description: description[locale],
-    data: JSON.stringify(assetAddress),
+    data: JSON.stringify(assets.address),
     type: 'mime:text/plain',
-    display: JSON.stringify({
-      type: 'svg_gzipped',
-      content: gzipSvg,
-    }),
+    display: JSON.stringify(assets.data.value.credentialSubject.display),
   };
 };
 
@@ -90,7 +86,9 @@ const getExchangeSig = async ({ userPk, userDid, pa, pt, ra, rt, name, desc, sta
   } else {
     const assets = await getTransferrableAssets(userDid);
     senderPayload = assets
-      .filter(item => JSON.parse(item.data.value).type === (pt === 'badge' ? 'WalletPlaygroundAchievement' : AssetType[pt]))
+      .filter(
+        item => (transferVCTypeToAssetType(JSON.parse(item.data.value).type) === NFTType[pt])
+      )
       .map(item => item.address)
       .slice(0, pa);
 
@@ -102,7 +100,7 @@ const getExchangeSig = async ({ userPk, userDid, pa, pt, ra, rt, name, desc, sta
   if (rt === 'token') {
     receiverPayload = await ForgeSDK.fromTokenToUnit(ra);
   } else {
-    receiverPayload = await getAssets({
+    const assets = await getAssets({
       amount: ra,
       type: rt,
       userPk,
@@ -116,6 +114,7 @@ const getExchangeSig = async ({ userPk, userDid, pa, pt, ra, rt, name, desc, sta
       loc,
       svg,
     });
+    receiverPayload = assets.map(asset => asset.address);
   }
 
   const tx = await ForgeSDK.signExchangeTx({
@@ -209,11 +208,11 @@ module.exports = {
         throw new Error('Cannot buy/sell asset without a valid name');
       }
 
-      if (pt !== 'token' && AssetType[pt] === undefined) {
+      if (pt !== 'token' && NFTType[pt] === undefined) {
         throw new Error(`Invalid asset type: ${pt}`);
       }
 
-      if (rt !== 'token' && AssetType[rt] === undefined) {
+      if (rt !== 'token' && NFTType[rt] === undefined) {
         throw new Error(`Invalid asset type: ${rt}`);
       }
 
