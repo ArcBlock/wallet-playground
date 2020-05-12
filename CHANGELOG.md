@@ -1,3 +1,25 @@
+## 0.93.0 (May 12, 2020)
+
+- Merge pull request #52 from ArcBlock/feat-asset-vc
+- can not get random fake badge vc
+- check email digest for email vc
+- support email vc
+- improve consume vc
+- chore: add more buttons to test consume different kind of vc
+- chore: bump dependency version
+- chore: random onchain badge asset not properly handled
+- chore: update dependencies
+- try fix release page error
+- fix badge type empty issue
+- improve asset transfer
+- chore: remove asset-factory
+- chore: bump ux and forge sdk version
+- Merge branch 'master' into feat-asset-vc
+- support create ticket svg
+- sync asscet factory to nft
+- fix type
+- feature: all asset to vc
+
 ## 0.92.0 (April 17, 2020)
 
 - fix: sig verify for skip_hash test case

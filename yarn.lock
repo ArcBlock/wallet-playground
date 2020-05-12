@@ -64,32 +64,15 @@
 "@arcblock/did-playground@./packages/did-playground":
   version "0.92.0"
   dependencies:
-    "@arcblock/did-react" "^0.77.2"
+    "@arcblock/did-react" "^0.77.3"
     "@arcblock/react-hooks" "^0.77.0"
-    "@arcblock/ux" "^0.77.2"
+    "@arcblock/ux" "^0.77.3"
     "@material-ui/core" "^4.9.1"
     axios "^0.19.2"
     core-js "^3.6.4"
     mustache "^4.0.0"
     react-use "^13.27.0"
     styled-components "^5.0.1"
-
-"@arcblock/did-react@^0.77.2":
-  version "0.77.2"
-  resolved "https://registry.npm.taobao.org/@arcblock/did-react/download/@arcblock/did-react-0.77.2.tgz?cache=0&sync_timestamp=1587896662422&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40arcblock%2Fdid-react%2Fdownload%2F%40arcblock%2Fdid-react-0.77.2.tgz#0a5b3503d0df031854b08e1aa9da70d3593317d1"
-  integrity sha1-Cls1A9DfAxhUsI4aqdpw01kzF9E=
-  dependencies:
-    "@arcblock/event-client" "^1.0.23"
-    "@arcblock/react-hooks" "^0.77.0"
-    "@arcblock/ux" "^0.77.2"
-    "@material-ui/core" "^4.9.7"
-    axios "^0.19.2"
-    core-js "^3.6.4"
-    dsbridge "3.1.4"
-    qrcode.react "^1.0.0"
-    react-load-script "^0.0.6"
-    react-use "^13.22.4"
-    styled-components "^5.0.0"
 
 "@arcblock/did-react@^0.77.3":
   version "0.77.3"
@@ -324,39 +307,6 @@
   dependencies:
     "@arcblock/forge-sdk" "^1.2.13"
     debug "^4.1.1"
-
-"@arcblock/ux@^0.77.2":
-  version "0.77.2"
-  resolved "https://registry.npm.taobao.org/@arcblock/ux/download/@arcblock/ux-0.77.2.tgz?cache=0&sync_timestamp=1587896662991&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40arcblock%2Fux%2Fdownload%2F%40arcblock%2Fux-0.77.2.tgz#93533be42aa5951cf3a9d33d78fd87ec596d3ba2"
-  integrity sha1-k1M75CqllRzzqdM9eP2H7FltO6I=
-  dependencies:
-    "@arcblock/react-hooks" "^0.77.0"
-    "@babel/plugin-syntax-dynamic-import" "^7.8.3"
-    "@material-ui/core" "^4.9.7"
-    "@material-ui/icons" "4.5.1"
-    axios "^0.19.2"
-    browser-lang "^0.1.0"
-    copy-to-clipboard "^3.2.0"
-    core-js "^3.6.4"
-    d3-geo "^1.11.6"
-    devices.css "^0.1.15"
-    graphiql "^0.13.2"
-    graphiql-code-exporter "^2.0.5"
-    graphiql-explorer "^0.4.3"
-    graphql "^14.6.0"
-    highlight.js "^9.15.8"
-    js-cookie "^2.2.0"
-    react-helmet "^5.2.1"
-    react-load-script "^0.0.6"
-    react-player "^1.15.2"
-    react-use "^13.22.4"
-    rebound "^0.1.0"
-    styled-components "^5.0.0"
-    topojson-client "^3.0.0"
-    versor "^0.0.4"
-    xterm "4.1.0"
-    xterm-addon-fit "^0.2.1"
-    xterm-addon-web-links "^0.2.1"
 
 "@arcblock/ux@^0.77.3":
   version "0.77.3"
