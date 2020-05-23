@@ -5,7 +5,7 @@ const env = require('./libs/env');
 const { name, version } = require('../package.json');
 const { server } = require('./functions/app');
 
-const port = parseInt(process.env.PORT, 10) || parseInt(process.env.APP_PORT, 10) || 3000;
+const port = parseInt(process.env.BLOCKLET_PORT || process.env.APP_PORT, 10) || 3000;
 server.listen(port, err => {
   if (err) throw err;
   console.log(`> ${name} v${version} ready on ${env.baseUrl}`);
