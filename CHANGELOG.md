@@ -1,3 +1,8 @@
+## 1.0.0 (May 24, 2020)
+
+- feat: add pre-start script to fund the app
+- feat: we can now run as blocklet in abt node
+
 ## 0.93.1 (May 20, 2020)
 
 

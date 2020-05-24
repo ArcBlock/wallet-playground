@@ -51,7 +51,7 @@ export default function MiniPage() {
               action="receive_local_token"
               className="action"
               amount={20}
-              title={`Get 400 ${token.local.symbol}`}
+              title={`Get 20 ${token.local.symbol}`}
             />
           </div>
         </section>
