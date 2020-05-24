@@ -1,3 +1,7 @@
+## 1.3.0 (May 24, 2020)
+
+
+
 ## 1.2.0 (May 24, 2020)
 
 - fix: publish config
