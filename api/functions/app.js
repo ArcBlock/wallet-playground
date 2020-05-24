@@ -1,6 +1,6 @@
 /* eslint-disable object-curly-newline */
 /* eslint-disable no-console */
-require('../libs/contracts/create_movie_ticket_contract/.compiled/create_movie_ticket/javascript/index');
+// require('../libs/contracts/create_movie_ticket_contract/.compiled/create_movie_ticket/javascript/index');
 const fs = require('fs');
 const path = require('path');
 const http = require('http');
@@ -14,7 +14,6 @@ const bodyParser = require('body-parser');
 const bearerToken = require('express-bearer-token');
 const compression = require('compression');
 const nocache = require('nocache');
-const ForgeSDK = require('@arcblock/forge-sdk');
 const EventServer = require('@arcblock/event-server');
 const logger = require('../libs/logger');
 
@@ -22,11 +21,10 @@ const logger = require('../libs/logger');
 // Routes: due to limitations of netlify functions, we need to import routes here
 // ------------------------------------------------------------------------------
 const { decode } = require('../libs/jwt');
-const { walletHandlers, swapHandlers, agentHandlers, wallet } = require('../libs/auth');
-const { getAccountStateOptions } = require('../libs/util');
+const { walletHandlers, swapHandlers, agentHandlers } = require('../libs/auth');
 
 const netlifyPrefix = '/.netlify/functions/app';
-const isProduction = process.env.NODE_ENV === 'production';
+const isProduction = process.env.NODE_ENV === 'production' || !!process.env.BLOCKLET_APP_ID;
 const isNetlify = process.env.NETLIFY && JSON.parse(process.env.NETLIFY);
 
 if (!process.env.MONGO_URI) {
@@ -149,39 +147,17 @@ require('../routes/orders').init(router);
 require('../routes/charge').init(router);
 require('../routes/assets').init(router);
 
-// Check for application account
-ForgeSDK.getAccountState({ address: wallet.address }, getAccountStateOptions)
-  .then(res => {
-    if (!res.state) {
-      console.log('\n----------');
-      console.error('Application account not declared on chain, abort!');
-      console.error('Please run `node tools/declare.js` then start the application again');
-      console.log('----------\n');
-      process.exit(1);
-    } else {
-      console.error('Application account declared on chain');
-    }
-  })
-  .catch(err => {
-    console.error(err);
-    console.log('\n----------');
-    console.error('Application account check failed, abort!');
-    console.log('----------\n');
-    process.exit(1);
-  });
-
-// ------------------------------------------------------
-// This is required by netlify functions
-// ------------------------------------------------------
 if (isProduction) {
   if (isNetlify) {
     app.use(netlifyPrefix, router);
   } else {
+    const staticDir = process.env.BLOCKLET_APP_ID ? './' : '../../';
+
     app.use(compression());
     app.use(router);
-    app.use(express.static(path.resolve(__dirname, '../../build'), { maxAge: '365d', index: false }));
+    app.use(express.static(path.resolve(__dirname, staticDir, 'build'), { maxAge: '365d', index: false }));
     app.get('*', nocache(), (req, res) => {
-      res.send(fs.readFileSync(path.resolve(__dirname, '../../build/index.html')).toString());
+      res.send(fs.readFileSync(path.resolve(__dirname, staticDir, 'build/index.html')).toString());
     });
   }
   app.use((req, res) => {

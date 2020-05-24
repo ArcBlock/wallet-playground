@@ -50,8 +50,8 @@ export default function MiniPage() {
             <PlaygroundAction
               action="receive_local_token"
               className="action"
-              amount={400}
-              title={`Get 400 ${token.local.symbol}`}
+              amount={20}
+              title={`Get 20 ${token.local.symbol}`}
             />
           </div>
         </section>
@@ -68,16 +68,16 @@ export default function MiniPage() {
               title="Exchange Currency"
               className="action"
               buttonVariant="contained"
-              buttonText={`Buy 1 ${token.foreign.symbol} with 195.8 ${token.local.symbol}`}
-              exchangeRate={195.8}
+              buttonText={`Buy 1 ${token.foreign.symbol} with 19.58 ${token.local.symbol}`}
+              exchangeRate={19.58}
             />
             <PlaygroundAction
               action="exchange_to_local_token"
               title="Exchange Currency"
               className="action"
               buttonVariant="contained"
-              buttonText={`Sell 1 ${token.foreign.symbol} for 195.8 ${token.local.symbol}`}
-              exchangeRate={195.8}
+              buttonText={`Sell 1 ${token.foreign.symbol} for 19.58 ${token.local.symbol}`}
+              exchangeRate={19.58}
             />
           </div>
         </section>

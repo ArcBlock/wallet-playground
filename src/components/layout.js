@@ -2,8 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import BaseLayout from '@arcblock/ux/lib/Layout';
 
-import env from '../libs/env';
-
 export default function Layout({ title, children, contentOnly }) {
   const getExplorerUrl = (chainHost, type) => {
     if (window.env) {
@@ -27,16 +25,21 @@ export default function Layout({ title, children, contentOnly }) {
     { url: 'https://www.arcblock.io/en/try-identity-now/', title: 'Demos' },
   ];
 
-  if (env.chainHost) {
-    links.push({ url: getExplorerUrl(env.chainHost, 'local'), title: 'Local Chain' });
+  if (window.env.chainHost) {
+    links.push({ url: getExplorerUrl(window.env.chainHost, 'local'), title: 'Local Chain' });
   }
-  if (env.assetChainHost) {
-    links.push({ url: getExplorerUrl(env.assetChainHost, 'foreign'), title: 'Foreign Chain' });
+  if (window.env.assetChainHost) {
+    links.push({ url: getExplorerUrl(window.env.assetChainHost, 'foreign'), title: 'Foreign Chain' });
   }
   links.push({ url: 'https://github.com/ArcBlock/wallet-playground', title: 'GitHub' });
 
   return (
-    <BaseLayout title={title} brand={env.appName} links={links} contentOnly={contentOnly} baseUrl={env.baseUrl}>
+    <BaseLayout
+      title={title}
+      brand={window.env.appName}
+      links={links}
+      contentOnly={contentOnly}
+      baseUrl={window.env.baseUrl}>
       {children}
     </BaseLayout>
   );

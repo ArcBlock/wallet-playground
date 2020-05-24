@@ -18,6 +18,7 @@ module.exports = {
     'react/no-unescaped-entities': 'off',
     'react/sort-comp': 'off',
     'object-curly-newline': 'off',
+    'operator-linebreak': 'off',
     'class-methods-use-this': 'off',
     'max-len': [
       'error',
