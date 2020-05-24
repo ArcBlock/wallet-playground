@@ -1,3 +1,7 @@
+## 1.1.0 (May 24, 2020)
+
+- fix: publish config
+
 ## 1.0.0 (May 24, 2020)
 
 - feat: add pre-start script to fund the app
