@@ -57,9 +57,9 @@ setenv:
 	@echo "Setup .env file..."
 	@echo "SKIP_PREFLIGHT_CHECK=true" > .env
 
-precommit: setenv dep lint build test
+precommit: dep lint build test
 
-travis: init coverage
+travis: setenv init coverage
 
 travis-deploy:
 	@echo "Deploy the software by travis"
