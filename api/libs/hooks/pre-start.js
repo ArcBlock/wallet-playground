@@ -1,48 +1,90 @@
+/* eslint-disable no-plusplus */
+/* eslint-disable no-await-in-loop */
 /* eslint-disable no-console */
 require('dotenv').config();
 
 const ForgeSDK = require('@arcblock/forge-sdk');
+const { verifyTxAsync, verifyAccountAsync } = require('@arcblock/tx-util');
+const batchPromises = require('batch-promises');
+const range = require('lodash/range');
 
 const { wallet } = require('../auth');
 const { getAccountStateOptions } = require('../util');
 const env = require('../env');
 
+// Check for application account
+const ensureAccountDeclared = async chainId => {
+  const { state } = await ForgeSDK.getAccountState(
+    { address: wallet.address },
+    { ...getAccountStateOptions, conn: chainId }
+  );
+  if (!state) {
+    console.error('Application account not declared on chain');
+
+    const app = ForgeSDK.Wallet.fromJSON(wallet);
+    const hash = await ForgeSDK.declare(
+      {
+        moniker: 'abt_wallet_playground',
+        wallet: app,
+      },
+      { conn: chainId }
+    );
+
+    console.log(`Application declared on chain ${chainId}`, hash);
+    return { balance: 0, address: wallet.address };
+  }
+
+  return state;
+};
+
+const ensureAccountFunded = async (chainId, chainHost) => {
+  const { state } = await ForgeSDK.getAccountState(
+    { address: wallet.address },
+    { ...getAccountStateOptions, conn: chainId }
+  );
+
+  // console.log('application account state', state);
+
+  const balance = await ForgeSDK.fromUnitToToken(state.balance, { conn: chainId });
+  console.info(`application account balance on chain ${chainId} is ${balance}`);
+  const amount = 250;
+  if (+balance < amount) {
+    const limit = amount / 25;
+    await batchPromises(5, range(1, limit + 1), async () => {
+      const slave = ForgeSDK.Wallet.fromRandom();
+      try {
+        await ForgeSDK.declare({ moniker: 'sweeper', wallet: slave }, { conn: chainId });
+        await verifyAccountAsync({ chainId, chainHost, address: slave.toAddress() });
+        const hash = await ForgeSDK.checkin({ wallet: slave }, { conn: chainId });
+        await verifyTxAsync({ chainId, chainHost, hash });
+        await ForgeSDK.transfer({ to: wallet.address, token: 25, wallet: slave }, { conn: chainId });
+        console.info('Collect success', slave.toAddress());
+      } catch (err) {
+        console.error('Collect failed', err);
+      }
+    });
+    console.info(`Application account funded with another ${amount}`);
+  } else {
+    console.info(`Application account balance greater than ${amount}`);
+  }
+};
+
 (async () => {
   try {
-    // Check for application account
-    const { state } = await ForgeSDK.getAccountState({ address: wallet.address }, getAccountStateOptions);
-    if (!state) {
-      console.error('Application account not declared on chain, abort!');
+    if (env.chainId) {
+      await ensureAccountDeclared(env.chainId);
+      await verifyAccountAsync({ chainId: env.chainId, chainHost: env.chainHost, address: wallet.address });
+      await ensureAccountFunded(env.chainId, env.chainHost);
+    }
 
-      const app = ForgeSDK.Wallet.fromJSON(wallet);
-      let hash = await ForgeSDK.declare(
-        {
-          moniker: 'abt_wallet_playground',
-          wallet: app,
-        },
-        { conn: env.chainId }
-      );
-
-      console.log(`Application declared on chain ${env.chainId}`, hash);
-
-      if (env.assetChainId) {
-        hash = await ForgeSDK.declare(
-          {
-            moniker: 'abt_wallet_playground',
-            wallet: app,
-          },
-          { conn: env.assetChainId }
-        );
-        console.log(`Application declared on chain ${env.assetChainId}`, hash);
-      }
-
-      process.exit(0);
-    } else {
-      console.error('Application account declared on chain');
+    if (env.assetChainId) {
+      await ensureAccountDeclared(env.assetChainId);
+      await verifyAccountAsync({ chainId: env.assetChainId, chainHost: env.assetChainHost, address: wallet.address });
+      await ensureAccountFunded(env.assetChainId, env.assetChainHost);
     }
   } catch (err) {
-    console.error(err);
-    console.error('Application account check failed, abort!');
-    process.exit(1);
+    console.error('wallet-playground pre-start error', err);
   }
+
+  process.exit(0);
 })();
