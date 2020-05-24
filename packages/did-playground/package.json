@@ -21,8 +21,8 @@
   },
   "scripts": {
     "lint": "eslint src tests",
-    "build": "babel src --out-dir lib --copy-files",
-    "watch": "babel src --out-dir lib -w --copy-files",
+    "build": "../../node_modules/.bin/babel src --out-dir lib --copy-files",
+    "watch": "../../node_modules/.bin/babel src --out-dir lib -w --copy-files",
     "precommit": "CI=1 yarn test",
     "prepush": "CI=1 yarn test",
     "prepublish": "npm run build",
