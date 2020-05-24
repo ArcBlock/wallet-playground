@@ -53,7 +53,11 @@ lint:
 	@echo "Linting the software..."
 	@lerna run lint
 
-precommit: dep lint build test
+setenv:
+	@echo "Setup .env file..."
+	@echo "SKIP_PREFLIGHT_CHECK=true" > .env
+
+precommit: setenv dep lint build test
 
 travis: init coverage
 
