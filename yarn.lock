@@ -2,6 +2,11 @@
 # yarn lockfile v1
 
 
+"@abtnode/util@^0.6.0":
+  version "0.6.0"
+  resolved "https://registry.npm.taobao.org/@abtnode/util/download/@abtnode/util-0.6.0.tgz#311f7676c151d97e1b252958f31d090d61a678b9"
+  integrity sha1-MR92dsFR2X4bJSlY8x0JDWGmeLk=
+
 "@arcblock/client-extension@^1.2.13":
   version "1.2.13"
   resolved "https://registry.npm.taobao.org/@arcblock/client-extension/download/@arcblock/client-extension-1.2.13.tgz#7621103ee60998598a532a3201b53d4fc848363f"
@@ -62,7 +67,7 @@
     lodash.get "^4.4.2"
 
 "@arcblock/did-playground@./packages/did-playground":
-  version "0.93.1"
+  version "1.4.1"
   dependencies:
     "@arcblock/did-react" "^0.77.6"
     "@arcblock/react-hooks" "^0.77.0"

@@ -2,6 +2,7 @@
 /* eslint-disable no-await-in-loop */
 /* eslint-disable no-console */
 require('dotenv').config();
+require('@abtnode/util/lib/error-handler');
 
 const ForgeSDK = require('@arcblock/forge-sdk');
 const { verifyTxAsync, verifyAccountAsync } = require('@arcblock/tx-util');
@@ -60,7 +61,7 @@ const ensureAccountFunded = async (chainId, chainHost) => {
         await ForgeSDK.transfer({ to: wallet.address, token: 25, wallet: slave }, { conn: chainId });
         console.info('Collect success', slave.toAddress());
       } catch (err) {
-        console.error('Collect failed', err);
+        console.info('Collect failed', err);
       }
     });
     console.info(`Application account funded with another ${amount}`);
@@ -82,9 +83,9 @@ const ensureAccountFunded = async (chainId, chainHost) => {
       await verifyAccountAsync({ chainId: env.assetChainId, chainHost: env.assetChainHost, address: wallet.address });
       await ensureAccountFunded(env.assetChainId, env.assetChainHost);
     }
+    process.exit(0);
   } catch (err) {
     console.error('wallet-playground pre-start error', err);
+    process.exit(1);
   }
-
-  process.exit(0);
 })();
