@@ -13,7 +13,7 @@
     "access": "public",
     "directory": "_blocklet/"
   },
-  "version": "1.4.3",
+  "version": "1.4.4",
   "author": "wangshijun <shijun@arcblock.io> https://github.com/wangshijun",
   "keywords": [
     "dapp",
@@ -32,7 +32,7 @@
     "@abtnode/util": "^0.6.0",
     "@arcblock/did": "^1.2.13",
     "@arcblock/did-agent-storage-mongo": "^1.2.7",
-    "@arcblock/did-auth": "^1.2.15",
+    "@arcblock/did-auth": "^1.2.17",
     "@arcblock/did-auth-storage-mongo": "^1.2.7",
     "@arcblock/did-playground": "./packages/did-playground",
     "@arcblock/did-react": "^0.77.7",
