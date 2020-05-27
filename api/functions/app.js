@@ -62,6 +62,7 @@ if (isProduction && !isNetlify) {
   walletHandlers.on('failed', data => data && eventServer.dispatch('auth', data));
 }
 
+app.set('trust proxy', true);
 app.use(cookieParser());
 app.use(bodyParser.json({ limit: '1 mb' }));
 app.use(bodyParser.urlencoded({ extended: true, limit: '1 mb' }));
@@ -148,18 +149,19 @@ require('../routes/charge').init(router);
 require('../routes/assets').init(router);
 
 if (isProduction) {
+  app.use(compression());
   if (isNetlify) {
     app.use(netlifyPrefix, router);
   } else {
-    const staticDir = process.env.BLOCKLET_APP_ID ? './' : '../../';
-
-    app.use(compression());
     app.use(router);
-    app.use(express.static(path.resolve(__dirname, staticDir, 'build'), { maxAge: '365d', index: false }));
-    app.get('*', nocache(), (req, res) => {
-      res.send(fs.readFileSync(path.resolve(__dirname, staticDir, 'build/index.html')).toString());
-    });
   }
+
+  const staticDir = process.env.BLOCKLET_APP_ID ? './' : '../../';
+  app.use(express.static(path.resolve(__dirname, staticDir, 'build'), { maxAge: '365d', index: false }));
+  app.get('*', nocache(), (req, res) => {
+    res.send(fs.readFileSync(path.resolve(__dirname, staticDir, 'build/index.html')).toString());
+  });
+
   app.use((req, res) => {
     res.status(404).send('404 NOT FOUND');
   });

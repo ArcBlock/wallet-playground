@@ -38,7 +38,7 @@ const isNetlify = process.env.NETLIFY && JSON.parse(process.env.NETLIFY);
 const icon = 'https://releases.arcblockio.cn/dapps/labs.png';
 const walletAuth = new WalletAuthenticator({
   wallet,
-  baseUrl: isNetlify ? env.baseUrl.replace('/.netlify/functions/app', '') : env.baseUrl,
+  baseUrl: env.baseUrl,
   appInfo: {
     name: env.appName,
     description: env.appDescription,
@@ -68,8 +68,8 @@ const agentAuth = new AgentAuthenticator({
   appInfo: {
     name: 'Agent Service',
     description: 'This is a demo agent service that can do did-auth on be-half-of another application',
-    icon,
-    link: isNetlify ? env.baseUrl.replace(netlifyPrefix, '') : env.baseUrl,
+    icon: env.appIcon || icon,
+    link: env.appLink || (isNetlify ? env.baseUrl.replace(netlifyPrefix, '') : env.baseUrl.replace('3030', '3000')),
   },
   chainInfo: {
     host: env.chainHost,
