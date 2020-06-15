@@ -1,3 +1,7 @@
+## 1.4.5 (June 15, 2020)
+
+
+
 ## 1.4.4 (May 27, 2020)
 
 - chore: adopt latest did-auth library

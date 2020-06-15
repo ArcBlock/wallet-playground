@@ -1,5 +1,6 @@
 {
   "name": "wallet-playground",
+  "title": "Wallet Playground",
   "description": "A simple playground that shows the potential of ABT Wallet V2",
   "files": [
     "blocklet.js",
@@ -13,7 +14,7 @@
     "access": "public",
     "directory": "_blocklet/"
   },
-  "version": "1.4.4",
+  "version": "1.4.5",
   "author": "wangshijun <shijun@arcblock.io> https://github.com/wangshijun",
   "keywords": [
     "dapp",
