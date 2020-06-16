@@ -4,7 +4,19 @@ const path = require('path');
 const packageFile = path.join(__dirname, '../package.json');
 const packageJson = JSON.parse(fs.readFileSync(packageFile).toString());
 
-const { name, version, description, publishConfig, files, keywords, author, repository, bugs, blocklet } = packageJson;
+const {
+  name,
+  version,
+  description,
+  title,
+  publishConfig,
+  files,
+  keywords,
+  author,
+  repository,
+  bugs,
+  blocklet,
+} = packageJson;
 
 fs.writeFileSync(
   packageFile,
@@ -13,6 +25,7 @@ fs.writeFileSync(
       name,
       version,
       description,
+      title,
       publishConfig,
       files,
       keywords,

@@ -14,7 +14,7 @@
     "access": "public",
     "directory": "_blocklet/"
   },
-  "version": "1.4.5",
+  "version": "1.4.6",
   "author": "wangshijun <shijun@arcblock.io> https://github.com/wangshijun",
   "keywords": [
     "dapp",
