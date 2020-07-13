@@ -49,30 +49,30 @@
   resolved "https://registry.npm.taobao.org/@arcblock/did-auth-storage/download/@arcblock/did-auth-storage-1.2.7.tgz#9b7cdf65850982a2f38f2c5b48cbc49a0f3032bf"
   integrity sha1-m3zfZYUJgqLzjyxbSMvEmg8wMr8=
 
-"@arcblock/did-auth@^1.3.3":
-  version "1.3.3"
-  resolved "https://registry.npm.taobao.org/@arcblock/did-auth/download/@arcblock/did-auth-1.3.3.tgz#5e28bc6ecc720cb3da78463df299b959eb8dad3e"
-  integrity sha1-Xii8bsxyDLPaeEY98pm5WeuNrT4=
+"@arcblock/did-auth@^1.3.4":
+  version "1.3.4"
+  resolved "https://registry.yarnpkg.com/@arcblock/did-auth/-/did-auth-1.3.4.tgz#17503e318bbac361c36ae9fcfc52303b90712dfd"
+  integrity sha512-4J1JG0zmxcgo3Mg30NYLEwmAicF1ZzqgrIOPKco735K+d/aLKPEqOsofRBwU8iorgHyimxiFevWpJjfJNGu7hg==
   dependencies:
     "@arcblock/did" "^1.3.3"
-    "@arcblock/forge-sdk" "^1.3.3"
+    "@arcblock/forge-sdk" "^1.3.4"
     "@arcblock/forge-util" "^1.2.13"
     "@arcblock/forge-wallet" "^1.3.3"
     "@arcblock/mcrypto" "^1.2.13"
-    "@arcblock/swap-retriever" "^1.3.3"
-    "@arcblock/tx-util" "^1.3.3"
+    "@arcblock/swap-retriever" "^1.3.4"
+    "@arcblock/tx-util" "^1.3.4"
     axios "^0.19.0"
     debug "^4.1.1"
     json-stable-stringify "^1.0.1"
     lodash.get "^4.4.2"
 
 "@arcblock/did-playground@./packages/did-playground":
-  version "1.4.7"
+  version "1.4.8"
   dependencies:
     "@arcblock/did-react" "^0.78.1"
     "@arcblock/react-hooks" "^0.78.0"
     "@arcblock/ux" "^0.78.0"
-    "@material-ui/core" "^4.9.1"
+    "@material-ui/core" "^4.11.0"
     axios "^0.19.2"
     core-js "^3.6.4"
     mustache "^4.0.0"
@@ -160,16 +160,16 @@
     google-auth-library "^6.0.1"
     lodash "^4.17.15"
 
-"@arcblock/forge-sdk@^1.3.3":
-  version "1.3.3"
-  resolved "https://registry.npm.taobao.org/@arcblock/forge-sdk/download/@arcblock/forge-sdk-1.3.3.tgz#1a4a14b208ea93cea5418997b503960f5ba77f50"
-  integrity sha1-GkoUsgjqk86lQYmXtQOWD1unf1A=
+"@arcblock/forge-sdk@^1.3.4":
+  version "1.3.4"
+  resolved "https://registry.yarnpkg.com/@arcblock/forge-sdk/-/forge-sdk-1.3.4.tgz#69f51da8cfcab11b444624b8715518b245e80390"
+  integrity sha512-Xe11BKz8qPPIHje+xUxVEc2lqgkHuZ38hzgCZW7BTIBRJi6q9+LHPSLEh9G94G+clXjyw4t55jObPryY4voqfw==
   dependencies:
     "@arcblock/did-util" "^1.3.3"
     "@arcblock/forge-message" "^1.3.1"
     "@arcblock/forge-util" "^1.2.13"
     "@arcblock/forge-wallet" "^1.3.3"
-    "@arcblock/graphql-client" "^1.3.3"
+    "@arcblock/graphql-client" "^1.3.4"
     "@arcblock/grpc-client" "^1.3.3"
     debug "^4.1.1"
     react-app-polyfill "^1.0.1"
@@ -195,10 +195,10 @@
     "@arcblock/mcrypto" "^1.2.13"
     lodash.upperfirst "^4.3.1"
 
-"@arcblock/graphql-client@^1.3.3":
-  version "1.3.3"
-  resolved "https://registry.npm.taobao.org/@arcblock/graphql-client/download/@arcblock/graphql-client-1.3.3.tgz#31ad77f3905bd2980d7dd0d5a3ed7baa8be566ae"
-  integrity sha1-Ma1385Bb0pgNfdDVo+17qovlZq4=
+"@arcblock/graphql-client@^1.3.4":
+  version "1.3.4"
+  resolved "https://registry.yarnpkg.com/@arcblock/graphql-client/-/graphql-client-1.3.4.tgz#e92e16765549ab81a13491377f1665d0d6a71fd3"
+  integrity sha512-el8hBCkLldXwh/fmfuejQwxiLMXfdmWiD+T8DbrMi2yHYzH6+hyHHC5Ckdy4nsWVZ386U6Ph+e1gs0Om7O2FqA==
   dependencies:
     "@arcblock/client-extension" "^1.3.3"
     "@arcblock/sdk-util" "^0.28.2"
@@ -238,28 +238,28 @@
     randombytes "^2.0.6"
     tweetnacl "^1.0.1"
 
-"@arcblock/nft-template@^1.3.3":
-  version "1.3.3"
-  resolved "https://registry.npm.taobao.org/@arcblock/nft-template/download/@arcblock/nft-template-1.3.3.tgz#adcd141a9474548fc17b2ce0999c417a3ffbf081"
-  integrity sha1-rc0UGpR0VI/BeyzgmZxBej/78IE=
+"@arcblock/nft-template@^1.3.4":
+  version "1.3.4"
+  resolved "https://registry.yarnpkg.com/@arcblock/nft-template/-/nft-template-1.3.4.tgz#6d79bc76b077409836759ea3a29589e303921181"
+  integrity sha512-u011M4nGsFl2Xx1plf0odFtODUbxIIadB2ltqcS04sE4fHGYW0iB7yjFyH0rH+02iGRbiZ+CPMQ9gbNvY+f+6g==
   dependencies:
     "@arcblock/did" "^1.3.3"
     "@arcblock/forge-util" "^1.2.13"
     "@arcblock/forge-wallet" "^1.3.3"
     "@arcblock/mcrypto" "^1.2.13"
-    "@arcblock/nft" "^1.3.3"
+    "@arcblock/nft" "^1.3.4"
     debug "^4.1.1"
     lodash "^4.17.14"
     pako "^1.0.11"
 
-"@arcblock/nft@^1.3.3":
-  version "1.3.3"
-  resolved "https://registry.npm.taobao.org/@arcblock/nft/download/@arcblock/nft-1.3.3.tgz#ed3c3880016e074ae24316ec7c56b495c722c6d3"
-  integrity sha1-7Tw4gAFuB0riQxbsfFa0lccixtM=
+"@arcblock/nft@^1.3.4":
+  version "1.3.4"
+  resolved "https://registry.yarnpkg.com/@arcblock/nft/-/nft-1.3.4.tgz#aecf9a3fa5c8acd9d35f32955aeeb16d685e853e"
+  integrity sha512-U22LFlQybEWttWNOOOjprHP9ntiaYutyrDx/Lw3Yus/bVshg60byHyRhQgcOIH4UZKDkbo28nSMVbP5HsVd7dQ==
   dependencies:
-    "@arcblock/forge-sdk" "^1.3.3"
+    "@arcblock/forge-sdk" "^1.3.4"
     "@arcblock/forge-wallet" "^1.3.3"
-    "@arcblock/vc" "^1.3.3"
+    "@arcblock/vc" "^1.3.4"
     debug "^4.1.1"
     json-stable-stringify "^1.0.1"
     lodash "^4.17.15"
@@ -285,13 +285,13 @@
     lodash.get "^4.4.2"
     lodash.set "^4.3.2"
 
-"@arcblock/swap-retriever@^1.3.3":
-  version "1.3.3"
-  resolved "https://registry.npm.taobao.org/@arcblock/swap-retriever/download/@arcblock/swap-retriever-1.3.3.tgz#062577f63da4a5dcadeeaddd12b6e4ea14cf1de7"
-  integrity sha1-BiV39j2kpdyt7q3dErbk6hTPHec=
+"@arcblock/swap-retriever@^1.3.4":
+  version "1.3.4"
+  resolved "https://registry.yarnpkg.com/@arcblock/swap-retriever/-/swap-retriever-1.3.4.tgz#f5a0855eaa337122eb1d94a4bc2445241fb0bfa6"
+  integrity sha512-HWhJATvgZyy5dGXCRz2yOc9B9WJUSYoK4BfJizSIUbZrWvq0XvPBxnV9YdFiIEMscyusbS1U30nb1VbV2EybNg==
   dependencies:
-    "@arcblock/forge-sdk" "^1.3.3"
-    "@arcblock/tx-util" "^1.3.3"
+    "@arcblock/forge-sdk" "^1.3.4"
+    "@arcblock/tx-util" "^1.3.4"
     debug "^4.1.1"
     lodash "^4.17.15"
 
@@ -308,12 +308,12 @@
   resolved "https://registry.npm.taobao.org/@arcblock/swap-storage/download/@arcblock/swap-storage-1.2.7.tgz#87909a5d3267e635ecdafb858eff26d5d4258ada"
   integrity sha1-h5CaXTJn5jXs2vuFjv8m1dQlito=
 
-"@arcblock/tx-util@^1.3.3":
-  version "1.3.3"
-  resolved "https://registry.npm.taobao.org/@arcblock/tx-util/download/@arcblock/tx-util-1.3.3.tgz#c52a88c21966a1405e8f99a5da8cb5db493dbc1e"
-  integrity sha1-xSqIwhlmoUBej5ml2oy120k9vB4=
+"@arcblock/tx-util@^1.3.4":
+  version "1.3.4"
+  resolved "https://registry.yarnpkg.com/@arcblock/tx-util/-/tx-util-1.3.4.tgz#e36d57d78a1de3323f7de75fd528247eedbc06ec"
+  integrity sha512-hm8T34c0llMHM1GmaAzhiTCPF2Ixs5SVanAC7ofZeeyGVcS+OznJDuiBam6lBZ3ONx/x+eKIOuInUCDrKpCTNw==
   dependencies:
-    "@arcblock/forge-sdk" "^1.3.3"
+    "@arcblock/forge-sdk" "^1.3.4"
     debug "^4.1.1"
 
 "@arcblock/ux@^0.78.0":
@@ -349,10 +349,10 @@
     xterm-addon-fit "^0.2.1"
     xterm-addon-web-links "^0.2.1"
 
-"@arcblock/vc@^1.3.3":
-  version "1.3.3"
-  resolved "https://registry.npm.taobao.org/@arcblock/vc/download/@arcblock/vc-1.3.3.tgz#76bb827db9f117049c7c31a7ebc8b178cabedb12"
-  integrity sha1-druCfbnxFwScfDGn68ixeMq+2xI=
+"@arcblock/vc@^1.3.4":
+  version "1.3.4"
+  resolved "https://registry.yarnpkg.com/@arcblock/vc/-/vc-1.3.4.tgz#27b7baadd4196c2f5c26c3a56c27fbdd9d3fc4b5"
+  integrity sha512-rHoiRiGkO4aqI/GNGQUC2ZkhksrdUjK6R+vgZMF5rmx6KdIHxKhMm8ErG6p3kscRlaGeyWMG5elO0kTLEGeblw==
   dependencies:
     "@arcblock/did" "^1.3.3"
     "@arcblock/forge-util" "^1.2.13"
@@ -2401,7 +2401,7 @@
     npmlog "^4.1.2"
     write-file-atomic "^2.3.0"
 
-"@material-ui/core@^4.10.1":
+"@material-ui/core@4.10.2", "@material-ui/core@^4.10.1":
   version "4.10.2"
   resolved "https://registry.npm.taobao.org/@material-ui/core/download/@material-ui/core-4.10.2.tgz#0ef78572132fcef1a25f6969bce0d34652d42e31"
   integrity sha1-DveFchMvzvGiX2lpvODTRlLULjE=
@@ -2419,24 +2419,23 @@
     react-is "^16.8.0"
     react-transition-group "^4.4.0"
 
-"@material-ui/core@^4.9.1", "@material-ui/core@^4.9.7":
-  version "4.9.11"
-  resolved "https://registry.npm.taobao.org/@material-ui/core/download/@material-ui/core-4.9.11.tgz#02f45f4dbea6db191fdc0d993323d64cfae613fd"
-  integrity sha1-AvRfTb6m2xkf3A2ZMyPWTPrmE/0=
+"@material-ui/core@^4.11.0":
+  version "4.11.0"
+  resolved "https://registry.yarnpkg.com/@material-ui/core/-/core-4.11.0.tgz#b69b26e4553c9e53f2bfaf1053e216a0af9be15a"
+  integrity sha512-bYo9uIub8wGhZySHqLQ833zi4ZML+XCBE1XwJ8EuUVSpTWWG57Pm+YugQToJNFsEyiKFhPh8DPD0bgupz8n01g==
   dependencies:
     "@babel/runtime" "^7.4.4"
-    "@material-ui/react-transition-group" "^4.2.0"
-    "@material-ui/styles" "^4.9.10"
-    "@material-ui/system" "^4.9.10"
-    "@material-ui/types" "^5.0.1"
-    "@material-ui/utils" "^4.9.6"
+    "@material-ui/styles" "^4.10.0"
+    "@material-ui/system" "^4.9.14"
+    "@material-ui/types" "^5.1.0"
+    "@material-ui/utils" "^4.10.2"
     "@types/react-transition-group" "^4.2.0"
     clsx "^1.0.4"
     hoist-non-react-statics "^3.3.2"
-    popper.js "^1.16.1-lts"
+    popper.js "1.16.1-lts"
     prop-types "^15.7.2"
     react-is "^16.8.0"
-    react-transition-group "^4.3.0"
+    react-transition-group "^4.4.0"
 
 "@material-ui/icons@4.5.1":
   version "4.5.1"
@@ -2444,16 +2443,6 @@
   integrity sha1-aWO60TnpOHAuzoXKQwZ2iAGPBPg=
   dependencies:
     "@babel/runtime" "^7.4.4"
-
-"@material-ui/react-transition-group@^4.2.0":
-  version "4.3.0"
-  resolved "https://registry.npm.taobao.org/@material-ui/react-transition-group/download/@material-ui/react-transition-group-4.3.0.tgz#92529142addb5cc179dbf42d246c7e3fe4d6104b"
-  integrity sha1-klKRQq3bXMF52/QtJGx+P+TWEEs=
-  dependencies:
-    "@babel/runtime" "^7.5.5"
-    dom-helpers "^5.0.1"
-    loose-envify "^1.4.0"
-    prop-types "^15.6.2"
 
 "@material-ui/styles@^4.10.0":
   version "4.10.0"
@@ -2477,37 +2466,6 @@
     jss-plugin-vendor-prefixer "^10.0.3"
     prop-types "^15.7.2"
 
-"@material-ui/styles@^4.9.10":
-  version "4.9.10"
-  resolved "https://registry.npm.taobao.org/@material-ui/styles/download/@material-ui/styles-4.9.10.tgz#182ccdd0bc8525a459486499bbaebcd92b0db3ab"
-  integrity sha1-GCzN0LyFJaRZSGSZu6682SsNs6s=
-  dependencies:
-    "@babel/runtime" "^7.4.4"
-    "@emotion/hash" "^0.8.0"
-    "@material-ui/types" "^5.0.1"
-    "@material-ui/utils" "^4.9.6"
-    clsx "^1.0.2"
-    csstype "^2.5.2"
-    hoist-non-react-statics "^3.3.2"
-    jss "^10.0.3"
-    jss-plugin-camel-case "^10.0.3"
-    jss-plugin-default-unit "^10.0.3"
-    jss-plugin-global "^10.0.3"
-    jss-plugin-nested "^10.0.3"
-    jss-plugin-props-sort "^10.0.3"
-    jss-plugin-rule-value-function "^10.0.3"
-    jss-plugin-vendor-prefixer "^10.0.3"
-    prop-types "^15.7.2"
-
-"@material-ui/system@^4.9.10":
-  version "4.9.10"
-  resolved "https://registry.npm.taobao.org/@material-ui/system/download/@material-ui/system-4.9.10.tgz#5de6ec7bea0f222b10b45e5bd5bb8b9a7b938926"
-  integrity sha1-Xebse+oPIisQtF5b1buLmnuTiSY=
-  dependencies:
-    "@babel/runtime" "^7.4.4"
-    "@material-ui/utils" "^4.9.6"
-    prop-types "^15.7.2"
-
 "@material-ui/system@^4.9.14":
   version "4.9.14"
   resolved "https://registry.npm.taobao.org/@material-ui/system/download/@material-ui/system-4.9.14.tgz#4b00c48b569340cefb2036d0596b93ac6c587a5f"
@@ -2517,11 +2475,6 @@
     "@material-ui/utils" "^4.9.6"
     csstype "^2.5.2"
     prop-types "^15.7.2"
-
-"@material-ui/types@^5.0.1":
-  version "5.0.1"
-  resolved "https://registry.npm.taobao.org/@material-ui/types/download/@material-ui/types-5.0.1.tgz#c4954063cdc196eb327ee62c041368b1aebb6d61"
-  integrity sha1-xJVAY83BlusyfuYsBBNosa67bWE=
 
 "@material-ui/types@^5.1.0":
   version "5.1.0"
@@ -4720,7 +4673,7 @@ clone@^1.0.2:
   resolved "https://registry.npm.taobao.org/clone/download/clone-1.0.4.tgz#da309cc263df15994c688ca902179ca3c7cd7c7e"
   integrity sha1-2jCcwmPfFZlMaIypAheco8fNfH4=
 
-clsx@^1.0.2, clsx@^1.0.4:
+clsx@^1.0.4:
   version "1.1.0"
   resolved "https://registry.npm.taobao.org/clsx/download/clsx-1.1.0.tgz#62937c6adfea771247c34b54d320fb99624f5702"
   integrity sha1-YpN8at/qdxJHw0tU0yD7mWJPVwI=
@@ -11701,11 +11654,6 @@ popper.js@1.16.1-lts:
   resolved "https://registry.npm.taobao.org/popper.js/download/popper.js-1.16.1-lts.tgz#cf6847b807da3799d80ee3d6d2f90df8a3f50b05"
   integrity sha1-z2hHuAfaN5nYDuPW0vkN+KP1CwU=
 
-popper.js@^1.16.1-lts:
-  version "1.16.1"
-  resolved "https://registry.npm.taobao.org/popper.js/download/popper.js-1.16.1.tgz#2a223cb3dc7b6213d740e40372be40de43e65b1b"
-  integrity sha1-KiI8s9x7YhPXQOQDcr5A3kPmWxs=
-
 portfinder@^1.0.25:
   version "1.0.25"
   resolved "https://registry.npm.taobao.org/portfinder/download/portfinder-1.0.25.tgz#254fd337ffba869f4b9d37edc298059cb4d35eca"
@@ -12865,16 +12813,6 @@ react-side-effect@^1.1.0:
   integrity sha1-DpQMePq6DHO5sOupzT3ajft+fa4=
   dependencies:
     shallowequal "^1.0.1"
-
-react-transition-group@^4.3.0:
-  version "4.3.0"
-  resolved "https://registry.npm.taobao.org/react-transition-group/download/react-transition-group-4.3.0.tgz?cache=0&sync_timestamp=1583076886991&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Freact-transition-group%2Fdownload%2Freact-transition-group-4.3.0.tgz#fea832e386cf8796c58b61874a3319704f5ce683"
-  integrity sha1-/qgy44bPh5bFi2GHSjMZcE9c5oM=
-  dependencies:
-    "@babel/runtime" "^7.5.5"
-    dom-helpers "^5.0.1"
-    loose-envify "^1.4.0"
-    prop-types "^15.6.2"
 
 react-transition-group@^4.4.0:
   version "4.4.1"

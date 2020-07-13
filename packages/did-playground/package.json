@@ -36,7 +36,7 @@
     "@arcblock/did-react": "^0.78.1",
     "@arcblock/react-hooks": "^0.78.0",
     "@arcblock/ux": "^0.78.0",
-    "@material-ui/core": "^4.9.1",
+    "@material-ui/core": "^4.11.0",
     "axios": "^0.19.2",
     "core-js": "^3.6.4",
     "mustache": "^4.0.0",
