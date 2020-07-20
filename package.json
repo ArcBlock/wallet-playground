@@ -16,6 +16,7 @@
   ],
   "version": "1.4.10",
   "author": "wangshijun <shijun@arcblock.io> https://github.com/wangshijun",
+  "homepage": ".",
   "keywords": [
     "dapp",
     "playground",
@@ -158,7 +159,8 @@
     "config_url": "",
     "public_url": "/",
     "hooks": {
-      "pre-start": "node api/libs/hooks/pre-start.js"
+      "pre-start": "node api/libs/hooks/pre-start.js",
+      "pre-deploy": "npm run bundle"
     },
     "hookFiles": [
       "api/libs/hooks/pre-start.js"
