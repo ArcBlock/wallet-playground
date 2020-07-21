@@ -17,11 +17,13 @@ export default function Layout({ title, children, contentOnly }) {
     return `${host}/node/explorer/txs`;
   };
 
+  const apiPrefix = (window.env.apiPrefix || '/').replace(/^\/+/, '').replace(/\/+$/, '');
+
   const links = [
-    { url: '/', title: 'Home' },
-    { url: '/profile', title: 'Profile' },
-    { url: '/full', title: 'Everything' },
-    { url: '/orders', title: 'Orders' },
+    { url: `/${apiPrefix}/`, title: 'Home' },
+    { url: `/${apiPrefix}/profile`, title: 'Profile' },
+    { url: `/${apiPrefix}/full`, title: 'Everything' },
+    { url: `/${apiPrefix}/orders`, title: 'Orders' },
     { url: 'https://www.arcblock.io/en/try-identity-now/', title: 'Demos' },
   ];
 

@@ -1,3 +1,8 @@
+## 1.4.11 (July 20, 2020)
+
+- make wallet playground adapter latest abt node
+- fit latest abtnode
+
 ## 1.4.10 (July 13, 2020)
 
 

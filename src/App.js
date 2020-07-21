@@ -58,7 +58,7 @@ export const App = () => (
 const WrappedApp = withRouter(App);
 
 export default () => (
-  <Router>
+  <Router basename={window.env.apiPrefix}>
     <WrappedApp />
   </Router>
 );

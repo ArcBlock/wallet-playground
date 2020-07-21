@@ -71,5 +71,6 @@ module.exports = {
     process.env.NF_API_PREFIX ||
     process.env.API_PREFIX ||
     process.env.apiPrefix ||
+    process.env.BLOCKLET_PREFIX ||
     '',
 };
