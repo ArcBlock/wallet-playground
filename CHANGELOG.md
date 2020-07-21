@@ -1,3 +1,7 @@
+## 1.4.12 (July 21, 2020)
+
+- fix apiprefix issue
+
 ## 1.4.11 (July 20, 2020)
 
 - make wallet playground adapter latest abt node
