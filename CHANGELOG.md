@@ -1,3 +1,7 @@
+## 1.7.0 (July 22, 2020)
+
+- fix: blocklet publish config
+
 ## 1.6.0 (July 22, 2020)
 
 
