@@ -3,7 +3,8 @@
   "title": "Wallet Playground",
   "description": "A simple playground that shows the potential of ABT Wallet V2",
   "publishConfig": {
-    "access": "public"
+    "access": "public",
+    "directory": "_blocklet/"
   },
   "files": [
     "api",
