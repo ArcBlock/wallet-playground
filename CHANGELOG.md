@@ -1,3 +1,7 @@
+## 1.6.0 (July 22, 2020)
+
+
+
 ## 1.5.0 (July 22, 2020)
 
 - fix: netlify build error
