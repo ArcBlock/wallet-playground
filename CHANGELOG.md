@@ -1,3 +1,7 @@
+## 1.5.0 (July 22, 2020)
+
+- fix: netlify build error
+
 ## 1.4.12 (July 21, 2020)
 
 - fix apiprefix issue
