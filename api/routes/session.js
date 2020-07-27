@@ -20,7 +20,6 @@ module.exports = {
           balance: {},
         });
       } catch (e) {
-        console.error('did.session', e);
         return res.json({});
       }
     });
@@ -31,7 +30,7 @@ module.exports = {
     });
 
     app.get('/api/env', (req, res) => {
-      res.type('script');
+      res.type('js');
       res.send(`window.env = ${JSON.stringify(env, null, 2)}`);
     });
   },
