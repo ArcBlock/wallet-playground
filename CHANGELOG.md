@@ -1,3 +1,7 @@
+## 1.7.1 (July 27, 2020)
+
+- update mime type
+
 ## 1.7.0 (July 22, 2020)
 
 - fix: blocklet publish config
