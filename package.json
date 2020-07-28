@@ -33,10 +33,11 @@
     "email": "shijun@arcblock.io"
   },
   "dependencies": {
+    "@abtnode/router-adapter": "^0.8.7",
     "@abtnode/util": "^0.6.0",
     "@arcblock/did": "^1.3.3",
     "@arcblock/did-agent-storage-mongo": "^1.2.7",
-    "@arcblock/did-auth": "^1.3.7",
+    "@arcblock/did-auth": "^1.3.8",
     "@arcblock/did-auth-storage-mongo": "^1.2.7",
     "@arcblock/did-playground": "./packages/did-playground",
     "@arcblock/did-react": "^0.78.2",
@@ -71,6 +72,7 @@
     "dsbridge": "^3.1.4",
     "express": "^4.17.1",
     "express-bearer-token": "^2.4.0",
+    "express-history-api-fallback": "^2.2.1",
     "file-stream-rotator": "^0.5.7",
     "http-proxy-middleware": "^0.19.1",
     "ip": "^1.1.5",

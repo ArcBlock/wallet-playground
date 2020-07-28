@@ -1,7 +1,6 @@
 /* eslint-disable object-curly-newline */
 /* eslint-disable no-console */
 // require('../libs/contracts/create_movie_ticket_contract/.compiled/create_movie_ticket/javascript/index');
-const fs = require('fs');
 const path = require('path');
 const http = require('http');
 const cors = require('cors');
@@ -12,9 +11,10 @@ const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const bearerToken = require('express-bearer-token');
+const fallback = require('express-history-api-fallback');
 const compression = require('compression');
-const nocache = require('nocache');
 const EventServer = require('@arcblock/event-server');
+const getRouterAdapter = require('@abtnode/router-adapter');
 const logger = require('../libs/logger');
 
 // ------------------------------------------------------------------------------
@@ -154,13 +154,13 @@ if (isProduction) {
     app.use(netlifyPrefix, router);
   } else {
     app.use(router);
-  }
 
-  const staticDir = process.env.BLOCKLET_APP_ID ? './' : '../../';
-  app.use(express.static(path.resolve(__dirname, staticDir, 'build'), { maxAge: '365d', index: false }));
-  app.get('*', nocache(), (req, res) => {
-    res.send(fs.readFileSync(path.resolve(__dirname, staticDir, 'build/index.html')).toString());
-  });
+    app.use(getRouterAdapter());
+    const staticDir = process.env.BLOCKLET_APP_ID ? './' : '../../';
+    const staticDirNew = path.resolve(__dirname, staticDir, 'build');
+    app.use(express.static(staticDirNew, { maxAge: '365d', index: false }));
+    app.use(fallback('index.html', { root: staticDirNew }));
+  }
 
   app.use((req, res) => {
     res.status(404).send('404 NOT FOUND');
