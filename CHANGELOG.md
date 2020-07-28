@@ -1,3 +1,7 @@
+## 1.7.2 (July 28, 2020)
+
+- update fix netlify version
+
 ## 1.7.1 (July 27, 2020)
 
 - update mime type

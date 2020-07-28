@@ -28,7 +28,7 @@ const GlobalStyle = createGlobalStyle`
 export const App = () => (
   <MuiThemeProvider theme={theme}>
     <ThemeProvider theme={theme}>
-      <SessionProvider serviceHost={window.env.apiPrefix} autoLogin>
+      <SessionProvider serviceHost={window.env && window.env.apiPrefix ? window.env.apiPrefix : '/'} autoLogin>
         {({ session }) => {
           if (session.loading) {
             return <CircularProgress />;
@@ -57,8 +57,14 @@ export const App = () => (
 
 const WrappedApp = withRouter(App);
 
-export default () => (
-  <Router basename={window.env.apiPrefix}>
-    <WrappedApp />
-  </Router>
-);
+export default () => {
+  let basename = '/';
+  if (window.env && window.env.apiPrefix) {
+    basename = (window.env.apiPrefix.indexOf('.netlify/')) > -1 ? '/' : window.env.apiPrefix;
+  }
+  return (
+    <Router basename={basename}>
+      <WrappedApp />
+    </Router>
+  );
+};
