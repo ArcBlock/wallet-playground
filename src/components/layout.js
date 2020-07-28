@@ -17,8 +17,12 @@ export default function Layout({ title, children, contentOnly }) {
     return `${host}/node/explorer/txs`;
   };
 
-  let apiPrefix = (window.env.apiPrefix || '').replace(/^\/+/, '').replace(/\/+$/, '');
+  let prefix = '/';
+  if (window.env && window.env.apiPrefix) {
+    prefix = (window.env.apiPrefix.indexOf('.netlify/')) > -1 ? '/' : window.env.apiPrefix;
+  }
 
+  let apiPrefix = prefix.replace(/^\/+/, '').replace(/\/+$/, '');
   if (apiPrefix) {
     apiPrefix = `/${apiPrefix}`;
   }
