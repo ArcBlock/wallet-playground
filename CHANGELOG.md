@@ -1,3 +1,7 @@
+## 1.7.3 (August 14, 2020)
+
+- update blocklet
+
 ## 1.7.2 (July 28, 2020)
 
 - update fix netlify version
