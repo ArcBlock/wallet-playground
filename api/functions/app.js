@@ -14,7 +14,6 @@ const bearerToken = require('express-bearer-token');
 const fallback = require('express-history-api-fallback');
 const compression = require('compression');
 const EventServer = require('@arcblock/event-server');
-const getRouterAdapter = require('@abtnode/router-adapter');
 const logger = require('../libs/logger');
 
 // ------------------------------------------------------------------------------
@@ -154,11 +153,17 @@ if (isProduction) {
     app.use(netlifyPrefix, router);
   } else {
     app.use(router);
+    if (process.env.BLOCKLET_DID) {
+      app.use(`/${process.env.BLOCKLET_DID}`, router);
+    }
 
-    app.use(getRouterAdapter());
+
     const staticDir = process.env.BLOCKLET_APP_ID ? './' : '../../';
     const staticDirNew = path.resolve(__dirname, staticDir, 'build');
     app.use(express.static(staticDirNew, { maxAge: '365d', index: false }));
+    if (process.env.BLOCKLET_DID) {
+      app.use(`/${process.env.BLOCKLET_DID}`, express.static(staticDirNew, { maxAge: '365d', index: false }));
+    }
     app.use(fallback('index.html', { root: staticDirNew }));
   }
 

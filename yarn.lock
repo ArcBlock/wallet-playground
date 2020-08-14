@@ -2,7 +2,7 @@
 # yarn lockfile v1
 
 
-"@abtnode/router-adapter@^0.8.5", "@abtnode/router-adapter@^0.8.7":
+"@abtnode/router-adapter@^0.8.5":
   version "0.8.7"
   resolved "https://registry.npm.taobao.org/@abtnode/router-adapter/download/@abtnode/router-adapter-0.8.7.tgz#3bec12cca071020eb54b61b40589fc7f5643539a"
   integrity sha1-O+wSzKBxAg61S2G0BYn8f1ZDU5o=
@@ -76,7 +76,7 @@
     lodash.get "^4.4.2"
 
 "@arcblock/did-playground@./packages/did-playground":
-  version "1.7.1"
+  version "1.7.2"
   dependencies:
     "@arcblock/did-react" "^0.78.2"
     "@arcblock/react-hooks" "^0.78.0"

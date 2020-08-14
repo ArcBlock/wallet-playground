@@ -1,3 +1,4 @@
+/* eslint-disable prefer-destructuring */
 import React from 'react';
 import { MuiThemeProvider } from '@material-ui/core/styles';
 import { createGlobalStyle, ThemeProvider } from 'styled-components';
@@ -25,10 +26,17 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
+let apiPrefix = '/';
+if (window.blocklet && window.blocklet.prefix) {
+  apiPrefix = window.blocklet.prefix;
+} else if (window.env && window.env.apiPrefix) {
+  apiPrefix = window.env.apiPrefix;
+}
+
 export const App = () => (
   <MuiThemeProvider theme={theme}>
     <ThemeProvider theme={theme}>
-      <SessionProvider serviceHost={window.env && window.env.apiPrefix ? window.env.apiPrefix : '/'} autoLogin>
+      <SessionProvider serviceHost={apiPrefix} autoLogin>
         {({ session }) => {
           if (session.loading) {
             return <CircularProgress />;
@@ -59,9 +67,15 @@ const WrappedApp = withRouter(App);
 
 export default () => {
   let basename = '/';
+
   if (window.env && window.env.apiPrefix) {
-    basename = (window.env.apiPrefix.indexOf('.netlify/')) > -1 ? '/' : window.env.apiPrefix;
+    basename = window.env.apiPrefix.indexOf('.netlify/') > -1 ? '/' : window.env.apiPrefix;
   }
+
+  if (window.blocklet && window.blocklet.prefix) {
+    basename = window.blocklet.prefix;
+  }
+
   return (
     <Router basename={basename}>
       <WrappedApp />

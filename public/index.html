@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <base href="/" />
     <meta charset="utf-8" />
-    <link rel="shortcut icon" href="favicon.ico" />
+    <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
     <!--
@@ -11,8 +10,9 @@
       user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
     -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@arcblock/did-logo@0.50.0/style.css" />
-    <link rel="manifest" href="manifest.json" />
-    <script src="%REACT_APP_API_PREFIX%api/env" type="text/javascript"></script>
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <script src="__meta__.js"></script>
+    <script src="%PUBLIC_URL%/api/env" type="text/javascript"></script>
     <!--
       Notice the use of %PUBLIC_URL% in the tags above.
       It will be replaced with the URL of the `public` folder during the build.
