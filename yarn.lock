@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@abtnode/router-adapter@^0.8.5":
-  version "0.8.7"
-  resolved "https://registry.npm.taobao.org/@abtnode/router-adapter/download/@abtnode/router-adapter-0.8.7.tgz#3bec12cca071020eb54b61b40589fc7f5643539a"
-  integrity sha1-O+wSzKBxAg61S2G0BYn8f1ZDU5o=
+"@abtnode/router-adapter@^0.9.0":
+  version "0.9.7"
+  resolved "https://registry.npmjs.org/@abtnode/router-adapter/-/router-adapter-0.9.7.tgz#1cc7d088de4931d0ea97655644dec97aa0a6a09b"
+  integrity sha512-gnV3MVGpuIK1PgUpXA9McmMKv9aiBjmDSuswJKrWh0T615Xuhlu9YsQcjdwvOLs5vgJoEaluNH+IK9kuvrAJzg==
   dependencies:
     cheerio "^1.0.0-rc.3"
     mime "^2.4.6"
@@ -57,26 +57,26 @@
   resolved "https://registry.npm.taobao.org/@arcblock/did-auth-storage/download/@arcblock/did-auth-storage-1.2.7.tgz#9b7cdf65850982a2f38f2c5b48cbc49a0f3032bf"
   integrity sha1-m3zfZYUJgqLzjyxbSMvEmg8wMr8=
 
-"@arcblock/did-auth@^1.3.8":
-  version "1.3.8"
-  resolved "https://registry.npm.taobao.org/@arcblock/did-auth/download/@arcblock/did-auth-1.3.8.tgz#319dccee2a69599953a10ebb23cc7bfe0f3009aa"
-  integrity sha1-MZ3M7ippWZlToQ67I8x7/g8wCao=
+"@arcblock/did-auth@^1.3.10":
+  version "1.3.10"
+  resolved "https://registry.npmjs.org/@arcblock/did-auth/-/did-auth-1.3.10.tgz#06cc62ab9d52e6a02e7e5c3f80625b0f8163beba"
+  integrity sha512-HOzeSx3dzbpZokglOVYXqvK8S7uJ7dMklqLHOxrz7mu/JDfuN1tBdBCoQJMeLKuIK+vRw4PJrcvwEk4PP4QAQg==
   dependencies:
-    "@abtnode/router-adapter" "^0.8.5"
+    "@abtnode/router-adapter" "^0.9.0"
     "@arcblock/did" "^1.3.3"
-    "@arcblock/forge-sdk" "^1.3.7"
+    "@arcblock/forge-sdk" "^1.3.10"
     "@arcblock/forge-util" "^1.2.13"
     "@arcblock/forge-wallet" "^1.3.3"
     "@arcblock/mcrypto" "^1.2.13"
-    "@arcblock/swap-retriever" "^1.3.7"
-    "@arcblock/tx-util" "^1.3.7"
+    "@arcblock/swap-retriever" "^1.3.10"
+    "@arcblock/tx-util" "^1.3.10"
     axios "^0.19.0"
     debug "^4.1.1"
     json-stable-stringify "^1.0.1"
     lodash.get "^4.4.2"
 
 "@arcblock/did-playground@./packages/did-playground":
-  version "1.7.2"
+  version "1.7.3"
   dependencies:
     "@arcblock/did-react" "^0.78.2"
     "@arcblock/react-hooks" "^0.78.0"
@@ -96,6 +96,23 @@
     "@arcblock/event-client" "^1.0.23"
     "@arcblock/react-hooks" "^0.78.0"
     "@arcblock/ux" "^0.78.2"
+    "@material-ui/core" "^4.10.1"
+    axios "^0.19.2"
+    core-js "^3.6.4"
+    dsbridge "3.1.4"
+    qrcode.react "^1.0.0"
+    react-load-script "^0.0.6"
+    react-use "^13.22.4"
+    styled-components "^5.0.0"
+
+"@arcblock/did-react@^0.78.4":
+  version "0.78.4"
+  resolved "https://registry.npmjs.org/@arcblock/did-react/-/did-react-0.78.4.tgz#6594c8a8feb47e33ff3b1d4b4d8402bb9d484d90"
+  integrity sha512-Yd24VtPQfXTR9osQp2rwtna4omZILYLq6lghaZaS5vshb4EI3q3jVEFlW1Vb6cKr563fyYBN8tDKKdd6mGgOAg==
+  dependencies:
+    "@arcblock/event-client" "^1.0.23"
+    "@arcblock/react-hooks" "^0.78.0"
+    "@arcblock/ux" "^0.78.4"
     "@material-ui/core" "^4.10.1"
     axios "^0.19.2"
     core-js "^3.6.4"
@@ -169,10 +186,10 @@
     google-auth-library "^6.0.1"
     lodash "^4.17.15"
 
-"@arcblock/forge-sdk@^1.3.7":
-  version "1.3.7"
-  resolved "https://registry.yarnpkg.com/@arcblock/forge-sdk/-/forge-sdk-1.3.7.tgz#e4cfa0226e0dc1a4fe14b343168f0e8f7c6b264e"
-  integrity sha512-PiiiJbERA8PZphMAPK+UTLGCur7QRzQIxMnLVdsiFk8ac0nFBUTMF46z9IZTjLU5oNpsV/E+dTdZoo7i8SzDmw==
+"@arcblock/forge-sdk@^1.3.10":
+  version "1.3.10"
+  resolved "https://registry.npmjs.org/@arcblock/forge-sdk/-/forge-sdk-1.3.10.tgz#f2b947df03ffd92191f7ea9502763ac9689fa72b"
+  integrity sha512-QAdRSOL+cmA6w0X4uuNYh4NlW2BCo6cMHMz1bwTP8kwBD+CIWgo/XM0lmpWHIjp+jepFkGh4cRDFYM3vM1GdIA==
   dependencies:
     "@arcblock/did-util" "^1.3.3"
     "@arcblock/forge-message" "^1.3.1"
@@ -247,26 +264,26 @@
     randombytes "^2.0.6"
     tweetnacl "^1.0.1"
 
-"@arcblock/nft-template@^1.3.7":
-  version "1.3.7"
-  resolved "https://registry.yarnpkg.com/@arcblock/nft-template/-/nft-template-1.3.7.tgz#5d7b188880f310225f9c277d9d79831229c36fa3"
-  integrity sha512-FU58owm4Il6paA6ClsyMeKz5h8GvrpfGnSmyAtvETR+d0ZbFMdcd8MRlCSrOIf3S6CsEyAxx2WKrpjV/8k9Axg==
+"@arcblock/nft-template@^1.3.10":
+  version "1.3.10"
+  resolved "https://registry.npmjs.org/@arcblock/nft-template/-/nft-template-1.3.10.tgz#6bb6a032a1043f24ffa4d34ad1f81de7c0bf7c32"
+  integrity sha512-jpLhIt7a8L+eAlxXJMtQsvqOAnFvlSRtQLIW5fH3m8LjqlBAo6bydRoJK6EWelYgmUBZP0kVSXu3W2rpujcDVA==
   dependencies:
     "@arcblock/did" "^1.3.3"
     "@arcblock/forge-util" "^1.2.13"
     "@arcblock/forge-wallet" "^1.3.3"
     "@arcblock/mcrypto" "^1.2.13"
-    "@arcblock/nft" "^1.3.7"
+    "@arcblock/nft" "^1.3.10"
     debug "^4.1.1"
     lodash "^4.17.14"
     pako "^1.0.11"
 
-"@arcblock/nft@^1.3.7":
-  version "1.3.7"
-  resolved "https://registry.yarnpkg.com/@arcblock/nft/-/nft-1.3.7.tgz#93306d93a5e5a76cdced58e00db8df4e9c9d991c"
-  integrity sha512-MEWbQ5EdQIagh+yIImdZMH/+km3a6KLKK5zkUmKKJP60TfO+Fl+NNt8DBgUKbi7owq5yjtjT5itktbRgCdrlLg==
+"@arcblock/nft@^1.3.10":
+  version "1.3.10"
+  resolved "https://registry.npmjs.org/@arcblock/nft/-/nft-1.3.10.tgz#f6a617b4c1f968d26a0ce39baa6bdb47e827302d"
+  integrity sha512-5P4pizwQP3wlYqc8dQ1TEhIB2GKHLJ8LXLvA0OzkclvAo5iaok4W/4Zys787kWDFchZQJLa+U9ViMtx7iwfLjA==
   dependencies:
-    "@arcblock/forge-sdk" "^1.3.7"
+    "@arcblock/forge-sdk" "^1.3.10"
     "@arcblock/forge-wallet" "^1.3.3"
     "@arcblock/vc" "^1.3.4"
     debug "^4.1.1"
@@ -294,13 +311,13 @@
     lodash.get "^4.4.2"
     lodash.set "^4.3.2"
 
-"@arcblock/swap-retriever@^1.3.7":
-  version "1.3.7"
-  resolved "https://registry.yarnpkg.com/@arcblock/swap-retriever/-/swap-retriever-1.3.7.tgz#b0f0ec5c92b6e8d932500857fb3b43e00a4ee9f6"
-  integrity sha512-zk327sjypiGBEH7PRx3YQFqhM/a8Fm2Hq43ex8WCYcmzewv79E8lbRfM5SC6uJWbyCXJc9OFmsOTIIzeVMhjjA==
+"@arcblock/swap-retriever@^1.3.10":
+  version "1.3.10"
+  resolved "https://registry.npmjs.org/@arcblock/swap-retriever/-/swap-retriever-1.3.10.tgz#f6c3b08e05040920edf284c9bf2a55db7719e124"
+  integrity sha512-sYz1ay53L2ueh9B03AQrhLnh2YF9KoulLU3sXEmwZX4x0KAbRuGaANXm+pANjqaTEdi4FjXjyQqQhHxur61XOA==
   dependencies:
-    "@arcblock/forge-sdk" "^1.3.7"
-    "@arcblock/tx-util" "^1.3.7"
+    "@arcblock/forge-sdk" "^1.3.10"
+    "@arcblock/tx-util" "^1.3.10"
     debug "^4.1.1"
     lodash "^4.17.15"
 
@@ -317,12 +334,12 @@
   resolved "https://registry.npm.taobao.org/@arcblock/swap-storage/download/@arcblock/swap-storage-1.2.7.tgz#87909a5d3267e635ecdafb858eff26d5d4258ada"
   integrity sha1-h5CaXTJn5jXs2vuFjv8m1dQlito=
 
-"@arcblock/tx-util@^1.3.7":
-  version "1.3.7"
-  resolved "https://registry.yarnpkg.com/@arcblock/tx-util/-/tx-util-1.3.7.tgz#c28c7bd8cef3eb61555ee655444f4fba33dfad68"
-  integrity sha512-ibt0RfeKnqAnbGiWfE5yECCi/utqAnci3rchPFHFCWGx812eVXV1tusnJLLgg09k0dKrStpGPCu1Dcw2Ol0h+w==
+"@arcblock/tx-util@^1.3.10":
+  version "1.3.10"
+  resolved "https://registry.npmjs.org/@arcblock/tx-util/-/tx-util-1.3.10.tgz#b8ab5d49690bc68cd7716197b842e468c156382e"
+  integrity sha512-UyKAy3CZZayJidDEvTDrZdUSQdr1nL7yfEXNgy029E6+QK6bqsNCc3qMhtvg0xm7EgCJ3NXnnPLrn3CKRq0xFA==
   dependencies:
-    "@arcblock/forge-sdk" "^1.3.7"
+    "@arcblock/forge-sdk" "^1.3.10"
     debug "^4.1.1"
 
 "@arcblock/ux@^0.78.2":
@@ -346,6 +363,40 @@
     highlight.js "^9.15.8"
     js-cookie "^2.2.0"
     react-helmet "^5.2.1"
+    react-load-script "^0.0.6"
+    react-player "^1.15.2"
+    react-router-dom "^5.1.2"
+    react-use "^13.22.4"
+    rebound "^0.1.0"
+    styled-components "^5.0.0"
+    topojson-client "^3.0.0"
+    versor "^0.0.4"
+    xterm "4.1.0"
+    xterm-addon-fit "^0.2.1"
+    xterm-addon-web-links "^0.2.1"
+
+"@arcblock/ux@^0.78.4":
+  version "0.78.4"
+  resolved "https://registry.npmjs.org/@arcblock/ux/-/ux-0.78.4.tgz#5ef45e89a40995eace052ad644144db1dc0ce4b8"
+  integrity sha512-cJrTijz29ESukrh/LRSMh7RTyL6NJ9Dmq1K37D1IQxNfv2iJG+ul+Fyy+nK6KT/BjtwTSIVXk/jSJW8DPHi82w==
+  dependencies:
+    "@arcblock/react-hooks" "^0.78.0"
+    "@babel/plugin-syntax-dynamic-import" "^7.8.3"
+    "@material-ui/core" "^4.10.1"
+    "@material-ui/icons" "4.5.1"
+    axios "^0.19.2"
+    copy-to-clipboard "^3.2.0"
+    core-js "^3.6.4"
+    d3-geo "^1.11.6"
+    devices.css "^0.1.15"
+    graphiql "^0.13.2"
+    graphiql-code-exporter "^2.0.5"
+    graphiql-explorer "^0.4.3"
+    graphql "^14.6.0"
+    highlight.js "^9.15.8"
+    js-cookie "^2.2.0"
+    react-helmet "^5.2.1"
+    react-image "^4.0.3"
     react-load-script "^0.0.6"
     react-player "^1.15.2"
     react-router-dom "^5.1.2"
@@ -12744,6 +12795,11 @@ react-helmet@^5.2.1:
     prop-types "^15.5.4"
     react-fast-compare "^2.0.2"
     react-side-effect "^1.1.0"
+
+react-image@^4.0.3:
+  version "4.0.3"
+  resolved "https://registry.npmjs.org/react-image/-/react-image-4.0.3.tgz#6fa722877660b67295298a914bff1ed87ad2cf83"
+  integrity sha512-19MUK9u1qaw9xys8XEsVkSpVhHctEBUeYFvrLTe1PN+4w5Co13AN2WA7xtBshPM6SthsOj77SlDrEAeOaJpf7g==
 
 react-is@^16.6.0, react-is@^16.7.0, react-is@^16.8.0, react-is@^16.8.1, react-is@^16.8.4:
   version "16.13.1"

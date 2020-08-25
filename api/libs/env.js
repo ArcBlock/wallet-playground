@@ -5,14 +5,13 @@ module.exports = {
     process.env.GATSBY_CHAIN_ID ||
     process.env.CHAIN_ID ||
     process.env.chainId ||
-    'liberia',
+    'local-chain',
   chainHost:
     process.env.LOCAL_CHAIN_HOST ||
     process.env.REACT_APP_CHAIN_HOST ||
     process.env.GATSBY_CHAIN_HOST ||
     process.env.CHAIN_HOST ||
-    process.env.chainHost ||
-    'https://lbd.abtnetwork.io/api',
+    process.env.chainHost,
   chainHostZh:
     process.env.LOCAL_CHAIN_HOST_ZH ||
     process.env.REACT_APP_CHAIN_HOST_ZH ||
@@ -25,14 +24,13 @@ module.exports = {
     process.env.GATSBY_ASSET_CHAIN_ID ||
     process.env.ASSET_CHAIN_ID ||
     process.env.assetChainId ||
-    'ausd',
+    'foreign-chain',
   assetChainHost:
     process.env.FOREIGN_CHAIN_HOST ||
     process.env.REACT_APP_ASSET_CHAIN_HOST ||
     process.env.GATSBY_ASSET_CHAIN_HOST ||
     process.env.ASSET_CHAIN_HOST ||
-    process.env.assetChainHost ||
-    'https://ausd.abtnetwork.io/api',
+    process.env.assetChainHost,
   assetChainHostZh:
     process.env.FOREIGN_CHAIN_HOST_ZH ||
     process.env.REACT_APP_ASSET_CHAIN_HOST_ZH ||
@@ -59,12 +57,7 @@ module.exports = {
     process.env.appDescription ||
     'Sample application shows what you can build upon ArcBlock technologies',
   baseUrl:
-    process.env.BLOCKLET_BASE_URL ||
-    process.env.REACT_APP_BASE_URL ||
-    process.env.GATSBY_BASE_URL ||
-    process.env.BASE_URL ||
-    process.env.baseUrl ||
-    '',
+    process.env.REACT_APP_BASE_URL || process.env.GATSBY_BASE_URL || process.env.BASE_URL || process.env.baseUrl || '',
   apiPrefix:
     process.env.REACT_APP_API_PREFIX ||
     process.env.GATSBY_API_PREFIX ||
