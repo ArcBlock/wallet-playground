@@ -8,6 +8,12 @@ build: init
 	@yarn link @arcblock/did-playground
 	@yarn build
 
+build-netlify: build patch-netlify
+
+patch-netlify:
+	@echo "Patching index.html for netlify"
+	@sed -i -e "s#/api/env#/.netlify/functions/app/api/env#g" build/index.html
+
 deploy-aliyun:
 	@echo "Building the software..."
 	@git pull origin master
