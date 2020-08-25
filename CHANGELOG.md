@@ -1,3 +1,7 @@
+## 1.8.1 (August 25, 2020)
+
+- fix: netlify build
+
 ## 1.8.0 (August 25, 2020)
 
 - chore: remove default value for chains

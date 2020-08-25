@@ -57,10 +57,10 @@
   resolved "https://registry.npm.taobao.org/@arcblock/did-auth-storage/download/@arcblock/did-auth-storage-1.2.7.tgz#9b7cdf65850982a2f38f2c5b48cbc49a0f3032bf"
   integrity sha1-m3zfZYUJgqLzjyxbSMvEmg8wMr8=
 
-"@arcblock/did-auth@^1.3.10":
-  version "1.3.10"
-  resolved "https://registry.npmjs.org/@arcblock/did-auth/-/did-auth-1.3.10.tgz#06cc62ab9d52e6a02e7e5c3f80625b0f8163beba"
-  integrity sha512-HOzeSx3dzbpZokglOVYXqvK8S7uJ7dMklqLHOxrz7mu/JDfuN1tBdBCoQJMeLKuIK+vRw4PJrcvwEk4PP4QAQg==
+"@arcblock/did-auth@^1.3.11":
+  version "1.3.11"
+  resolved "https://registry.npmjs.org/@arcblock/did-auth/-/did-auth-1.3.11.tgz#5853e4ba303930bbaa4267dd58c9e3fd78062e6b"
+  integrity sha512-FkKy2stVG2EgQ0ibxQvAlY2V0qqKapEFnisRa6KhYxj626ejKsfqGkckkrz5NaLU8BApUAJILemiyaXZ+P2EJg==
   dependencies:
     "@abtnode/router-adapter" "^0.9.0"
     "@arcblock/did" "^1.3.3"
@@ -76,7 +76,7 @@
     lodash.get "^4.4.2"
 
 "@arcblock/did-playground@./packages/did-playground":
-  version "1.7.3"
+  version "1.8.0"
   dependencies:
     "@arcblock/did-react" "^0.78.4"
     "@arcblock/react-hooks" "^0.78.0"
