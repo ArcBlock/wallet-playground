@@ -1,3 +1,7 @@
+## 1.8.0 (August 25, 2020)
+
+- chore: remove default value for chains
+
 ## 1.7.3 (August 14, 2020)
 
 - update blocklet
