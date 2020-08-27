@@ -5,7 +5,6 @@ module.exports = {
   // externals: [nodeExternals()],
   resolve: {
     alias: {
-      grpc: require.resolve('./grpc.mock.js'),
       require_optional: require.resolve('./require-optional.mock.js'),
     },
   },
