@@ -1,3 +1,7 @@
+## 1.8.2 (August 27, 2020)
+
+- chore: remove grpc mock
+
 ## 1.8.1 (August 25, 2020)
 
 - fix: netlify build
