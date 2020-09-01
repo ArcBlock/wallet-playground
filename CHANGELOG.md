@@ -1,3 +1,7 @@
+## 1.8.4 (September 01, 2020)
+
+- fix typo
+
 ## 1.8.3 (September 01, 2020)
 
 - update blocklet md
