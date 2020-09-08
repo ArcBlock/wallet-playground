@@ -34,3 +34,4 @@ logs/
 blocklet.js
 _blocklet
 .env.dev
+*.db

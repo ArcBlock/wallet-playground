@@ -1,9 +1,9 @@
 /* eslint-disable no-console */
 const Mcrypto = require('@arcblock/mcrypto');
 const ForgeSDK = require('@arcblock/forge-sdk');
-const TokenMongoStorage = require('@arcblock/did-auth-storage-mongo');
-const AgentMongoStorage = require('@arcblock/did-agent-storage-mongo');
-const SwapMongoStorage = require('@arcblock/swap-storage-mongo');
+const TokenNedbStorage = require('@arcblock/did-auth-storage-nedb');
+const AgentNedbStorage = require('@arcblock/did-agent-storage-nedb');
+const SwapNedbStorage = require('@arcblock/swap-storage-nedb');
 const { NFTFactory } = require('@arcblock/nft');
 const { fromSecretKey, fromJSON, WalletType } = require('@arcblock/forge-wallet');
 const {
@@ -13,6 +13,7 @@ const {
   SwapHandlers,
   AgentWalletHandlers,
 } = require('@arcblock/did-auth');
+const path = require('path');
 const env = require('./env');
 
 const type = WalletType({
@@ -78,9 +79,36 @@ const agentAuth = new AgentAuthenticator({
   },
 });
 
-const tokenStorage = new TokenMongoStorage({ url: process.env.MONGO_URI });
-const swapStorage = new SwapMongoStorage({ url: process.env.MONGO_URI });
-const agentStorage = new AgentMongoStorage({ url: process.env.MONGO_URI });
+const tokenStorage = new TokenNedbStorage({
+  dbPath: path.join(process.env.BLOCKLET_DATA_DIR || './', 'auth.db'),
+  onload: err => {
+    if (err) {
+      console.error(
+        `Failed to load database from ${path.join(process.env.BLOCKLET_DATA_DIR || './', 'auth.db')}`,
+        err
+      );
+    }
+  },
+});
+const swapStorage = new SwapNedbStorage({
+  dbPath: path.join(process.env.BLOCKLET_DATA_DIR || './', 'swap.db'),
+  onload: err => {
+    if (err) {
+      console.error(`Failed to load database from ${path.join(process.env.BLOCKLET_DATA_DIR || './', 'swap.db')}`, err);
+    }
+  },
+});
+const agentStorage = new AgentNedbStorage({
+  dbPath: path.join(process.env.BLOCKLET_DATA_DIR || './', 'agent.db'),
+  onload: err => {
+    if (err) {
+      console.error(
+        `Failed to load database from ${path.join(process.env.BLOCKLET_DATA_DIR || './', 'agent.db')}`,
+        err
+      );
+    }
+  },
+});
 
 const walletHandlers = new WalletHandlers({
   authenticator: walletAuth,
