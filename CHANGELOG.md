@@ -1,3 +1,10 @@
+## 1.8.5 (September 09, 2020)
+
+- update blocklet
+- update yarn.lock
+- replace mongodb with nedb
+- remove mongo, use nedb
+
 ## 1.8.4 (September 01, 2020)
 
 - fix typo
