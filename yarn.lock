@@ -40,10 +40,29 @@
     mongodb "3.1.13"
     nedb "^1.8.0"
 
+"@arcblock/did-agent-storage-nedb@^1.2.7":
+  version "1.2.7"
+  resolved "https://registry.yarnpkg.com/@arcblock/did-agent-storage-nedb/-/did-agent-storage-nedb-1.2.7.tgz#fc97bea75393f30a7f01eee32b7462c1d57fc8b1"
+  integrity sha512-UhjA6W27z4MehTtYGZO/be+Fe289D7q5+Aou0lqE4cO224D3tanLE9Qw0zK3i1te3LiyDCKr5AEwv8mWu6LZyg==
+  dependencies:
+    "@arcblock/did-agent-storage" "^1.2.7"
+    debug "^4.1.1"
+    mongodb "3.1.13"
+    nedb "^1.8.0"
+
 "@arcblock/did-agent-storage@^1.2.7":
   version "1.2.7"
   resolved "https://registry.npm.taobao.org/@arcblock/did-agent-storage/download/@arcblock/did-agent-storage-1.2.7.tgz#8290575cbd856d122b5ac82c4859b72eae6c025a"
   integrity sha1-gpBXXL2FbRIrWsgsSFm3Lq5sAlo=
+
+"@arcblock/did-auth-storage-nedb@^1.2.7":
+  version "1.2.7"
+  resolved "https://registry.yarnpkg.com/@arcblock/did-auth-storage-nedb/-/did-auth-storage-nedb-1.2.7.tgz#5b2a547e13fbb282b3658c0bc4580d5ae4a9348a"
+  integrity sha512-gexKVFi3WzNI/tedgMuUqXX9lU1/uYdM3YvFqE2OwtyvFKf5v/vzmzimMc7rh/NlyLdoEPwiBb1WeReVv1DIPQ==
+  dependencies:
+    "@arcblock/did-auth-storage" "^1.2.7"
+    debug "^4.1.1"
+    nedb "^1.8.0"
 
 "@arcblock/did-auth-storage-nedb@^1.2.7":
   version "1.2.7"
@@ -305,6 +324,15 @@
     "@arcblock/tx-util" "^1.3.10"
     debug "^4.1.1"
     lodash "^4.17.15"
+
+"@arcblock/swap-storage-nedb@^1.2.7":
+  version "1.2.7"
+  resolved "https://registry.yarnpkg.com/@arcblock/swap-storage-nedb/-/swap-storage-nedb-1.2.7.tgz#d5c72b98f3b99b7c03096bab2e5072f44ef9d548"
+  integrity sha512-fmg21ZXQspK87NY/TdHMxm0jB6uwDGYflDs4PeC+MzAV/5pbpAnhfsNS8UtIzmxsb14BGUP2r/FB4iO+FowPkA==
+  dependencies:
+    "@arcblock/swap-storage" "^1.2.7"
+    debug "^4.1.1"
+    nedb "^1.8.0"
 
 "@arcblock/swap-storage-nedb@^1.2.7":
   version "1.2.7"
