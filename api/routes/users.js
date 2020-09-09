@@ -24,13 +24,12 @@ module.exports = {
           throw new Error('User not found');
         }
 
-        
         user.emailVerified = true;
         user.updatedAt = new Date();
-        await user.save();
+        await User.insert(user);
 
         logger.info('user.verify.success', req.params, result);
-        return res.json('verification success')
+        return res.json('verification success');
       } catch (err) {
         logger.error('user.verify.error', req.params);
         res.status(400).send(err.message);

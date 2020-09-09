@@ -1,16 +1,22 @@
-const mongoose = require('mongoose');
+/* eslint-disable no-underscore-dangle */
+const BaseState = require('./base');
 
-const UserSchema = new mongoose.Schema({
-  did: { type: String, required: true },
-  name: { type: String, required: true },
-  email: { type: String, default: '' },
-  emailVerified: { type: Boolean, default: false },
-  mobile: { type: String, default: '' },
-  extraDid: { type: Array, default: [] },
-  createdAt: { type: Date },
-  updatedAt: { type: Date },
-});
+class UserState extends BaseState {
+  constructor(options = {}) {
+    super(process.env.BLOCKLET_DATA_DIR || './', { filename: 'users.db', ...options });
+  }
 
-const User = mongoose.model('User', UserSchema);
+  async insert(user) {
+    return this.asyncDB.insert(user);
+  }
 
-module.exports = User;
+  async update(user) {
+    return this.asyncDB.update(user._id, { $set: user });
+  }
+
+  async findOne(condition) {
+    return this.asyncDB.findOne(condition);
+  }
+}
+
+module.exports = UserState;

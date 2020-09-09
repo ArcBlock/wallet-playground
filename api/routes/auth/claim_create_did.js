@@ -75,6 +75,6 @@ module.exports = {
     const user = await User.findOne({ did: sessionDid });
     user.extraDid = [userDid].concat(Array.isArray(user.extraDid) ? user.extraDid : []);
     user.markModified('extraDid');
-    await user.save();
+    await User.insert(user);
   },
 };

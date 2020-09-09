@@ -21,32 +21,34 @@ module.exports = {
     try {
       const profile = claims.find(x => x.type === 'profile');
       const exist = await User.findOne({ did: userDid });
+      console.log(exist);
       if (exist) {
         logger.info('update user', userDid, JSON.stringify(profile));
         exist.name = profile.fullName;
         exist.email = profile.email;
-        await exist.save();
+        await User.update(exist);
       } else {
         logger.info('create user', userDid, JSON.stringify(profile));
-        const user = new User({
+        const user = {
           did: userDid,
           name: profile.fullName,
           email: profile.email,
-        });
-        await user.save();
+        };
+        await User.insert(user);
       }
 
       // Generate new session token that client can save to localStorage
       const sessionToken = await login(userDid);
+      console.log(`sessionToken:${sessionToken}`);
       await storage.update(token, { did: userDid, sessionToken });
-      logger.error('login.onAuth.login', { userDid, sessionToken });
-
+      console.log(`sessionToken updated:${sessionToken}`);
       return {
         callbackParams: {
           loginToken: sessionToken,
         },
       };
     } catch (err) {
+      console.log(err);
       logger.error('login.onAuth.error', err);
     }
   },

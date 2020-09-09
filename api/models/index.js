@@ -1,2 +1,6 @@
-module.exports.User = require('./user');
-module.exports.VerificationToken = require('./verification_token');
+const User = require('./user');
+const VerificationToken = require('./verification_token');
+
+
+module.exports.User = new User();
+module.exports.VerificationToken = new VerificationToken();
