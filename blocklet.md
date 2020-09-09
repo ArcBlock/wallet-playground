@@ -11,12 +11,13 @@ A simple dapp that shows the full potential of what you can do when build with f
 
 ### 2. config the required environments
 
-#### 2.1 MONGO_URI
+#### 2.1 LOCAL_CHAIN_ID
 
-A valid MongoDB connection url like:
+A valid chain id, The `LOCAL_CHAIN_ID` and `LOCAL_CHAIN_HOST` are one-to-one, you can start a chain by `Blockchain Manager` blocklet, or you can use our test chain:
 
 ```
-mongodb://127.0.0.1:27017/wallet-playground
+// playground chain id:
+playground
 ```
 
 #### 2.2 LOCAL_CHAIN_HOST
@@ -28,31 +29,22 @@ A valid chain host, you can start a chain by `Blockchain Manager` blocklet, or y
 https://playground.network.arcblockio.cn/api
 ```
 
-#### 2.3 FOREIGN_CHAIN_HOST
-
-A valid chain host, you can start an another chain by `Blockchain Manager` blocklet, or you can use our another test chain:
-
-```
-// zinc chain host:
-https://zinc.network.arcblockio.cn/api
-```
-
-#### 2.4 LOCAL_CHAIN_ID
-
-A valid chain id, The `LOCAL_CHAIN_ID` and `LOCAL_CHAIN_HOST` are one-to-one, you can start a chain by `Blockchain Manager` blocklet, or you can use our test chain:
-
-```
-// playground chain id:
-playground
-```
-
-#### 2.5 FOREIGN_CHAIN_ID
+#### 2.3 FOREIGN_CHAIN_ID
 
 A valid chain id, The `FOREIGN_CHAIN_ID` and `FOREIGN_CHAIN_HOST` are one-to-one, you can start an another chain by `Blockchain Manager` blocklet, or you can use our another test chain:
 
 ```
 // zinc chain id:
 zinc-2019-05-17
+```
+
+#### 2.4 FOREIGN_CHAIN_HOST
+
+A valid chain host, you can start an another chain by `Blockchain Manager` blocklet, or you can use our another test chain:
+
+```
+// zinc chain host:
+https://zinc.network.arcblockio.cn/api
 ```
 
 ### 3. start the blocklet
