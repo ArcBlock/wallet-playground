@@ -1,3 +1,7 @@
+## 1.8.5 (September 10, 2020)
+
+- remove blocklet publish
+
 ## 1.8.4 (September 01, 2020)
 
 - fix typo
