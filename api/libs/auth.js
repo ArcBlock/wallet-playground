@@ -79,34 +79,28 @@ const agentAuth = new AgentAuthenticator({
   },
 });
 
+const dbOnload = (err, dbName) => {
+  if (err) {
+    console.error(`Failed to load database from ${path.join(process.env.BLOCKLET_DATA_DIR || './', dbName)}`, err);
+  }
+};
+
 const tokenStorage = new AuthNedbStorage({
   dbPath: path.join(process.env.BLOCKLET_DATA_DIR || './', 'auth.db'),
   onload: err => {
-    if (err) {
-      console.error(
-        `Failed to load database from ${path.join(process.env.BLOCKLET_DATA_DIR || './', 'auth.db')}`,
-        err
-      );
-    }
+    dbOnload(err, 'auth.db');
   },
 });
 const swapStorage = new SwapNedbStorage({
   dbPath: path.join(process.env.BLOCKLET_DATA_DIR || './', 'swap.db'),
   onload: err => {
-    if (err) {
-      console.error(`Failed to load database from ${path.join(process.env.BLOCKLET_DATA_DIR || './', 'swap.db')}`, err);
-    }
+    dbOnload(err, 'swap.db');
   },
 });
 const agentStorage = new AgentNedbStorage({
   dbPath: path.join(process.env.BLOCKLET_DATA_DIR || './', 'agent.db'),
   onload: err => {
-    if (err) {
-      console.error(
-        `Failed to load database from ${path.join(process.env.BLOCKLET_DATA_DIR || './', 'agent.db')}`,
-        err
-      );
-    }
+    dbOnload(err, 'agent.db');
   },
 });
 
