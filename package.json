@@ -2,7 +2,7 @@
   "name": "wallet-playground",
   "title": "Wallet Playground",
   "description": "A simple playground that shows the potential of ABT Wallet V2",
-  "version": "1.8.8",
+  "version": "1.8.9",
   "author": "wangshijun <shijun@arcblock.io> https://github.com/wangshijun",
   "keywords": [
     "dapp",
