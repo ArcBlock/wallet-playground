@@ -2,21 +2,7 @@
   "name": "wallet-playground",
   "title": "Wallet Playground",
   "description": "A simple playground that shows the potential of ABT Wallet V2",
-  "publishConfig": {
-    "access": "public",
-    "directory": "_blocklet/"
-  },
-  "files": [
-    "api",
-    "build",
-    "screenshots",
-    "logo.png",
-    "blocklet.md",
-    "blocklet.js",
-    "blocklet.json",
-    "README.md"
-  ],
-  "version": "1.8.8",
+  "version": "1.8.9",
   "author": "wangshijun <shijun@arcblock.io> https://github.com/wangshijun",
   "keywords": [
     "dapp",
@@ -110,11 +96,6 @@
     "build:client": "react-scripts build",
     "build:server:debug": "netlify-lambda build api/functions --config api/webpack.functions.js",
     "build:server": "NODE_ENV=production netlify-lambda build api/functions --config api/webpack.functions.js",
-    "bundle": "yarn clean && npm-run-all bundle:*",
-    "bundle:client": "PUBLIC_URL=\"/z8iZpn7gP9WJNUonEMq7zAoCbv4fMMqX8JasV\" REACT_APP_API_PREFIX=\"\" REACT_APP_APP_NAME=\"Wallet Playground\" yarn build:client",
-    "bundle:server": "DEBUG=@abtnode/* NODE_ENV=production abtnode bundle -w api/webpack.blocklet.js",
-    "bundle-server": "DEBUG=@abtnode/* NODE_ENV=development abtnode bundle -w api/webpack.blocklet.js",
-    "prepublishOnly": "npm run bundle && rm -f _blocklet/build/**/*.{js,css}.map && node scripts/prepare.js",
     "test": "react-scripts test",
     "echo": "export MESSAGE=$1 && echo $MESSAGE",
     "eject": "react-scripts eject"
@@ -150,55 +131,6 @@
     "netlify-lambda": "^1.4.13",
     "nodemon": "^1.19.1",
     "npm-run-all": "^4.1.5"
-  },
-  "blocklet": {
-    "group": "dapp",
-    "color": "secondary",
-    "logo": "logo.png",
-    "main": "api/index.js",
-    "provider": "arcblock",
-    "admin_url": "",
-    "config_url": "",
-    "public_url": "/",
-    "hooks": {
-      "pre-start": "node api/libs/hooks/pre-start.js",
-      "pre-deploy": "npm run bundle"
-    },
-    "hookFiles": [
-      "api/libs/hooks/pre-start.js"
-    ],
-    "requiredEnvironments": [
-      {
-        "name": "MONGO_URI",
-        "description": "Please provide a valid MongoDB connection string to start",
-        "required": true,
-        "default": ""
-      },
-      {
-        "name": "LOCAL_CHAIN_HOST",
-        "description": "Please provide endpoint of local chain",
-        "required": true,
-        "default": ""
-      },
-      {
-        "name": "FOREIGN_CHAIN_HOST",
-        "description": "Please provide endpoint of foreign chain",
-        "required": true,
-        "default": ""
-      },
-      {
-        "name": "LOCAL_CHAIN_ID",
-        "description": "Please provide id of local chain",
-        "required": true,
-        "default": "local-chain"
-      },
-      {
-        "name": "FOREIGN_CHAIN_ID",
-        "description": "Please provide id of foreign chain",
-        "required": true,
-        "default": "foreign-chain"
-      }
-    ]
   },
   "license": "Apache-2.0"
 }

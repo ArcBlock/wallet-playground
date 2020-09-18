@@ -29,7 +29,7 @@ travis-init: install dep
 
 install:
 	@echo "Install software required for this repo..."
-	@npm install -g lerna yarn @abtnode/cli @babel/cli
+	@npm install -g lerna yarn @babel/cli
 
 dep:
 	@echo "Install dependencies required for this repo..."
