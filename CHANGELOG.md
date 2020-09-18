@@ -1,3 +1,7 @@
+## 1.8.8 (September 17, 2020)
+
+- chore(ci): auto deploy to ABT Node
+
 ## 1.8.5 (September 10, 2020)
 
 - remove blocklet publish
