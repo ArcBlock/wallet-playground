@@ -1,3 +1,7 @@
+## 1.9.0 (October 22, 2020)
+
+- ci: remove auto deploy (#67)
+
 ## 1.8.9 (September 18, 2020)
 
 - chore(ci): remove auto deploy to ABT Node
