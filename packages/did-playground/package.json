@@ -1,6 +1,6 @@
 {
   "name": "@arcblock/did-playground",
-  "version": "1.9.0",
+  "version": "1.9.1",
   "description": "React components that works with wallet-playground",
   "keywords": [
     "react",
@@ -33,9 +33,9 @@
     "url": "https://github.com/ArcBlock/wallet-playground/issues"
   },
   "dependencies": {
-    "@arcblock/did-react": "^0.78.12",
+    "@arcblock/did-react": "^0.78.14",
     "@arcblock/react-hooks": "^0.78.0",
-    "@arcblock/ux": "^0.78.11",
+    "@arcblock/ux": "^0.78.14",
     "@material-ui/core": "^4.11.0",
     "axios": "^0.19.2",
     "core-js": "^3.6.4",
