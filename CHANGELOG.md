@@ -1,4 +1,4 @@
-## 1.9.2 (十二月 17, 2020)
+## 1.9.2 (December 17, 2020)
 
 - chore: update lib version
 
