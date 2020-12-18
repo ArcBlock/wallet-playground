@@ -1,3 +1,7 @@
+## 1.10.0 (December 18, 2020)
+
+
+
 ## 1.9.2 (December 17, 2020)
 
 - chore: update lib version
