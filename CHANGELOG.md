@@ -1,4 +1,4 @@
-## 1.10.1 (十二月 28, 2020)
+## 1.10.1 (December 28, 2020)
 
 - feat: add web wallet for playground action
 - chore: bump version to latest
