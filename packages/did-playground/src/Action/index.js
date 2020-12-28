@@ -24,7 +24,7 @@ function Close({ onClose }) {
 
 Close.propTypes = { onClose: PropTypes.func.isRequired };
 const CloseContainer = styled.div`
-  display: ${props => (props.disableClose ? 'none' : 'block')};
+  display: ${(props) => (props.disableClose ? 'none' : 'block')};
   position: absolute;
   top: 1rem;
   right: 1rem;
@@ -57,6 +57,7 @@ function PlaygroundAction(props) {
     extraParams,
     timeout,
     theme,
+    webWalletUrl,
     ...rest
   } = newProps;
 
@@ -215,6 +216,7 @@ function PlaygroundAction(props) {
                 checkTimeout={timeout}
                 // 3 layers of extraParams: user props, dynamically generated, from other props
                 extraParams={Object.assign(getActionParams(config, rest, session), dynamicParams, extraParams)}
+                webWalletUrl={webWalletUrl}
                 messages={{
                   title: getMessage(title, session),
                   scan: getMessage(scanMessage, session),
@@ -247,6 +249,7 @@ PlaygroundAction.propTypes = {
   successUrl: PropTypes.string,
   successTarget: PropTypes.oneOf(['_blank', '_self', 'frame']),
   frameProps: PropTypes.object,
+  webWalletUrl: PropTypes.string,
 };
 
 PlaygroundAction.defaultProps = {
@@ -264,6 +267,7 @@ PlaygroundAction.defaultProps = {
   successUrl: '',
   successTarget: '_self',
   frameProps: {},
+  webWalletUrl: '',
 };
 
 export default withTheme(PlaygroundAction);
